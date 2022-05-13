@@ -36,7 +36,7 @@ class DisplayManager:
         pygame.display.update()
 
     def configurewindow(self):
-        if eval(self.pde.config_manager.config["config"]["fullscreen"]):
+        if self.pde.config_manager.config["config"]["fullscreen"]:
             self.screen = pygame.display.set_mode((640, 480), pygame.FULLSCREEN)
         else:
             self.screen = pygame.display.set_mode((640, 480))

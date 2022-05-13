@@ -6,13 +6,13 @@ from data.topdownshooter.content.tiles.tile import Tile
 from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookatposition, objectlookattarget
 
 class Bullet(Actor):
-    def __init__(self, man, pde, owner, position=[0,0], target=[0, 0], scale=[14, 7], sprite=r'data\topdownshooter\assets\sprites\debug\debugweapon\rocket.png'):
+    def __init__(self, man, pde, owner, position=[0,0], target=[0, 0], scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\assaultrifle\assaultriflebullet.png'):
         self.checkForCollision = False
         self.useCenterForPosition = True
         self.scale = scale
         self.position = position
-        self.speed = 12
-        self.damage = 1
+        self.speed = 24
+        self.damage = 4
         self.owner = owner
         self.kb = 2
         self.destroyOnCollide = True

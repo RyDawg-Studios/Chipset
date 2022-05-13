@@ -57,7 +57,6 @@ class SMG(Weapon):
     def update(self):
         return super().update()
 
-
 class DevGun(Weapon):
     def __init__(self, man, pde, owner):
         self.scale = [56, 22]
@@ -75,9 +74,7 @@ class DevGun(Weapon):
 class LaserRifle(Weapon):
     def __init__(self, man, pde, owner):
         self.scale = [40, 14]
-        super().__init__(man, pde, owner)
-        self.sprite = self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\debug\debugweapon\cbmk2.png', layer=3)
-
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\rydawgun.png')
         #----------< Weapon Info >----------#
 
         self.firerate = 12
@@ -111,7 +108,6 @@ class GrenadeLauncher(Weapon):
     def update(self):
         self.components["Sprite"].sprite.rotation = self.rotation
         return super().update()
-
 
 class LaserMachineGun(Weapon):
     def __init__(self, man, pde, owner):
