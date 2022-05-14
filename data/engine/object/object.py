@@ -24,6 +24,7 @@ class Object:
 
     def serialize(self, data=None):
         return struct.pack(data)
+        
     def deserialize(self):
         return
 

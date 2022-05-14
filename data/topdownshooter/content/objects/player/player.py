@@ -1,6 +1,4 @@
-from lib2to3.pgen2.token import GREATER
 import random
-from typing_extensions import Self
 from data.engine.fl.world_fl import objectlookatposition
 from data.engine.projectile.projectile_component import ProjectileComponent
 from data.engine.sprite.sprite_component import SpriteComponent
@@ -21,8 +19,8 @@ class ShooterPlayer(ShooterEntity):
         self.components["PlayerController"] = ShooterController(owner=self)
         w = random.choice([SMG, AutomaticRifle, SniperRifle, LaserMachineGun])
 
-        self.weapon = man.add_object(obj=GrenadeLauncher(man=man, pde=pde, owner=self))
-        self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=pde, position=self.position, target=self))
+        self.weapon = man.add_object(obj=Shotgun(man=man, pde=pde, owner=self))
+        #self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=pde, position=self.position, target=self))
 
         self.weaponindx = 0
 

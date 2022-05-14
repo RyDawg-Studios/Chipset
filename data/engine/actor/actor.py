@@ -65,7 +65,7 @@ class Actor(Object):
 
         super().__init__(man, pde)
 
-        if eval(self.pde.config_manager.config["config"]["debugMode"]):
+        if self.pde.config_manager.config["config"]["debugMode"]:
             self.components["DebugButton"] = Button(owner=self, bind=self.printDebugInfo)
 
 
@@ -142,7 +142,7 @@ class Actor(Object):
 
     def checkXcollision(self, movement):
         if self.canMove:
-            self.rect.x += self.movement.x * self.velocity
+            self.rect.x += self.movement.x
             hits = self.getoverlaps()  
             for object in hits:
                 if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
@@ -159,7 +159,7 @@ class Actor(Object):
 
     def checkYcollision(self, movement):
         if self.canMove:
-            self.rect.y += self.movement.y * self.velocity
+            self.rect.y += self.movement.y
             hits = self.getoverlaps()  
             for object in hits:
                 if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:

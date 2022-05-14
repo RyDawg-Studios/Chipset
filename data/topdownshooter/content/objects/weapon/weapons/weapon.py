@@ -3,13 +3,13 @@ import random
 
 import pygame
 from data.engine.actor.actor import Actor
-from data.engine.fl.world_fl import objectlookatposition, objectlookattarget
+from data.engine.fl.world_fl import normal_cut, objectlookatposition, objectlookattarget
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 from copy import deepcopy
 
 class Weapon(Actor):
-    def __init__(self, man, pde, owner, firerate=10, bullet=Bullet, shotangles=None, shotspread=10, sprite=''):
+    def __init__(self, man, pde, owner, firerate=10, bullet=Bullet, shotangles=None, shotspread=4, sprite=''):
 
         #----------< Actor Info >----------#
         self.owner = owner
@@ -40,18 +40,18 @@ class Weapon(Actor):
         if self.shottick >= self.firerate:
             self.shottick = 0
             for shot in self.shotangles:
-                if self.shotspread != 0:
-                    spr = random.randrange(-self.shotspread, self.shotspread)
-                else:
-                    spr = 0
-                
-                spr = [spr, spr]
-                
-                targ = pygame.Vector2(target) + spr
 
-                b = self.man.add_object(obj=self.bullet(man=self.man, pde=self.pde, owner=self, target=targ, position=[self.owner.position[0] + 10, self.owner.position[1] + 10]))
+                target_pos = pygame.Vector2(target)
+                shooter_to_target = target_pos - self.position
+                with_spread = shooter_to_target.rotate(normal_cut(0, self.shotspread))
+                bullet_target = with_spread.rotate(shot) + self.position
+                
+            
+
+                b = self.man.add_object(obj=self.bullet(man=self.man, pde=self.pde, owner=self, target=bullet_target, position=[self.position[0], self.position[1]]))
                 b.onshot()
                 bs.append(b)
+
         return bs
                 
     def update(self):

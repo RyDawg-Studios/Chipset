@@ -26,7 +26,7 @@ class Shotgun(Weapon):
         #----------< Weapon Info >----------#
 
         self.firerate = 60
-        self.bullet = DefaultBullet
+        self.bullet = LaserBullet
         self.shotspread = 0
         self.shotangles = [-10, -5, 0, 5, 10]
 
@@ -51,7 +51,7 @@ class SMG(Weapon):
         #----------< Weapon Info >----------#
 
         self.firerate = 10
-        self.shotspread = 20
+        self.shotspread = 8
         self.bullet = DefaultBullet
 
     def update(self):
@@ -117,7 +117,7 @@ class LaserMachineGun(Weapon):
         #----------< Weapon Info >----------#
 
         self.firerate = 6
-        self.shotspread = 30
+        self.shotspread = 5
         self.bullet = LaserBullet
 
     def update(self):

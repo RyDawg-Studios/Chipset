@@ -1,4 +1,5 @@
 import math
+import random
 
 from pygame import Vector2
 
@@ -50,3 +51,9 @@ def getobjectlookatvector(object, target):
 def getvectorfromrotation(rotation):
     v = Vector2(float(math.cos(math.radians(rotation))), float(math.sin(math.radians(rotation))))
     return v
+
+def normal_cut(mean,std):
+    """ Returns a value from a normal distribution, but limited to +-3std (no extreme outliers allowed)"""
+    x = random.gauss(mean,std)
+    x = max(mean-3*std, min(mean+3*std, x))
+    return x

@@ -9,7 +9,7 @@ from data.topdownshooter.content.objects.player.player import ShooterPlayer
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
-from data.topdownshooter.content.objects.weapon.weapons.weapons import SniperRifle
+from data.topdownshooter.content.objects.weapon.weapons.weapons import LaserMachineGun, SniperRifle
 
 
 class ShooterLevel(Level):
@@ -19,5 +19,5 @@ class ShooterLevel(Level):
         self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\bg.png')
         lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[0,0],level="room"))
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[320, 240]))
-        e = self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[100, 100], player=p, weapon=SniperRifle))
+        e = self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[100, 100], weapon=LaserMachineGun))
 

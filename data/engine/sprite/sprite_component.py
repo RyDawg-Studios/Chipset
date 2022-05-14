@@ -59,15 +59,11 @@ class SpriteComponent(Component):
         if self.owner.useSpriteRectForCollision:
             self.owner.rect = self.sprite.image.get_rect()
 
-
         self.sprite = Sprite(parent=owner, sprite=sprite, layer=layer, rotation=self.owner.rotation, scale=self.owner.scale)
 
-
-    
     def update(self):
         self.sprite.update()
 
     def deconstruct(self):
-        self.sprite.kill()
         self.sprite.deconstruct()
         super().deconstruct()
