@@ -30,7 +30,7 @@ class ShooterEnemy(ShooterEntity):
 
         if self.weapon != None and self.player != None and self.player.dead == False:
             self.weapon.shoot(target=self.player.position)
-            self.weapon.rotation = objectlookattarget(self, self.player)
+            self.weapon.rotation = objectlookattarget(self.weapon, self.player)
         else:
             return
 

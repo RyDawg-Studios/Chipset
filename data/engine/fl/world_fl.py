@@ -1,5 +1,7 @@
 import math
 import random
+import numpy as np
+import random as rng
 
 from pygame import Vector2
 
@@ -57,3 +59,17 @@ def normal_cut(mean,std):
     x = random.gauss(mean,std)
     x = max(mean-3*std, min(mean+3*std, x))
     return x
+
+
+def normal_clamped_resample(mu=0, sigma=1, size=1, clamp_sigmas=2):
+    """
+        Normal distribution that guarantees no outliers futher than clamp_sigmas STDs.
+        This is done by rerolling such outliers once, and clamping them if that doesn't help.
+    """
+    arr = rng.normal(loc=mu, scale=sigma, size=size)
+    # find bad positions:
+    inds = (arr < mu-clamp_sigmas*sigma) | (arr > mu+clamp_sigmas*sigma)
+    to_resample = inds.sum()
+    arr[inds] = rng.normal(loc=mu, scale=sigma, size=to_resample)
+    # and finally clamp just in case, but should rarely ever be required
+    return np.clip(arr, mu-clamp_sigmas*sigma, mu+clamp_sigmas*sigma)

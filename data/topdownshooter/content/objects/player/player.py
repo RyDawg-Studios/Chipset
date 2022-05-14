@@ -17,16 +17,16 @@ class ShooterPlayer(ShooterEntity):
         pde.game.player = self
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
         self.components["PlayerController"] = ShooterController(owner=self)
-        w = random.choice([SMG, AutomaticRifle, SniperRifle, LaserMachineGun])
+        w = random.choice([SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher])
 
-        self.weapon = man.add_object(obj=Shotgun(man=man, pde=pde, owner=self))
+        self.weapon = man.add_object(obj=w(man=man, pde=pde, owner=self))
         #self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=pde, position=self.position, target=self))
 
         self.weaponindx = 0
 
     def update(self):
         if self.weapon != None:
-            self.weapon.rotation = objectlookatposition(self, self.pde.input_manager.mouse_position)
+            self.weapon.rotation = objectlookatposition(self.weapon, self.pde.input_manager.mouse_position)
 
         #self.scrollcameratocenterx()
         #self.scrollcameratocentery()
