@@ -48,7 +48,7 @@ class TextComponent(Component):
         super().__init__(owner, **kwargs)
 
 
-        self.sprite = Sprite(parent=owner, layer=layer, rotation=self.owner.spriteRotation, scale=self.owner.spriteScale, text=text, font=font, color=color)
+        self.sprite = Sprite(parent=owner, layer=layer, rotation=self.owner.rotation, scale=self.owner.scale, text=text, font=font, color=color)
 
 
     

@@ -85,6 +85,10 @@ class Grenade(Bullet):
 
         if self.speed > 0.3:
             self.speed -= 0.3
+        else:
+            self.speed = 0
+
+        
         return super().update()
 
     def collide(self, obj, side):
@@ -149,7 +153,15 @@ class SniperBullet(Bullet):
         self.speed = 48
         self.damage = random.randint(80, 120)
 
+class ShotgunBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, sprite=r'data\topdownshooter\assets\sprites\weapons\shotgun\shotgunbullet.png')
+        self.damage = 5
 
 
-
+class SMGBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target)
+        self.speed = 20
+        self.damage = 2
 

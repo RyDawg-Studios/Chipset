@@ -15,7 +15,13 @@ class ShooterCamera(Actor):
         self.target = target
         
         super().__init__(man, pde)
-        #self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\camera.png', layer=8)
+
+        if self.pde.config_manager.config["config"]["debugMode"]:
+            self.sprite = self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\camera.png', layer=8)
+        else:
+            self.sprite = None
+
+
         self.components["Projectile"] = ProjectileComponent(owner=self, speed=self.speed)
 
     def update(self):
@@ -24,7 +30,7 @@ class ShooterCamera(Actor):
         self.scrollcameratocentery()
 
         dist = abs(math.hypot(self.rect.centerx - self.target.rect.centerx, self.rect.centery-self.target.rect.centery))
-        if dist < 30:
+        if dist < 50:
             self.speed = [dist/10, dist/10]
         
         if dist > 150:
@@ -40,6 +46,7 @@ class ShooterCamera(Actor):
 
         self.rotation = objectlookattarget(self, self.target)
         self.components["Projectile"].speed = self.speed
-        #self.components["Sprite"].sprite.rotation = self.rotation
+        if self.sprite is not None:
+            self.components["Sprite"].sprite.rotation = self.rotation
         
         return super().update()

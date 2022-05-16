@@ -9,7 +9,7 @@ class AIMovementTarget(Actor):
         self.scale = [20, 20]
         self.checkForCollision = False
         super().__init__(man, pde)
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\undef.png', layer=4)
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\mariohitbox.png', layer=4)
 
     def update(self):
         self.randomizeposition()

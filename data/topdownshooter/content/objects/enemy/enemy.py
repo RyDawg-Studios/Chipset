@@ -22,7 +22,6 @@ class ShooterEnemy(ShooterEntity):
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\badme.png', layer=2)
         ai = self.components["AI"] = AIComponent(owner=self)
         ai.addstate(name="default", state=WanderAI)
-        w = random.choice([SMG, AutomaticRifle, SniperRifle])
         self.weapon = man.add_object(obj=weapon(man=man, pde=pde, owner=self))
 
     def update(self):

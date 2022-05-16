@@ -2,7 +2,7 @@ import random
 from data.engine.fl.world_fl import objectlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
-from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Grenade, LaserBullet, SniperBullet
+from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Grenade, LaserBullet, SMGBullet, ShotgunBullet, SniperBullet
 
 
 class AutomaticRifle(Weapon):
@@ -25,9 +25,9 @@ class Shotgun(Weapon):
 
         #----------< Weapon Info >----------#
 
-        self.firerate = 60
-        self.bullet = DefaultBullet
-        self.shotspread = 0
+        self.firerate = 52
+        self.bullet = ShotgunBullet
+        self.shotspread = 1
         self.shotangles = [-10, -5, 0, 5, 10]
 
 class SniperRifle(Weapon):
@@ -50,9 +50,9 @@ class SMG(Weapon):
 
         #----------< Weapon Info >----------#
 
-        self.firerate = 10
-        self.shotspread = 8
-        self.bullet = DefaultBullet
+        self.firerate = 4
+        self.shotspread = 12
+        self.bullet = SMGBullet
 
     def update(self):
         return super().update()
@@ -77,7 +77,7 @@ class LaserRifle(Weapon):
         super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\rydawgun.png')
         #----------< Weapon Info >----------#
 
-        self.firerate = 12
+        self.firerate = 16
         self.bullet = None
 
     def update(self):
@@ -101,8 +101,7 @@ class GrenadeLauncher(Weapon):
         #----------< Weapon Info >----------#
 
         self.shotspread = 5
-        self.shotangles = [0]
-        self.firerate = 60
+        self.firerate = 75
         self.bullet = Grenade
 
     def update(self):

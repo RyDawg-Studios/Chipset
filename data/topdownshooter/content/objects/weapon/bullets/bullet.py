@@ -19,12 +19,12 @@ class Bullet(Actor):
         self.ignoreCollides = []
         
         super().__init__(man, pde)
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=sprite, layer=2)
 
         self.target = getpositionlookatvector(self, target)
         self.rotation = objectlookatposition(self, self.position + self.target)
 
         self.movement = self.target * self.speed
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=sprite, layer=2)
 
 
     def update(self):

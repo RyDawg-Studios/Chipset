@@ -47,9 +47,7 @@ class ShooterEntity(Actor):
 
         self.deadticks = 0
 
-
         super().__init__(man, pde)
-
         self.healthbar = man.add_object(obj=HealthBar(man=man, pde=pde, owner=self))
 
 

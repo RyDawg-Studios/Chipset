@@ -48,7 +48,7 @@ class Weapon(Actor):
                 
             
 
-                b = self.man.add_object(obj=self.bullet(man=self.man, pde=self.pde, owner=self, target=bullet_target, position=[self.position[0], self.position[1]]))
+                b = self.man.add_object(obj=self.bullet(man=self.man, pde=self.pde, owner=self, target=bullet_target, position=self.rect.center))
                 b.onshot()
                 bs.append(b)
 

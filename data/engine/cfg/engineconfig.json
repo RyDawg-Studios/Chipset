@@ -5,8 +5,8 @@
         "dimensions": [640, 480],
         "icon": "r'data\\assets\\sprites\\me.png'",
         "fullscreen": false,
-        "hideMouseCursor": "False",
-        "debugMode": true,
+        "hideMouseCursor": false,
+        "debugMode": false,
         "network":
         {
             "connectToServer": false,
