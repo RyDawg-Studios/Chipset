@@ -17,9 +17,10 @@ class Bullet(Actor):
         self.kb = 2
         self.destroyOnCollide = True
         self.ignoreCollides = []
+        self.destroyOnOOB = True
         
         super().__init__(man, pde)
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=sprite, layer=2)
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=sprite, layer=1)
 
         self.target = getpositionlookatvector(self, target)
         self.rotation = objectlookatposition(self, self.position + self.target)
@@ -31,10 +32,12 @@ class Bullet(Actor):
         self.movement = self.target * self.speed
         self.components["Sprite"].sprite.rotation = self.rotation
 
-        if self.position[0] < -80 or self.position[1] < -80:
-            self.deconstruct()
-        elif self.position[0] > 720 or self.position[1] > 560:
-            self.deconstruct()
+        if self.destroyOnOOB:
+            if self.position[0] < -80 or self.position[1] < -80:
+                self.deconstruct()
+            elif self.position[0] > 720 or self.position[1] > 560:
+                self.deconstruct()
+
         return super().update()
 
 

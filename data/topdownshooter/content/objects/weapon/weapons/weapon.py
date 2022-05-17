@@ -28,6 +28,7 @@ class Weapon(Actor):
 
         #----------< Weapon Info >----------#
         self.shooting = False
+        self.upgrades = []
 
         super().__init__(man, pde)
         
@@ -46,9 +47,10 @@ class Weapon(Actor):
                 with_spread = shooter_to_target.rotate(normal_cut(0, self.shotspread))
                 bullet_target = with_spread.rotate(shot) + self.position
                 
-            
-
                 b = self.man.add_object(obj=self.bullet(man=self.man, pde=self.pde, owner=self, target=bullet_target, position=self.rect.center))
+                for u in self.upgrades:
+                    u.onshot(b)
+
                 b.onshot()
                 bs.append(b)
 

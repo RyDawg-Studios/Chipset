@@ -2,7 +2,7 @@ import random
 from data.engine.fl.world_fl import objectlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
-from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Grenade, LaserBullet, SMGBullet, ShotgunBullet, SniperBullet
+from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, SMGBullet, ShotgunBullet, SniperBullet
 
 
 class AutomaticRifle(Weapon):
@@ -121,3 +121,14 @@ class LaserMachineGun(Weapon):
 
     def update(self):
         return super().update()
+
+class ElectroLauncher(Weapon):
+    def __init__(self, man, pde, owner):
+        self.scale = [37, 16]
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\electrospherelauncher\electrospherelauncher.png')
+
+        #----------< Weapon Info >----------#
+
+        self.firerate = 180
+        self.shotspread = 2
+        self.bullet = Electrosphere

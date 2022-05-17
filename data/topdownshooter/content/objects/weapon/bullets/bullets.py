@@ -5,6 +5,7 @@ from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import getpositionlookatvector, objectlookatposition, objectlookattarget
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.hazard.explosion.explosion import Explosion
+from data.topdownshooter.content.objects.hazard.mine.mine import Mine
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 
 
@@ -165,3 +166,91 @@ class SMGBullet(Bullet):
         self.speed = 20
         self.damage = 2
 
+class Electrosphere(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale=[16, 16], sprite=r'data\topdownshooter\assets\sprites\weapons\electrospherelauncher\electroball.png')
+        self.lifetime = 300
+        self.speed = 8
+        self.destroyOnCollide = False
+        self.checkForCollision = True
+        self.mines = []
+        self.trailticks = 0
+        self.destroyOnOOB = False
+
+        self.explosion = Explosion
+        self.lastoverlap = None
+
+    def update(self):
+        if self.ticks >= self.lifetime - 1:
+            self.explode()
+            
+        self.trailticks += 1
+        if self.trailticks >= 6:
+            self.trailticks = 0
+            self.mines.append(self.man.add_object(obj=Mine(man=self.man, pde=self.pde, position=self.position, rotation=self.rotation)))
+        return super().update()
+
+    def collide(self, obj, side):
+        if side != self.lastoverlap:
+            r = random.randint(0, 100)
+            if r <= 5:
+                self.explode()
+
+
+        if side == "Left":
+            self.target = pygame.Vector2(self.target.reflect((-1,0)))
+        if side == "Right":
+             self.target = pygame.Vector2(self.target.reflect((1,0)))
+        if side == "Top":
+             self.target = pygame.Vector2(self.target.reflect((0, -1)))
+        if side == "Bottom":
+            self.target = pygame.Vector2(self.target.reflect((0, 1)))
+
+        self.lastoverlap = side
+        
+        return super().collide(obj, side)
+
+    def checkXcollision(self, movement):
+        if self.canMove:
+            self.rect.x += self.movement.x * self.velocity
+            hits = self.getoverlaps()  
+            for object in hits:
+                if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
+                    if object != self.owner and object != self.owner.owner and not isinstance(self, object.__class__):
+                        if object not in self.collideInfo["Objects"]:
+                            self.collideInfo["Objects"].append(object)
+                        if movement[0] > 0:
+                            self.rect.right = object.rect.left
+                            self.collideInfo["Right"] = True
+                            self.collide(self, "Right")
+                        elif movement[0] < 0:
+                            self.rect.left = object.rect.right
+                            self.collideInfo["Left"] = True
+                            self.collide(self, "Left")
+
+    def checkYcollision(self, movement):
+        if self.canMove:
+            self.rect.y += self.movement.y * self.velocity
+            hits = self.getoverlaps()  
+            for object in hits:
+                if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
+                    if object != self.owner and object != self.owner.owner and not isinstance(self, object.__class__):
+                        if object not in self.collideInfo["Objects"]:
+                            self.collideInfo["Objects"].append(object)
+                        if movement[1] > 0:
+                            self.rect.bottom = object.rect.top
+                            self.collideInfo["Bottom"] = True
+                            self.collide(self, "Bottom")
+                        elif movement[1] < 0:
+                            self.rect.top = object.rect.bottom
+                            self.collideInfo["Top"] = True
+                            self.collide(self, "Top")
+
+    def explode(self):
+        for mine in self.mines:
+            mine.explode()
+        e = self.man.add_object(obj=self.explosion(man=self.man, pde=self.pde, owner=self, position = self.position, scale = [128, 128]))
+        self.deconstruct()
+
+    def deconstruct(self):
+        return super().deconstruct()
