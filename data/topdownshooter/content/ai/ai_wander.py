@@ -25,7 +25,7 @@ class WanderAI(AIState):
                 self.picknewlocation()
         else:
             self.travelticks += 1
-            if self.travelticks >= 300:
+            if self.travelticks >= 100:
                 self.picknewlocation()
             self.r = getpositionlookatvector(self.owner.owner, self.destination)
             self.owner.owner.movement = self.r

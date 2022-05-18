@@ -7,3 +7,6 @@ class Component:
 
     def deconstruct(self):
         del self
+
+    def checkForOwner(self):
+        return

@@ -2,8 +2,6 @@ import random
 from data.engine.actor.actor import Actor
 from data.engine.projectile.projectile_component import ProjectileComponent
 from data.engine.sprite.sprite_component import SpriteComponent
-from data.topdownshooter.content.objects.weapon.weapons.weapons import AutomaticRifle
-import copy
 
 class PickupWeapon(Actor):
     def __init__(self, man, pde, position=[0, 0], speed=[4, 4], rotation=0, weapon=None):

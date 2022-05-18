@@ -8,7 +8,7 @@ from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
 
 
 class ShooterEntity(Actor):
-    def __init__(self, man, pde, position=None, scale=[32, 32], maxhp=100):
+    def __init__(self, man, pde, position=[0, 0], scale=[32, 32], maxhp=100):
 
         #----------< Transform Info >----------#
         if position is None: position = [0,0]
@@ -129,6 +129,7 @@ class ShooterEntity(Actor):
             
 
     def changeweapon(self, cls):
+        self.removeweapon()
         self.weapon = self.man.add_object(obj=cls(man=self.man, pde=self.pde, owner=self))
 
     def removeweapon(self):

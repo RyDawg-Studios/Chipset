@@ -1,6 +1,7 @@
 import random
 from data.engine.fl.world_fl import objectlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
+from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, SMGBullet, ShotgunBullet, SniperBullet
 
@@ -65,7 +66,7 @@ class DevGun(Weapon):
         #----------< Weapon Info >----------#
 
         self.shotspread = 0
-        self.firerate = 6
+        self.firerate = 3
         self.bullet = DevBullet
 
     def update(self):
@@ -132,3 +133,66 @@ class ElectroLauncher(Weapon):
         self.firerate = 60
         self.shotspread = 2
         self.bullet = Electrosphere
+
+class LingerTest(Weapon):
+    def __init__(self, man, pde, owner):
+        self.scale = [37, 16]
+        self.firerate = 1000
+        super().__init__(man, pde, owner, sprite='')
+
+    def shoot(self, target):
+        self.pde.game.activate()
+        return super().shoot(target)
+
+class SpawnerWeapon(Weapon):
+    def __init__(self, man, pde, owner):
+        self.scale = [46, 22]
+        self.firerate = 60
+        self.item = 0
+        self.items = [ShooterEnemy]
+        self.shot = False
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\zapinator\zapinator.png')
+
+    def shoot(self, target):
+        self.shooting = True
+        if not self.shot:
+
+            if self.item >= 0 and self.item < len(self.items):
+                self.man.add_object(self.items[self.item](man=self.man, pde=self.pde, position=target, weapon=SMG))
+            else:
+                self.item = 0
+
+            self.shot = True
+            return
+
+
+    def update(self):
+        if self.shot == True and self.shooting == False:
+            self.shot = False
+        if not self.shooting:
+            self.shooting = False
+        return super().update()
+
+class Enderpearl(Weapon):
+    def __init__(self, man, pde, owner):
+        self.scale = [16, 16]
+        self.firerate = 60
+        self.shot = False
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\enderpearl\enderpearl.png')
+
+    def shoot(self, target):
+        self.shooting = True
+        if not self.shot:
+
+            self.owner.rect.center = target
+
+            self.shot = True
+            return
+
+
+    def update(self):
+        if self.shot == True and self.shooting == False:
+            self.shot = False
+        if not self.shooting:
+            self.shooting = False
+        return super().update()

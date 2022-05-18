@@ -1,4 +1,5 @@
 from data.engine.game.game import Game
+from data.topdownshooter.content.levels.DevLevel import DevLevel
 from data.topdownshooter.content.levels.ShooterLevel import ShooterLevel
 
 class ShooterGame(Game):
@@ -8,6 +9,6 @@ class ShooterGame(Game):
 
 
     def activate(self):
-        self.pde.level_manager.addlevel(level=ShooterLevel(man=self.pde.level_manager, pde=self.pde), 
+        super().activate()
+        self.pde.level_manager.addlevel(level=DevLevel(man=self.pde.level_manager, pde=self.pde), 
                                                                         name="Main", active=True)
-        return super().activate()

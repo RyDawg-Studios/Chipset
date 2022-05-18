@@ -6,6 +6,7 @@ from data.engine.fl.world_fl import getpositionlookatvector, objectlookatpositio
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.hazard.explosion.explosion import Explosion
 from data.topdownshooter.content.objects.hazard.mine.mine import Mine
+from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 
 
@@ -25,7 +26,7 @@ class HomingActor(Actor):
         if self.foundtarget == False:
             self.target = obj
             if hasattr(obj, 'homable'):
-                if obj.homable and obj != self.owner.owner.owner:
+                if isinstance(obj, ShooterEntity) and obj != self.owner.owner.owner:
                     self.owner.target = getpositionlookatvector(self, obj.position)
                     self.owner.rotation = objectlookattarget(self, obj)
         return super().overlap(obj)
@@ -41,11 +42,11 @@ class DefaultBullet(Bullet):
 class DevBullet(Bullet):
     def __init__(self, man, pde, owner, target=[0,0], position=[0, 0]):
         self.scale=[12, 12]
-        super().__init__(man, pde, owner, position=position, target=target)
+        super().__init__(man, pde, owner, position=position, target=target, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\devbullet.png')
         self.damage = 5
         self.homing = False
         self.hometicks = 0
-        self.starthometime = 6
+        self.starthometime = 1
         self.area = None
         self.speed=24
 

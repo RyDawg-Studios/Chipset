@@ -15,6 +15,7 @@ class Weapon(Actor):
         self.owner = owner
         self.checkForCollision = False
         self.checkForOverlap = False
+        self.useCenterForPosition = True
 
         #----------< Shot Info >----------#
         if shotangles is None:

@@ -3,7 +3,9 @@ class Game:
         self.pde = pde
 
     def activate(self):
-        pass
+        for level in self.pde.level_manager.levels.values():
+            for object in list(level.objectManager.objects.values()):
+                object.deconstruct()
 
     def update(self):
         pass

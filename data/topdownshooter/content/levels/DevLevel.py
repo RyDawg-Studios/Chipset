@@ -10,7 +10,7 @@ from data.topdownshooter.content.objects.player.player import ShooterPlayer
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
-from data.topdownshooter.content.objects.weapon.weapons.weapons import LaserMachineGun, SniperRifle
+from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutomaticRifle, DevGun, ElectroLauncher, Enderpearl, GrenadeLauncher, LaserMachineGun, LingerTest, Shotgun, SniperRifle, SpawnerWeapon
 
 
 class DevLevel(Level):
@@ -18,7 +18,13 @@ class DevLevel(Level):
         self.ticks = 0
         super().__init__(man, pde)
         self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\bg.png')
-        p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[320, 240]))
-        p.weapon.deconstruct()
+        p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[320, 140]))
+        p.removeweapon()
 
-        t = self.objectManager.add_object(SpriteLingerObject(man=self.objectManager, pde=pde))
+
+        for inx, w in enumerate([SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, DevGun, SpawnerWeapon, Enderpearl]):
+            weap = w(man=self.objectManager, pde=self.pde, owner=None)
+            self.objectManager.add_object(PickupWeapon(man=self.objectManager, pde=self.pde, position=[(inx+1) * 64, 0], speed=[0, 0], weapon=weap))
+            weap.deconstruct()
+
+        lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[0,200],level="room2"))
