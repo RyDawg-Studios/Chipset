@@ -65,5 +65,6 @@ class SpriteComponent(Component):
         self.sprite.update()
 
     def deconstruct(self):
+        print(f'Sprite {self} - Owner {self.owner}')
         self.sprite.deconstruct()
         super().deconstruct()

@@ -129,6 +129,6 @@ class ElectroLauncher(Weapon):
 
         #----------< Weapon Info >----------#
 
-        self.firerate = 180
+        self.firerate = 60
         self.shotspread = 2
         self.bullet = Electrosphere

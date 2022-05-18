@@ -15,6 +15,7 @@ class Object:
     def update(self):
         for component in self.components:
             self.components[component].update()
+        return
 
     def deconstruct(self):
         self.man.remove_object(self)

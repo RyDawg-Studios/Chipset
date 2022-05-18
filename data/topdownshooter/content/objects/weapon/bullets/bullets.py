@@ -181,13 +181,14 @@ class Electrosphere(Bullet):
         self.lastoverlap = None
 
     def update(self):
-        if self.ticks >= self.lifetime - 1:
-            self.explode()
-            
         self.trailticks += 1
         if self.trailticks >= 6:
             self.trailticks = 0
             self.mines.append(self.man.add_object(obj=Mine(man=self.man, pde=self.pde, position=self.position, rotation=self.rotation)))
+            
+        if self.ticks >= self.lifetime - 1:
+            self.explode()
+            
         return super().update()
 
     def collide(self, obj, side):
