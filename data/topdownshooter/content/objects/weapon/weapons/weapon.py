@@ -3,7 +3,7 @@ import random
 
 import pygame
 from data.engine.actor.actor import Actor
-from data.engine.fl.world_fl import normal_cut, objectlookatposition, objectlookattarget
+from data.engine.fl.world_fl import getpositionlookatvector, normal_cut, objectlookatposition, objectlookattarget
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 from copy import deepcopy

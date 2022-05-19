@@ -29,9 +29,6 @@ class ShooterPlayer(ShooterEntity):
         if self.weapon != None:
             self.weapon.rotation = objectlookatposition(self.weapon, self.pde.input_manager.mouse_position)
 
-        #self.scrollcameratocenterx()
-        #self.scrollcameratocentery()
-
         if self.deadticks >= 100:
             self.pde.game.activate()
         return super().update()
