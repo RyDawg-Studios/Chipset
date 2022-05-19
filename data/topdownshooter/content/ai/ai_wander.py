@@ -3,8 +3,6 @@ from data.engine.fl.world_fl import objectlookatposition, getpositionlookatvecto
 import random
 from data.topdownshooter.content.ai.ai_target import AITarget
 
-from data.topdownshooter.content.objects.enemy.aitarget import AIMovementTarget
-
 
 class WanderAI(AIState):
     def __init__(self, man, pde, owner):
@@ -38,3 +36,5 @@ class WanderAI(AIState):
         self.target = self.man.add_object(AITarget(man=self.man, pde=self.pde, position=[random.randint(0, 600), random.randint(0, 400)]))
         self.destination = self.target.position
         self.travelticks = 0
+
+

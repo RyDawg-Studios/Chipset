@@ -16,12 +16,15 @@ class ShooterPlayer(ShooterEntity):
         self.maxhp = 400
         self.hp = 400
         pde.game.player = self
+        self.maxVelocity = 1
+        self.velocity = self.maxVelocity
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
         self.components["PlayerController"] = ShooterController(owner=self)
         w = chooseRandomWeapon()
 
         self.weapon = man.add_object(obj=w(man=man, pde=pde, owner=self))
         self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=pde, position=self.position, target=self))
+
 
         self.weaponindx = 0
 
@@ -37,7 +40,8 @@ class ShooterPlayer(ShooterEntity):
         self.canMove = False
         self.canShoot = False
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\deadme.png', layer=2)
-        self.dropweapon(rotation=self.weapon.rotation)
+        if self.weapon is not None:
+            self.dropweapon(rotation=self.weapon.rotation)
         self.weapon = None
         return
 

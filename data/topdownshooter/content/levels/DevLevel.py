@@ -10,7 +10,7 @@ from data.topdownshooter.content.objects.player.player import ShooterPlayer
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
-from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutomaticRifle, DevGun, ElectroLauncher, Enderpearl, GrenadeLauncher, LaserMachineGun, LingerTest, Shotgun, SniperRifle, SpawnerWeapon
+from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutomaticRifle, DevGun, ElectroLauncher, Enderpearl, GrenadeLauncher, LaserMachineGun, LingerTest, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
 
 
 class DevLevel(Level):
@@ -22,7 +22,7 @@ class DevLevel(Level):
         p.removeweapon()
 
 
-        for inx, w in enumerate([SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, DevGun, SpawnerWeapon, Enderpearl]):
+        for inx, w in enumerate([SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, DevGun, SpawnerWeapon, Enderpearl, SplatGun]):
             weap = w(man=self.objectManager, pde=self.pde, owner=None)
             self.objectManager.add_object(PickupWeapon(man=self.objectManager, pde=self.pde, position=[(inx) * 64, 0], speed=[0, 0], weapon=weap))
             weap.deconstruct()

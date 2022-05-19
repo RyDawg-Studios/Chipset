@@ -50,7 +50,7 @@ class Weapon(Actor):
                 
                 b = self.man.add_object(obj=self.bullet(man=self.man, pde=self.pde, owner=self, target=bullet_target, position=self.rect.center))
                 for u in self.upgrades:
-                    u.onshot(b)
+                    u.onShot(bullet=b, target=target)
 
                 b.onshot()
                 bs.append(b)

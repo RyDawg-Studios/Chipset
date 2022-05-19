@@ -1,8 +1,6 @@
-from turtle import pos
 from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookattarget
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
-from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
 from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
 
@@ -15,6 +13,7 @@ class ShooterEntity(Actor):
         self.position = position
         self.scale = scale
         self.useCenterForPosition = True
+
 
         #----------< Weapon Info >----------#
         

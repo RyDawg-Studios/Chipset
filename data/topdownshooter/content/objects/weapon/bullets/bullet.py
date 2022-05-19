@@ -29,6 +29,10 @@ class Bullet(Actor):
 
 
     def update(self):
+        for upg in self.owner.upgrades:
+            upg.onBulletUpdate(bullet=self)
+
+
         self.movement = self.target * self.speed
         self.components["Sprite"].sprite.rotation = self.rotation
 
@@ -47,13 +51,25 @@ class Bullet(Actor):
     def overlap(self, obj):
         if self.ticks >= 2:
             if obj != self.owner and obj != self.owner.owner:
+                for upg in self.owner.upgrades:
+                    upg.onHit(bullet=self, damage=self.damage, object=obj)
                 if hasattr(obj, 'hp'):
                     obj.takedamage(self)
                     self.man.add_object(obj=Hitmarker(man=self.man, pde=self.pde, position=self.position))
+                    self.hit(obj)
                     if self.destroyOnCollide:
                         self.deconstruct()
                 elif isinstance(obj, Tile):
+                    self.hit(obj)
                     if self.destroyOnCollide:
                         self.deconstruct()
                         
         return super().overlap(obj)
+
+    def hit(self, obj):
+        return
+
+    def deconstruct(self):
+        for upg in self.owner.upgrades:
+            upg.onBulletDestruction(bullet=self)
+        return super().deconstruct()

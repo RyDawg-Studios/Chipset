@@ -9,7 +9,16 @@ class Upgrade(Object):
     def update(self):
         return super().update()
 
-    def onShot(self, b):
-        return b
+    def onShot(self, bullet, target):
+        return bullet, target
+
+    def onHit(self, bullet, damage, object):
+        return bullet, damage, object
+
+    def onBulletUpdate(self, bullet):
+        return bullet
+
+    def onBulletDestruction(self, bullet):
+        return bullet
 
     

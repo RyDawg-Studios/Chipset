@@ -14,5 +14,8 @@ class AIComponent(Component):
 
     def update(self):
         if self.state != None:
-            self.states[self.state].update()
+            if self.state in self.states:
+                self.states[self.state].update()
+            else:
+                return super().update()
         return super().update()

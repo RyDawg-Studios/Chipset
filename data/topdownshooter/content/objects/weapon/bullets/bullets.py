@@ -1,11 +1,13 @@
 import math
 import random
+from numpy import isin
 import pygame
 from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import getpositionlookatvector, objectlookatposition, objectlookattarget
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.hazard.explosion.explosion import Explosion
 from data.topdownshooter.content.objects.hazard.mine.mine import Mine
+from data.topdownshooter.content.objects.hazard.splat.splat import Splat
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 
@@ -256,3 +258,33 @@ class Electrosphere(Bullet):
 
     def deconstruct(self):
         return super().deconstruct()
+
+
+class SplatBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        self.color = random.choice(['blue', 'orange'])
+        if self.color == 'orange':
+            s = r'data\topdownshooter\assets\sprites\weapons\splatgun\splatorange.png'
+        elif self.color == 'blue':
+            s = r'data\topdownshooter\assets\sprites\weapons\splatgun\splatblue.png'
+        super().__init__(man, pde, owner, position, target, sprite=s)
+        self.speed = 15
+        self.damage = 5
+        self.splatticks = 0
+        self.splattime = random.randint(10, 20)
+        
+    def hit(self, obj):
+        self.splat()
+        return super().hit(obj)
+
+    def update(self):
+        self.splatticks += 1
+        if self.splatticks >= self.splattime:
+            self.splat()
+            self.deconstruct()
+        return super().update()
+
+    def splat(self):
+        self.man.add_object(obj=Splat(man=self.man, pde=self.pde, position=list(self.rect.center), owner=self, color=self.color))
+
+    
