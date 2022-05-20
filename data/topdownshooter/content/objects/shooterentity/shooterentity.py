@@ -129,7 +129,9 @@ class ShooterEntity(Actor):
 
     def changeweapon(self, cls):
         self.removeweapon()
-        self.weapon = self.man.add_object(obj=cls(man=self.man, pde=self.pde, owner=self))
+        self.weapon = self.man.add_object(obj=cls(man=self.man, pde=self.pde, owner=self, position=[self.rect.centerx + 10, self.rect.centery + 10]))
+
+    
 
     def removeweapon(self):
         if self.weapon != None:

@@ -10,10 +10,9 @@ from data.topdownshooter.content.objects.weapon.upgrade.upgrades import Disarmam
 
 
 class AutomaticRifle(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [40, 14]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\debug\debugweapon\cbmk2.png')
-        self.upgrades = [self.man.add_object(obj=DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self))]
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\debug\debugweapon\cbmk2.png', position=position)
 
 
         #----------< Weapon Info >----------#
@@ -25,9 +24,9 @@ class AutomaticRifle(Weapon):
         return super().update()
 
 class Shotgun(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [30, 12]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\shotgun\boomstick.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\shotgun\boomstick.png', position=position)
 
 
         #----------< Weapon Info >----------#
@@ -38,9 +37,9 @@ class Shotgun(Weapon):
         self.shotangles = [-10, -5, 0, 5, 10]
 
 class SniperRifle(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [40, 14]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\sniper\sniper.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\sniper\sniper.png', position=position)
 
         #----------< Weapon Info >----------#
 
@@ -51,9 +50,9 @@ class SniperRifle(Weapon):
         return super().update()
 
 class SMG(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [24, 18]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\smg\smg.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\smg\smg.png', position=position)
 
         #----------< Weapon Info >----------#
 
@@ -65,9 +64,10 @@ class SMG(Weapon):
         return super().update()
 
 class DevGun(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [56, 22]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\rydawgun.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\rydawgun.png', position=position)
+        self.upgrades = [VamprismUpgrade(man=self.man, pde=self.pde, weapon=self), DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self), SplitStreamUpgrade(man=self.man, pde=self.pde, weapon=self)]
 
         #----------< Weapon Info >----------#
 
@@ -79,9 +79,9 @@ class DevGun(Weapon):
         return super().update()
 
 class LaserRifle(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [40, 14]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\rydawgun.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\rydawgun.png', position=position)
         #----------< Weapon Info >----------#
 
         self.firerate = 16
@@ -101,9 +101,9 @@ class LaserRifle(Weapon):
         return []
 
 class GrenadeLauncher(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [56, 22]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\grenadelauncher\grenadelauncher.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\grenadelauncher\grenadelauncher.png', position=position)
 
         #----------< Weapon Info >----------#
 
@@ -116,9 +116,9 @@ class GrenadeLauncher(Weapon):
         return super().update()
 
 class LaserMachineGun(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [56, 26]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\lasermachinegun\lasermachinegun.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\lasermachinegun\lasermachinegun.png', position=position)
 
         #----------< Weapon Info >----------#
 
@@ -130,9 +130,9 @@ class LaserMachineGun(Weapon):
         return super().update()
 
 class ElectroLauncher(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [37, 16]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\electrospherelauncher\electrospherelauncher.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\electrospherelauncher\electrospherelauncher.png', position=position)
 
         #----------< Weapon Info >----------#
 
@@ -141,7 +141,7 @@ class ElectroLauncher(Weapon):
         self.bullet = Electrosphere
 
 class LingerTest(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [37, 16]
         self.firerate = 1000
         super().__init__(man, pde, owner, sprite='')
@@ -151,13 +151,13 @@ class LingerTest(Weapon):
         return super().shoot(target)
 
 class SpawnerWeapon(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [46, 22]
         self.firerate = 60
         self.item = 0
         self.items = [ShooterEnemy]
         self.shot = False
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\zapinator\zapinator.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\zapinator\zapinator.png', position=position)
 
     def shoot(self, target):
         self.shooting = True
@@ -180,11 +180,11 @@ class SpawnerWeapon(Weapon):
         return super().update()
 
 class Enderpearl(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [16, 16]
         self.firerate = 60
         self.shot = False
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\enderpearl\enderpearl.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\enderpearl\enderpearl.png', position=position)
 
     def shoot(self, target):
         self.shooting = True
@@ -204,9 +204,9 @@ class Enderpearl(Weapon):
         return super().update()
 
 class SplatGun(Weapon):
-    def __init__(self, man, pde, owner):
+    def __init__(self, man, pde, owner, position):
         self.scale = [70, 20]
-        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\splatgun\splatgun.png')
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\splatgun\splatgun.png', position=position)
 
         #----------< Weapon Info >----------#
 

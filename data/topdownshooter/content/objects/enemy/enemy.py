@@ -43,7 +43,7 @@ class ShooterEnemy(ShooterEntity):
 
 
         if weapon != None:
-            self.weapon = man.add_object(obj=weapon(man=man, pde=pde, owner=self))
+            self.weapon = man.add_object(obj=weapon(man=man, pde=pde, owner=self, position=[self.rect.centerx + 10, self.rect.centery + 10]))
 
     def update(self):
         self.player = self.pde.game.player

@@ -22,7 +22,7 @@ class ShooterPlayer(ShooterEntity):
         self.components["PlayerController"] = ShooterController(owner=self)
         w = chooseRandomWeapon()
 
-        self.weapon = man.add_object(obj=w(man=man, pde=pde, owner=self))
+        self.weapon = man.add_object(obj=w(man=man, pde=pde, owner=self, position=[self.rect.centerx + 10, self.rect.centery + 10]))
         self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=pde, position=self.position, target=self))
 
 

@@ -23,7 +23,7 @@ class DevLevel(Level):
 
 
         for inx, w in enumerate([SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, DevGun, SpawnerWeapon, Enderpearl, SplatGun]):
-            weap = w(man=self.objectManager, pde=self.pde, owner=None)
+            weap = w(man=self.objectManager, pde=self.pde, owner=None, position=[0,0])
             self.objectManager.add_object(PickupWeapon(man=self.objectManager, pde=self.pde, position=[(inx) * 64, 0], speed=[0, 0], weapon=weap))
             weap.deconstruct()
 

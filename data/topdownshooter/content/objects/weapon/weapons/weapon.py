@@ -9,10 +9,11 @@ from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 from copy import deepcopy
 
 class Weapon(Actor):
-    def __init__(self, man, pde, owner, firerate=10, bullet=Bullet, shotangles=None, shotspread=4, sprite=''):
+    def __init__(self, man, pde, owner, position=[0, 0], firerate=10, bullet=Bullet, shotangles=None, shotspread=4, sprite=''):
 
         #----------< Actor Info >----------#
         self.owner = owner
+        self.position = position
         self.checkForCollision = False
         self.checkForOverlap = False
         self.useCenterForPosition = True
