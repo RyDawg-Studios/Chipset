@@ -34,5 +34,5 @@ class PlayerController(Component):
         pass
 
     def deconstruct(self):
-        self.owner.pde.player_manager.player_controllers.remove(self)
+#        self.owner.pde.player_manager.player_controllers.remove(self)
         return super().deconstruct()

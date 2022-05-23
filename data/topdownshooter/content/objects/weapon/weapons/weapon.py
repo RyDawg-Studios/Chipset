@@ -32,6 +32,8 @@ class Weapon(Actor):
         self.shooting = False
         self.upgrades = []
 
+
+
         super().__init__(man, pde)
         
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=sprite, layer=3)

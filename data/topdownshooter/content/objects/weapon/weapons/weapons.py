@@ -3,8 +3,8 @@ from data.engine.fl.world_fl import objectlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
-from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet
-from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, SplitStreamUpgrade, VamprismUpgrade
+from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet
+from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, SplitStreamUpgrade, VamprismUpgrade
 
 
 
@@ -39,6 +39,7 @@ class Shotgun(Weapon):
 class SniperRifle(Weapon):
     def __init__(self, man, pde, owner, position):
         self.scale = [40, 14]
+        self.shotspread = 1
         super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\sniper\sniper.png', position=position)
 
         #----------< Weapon Info >----------#
@@ -47,6 +48,10 @@ class SniperRifle(Weapon):
         self.bullet = SniperBullet
 
     def update(self):
+        if self.owner.movement[0] != 0 or self.owner.movement[1] != 0:
+            self.shotspread = 20
+        else:
+            self.shotspread = 1
         return super().update()
 
 class SMG(Weapon):
@@ -207,6 +212,7 @@ class SplatGun(Weapon):
     def __init__(self, man, pde, owner, position):
         self.scale = [70, 20]
         super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\splatgun\splatgun.png', position=position)
+        self.upgrades = [SplitStreamUpgrade(pde=pde, man=man, weapon=self)]
 
         #----------< Weapon Info >----------#
 
@@ -215,4 +221,43 @@ class SplatGun(Weapon):
         self.bullet = SplatBullet
 
     def update(self):
+        return super().update()
+
+class RocketLauncher(Weapon):
+    def __init__(self, man, pde, owner, position):
+        self.scale = [52, 22]
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\rocketlauncher\rocketlauncher.png', position=position)
+
+        #----------< Weapon Info >----------#
+
+        self.shotspread = 5
+        self.firerate = 75
+        self.bullet = Rocket
+
+    def update(self):
+        self.components["Sprite"].sprite.rotation = self.rotation
+        return super().update()
+
+class Revolver(Weapon):
+    def __init__(self, man, pde, owner, position):
+        self.scale = [52, 20]
+        super().__init__(man, pde, owner, sprite=r'data\topdownshooter\assets\sprites\weapons\revolver\revolver.png', position=position)
+        self.firerate = 25
+        self.shot = False
+        self.shotspread = 3
+        self.bullet = RevolverBullet
+
+    def shoot(self, target):
+        self.shooting = True
+        if not self.shot:
+            super().shoot(target)
+            self.shot = True
+            return
+
+
+    def update(self):
+        if self.shot == True and self.shooting == False:
+            self.shot = False
+        if not self.shooting:
+            self.shooting = False
         return super().update()

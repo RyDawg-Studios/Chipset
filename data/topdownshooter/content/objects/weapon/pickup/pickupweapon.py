@@ -9,6 +9,7 @@ class PickupWeapon(Actor):
         self.position = position
         self.scale = self.weapon.scale
         self.checkForCollision = False
+        self.useCenterForPosition = True
         self.speed = speed
         self.rotation = rotation
         self.rotdir = random.choice([-0.35, 0.35])

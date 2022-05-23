@@ -22,9 +22,9 @@ class ObjectManager:
     def update(self):
         for obj in list(self.objects.values()):
             obj.update()
+            #if hasattr(obj, 'owner'):
+                #print(f'Object {obj.__class__.__name__} Owner {obj.owner.__class__.__name__}')
 
-
-        
 
     def getPlayers(self):
         for obj in list(self.objects.values()):

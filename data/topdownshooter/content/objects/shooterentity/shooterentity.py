@@ -59,7 +59,8 @@ class ShooterEntity(Actor):
         if self.dead:
             self.deadticks += 1
         self.dodgebuffer()
-        self.weaponoffset()
+        self.weaponoffset(weapon=self.weapon)
+
         return super().update()
 
     def collide(self, obj, side):
@@ -107,10 +108,10 @@ class ShooterEntity(Actor):
             self.weapon.deconstruct()
         self.deconstruct()
 
-    def weaponoffset(self):
-        if self.weapon != None:
-            self.weapon.rect.centerx = self.rect.centerx + 10
-            self.weapon.rect.centery = self.rect.centery + 10
+    def weaponoffset(self, weapon, offset=10):
+        if weapon != None:
+            weapon.rect.centerx = self.rect.centerx + offset
+            weapon.rect.centery = self.rect.centery + offset
 
     def dropweapon(self, rotation=0):
         if self.weapon != None:

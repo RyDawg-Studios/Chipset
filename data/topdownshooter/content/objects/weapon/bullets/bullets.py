@@ -3,13 +3,14 @@ import random
 from numpy import isin
 import pygame
 from data.engine.actor.actor import Actor
-from data.engine.fl.world_fl import getpositionlookatvector, objectlookatposition, objectlookattarget
+from data.engine.fl.world_fl import getpositionlookatpositionvector, getpositionlookatvector, objectlookatposition, objectlookattarget, positionlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.hazard.explosion.explosion import Explosion
 from data.topdownshooter.content.objects.hazard.mine.mine import Mine
 from data.topdownshooter.content.objects.hazard.splat.splat import Splat
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
+from data.topdownshooter.content.tiles.tile import Tile
 
 
 
@@ -157,6 +158,12 @@ class SniperBullet(Bullet):
         self.speed = 48
         self.damage = random.randint(80, 120)
 
+class RevolverBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale=[24, 3], sprite=r'data\topdownshooter\assets\sprites\weapons\sniper\sniperbullet.png')
+        self.speed = 48
+        self.damage = 20
+
 class ShotgunBullet(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, sprite=r'data\topdownshooter\assets\sprites\weapons\shotgun\shotgunbullet.png')
@@ -287,4 +294,24 @@ class SplatBullet(Bullet):
     def splat(self):
         self.man.add_object(obj=Splat(man=self.man, pde=self.pde, position=list(self.rect.center), owner=self, color=self.color))
 
-    
+class Rocket(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale = [30, 20], sprite=r'data\topdownshooter\assets\sprites\weapons\rocketlauncher\rocket.png')
+        self.speed = 5
+        self.damage = 15
+        self.reachedTarget = False
+
+    def update(self):
+
+        if pygame.Vector2.distance_to(self.position, self.pde.input_manager.mouse_position) <= 4:
+            self.reachedTarget = True
+
+        if not self.reachedTarget:
+            self.target = getpositionlookatpositionvector(self.position, self.pde.input_manager.mouse_position)
+            self.rotation = positionlookatposition(self.rect.center, self.pde.input_manager.mouse_position)
+        return super().update()
+
+    def hit(self, object):
+        if isinstance(object, ShooterEntity) or isinstance(object, Tile):
+            self.man.add_object(obj=Explosion(man=self.man, pde=self.pde, owner=self, position=self.rect.center, scale=[64, 64]))
+        return super().hit(object)

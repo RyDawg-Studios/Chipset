@@ -13,15 +13,12 @@ class Object:
         self.components.pop(component)
 
     def update(self):
-        for component in self.components:
-            self.components[component].update()
         return
 
     def deconstruct(self):
         self.man.remove_object(self)
         for component in self.components.values():
             component.deconstruct()
-        del self
 
     def serialize(self, data=None):
         return struct.pack(data)

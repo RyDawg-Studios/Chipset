@@ -1,3 +1,4 @@
+import random
 import pygame
 from data.engine.actor.actor import Actor
 from data.engine.anim.anim_manager import AnimManager
@@ -14,6 +15,7 @@ class Splat(Actor):
         self.useCenterForPosition = True
         self.checkForCollision = False
         self.objects = []
+        self.rotation = random.randint(0, 360)
         super().__init__(man, pde)
         if color == 'blue':
             self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\weapons\splatgun\splatblue.png', layer=0)
@@ -32,6 +34,8 @@ class Splat(Actor):
                 if object.velocity != object.maxVelocity / 2 and object != self.owner.owner.owner:
                     object.velocity = object.maxVelocity / 2
 
+        if self.ticks >= 300:
+            self.components["Sprite"].sprite.opacity -= 5
         return super().update()
 
 
