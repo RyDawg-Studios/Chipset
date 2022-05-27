@@ -21,7 +21,10 @@ class ObjectManager:
 
     def update(self):
         for obj in list(self.objects.values()):
-            obj.update()
+            if not obj.paused:
+                obj.update()
+                for component in list(obj.components.values()):
+                    component.update()
             #if hasattr(obj, 'owner'):
                 #print(f'Object {obj.__class__.__name__} Owner {obj.owner.__class__.__name__}')
 

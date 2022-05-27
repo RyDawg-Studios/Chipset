@@ -1,0 +1,230 @@
+{
+    "AutomaticRifle":
+    {
+        "textinfo":{
+            "name": "Automatic Rifle",
+            "desc": "A well rounded, medium fire rate, medium damage automatic rifle.",
+            "flavor": "Good o'l reliable."
+        },
+        "transforminfo":{
+            "scale": [40, 14],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\debug\\debugweapon\\cbmk2.png"
+        },
+        "statinfo":{
+            "firerate": 12,
+            "shotangles": [0],
+            "shotspread": 4,
+            "damagemultiplier": 1
+
+        }
+    },
+    "Shotgun":
+    {
+        "textinfo":{
+            "name": "Pump Shotgun",
+            "desc": "The Pump Shotgun is a medium damage, low fire rate spread weapon. It shoots 5 accurate pellets in 5 degree increments",
+            "flavor": "But can you double pump?"
+        },
+        "transforminfo":{
+            "scale": [30, 12],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\shotgun\\boomstick.png"
+
+        },
+        "statinfo":{
+            "firerate": 52,
+            "shotspread": 1,
+            "shotangles": [-10, -5, 0, 5, 10],
+            "damagemultiplier": 1
+        }
+    },
+    "SniperRifle":
+    {
+        "textinfo":{
+            "name": "Sniper Rifle",
+            "desc": "The Sniper Rifle is a very low fire rate, very high damage, long-distance rifle.\nShooting while moving will result in highly unfavorable accuracy.",
+            "flavor": "Professionals have standards."
+        },
+        "transforminfo":{
+            "scale": [40, 14],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\sniper\\sniper.png"
+
+        },
+        "statinfo":{
+            "firerate": 75,
+            "shotspread": 1,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "SMG":
+    {
+        "textinfo":{
+            "name": "Sub-Machine Gun",
+            "desc": "The SMG is an incredibly fast firing, low accuracy weapon.\nIt's bullets may stray far from the target, but this means it can deal with large groups easily.",
+            "flavor": "I'll think of one of these later."
+        },
+        "transforminfo":{
+            "scale": [24, 18],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\smg\\smg.png"
+
+        },
+        "statinfo":{
+            "firerate": 4,
+            "shotspread": 12,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "Devgun":
+    {
+        "textinfo":{
+            "name": "RyDawg Gun",
+            "desc": "This weapon was used for testing during development.\nIt originally had the sprite of the Onyx Blaster from Terraria.\nIt comes pre-loaded with all my favorite upgrades.",
+            "flavor": "Get nutted mother fucker!"
+        },
+        "transforminfo":{
+            "scale": [56, 22],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\devgun\\rydawgun.png"
+
+        },
+        "statinfo":{
+            "firerate": 3,
+            "shotspread": 0,
+            "shotangles": [-5, 0, 5],
+            "damagemultiplier": 1
+        }
+    },
+    "LaserRifle":
+    {
+        "textinfo":{
+            "name": "Laser Rifle",
+            "desc": "This weapon does not fire bullets, instead it charges up and fires a large laser beam, with it's length dependant on its charge time.",
+            "flavor": "For the record, this was a pain in the ass to program."
+        },
+        "transforminfo":{
+            "scale": [56, 22],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\devgun\\rydawgun.png"
+
+        },
+        "statinfo":{
+            "firerate": 16,
+            "shotspread": 0,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "GrenadeLauncher":
+    {
+        "textinfo":{
+            "name": "Grenade Launcher",
+            "desc": "The Grenade Launcher fires the Grenade projectile, which bounces off walls and explodes after a short time.",
+            "flavor": "I wrote a whole seperate physics engine for this."
+        },
+        "transforminfo":{
+            "scale": [56, 22],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\grenadelauncher\\grenadelauncher.png"
+
+        },
+        "statinfo":{
+            "firerate": 75,
+            "shotspread": 5,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "LaserMachineGun":
+    {
+        "textinfo":{
+            "name": "Laser Machine Gun",
+            "desc": "This high fire rate, high damage, and mid-accuracy machine gun can swiftly mow down mobs of enemies with ease.",
+            "flavor": "And they said I couldn't make the Auto-Rifle any cooler."
+        },
+        "transforminfo":{
+            "scale": [56, 26],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\lasermachinegun\\lasermachinegun.png"
+
+        },
+        "statinfo":{
+            "firerate": 6,
+            "shotspread": 5,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "ElectroLauncher":
+    {
+        "textinfo":{
+            "name": "Mine Launcher",
+            "desc": "This projectile launcher fires a bubble that leaves a trail of mines in its path.\nWhen it explodes, so do all the mines.",
+            "flavor": "Patented by Jaanderson"
+        },
+        "transforminfo":{
+            "scale": [37, 16],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\electrospherelauncher\\electrospherelauncher.png"
+
+        },
+        "statinfo":{
+            "firerate": 60,
+            "shotspread": 2,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "SplatGun":
+    {
+        "textinfo":{
+            "name": "Splat Gun",
+            "desc": "This close-range automatic weapon fires bursts of paint that, which upon touching the ground, splatter and linger on the floor.\nThese puddles slow down enemy movement.",
+            "flavor": "An Islander fans wet dream."
+        },
+        "transforminfo":{
+            "scale": [70, 20],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\splatgun\\splatgun.png"
+
+        },
+        "statinfo":{
+            "firerate": 12,
+            "shotspread": 5,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "Revolver":
+    {
+        "textinfo":{
+            "name": "Revolver",
+            "desc": "This long range semi-automatic pistol boasts high damage and a fast fire rate.\nJust remember to tap the trigger.",
+            "flavor": "It's high noon."
+        },
+        "transforminfo":{
+            "scale": [52, 20],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\revolver\\revolver.png"
+
+        },
+        "statinfo":{
+            "firerate": 25,
+            "shotspread": 3,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "RocketLauncher":
+    {
+        "textinfo":{
+            "name": "Rocket Launcher",
+            "desc": "The Rocket Launcher fires Rockets that attempt to follow the mouse.\nShould the rocket hit the mouse, it will stop tracing.",
+            "flavor": "Tactical Nuke, Incoming!"
+        },
+        "transforminfo":{
+            "scale": [52, 20],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\rocketlauncher\\rocketlauncher.png"
+
+        },
+        "statinfo":{
+            "firerate": 25,
+            "shotspread": 3,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    }
+}

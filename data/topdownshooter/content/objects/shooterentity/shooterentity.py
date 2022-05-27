@@ -66,9 +66,9 @@ class ShooterEntity(Actor):
     def collide(self, obj, side):
         return super().collide(obj, side)
 
-    def takedamage(self, obj):
+    def takedamage(self, obj, dmg):
         if self.damagable:
-            self.hp -= obj.damage
+            self.hp -= dmg
             if self.hp <= 0:
                 if not self.dead:
                     self.dead = True

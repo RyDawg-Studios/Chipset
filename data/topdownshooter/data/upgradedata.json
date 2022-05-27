@@ -1,0 +1,61 @@
+{    "Empty":
+    {
+        "textinfo":
+        {
+            "name": "Empty Upgrade Slot",
+            "desc": "No Effect."
+        },
+        "spriteinfo":
+        {
+            "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\upgrades\\blank.png"
+        }
+    },  
+    "Vamprism":
+        {
+            "textinfo":
+            {
+                "name": "Vamprism",
+                "desc": "Steals HP from enemies."
+            },
+            "spriteinfo":
+            {
+                "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\upgrades\\vamprism.png"
+            }
+        },    
+    "SplitStream":
+        {
+            "textinfo":
+            {
+                "name": "Split Stream",
+                "desc": "Adds a second stream of bullets."
+            },
+            "spriteinfo":
+            {
+                "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\upgrades\\splitstream.png"
+            }
+        },
+    "ExplosiveBullets":
+        {
+            "textinfo":
+            {
+                "name": "Explosive Bullets",
+                "desc": "Bullets explode on impact."
+            },
+            "spriteinfo":
+            {
+                "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\upgrades\\explosivebullets.png"
+            }
+        },
+    "Disarmament":
+        {
+            "textinfo":
+            {
+                "name": "Disarmament",
+                "desc": "Bullets have a small chance to disarm enemies."
+            },
+            "spriteinfo":
+            {
+                "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\upgrades\\disarmament.png"
+            }
+        }
+}

@@ -8,6 +8,8 @@ class Object:
         self.components = {}
         self.scroll = True
         self.replicate = False
+        self.pausable = True
+        self.paused = False
 
     def removecomponent(self, component):
         self.components.pop(component)

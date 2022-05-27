@@ -27,6 +27,8 @@ class Sprite(pygame.sprite.Sprite):
         self.ogimage = self.image
 
         self.rect = self.ogimage.get_rect()
+
+        self.updatetransform()
  
         #add sprite to sprite layer
         parent.pde.display_manager.group.add(self)
@@ -41,7 +43,8 @@ class Sprite(pygame.sprite.Sprite):
         self.rect.center = self.parent.rect.center
 
     def update(self):
-        self.updatetransform()
+        if (self.parent.position[0] >= 0 and self.parent.position[1] >=0) or (self.parent.position[0] <= 720 and self.parent.position[1] <= 600):
+            self.updatetransform()
         super().update()
 
     

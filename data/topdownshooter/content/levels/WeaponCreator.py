@@ -11,22 +11,12 @@ from data.topdownshooter.content.objects.shooterentity.shooterentity import Shoo
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
 from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutomaticRifle, DevGun, ElectroLauncher, Enderpearl, GrenadeLauncher, LaserMachineGun, LingerTest, Revolver, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
-from data.topdownshooter.content.objects.widget.fadeout import FadeOut
+from data.topdownshooter.content.objects.widget.weaponcreationwidget import UpgradeSelector, UpgradeSwitchButton, WeaponCreatorWidget
 
 
-class DevLevel(Level):
+class WeaponCreator(Level):
     def __init__(self, man, pde) -> None:
         self.ticks = 0
         super().__init__(man, pde)
-        self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\bg.png')
-
-        p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[320, 140]))
-        p.removeweapon()
-
-
-        for inx, w in enumerate([SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, DevGun, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver]):
-            weap = w(man=self.objectManager, pde=self.pde, owner=None, position=[0,0])
-            self.objectManager.add_object(PickupWeapon(man=self.objectManager, pde=self.pde, position=[(inx) * 64, 0], speed=[0, 0], weapon=weap))
-            weap.deconstruct()
-
-        lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[0,200],level="room2"))
+        self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\blueprint.png')
+        t = self.objectManager.add_object(WeaponCreatorWidget(man=self.objectManager, pde=pde, position=[320, 300]))

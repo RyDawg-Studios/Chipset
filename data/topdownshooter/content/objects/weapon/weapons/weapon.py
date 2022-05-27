@@ -1,4 +1,6 @@
+import json
 import math
+from msilib.schema import Upgrade
 import random
 
 import pygame
@@ -6,10 +8,38 @@ from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import getpositionlookatvector, normal_cut, objectlookatposition, objectlookattarget
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
-from copy import deepcopy
 
 class Weapon(Actor):
-    def __init__(self, man, pde, owner, position=[0, 0], firerate=10, bullet=Bullet, shotangles=None, shotspread=4, sprite=''):
+    def __init__(self, man, pde, owner, position=[0, 0], id=None, bullet=Bullet):
+        #----------< Data Info >----------#
+        self.id = id
+        if self.id != None:
+            weapondata = json.load(open(r"data\topdownshooter\data\weapondata.json"))[self.id]
+
+            self.scale = weapondata["transforminfo"]["scale"]
+            self.sprite = weapondata["transforminfo"]["sprite"]
+
+            self.shotangles = weapondata['statinfo']['shotangles']
+            self.firerate = weapondata['statinfo']['firerate']
+            self.shotspread = weapondata['statinfo']['shotspread']
+            self.damagemultiplier = weapondata['statinfo']['damagemultiplier']
+
+            self.name = weapondata['textinfo']['name']
+            self.description = weapondata['textinfo']['desc']
+            self.flavor = weapondata['textinfo']['flavor']
+        else:
+            self.scale = [20, 10]
+            self.sprite = ''
+
+            self.shotangles = [0]
+            self.firerate = 10
+            self.shotspread = 4
+            self.damagemultiplier = 1.0
+
+            self.name = 'Default Name'
+            self.description = 'Default Description'
+            self.flavor = 'Devault Flavor'
+            
 
         #----------< Actor Info >----------#
         self.owner = owner
@@ -18,25 +48,22 @@ class Weapon(Actor):
         self.checkForOverlap = False
         self.useCenterForPosition = True
 
+
         #----------< Shot Info >----------#
-        if shotangles is None:
-            shotangles = [0]
-        self.shotangles = shotangles
-        self.firerate = firerate
         self.bullet = bullet
-        self.shotspread = shotspread
         self.shottick = 500
         self.shottime = 0
+        self.shooting = False
+        
 
         #----------< Weapon Info >----------#
-        self.shooting = False
         self.upgrades = []
 
 
 
         super().__init__(man, pde)
         
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=sprite, layer=3)
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.sprite, layer=3)
 
 
     def shoot(self, target):
@@ -73,3 +100,8 @@ class Weapon(Actor):
 
     def pickup(self):
         pass
+
+    def deconstruct(self):
+        for u in self.upgrades:
+            u.deconstruct()
+        return super().deconstruct()

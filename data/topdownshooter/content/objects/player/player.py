@@ -7,6 +7,7 @@ from data.topdownshooter.content.objects.player.shooter_controller import Shoote
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutomaticRifle, DevGun, LaserMachineGun, LaserRifle, Shotgun, SniperRifle, GrenadeLauncher
+from data.topdownshooter.content.objects.widget.fadeout import FadeOut
 from data.topdownshooter.fl.game_fl import chooseRandomWeapon
 
 
@@ -24,6 +25,8 @@ class ShooterPlayer(ShooterEntity):
 
         self.weapon = man.add_object(obj=w(man=man, pde=pde, owner=self, position=[self.rect.centerx + 10, self.rect.centery + 10]))
         self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=pde, position=self.position, target=self))
+        #self.fo = self.man.add_object(FadeOut(man=self.man, pde=self.pde))
+
 
 
         self.weaponindx = 0
@@ -34,6 +37,8 @@ class ShooterPlayer(ShooterEntity):
 
         if self.deadticks >= 100:
             self.pde.game.activate()
+
+        #self.fo.rect.center = self.cam.rect.center
         return super().update()
 
     def die(self, obj):

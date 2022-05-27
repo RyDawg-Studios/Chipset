@@ -12,6 +12,7 @@ class Explosion(Actor):
         self.owner = owner
         self.useCenterForPosition = True
         self.checkForCollision = False
+        self.damage = 60
         super().__init__(man, pde)
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\anims\explosion\tile000.png', layer=2)
         
@@ -25,7 +26,6 @@ class Explosion(Actor):
         if self.ticks == 1:
             for object in self.overlapInfo["Objects"]:
                 if hasattr(object, 'hp'):
-                    self.damage = 60
-                    object.takedamage(self)
+                    object.takedamage(self, 60)
         return super().update()
 
