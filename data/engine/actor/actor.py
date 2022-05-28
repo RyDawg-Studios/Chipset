@@ -82,16 +82,15 @@ class Actor(Object):
     def getoverlaps(self):
         hits = []
         if self.checkForOverlap:
-            for level in self.pde.level_manager.levels.values():
-                for object in list(level.objectManager.objects.values()):
-                    if hasattr(object, 'checkForOverlap'):
-                        if self.checkForOverlap == True:
-                            if self.collideRect.colliderect(object.collideRect) and object != self:
-                                hits.append(object)
-                                object.whileoverlap(self)
-                                self.whileoverlap(object)
-                                object.overlap(self)
-                                self.overlap(object)
+            for object in list(self.pde.level_manager.level.objectManager.objects.values()):
+                if hasattr(object, 'checkForOverlap'):
+                    if self.checkForOverlap == True:
+                        if self.collideRect.colliderect(object.collideRect) and object != self:
+                            hits.append(object)
+                            object.whileoverlap(self)
+                            self.whileoverlap(object)
+                            object.overlap(self)
+                            self.overlap(object)
         self.overlapInfo["Objects"] = hits
         return hits
 

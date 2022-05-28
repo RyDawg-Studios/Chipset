@@ -6,12 +6,13 @@ from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
 
 
 class ShooterEntity(Actor):
-    def __init__(self, man, pde, position=[0, 0], scale=[32, 32], maxhp=100):
+    def __init__(self, man, pde, position=[0, 0], maxhp=100):
 
         #----------< Transform Info >----------#
+
         if position is None: position = [0,0]
         self.position = position
-        self.scale = scale
+        self.scale = [32, 32]
         self.useCenterForPosition = True
 
 
@@ -26,6 +27,7 @@ class ShooterEntity(Actor):
         self.hp = self.maxhp
         self.dead = False
         self.damagable = True
+        self.falling = False
 
         #----------< Dodge Info >----------#
 
@@ -46,8 +48,8 @@ class ShooterEntity(Actor):
 
         self.deadticks = 0
 
-        super().__init__(man, pde)
         self.healthbar = man.add_object(obj=HealthBar(man=man, pde=pde, owner=self))
+        return super().__init__(man, pde)
 
 
     def shootweapon(self, target):
@@ -60,6 +62,9 @@ class ShooterEntity(Actor):
             self.deadticks += 1
         self.dodgebuffer()
         self.weaponoffset(weapon=self.weapon)
+
+        if self.falling:
+            self.fall()
 
         return super().update()
 
@@ -102,11 +107,14 @@ class ShooterEntity(Actor):
 
 
     def die(self, killer):
-        rot = killer.rotation
-        self.dropweapon(rot)
+        if killer is not None:
+            rot = killer.rotation
+            self.dropweapon(rot)
+        else:
+            self.removeweapon()
         if self.weapon != None:
             self.weapon.deconstruct()
-        self.deconstruct()
+
 
     def weaponoffset(self, weapon, offset=10):
         if weapon != None:
@@ -127,12 +135,10 @@ class ShooterEntity(Actor):
                     o.deconstruct()
                     return
             
-
     def changeweapon(self, cls):
         self.removeweapon()
         self.weapon = self.man.add_object(obj=cls(man=self.man, pde=self.pde, owner=self, position=[self.rect.centerx + 10, self.rect.centery + 10]))
-
-    
+        return
 
     def removeweapon(self):
         if self.weapon != None:
@@ -141,6 +147,7 @@ class ShooterEntity(Actor):
 
     def useitem(self, item):
         item.use()
+        return
 
     def checkXcollision(self, movement):
         if self.canMove:
@@ -177,6 +184,16 @@ class ShooterEntity(Actor):
                             self.rect.top = object.rect.bottom
                             self.collideInfo["Top"] = True
                             object.collide(self, "Bottom")
+
+    def fall(self):
+        self.canMove = False
+        self.takedamage(obj=None, dmg=10)
+        self.removeweapon()
+        if self.rect.height > 0 and self.rect.width > 0:
+            self.rect.height -= 1
+            self.rect.width -= 1
+        else:
+            self.die(killer=None)
 
     def deconstruct(self):
         self.healthbar.deconstruct()

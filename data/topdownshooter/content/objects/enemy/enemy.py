@@ -75,3 +75,8 @@ class ShooterEnemy(ShooterEntity):
             if self.ticksSinceWeapon >= 120:
                 self.interact()
         return super().overlap(obj)
+
+    def die(self, killer):
+        super().die(killer)
+        self.deconstruct()
+        return

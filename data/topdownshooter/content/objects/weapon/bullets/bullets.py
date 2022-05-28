@@ -302,10 +302,8 @@ class Rocket(Bullet):
         self.reachedTarget = False
 
     def update(self):
-
-        if pygame.Vector2.distance_to(self.position, self.pde.input_manager.mouse_position) <= 4:
+        if self.rect.collidepoint(self.pde.input_manager.mouse_position[0], self.pde.input_manager.mouse_position[1]):
             self.reachedTarget = True
-
         if not self.reachedTarget:
             self.target = getpositionlookatpositionvector(self.position, self.pde.input_manager.mouse_position)
             self.rotation = positionlookatposition(self.rect.center, self.pde.input_manager.mouse_position)

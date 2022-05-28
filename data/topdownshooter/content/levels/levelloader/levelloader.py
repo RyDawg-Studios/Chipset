@@ -20,6 +20,7 @@ class LevelLoader(Actor):
         self.checkForOverlap = False
         self.levels = json.load(f)
         self.level = level
+        self.tiles = []
 
         self.tilekey = {'x': r'data\topdownshooter\assets\sprites\tiles\wall1.png'}
         self.objectkey = {'x': ShooterEnemy, 'p': ShooterPlayer, 'n': LevelGate}
@@ -31,5 +32,13 @@ class LevelLoader(Actor):
         for rinx, row in enumerate(self.levels[self.level]["layers"][0]):
             for oinx, obj in enumerate(row):
                 if obj != '#':
-                    self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[(oinx*32) + 16 + self.position[0], (rinx*32+ 16)+ self.position[1]], sprite=self.tilekey[obj]))
+                    o = self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[(oinx*32) + 16 + self.position[0], (rinx*32+ 16)+ self.position[1]], sprite=self.tilekey[obj]))
+                    self.tiles.append(o)
+
+    def deconstruct(self):
+        for o in self.tiles:
+            o.deconstruct()
+        return super().deconstruct()
+
+    
         

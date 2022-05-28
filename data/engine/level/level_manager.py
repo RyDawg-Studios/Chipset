@@ -5,30 +5,25 @@ class LevelManager:
     def __init__(self, pde) -> None:
         self.active = False
         self.pde = pde
-        self.levels={}
+        self.level = None
 
     def addlevel(self, level, name, active):
         level.active = active
-        self.levels[name] = level
+        self.level= level
 
     def changelevel(self, level, name, active):
-        self.clearlevels()
+        self.level = None
         level.active = active
-        self.levels[name] = level
+        self.level = level
 
     def removelevel(self, level):
-        for obj in list(self.levels[level].objectManager.objects.values()):
+        for obj in list(self.level.objectManager.objects.values()):
             obj.deconstruct()
         self.levels.pop(level)
 
     def update(self):
-        for level in list(self.levels):
-            if self.levels[level].active:
-                self.levels[level].update()
+        self.level.update()
 
-    def clearlevels(self):
-        for level in list(self.levels):
-            self.removelevel(level)
 
     def activate(self):
         pass

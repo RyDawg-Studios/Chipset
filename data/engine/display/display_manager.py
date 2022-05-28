@@ -23,12 +23,12 @@ class DisplayManager:
             self.screen.blit(self.bg, (0, 0))
 
 
-        for level in self.pde.level_manager.levels.values():
-            for object in list(level.objectManager.objects.values()):
-                if hasattr(object, "rect"):
-                    if object.scroll == True:
-                        object.rect.centerx -= self.scroll[0]
-                        object.rect.centery -= self.scroll[1]
+
+        for object in list(self.pde.level_manager.level.objectManager.objects.values()):
+            if hasattr(object, "rect"):
+                if object.scroll == True:
+                    object.rect.centerx -= self.scroll[0]
+                    object.rect.centery -= self.scroll[1]
 
         self.group.update()
         self.group.draw(self.screen)

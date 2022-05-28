@@ -45,12 +45,13 @@ class Sprite(pygame.sprite.Sprite):
     def update(self):
         if (self.parent.position[0] >= 0 and self.parent.position[1] >=0) or (self.parent.position[0] <= 720 and self.parent.position[1] <= 600):
             self.updatetransform()
-        super().update()
+        return super().update()
 
     
     def deconstruct(self):
         self.parent.pde.display_manager.group.remove(self)
         self.kill()
+        return
 
 
 
