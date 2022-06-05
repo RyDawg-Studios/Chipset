@@ -8,6 +8,7 @@ from data.topdownshooter.content.objects.player.player import ShooterPlayer
 class MorphLevel(Level):
     def __init__(self, man, pde):
         super().__init__(man, pde)
+        self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\bg.png')
 
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[320, 240]))
         lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[0,0], level="m_room0"))

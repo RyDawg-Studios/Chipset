@@ -4,7 +4,7 @@ from data.topdownshooter.content.objects.shooterentity.shooterentity import Shoo
 
 
 class Hole(Actor):
-    def __init__(self, man, pde, position=[0, 0], sprite=r'data\assets\sprites\undef.png'):
+    def __init__(self, man, pde, position=[0, 0], sprite=r'data\topdownshooter\assets\sprites\objects\hole\hole.png'):
         self.position = position
         self.scale =[32, 32]
         self.useCenterForPosition = True
