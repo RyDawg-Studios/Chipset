@@ -24,8 +24,8 @@ class ShooterArea(Actor):
 
 
 class ShooterEnemy(ShooterEntity):
-    def __init__(self, man, pde, position=None, scale=[32, 32], player=None, velocity=4, weapon=None):
-        super().__init__(man, pde, position, scale, maxhp=100)
+    def __init__(self, man, pde, position=None, velocity=4, weapon=None):
+        super().__init__(man, pde, position)
         self.maxVelocity = velocity
         self.velocity = self.maxVelocity
         self.player = pde.game.player

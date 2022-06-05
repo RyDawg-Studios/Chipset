@@ -13,7 +13,7 @@ class ShooterGame(Game):
     def activate(self):
         super().activate()
         self.pde.level_manager.levels = {}
-        self.pde.level_manager.addlevel(level=StartLevel(man=self.pde.level_manager, pde=self.pde), 
+        self.pde.level_manager.addlevel(level=DevLevel(man=self.pde.level_manager, pde=self.pde), 
                                                                         name="Main", active=True)
 
 
