@@ -28,7 +28,7 @@ class ShooterPlayer(ShooterEntity):
             self.weapon.rotation = objectlookatposition(self.weapon, self.pde.input_manager.mouse_position)
 
         if self.deadticks >= 100:
-            self.pde.game.activate()
+            self.pde.game.restart()
 
         #self.fo.rect.center = self.cam.rect.center
         self.components["Sprite"].scale = self.scale

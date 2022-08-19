@@ -52,3 +52,7 @@ class WeaponlessAI(AIState):
         self.target = self.man.add_object(AITarget(man=self.man, pde=self.pde, position=[random.randint(0, 600), random.randint(0, 400)]))
         self.destination = self.target.position
         self.travelticks = 0
+
+    def deconstruct(self):
+        self.target.deconstruct()
+        return super().deconstruct()

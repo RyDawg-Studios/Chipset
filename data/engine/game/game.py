@@ -5,6 +5,7 @@ class Game:
     def activate(self):
         if self.pde.level_manager.level is not None:
             for object in list(self.pde.level_manager.level.objectManager.objects.values()):
+                print(f"Destroyed {object} Object")
                 object.deconstruct()
 
     def update(self):

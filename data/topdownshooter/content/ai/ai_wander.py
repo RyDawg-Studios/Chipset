@@ -37,4 +37,8 @@ class WanderAI(AIState):
         self.destination = self.target.position
         self.travelticks = 0
 
+    def deconstruct(self):
+        self.target.deconstruct()
+        return super().deconstruct()
+
 

@@ -11,10 +11,11 @@ from data.topdownshooter.content.ai.ai_weaponless import WeaponlessAI
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
 
-class ShooterArea(Actor):
+class EnemyPickupArea(Actor):
     def __init__(self, man, pde, position):
         self.position = position
         self.scale = [256, 256]
+        self.useCenterForPosition = True
         self.checkForCollision = False
         super().__init__(man, pde)
 
@@ -39,7 +40,7 @@ class ShooterEnemy(ShooterEntity):
         self.ai.addstate(name="weaponless", state=WeaponlessAI)
         self.ai.state = "wander"
 
-        self.area = self.man.add_object(obj=ShooterArea(man=self.man, pde=self.pde, position=self.rect.center))
+        self.area = self.man.add_object(obj=EnemyPickupArea(man=self.man, pde=self.pde, position=self.rect.center))
 
 
         if weapon != None:
@@ -47,6 +48,7 @@ class ShooterEnemy(ShooterEntity):
 
     def update(self):
         self.player = self.pde.game.player
+        self.area.rect.center = self.rect.center
 
 
         if self.weapon != None and self.player != None and self.player.dead == False:
@@ -68,6 +70,7 @@ class ShooterEnemy(ShooterEntity):
 
     def deconstruct(self):
         self.area.deconstruct()
+        
         return super().deconstruct()
 
     def overlap(self, obj):

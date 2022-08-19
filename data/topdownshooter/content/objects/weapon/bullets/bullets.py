@@ -297,16 +297,11 @@ class SplatBullet(Bullet):
 class Rocket(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale = [30, 20], sprite=r'data\topdownshooter\assets\sprites\weapons\rocketlauncher\rocket.png')
-        self.speed = 5
+        self.speed = 10
         self.damage = 15
         self.reachedTarget = False
 
     def update(self):
-        if self.rect.collidepoint(self.pde.input_manager.mouse_position[0], self.pde.input_manager.mouse_position[1]):
-            self.reachedTarget = True
-        if not self.reachedTarget:
-            self.target = getpositionlookatpositionvector(self.position, self.pde.input_manager.mouse_position)
-            self.rotation = positionlookatposition(self.rect.center, self.pde.input_manager.mouse_position)
         return super().update()
 
     def hit(self, object):

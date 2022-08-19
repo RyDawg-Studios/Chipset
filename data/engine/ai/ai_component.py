@@ -19,3 +19,8 @@ class AIComponent(Component):
             else:
                 return super().update()
         return super().update()
+
+    def deconstruct(self):
+        for state in self.states.values():
+            state.deconstruct()
+        return super().deconstruct()

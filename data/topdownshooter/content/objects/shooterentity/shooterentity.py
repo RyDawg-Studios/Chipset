@@ -82,6 +82,11 @@ class ShooterEntity(Actor):
         else:
             return False
 
+    def testdodge(self):
+        if self.movement[0] > 0:
+            self.rect.centerx += (self.movement[0] * 3) * 5
+            print()
+
     def dodgeroll(self):
         self.damagable = False
         if self.movement[0] != 0 and abs(self.movement[0]) == abs(self.movement[1]):

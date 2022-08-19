@@ -155,11 +155,12 @@ class SplatGun(Weapon):
 class RocketLauncher(Weapon):
     def __init__(self, man, pde, owner, position):
         self.scale = [52, 22]
+        
         super().__init__(man, pde, owner, id="RocketLauncher", position=position)
 
         #----------< Weapon Info >----------#
 
-        self.shotspread = 5
+        self.shotspread = 0
         self.firerate = 75
         self.bullet = Rocket
 
