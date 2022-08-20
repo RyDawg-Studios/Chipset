@@ -14,6 +14,7 @@ class LevelManager:
     def addlevel(self, level, name, active):
         if self.level is not None:
             self.clearlevel()
+            self.level.deconstruct()
         self.level = None
         self.level = level
         level.active = active

@@ -17,6 +17,8 @@ class ShooterController(PlayerController):
             self.owner.cycleweapon()
         if input == pygame.K_k:
             self.owner.dead = True
+        if input == pygame.K_m:
+            self.owner.spawnmagnet()
         return super().on_input(input)
 
     def manage_input(self):

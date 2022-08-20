@@ -6,6 +6,7 @@ class ObjectManager:
     def __init__(self, pde) -> None:
         self.objects = {}
         self.pde = pde
+        self.clearing = False
     
 
     def add_object(self, obj):
@@ -31,6 +32,7 @@ class ObjectManager:
     def clear(self):
         for obj in list(self.objects.values()):
             obj.deconstruct()
+        self.objects = {}
 
 
 

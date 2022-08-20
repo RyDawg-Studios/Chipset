@@ -6,6 +6,7 @@ from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.debug.SpriteLingerer import SpriteLingerObject
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.exp.exp import EXP
+from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
 from data.topdownshooter.content.objects.player.player import ShooterPlayer
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
@@ -23,6 +24,7 @@ class DevLevel(Level):
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[320, 140]))
         p.removeweapon()
 
+        m = self.objectManager.add_object(Magnet(man=self.objectManager, pde=pde, position=[320, 140]))
 
         for inx, w in enumerate([SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, DevGun, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver]):
             weap = w(man=self.objectManager, pde=self.pde, owner=None, position=[0,0])

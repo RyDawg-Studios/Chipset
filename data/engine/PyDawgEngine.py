@@ -54,7 +54,6 @@ class PyDawgEngine:
         self.targetFPS = 30
         self.fps = 0
 
-
         self.startengine()
 
     def startengine(self):

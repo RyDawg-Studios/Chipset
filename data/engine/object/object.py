@@ -11,6 +11,10 @@ class Object:
         self.pausable = True
         self.paused = False
 
+    def pause(self):
+        if self.pausable:
+            self.paused = True
+
     def removecomponent(self, component):
         self.components.pop(component)
 
@@ -18,6 +22,7 @@ class Object:
         return
 
     def deconstruct(self):
+        self.pause()
         self.man.remove_object(self)
         for component in self.components.values():
             component.deconstruct()

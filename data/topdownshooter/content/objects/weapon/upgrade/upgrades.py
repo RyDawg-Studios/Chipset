@@ -11,7 +11,8 @@ class VamprismUpgrade(Upgrade):
 
     def onHit(self, bullet, damage, object):
         if isinstance(object, ShooterEntity):
-            self.weapon.owner.hp += damage
+            if self.weapon.owner is not None:
+                self.weapon.owner.hp += damage
         return super().onHit(bullet, damage, object)
 
 class SplitStreamUpgrade(Upgrade):

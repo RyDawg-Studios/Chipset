@@ -54,12 +54,20 @@ def getvectorfromrotation(rotation):
     v = Vector2(float(math.cos(math.radians(rotation))), float(math.sin(math.radians(rotation))))
     return v
 
+def getobjectdistance(object1, object2):
+    y1=object1.rect.centery
+    y2=object2.rect.centery
+    x1=object1.rect.centerx
+    x2=object2.rect.centerx
+
+
+    return abs(y2-y1/x2-x1)
+
 def normal_cut(mean,std):
     """ Returns a value from a normal distribution, but limited to +-3std (no extreme outliers allowed)"""
     x = random.gauss(mean,std)
     x = max(mean-3*std, min(mean+3*std, x))
     return x
-
 
 def normal_clamped_resample(mu=0, sigma=1, size=1, clamp_sigmas=2):
     """

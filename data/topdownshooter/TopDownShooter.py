@@ -7,18 +7,22 @@ from data.topdownshooter.content.levels.morphlevel import MorphLevel
 class ShooterGame(Game):
     def __init__(self, pde):
         self.player = None
+        self.currentlevel = None
         super().__init__(pde)
+
+    
+    def changelevel(self, level):
+        self.clearObjectManager()
+        self.currentlevel = level
+        l = self.pde.level_manager.addlevel(level=level(man=self.pde.level_manager, pde=self.pde), 
+                                                                        name="Main", active=True)
+        return l
 
 
     def activate(self):
-        super().activate()
-        self.pde.level_manager.addlevel(level=DevLevel(man=self.pde.level_manager, pde=self.pde), 
-                                                                        name="Main", active=True)
+        self.changelevel(DevLevel)
+        return super().activate()
 
     def restart(self):
-        print("Level Restarting:")
-        self.clearObjectManager()
-        print("Level Object Manager Cleared")
-        self.pde.level_manager.addlevel(level=DevLevel(man=self.pde.level_manager, pde=self.pde), 
-                                                                        name="Main", active=True)
-        print("Level Manager Added a New Level")
+        self.changelevel(self.currentlevel)
+        return

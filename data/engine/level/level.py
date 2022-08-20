@@ -18,3 +18,4 @@ class Level:
 
     def deconstruct(self):
         self.objectManager.clear()
+        self.objectManager = None

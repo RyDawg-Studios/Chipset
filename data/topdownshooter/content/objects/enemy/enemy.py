@@ -1,3 +1,4 @@
+import gc
 import random
 from data.engine.actor.actor import Actor
 from data.engine.ai.ai_component import AIComponent
@@ -29,12 +30,11 @@ class ShooterEnemy(ShooterEntity):
         super().__init__(man, pde, position)
         self.maxVelocity = velocity
         self.velocity = self.maxVelocity
-        self.player = pde.game.player
         self.defaultspeed = [8, 8]
         self.speed = self.defaultspeed
         self.rotation = 0
         self.ticksSinceWeapon = 0
-        #self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\badme.png', layer=2)
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\badme.png', layer=2)
         self.ai = self.components["AI"] = AIComponent(owner=self)
         self.ai.addstate(name="wander", state=WanderAI)
         self.ai.addstate(name="weaponless", state=WeaponlessAI)
@@ -47,14 +47,13 @@ class ShooterEnemy(ShooterEntity):
             self.weapon = man.add_object(obj=weapon(man=man, pde=pde, owner=self, position=[self.rect.centerx + 10, self.rect.centery + 10]))
 
     def update(self):
-        self.player = self.pde.game.player
         self.area.rect.center = self.rect.center
 
 
-        if self.weapon != None and self.player != None and self.player.dead == False:
-            print("Sees Player")
-            self.weapon.shoot(target=self.player.position)
-            self.weapon.rotation = objectlookattarget(self.weapon, self.player)
+        if self.weapon != None and self.pde.game.player != None and self.pde.game.player.dead == False:
+            #print("Sees Player")
+            self.weapon.shoot(target=self.pde.game.player.position)
+            self.weapon.rotation = objectlookattarget(self.weapon, self.pde.game.player)
 
         if self.weapon is None:
             self.ticksSinceWeapon += 1
@@ -84,3 +83,7 @@ class ShooterEnemy(ShooterEntity):
         super().die(killer)
         self.deconstruct()
         return
+
+    def printDebugInfo(self):
+        print(f"Referrers: {gc.get_referrers(self)}")
+        return super().printDebugInfo()

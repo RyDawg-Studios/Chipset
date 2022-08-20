@@ -18,7 +18,6 @@ class Bullet(Actor):
         self.destroyOnCollide = True
         self.ignoreCollides = []
         self.destroyOnOOB = True
-        
         super().__init__(man, pde)
         self.target = getpositionlookatvector(self, target)
         self.rotation = objectlookatposition(self, self.position + self.target)
@@ -31,7 +30,6 @@ class Bullet(Actor):
     def update(self):
         for upg in self.owner.upgrades:
             upg.onBulletUpdate(bullet=self)
-
 
         self.movement = self.target * self.speed
         self.components["Sprite"].sprite.rotation = self.rotation

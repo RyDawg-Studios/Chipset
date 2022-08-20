@@ -50,3 +50,8 @@ class ShooterCamera(Actor):
             self.components["Sprite"].sprite.rotation = self.rotation
         
         return super().update()
+
+
+    def deconstruct(self):
+        self.target = None
+        return super().deconstruct()

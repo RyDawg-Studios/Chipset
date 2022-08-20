@@ -1,4 +1,4 @@
-from shutil import move
+import gc
 import pygame
 from data.engine.object.object import Object
 from data.engine.widgets.button import Button
@@ -77,8 +77,6 @@ class Actor(Object):
         self.move(self.movement)
         super().update()
 
-
-
     def getoverlaps(self):
         hits = []
         if self.checkForOverlap:
@@ -95,25 +93,22 @@ class Actor(Object):
         return hits
 
     def checkoverlaps(self):
-        pass
+        return
 
     def overlap(self, obj):
-        pass
+        return
 
     def whileoverlap(self, obj):
-        pass
+        return
 
     def collide(self, obj, side):
-        pass
+        return
 
     def move(self, movement):
         self.movement = pygame.math.Vector2(self.movement)
         self.collideInfo = {"Top": False, "Bottom": False, "Left": False, "Right": False, "Objects": []}
         self.checkXcollision(movement)
         self.checkYcollision(movement)
-
-
-
 
         self.position[0] = self.rect.center[0]
         self.position[1] = self.rect.center[1]
@@ -129,7 +124,11 @@ class Actor(Object):
 
     def checklifetime(self):
         if self.ticks >= self.lifetime and self.lifetime != -1:
+            self.expire()
             self.deconstruct()
+
+    def expire(self): #Runs before deconstruct.
+        return
 
     def scrollcameratocenterx(self):
         self.pde.display_manager.scroll[0] = (self.rect.centerx - 320)
