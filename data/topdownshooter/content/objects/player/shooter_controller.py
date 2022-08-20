@@ -15,6 +15,8 @@ class ShooterController(PlayerController):
             self.owner.interact()
         if input == pygame.K_q:
             self.owner.cycleweapon()
+        if input == pygame.K_k:
+            self.owner.dead = True
         return super().on_input(input)
 
     def manage_input(self):

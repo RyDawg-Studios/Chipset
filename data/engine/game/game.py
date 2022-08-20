@@ -3,10 +3,11 @@ class Game:
         self.pde = pde
 
     def activate(self):
+        return
+
+    def clearObjectManager(self):
         if self.pde.level_manager.level is not None:
-            for object in list(self.pde.level_manager.level.objectManager.objects.values()):
-                print(f"Destroyed {object} Object")
-                object.deconstruct()
+            self.pde.level_manager.clearlevel()
 
     def update(self):
         pass

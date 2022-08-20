@@ -28,6 +28,11 @@ class ObjectManager:
             #if hasattr(obj, 'owner'):
                 #print(f'Object {obj.__class__.__name__} Owner {obj.owner.__class__.__name__}')
 
+    def clear(self):
+        for obj in list(self.objects.values()):
+            obj.deconstruct()
+
+
 
     def getPlayers(self):
         for obj in list(self.objects.values()):

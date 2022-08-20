@@ -76,7 +76,6 @@ class ShooterEntity(Actor):
             self.hp -= dmg
             if self.hp <= 0:
                 if not self.dead:
-                    self.dead = True
                     self.die(obj)
             return True
         else:
@@ -112,6 +111,7 @@ class ShooterEntity(Actor):
 
 
     def die(self, killer):
+        self.dead = True
         if killer is not None:
             rot = killer.rotation
             self.dropweapon(rot)

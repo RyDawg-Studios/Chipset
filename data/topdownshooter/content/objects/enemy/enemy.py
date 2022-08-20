@@ -34,7 +34,7 @@ class ShooterEnemy(ShooterEntity):
         self.speed = self.defaultspeed
         self.rotation = 0
         self.ticksSinceWeapon = 0
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\badme.png', layer=2)
+        #self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\badme.png', layer=2)
         self.ai = self.components["AI"] = AIComponent(owner=self)
         self.ai.addstate(name="wander", state=WanderAI)
         self.ai.addstate(name="weaponless", state=WeaponlessAI)
@@ -52,6 +52,7 @@ class ShooterEnemy(ShooterEntity):
 
 
         if self.weapon != None and self.player != None and self.player.dead == False:
+            print("Sees Player")
             self.weapon.shoot(target=self.player.position)
             self.weapon.rotation = objectlookattarget(self.weapon, self.player)
 

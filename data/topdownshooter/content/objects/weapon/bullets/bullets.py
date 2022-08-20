@@ -297,6 +297,7 @@ class SplatBullet(Bullet):
 class Rocket(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale = [30, 20], sprite=r'data\topdownshooter\assets\sprites\weapons\rocketlauncher\rocket.png')
+        print("Spawned")
         self.speed = 10
         self.damage = 15
         self.reachedTarget = False

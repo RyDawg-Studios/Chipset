@@ -35,10 +35,8 @@ class ShooterPlayer(ShooterEntity):
         return super().update()
 
     def die(self, killer):
+        self.pde.game.player = None
         self.canMove = False
         self.canShoot = False
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\deadme.png', layer=2)
-        if self.weapon is not None:
-            self.dropweapon(rotation=self.weapon.rotation)
-        self.weapon = None
         return super().die(killer)

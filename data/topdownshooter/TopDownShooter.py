@@ -12,18 +12,13 @@ class ShooterGame(Game):
 
     def activate(self):
         super().activate()
-        self.pde.level_manager.levels = {}
         self.pde.level_manager.addlevel(level=DevLevel(man=self.pde.level_manager, pde=self.pde), 
-                                                                        name="Main", active=True)
-
-
-    def loadMorphLevel(self):
-        super().activate()
-        self.pde.level_manager.addlevel(level=MorphLevel(man=self.pde.level_manager, pde=self.pde), 
                                                                         name="Main", active=True)
 
     def restart(self):
-        super().activate()
-        print(self.pde.level_manager.level)
+        print("Level Restarting:")
+        self.clearObjectManager()
+        print("Level Object Manager Cleared")
         self.pde.level_manager.addlevel(level=DevLevel(man=self.pde.level_manager, pde=self.pde), 
                                                                         name="Main", active=True)
+        print("Level Manager Added a New Level")

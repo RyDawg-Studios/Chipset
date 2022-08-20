@@ -15,3 +15,6 @@ class Level:
 
     def update(self):
         self.objectManager.update()
+
+    def deconstruct(self):
+        self.objectManager.clear()
