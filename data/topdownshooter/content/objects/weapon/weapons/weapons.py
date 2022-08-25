@@ -3,7 +3,7 @@ from data.engine.fl.world_fl import objectlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
-from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet
+from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, LaserBullet2, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet
 from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, SplitStreamUpgrade, VamprismUpgrade
 
 
@@ -181,10 +181,19 @@ class Revolver(Weapon):
             self.shot = True
             return
 
-
     def update(self):
         if self.shot == True and self.shooting == False:
             self.shot = False
         if not self.shooting:
             self.shooting = False
         return super().update()
+
+class ChainRifle(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="ChainRifle", position=position)
+        self.bullet = LaserBullet2
+
+        #----------< Weapon Info >----------#
+
+        self.shotspread = 2
+        self.firerate = 15

@@ -8,7 +8,6 @@ from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvect
 class Bullet(Actor):
     def __init__(self, man, pde, owner, position=[0,0], target=[0, 0], scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\assaultrifle\assaultriflebullet.png'):
         self.checkForCollision = False
-        self.useCenterForPosition = True
         self.scale = scale
         self.position = position
         self.speed = 24
@@ -18,6 +17,7 @@ class Bullet(Actor):
         self.destroyOnCollide = True
         self.ignoreCollides = []
         self.destroyOnOOB = True
+        self.useCenterForPosition = True
         super().__init__(man, pde)
         self.target = getpositionlookatvector(self, target)
         self.rotation = objectlookatposition(self, self.position + self.target)
@@ -47,6 +47,7 @@ class Bullet(Actor):
         pass
 
     def overlap(self, obj):
+        print(f"Overlapped with {obj.__class__.__name__}")
         if self.ticks >= 2:
             if obj != self.owner and obj != self.owner.owner:
                 for upg in self.owner.upgrades:
@@ -56,6 +57,7 @@ class Bullet(Actor):
                     self.man.add_object(obj=Hitmarker(man=self.man, pde=self.pde, position=self.position))
                     self.hit(obj)
                     if self.destroyOnCollide:
+                        self.man.remove_object(self)
                         self.deconstruct()
                 elif isinstance(obj, Tile):
                     self.hit(obj)

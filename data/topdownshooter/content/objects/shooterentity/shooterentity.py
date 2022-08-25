@@ -6,14 +6,16 @@ from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
 
 
 class ShooterEntity(Actor):
-    def __init__(self, man, pde, position=[0, 0], maxhp=100):
+    def __init__(self, man, pde, position=[0, 0], scale=[32, 32], maxhp=100):
 
         #----------< Transform Info >----------#
 
         if position is None: position = [0,0]
+        if scale is None: scale = [32, 32]
         self.position = position
-        self.scale = [32, 32]
+        self.scale = scale
         self.useCenterForPosition = True
+        self.maxVelocity = 0
 
 
         #----------< Weapon Info >----------#
@@ -74,17 +76,12 @@ class ShooterEntity(Actor):
     def takedamage(self, obj, dmg):
         if self.damagable:
             self.hp -= dmg
-            if self.hp <= 0:
+            if self.hp <= 0 and self.hp != -1:
                 if not self.dead:
                     self.die(obj)
             return True
         else:
             return False
-
-    def testdodge(self):
-        if self.movement[0] > 0:
-            self.rect.centerx += (self.movement[0] * 3) * 5
-            print()
 
     def dodgeroll(self):
         self.damagable = False

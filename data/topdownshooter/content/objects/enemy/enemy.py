@@ -73,6 +73,10 @@ class ShooterEnemy(ShooterEntity):
         
         return super().deconstruct()
 
+    def takedamage(self, obj, dmg):
+        print(dmg)
+        return super().takedamage(obj, dmg)
+
     def overlap(self, obj):
         if isinstance(obj, PickupWeapon) and self.weapon is None:
             if self.ticksSinceWeapon >= 120:

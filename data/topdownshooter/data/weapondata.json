@@ -45,7 +45,7 @@
             "flavor": "Professionals have standards."
         },
         "transforminfo":{
-            "scale": [40, 14],
+            "scale": [80, 24],
             "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\sniper\\sniper.png"
 
         },
@@ -223,6 +223,25 @@
         "statinfo":{
             "firerate": 25,
             "shotspread": 3,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "ChainRifle":
+    {
+        "textinfo":{
+            "name": "Pulse Rifle",
+            "desc": "ToDo",
+            "flavor": "Todo"
+        },
+        "transforminfo":{
+            "scale": [66, 28],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\laserrifle\\chainrifle.png"
+
+        },
+        "statinfo":{
+            "firerate": 3,
+            "shotspread": 0,
             "shotangles": [0],
             "damagemultiplier": 1
         }

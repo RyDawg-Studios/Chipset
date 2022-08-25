@@ -10,3 +10,13 @@ pygame.joystick.init()
 if __name__ == '__main__':
     engine = PyDawgEngine()
 
+
+#~-----< TODO >-----#
+
+
+#  Fix Double Bullet Overlap  # !!!
+#  Health Component  #
+#  HasComponent()    #
+#  GetComponents()    #
+#  Change References in Bullet from hasattr('hp') to HasComponent(HealthComponent)  #
+

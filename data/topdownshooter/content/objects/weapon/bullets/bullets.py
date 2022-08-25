@@ -308,3 +308,11 @@ class Rocket(Bullet):
         if isinstance(object, ShooterEntity) or isinstance(object, Tile):
             self.man.add_object(obj=Explosion(man=self.man, pde=self.pde, owner=self, position=self.rect.center, scale=[64, 64]))
         return super().hit(object)
+
+class LaserBullet2(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale = [32, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\laserrifle\chainriflebullet.png')
+        self.speed = 3
+        self.damage = 15
+        self.reachedTarget = False
+
