@@ -43,6 +43,7 @@ class Object:
         for component in self.components.values():
             component.deconstruct()
             component = None
+        self.components = {}
  
     def serialize(self, data=None):
         return struct.pack(data)
