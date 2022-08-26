@@ -21,11 +21,12 @@ class Object:
     def update(self):
         return
 
-    def deconstruct(self):
+    def deconstruct(self, outer=None):
         self.pause()
-        self.man.remove_object(self)
+        self.man.remove_object(self, outer)
         for component in self.components.values():
             component.deconstruct()
+            component = None
 
     def serialize(self, data=None):
         return struct.pack(data)

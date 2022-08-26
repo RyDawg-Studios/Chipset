@@ -14,7 +14,7 @@ if __name__ == '__main__':
 #~-----< TODO >-----#
 
 
-#  Fix Double Bullet Overlap  # !!!
+#  Fix Double Bullet Overlap  # !!! #(Something to do with order of collision detection, x or y first)
 #  Health Component  #
 #  HasComponent()    #
 #  GetComponents()    #

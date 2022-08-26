@@ -6,7 +6,7 @@ class Component:
         return
 
     def deconstruct(self):
-        self.owner.man.remove_object(self)
+        return
 
     def checkForOwner(self):
         return

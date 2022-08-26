@@ -99,7 +99,7 @@ class SpawnerWeapon(Weapon):
         if not self.shot:
 
             if self.item >= 0 and self.item < len(self.items):
-                self.man.add_object(self.items[self.item](man=self.man, pde=self.pde, position=target, weapon=RocketLauncher))
+                self.man.add_object(self.items[self.item](man=self.man, pde=self.pde, position=target, weapon=LaserRifle))
             else:
                 self.item = 0
 

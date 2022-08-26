@@ -47,7 +47,7 @@ class Bullet(Actor):
         pass
 
     def overlap(self, obj):
-        print(f"Overlapped with {obj.__class__.__name__}")
+        #print(f"Overlapped with {obj.__class__.__name__}")
         if self.ticks >= 2:
             if obj != self.owner and obj != self.owner.owner:
                 for upg in self.owner.upgrades:
@@ -57,8 +57,7 @@ class Bullet(Actor):
                     self.man.add_object(obj=Hitmarker(man=self.man, pde=self.pde, position=self.position))
                     self.hit(obj)
                     if self.destroyOnCollide:
-                        self.man.remove_object(self)
-                        self.deconstruct()
+                        self.deconstruct(outer=obj)
                 elif isinstance(obj, Tile):
                     self.hit(obj)
                     if self.destroyOnCollide:
@@ -69,7 +68,7 @@ class Bullet(Actor):
     def hit(self, obj):
         return
 
-    def deconstruct(self):
+    def deconstruct(self, outer=None):
         for upg in self.owner.upgrades:
             upg.onBulletDestruction(bullet=self)
-        return super().deconstruct()
+        return super().deconstruct(outer)

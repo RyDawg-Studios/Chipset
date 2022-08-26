@@ -22,7 +22,7 @@ class DisplayManager:
         else:
             self.screen.blit(self.bg, (0, 0))
 
-        for object in list(self.pde.level_manager.level.objectManager.objects.values()):
+        for object in list(self.pde.level_manager.level.objectManager.objects):
             if hasattr(object, "rect"):
                 if object.scroll == True:
                     object.rect.centerx -= self.scroll[0]

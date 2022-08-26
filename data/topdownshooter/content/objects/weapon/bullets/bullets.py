@@ -62,10 +62,11 @@ class DevBullet(Bullet):
 
         return super().update()
 
-    def deconstruct(self):
+    def deconstruct(self, outer=None):
         if self.area != None:
             self.area.deconstruct()
-        return super().deconstruct()
+        return super().deconstruct(outer)
+
 
 class Grenade(Bullet):
     def __init__(self, man, pde, owner, target=[0,0], position=[0, 0]):
@@ -263,8 +264,8 @@ class Electrosphere(Bullet):
         e = self.man.add_object(obj=self.explosion(man=self.man, pde=self.pde, owner=self, position = self.position, scale = [128, 128]))
         self.deconstruct()
 
-    def deconstruct(self):
-        return super().deconstruct()
+    def deconstruct(self, outer=None):
+        return super().deconstruct(outer)
 
 
 class SplatBullet(Bullet):
@@ -312,7 +313,7 @@ class Rocket(Bullet):
 class LaserBullet2(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale = [32, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\laserrifle\chainriflebullet.png')
-        self.speed = 3
+        self.speed = 15
         self.damage = 15
         self.reachedTarget = False
 

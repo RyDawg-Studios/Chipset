@@ -80,9 +80,9 @@ class Actor(Object):
     def getoverlaps(self):
         hits = []
         if self.checkForOverlap:
-            for object in list(self.pde.level_manager.level.objectManager.objects.values()):
-                if hasattr(object, 'checkForOverlap'):
-                    if self.checkForOverlap == True:
+            for object in list(self.pde.level_manager.level.objectManager.objects):
+                if isinstance(object, Actor):
+                    if self.checkForOverlap and object.checkForOverlap:
                         if self.collideRect.colliderect(object.collideRect) and object != self:
                             hits.append(object)
                             object.whileoverlap(self)
@@ -107,6 +107,7 @@ class Actor(Object):
     def move(self, movement):
         self.movement = pygame.math.Vector2(self.movement)
         self.collideInfo = {"Top": False, "Bottom": False, "Left": False, "Right": False, "Objects": []}
+        
         self.checkXcollision(movement)
         self.checkYcollision(movement)
 
@@ -143,7 +144,7 @@ class Actor(Object):
             self.rect.x += self.movement.x
             hits = self.getoverlaps()  
             for object in hits:
-                if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
+                if isinstance(object, Actor) and object.checkForCollision and self.checkForCollision:
                     if object not in self.collideInfo["Objects"]:
                         self.collideInfo["Objects"].append(object)
                     if movement[0] > 0:
@@ -160,7 +161,7 @@ class Actor(Object):
             self.rect.y += self.movement.y
             hits = self.getoverlaps()  
             for object in hits:
-                if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
+                if isinstance(object, Actor) and object.checkForCollision and self.checkForCollision:
                     if object not in self.collideInfo["Objects"]:
                         self.collideInfo["Objects"].append(object)
                     if movement[1] > 0:
