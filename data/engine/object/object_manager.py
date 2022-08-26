@@ -7,7 +7,6 @@ class ObjectManager:
         self.objects = []
         self.pde = pde
         self.clearing = False
-    
 
     def add_object(self, obj):
         self.objects.append(obj)
@@ -30,9 +29,9 @@ class ObjectManager:
                 #print(f'Object {obj.__class__.__name__} Owner {obj.owner.__class__.__name__}')
 
     def clear(self):
-        for obj in list(self.objects):
+        for obj in self.objects:
             obj.deconstruct()
-        self.objects = {}
+        self.objects = []
 
 
 

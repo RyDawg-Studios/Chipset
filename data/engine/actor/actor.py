@@ -84,11 +84,10 @@ class Actor(Object):
                 if isinstance(object, Actor):
                     if self.checkForOverlap and object.checkForOverlap:
                         if self.collideRect.colliderect(object.collideRect) and object != self:
-                            hits.append(object)
-                            object.whileoverlap(self)
+                            if object not in self.overlapInfo["Objects"]:
+                                self.overlap(object)
                             self.whileoverlap(object)
-                            object.overlap(self)
-                            self.overlap(object)
+                            hits.append(object)
         self.overlapInfo["Objects"] = hits
         return hits
 

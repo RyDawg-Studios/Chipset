@@ -103,6 +103,4 @@ class Weapon(Actor):
 
     def deconstruct(self):
         self.owner = None
-        for u in self.upgrades:
-            u.deconstruct()
         return super().deconstruct()

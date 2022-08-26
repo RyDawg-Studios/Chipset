@@ -56,7 +56,7 @@ class LaserRifle(Weapon):
   
         return super().update()
 
-    def shoot(self, angle):
+    def shoot(self, angle, target):
         self.shooting = True
         return []
 
@@ -99,7 +99,7 @@ class SpawnerWeapon(Weapon):
         if not self.shot:
 
             if self.item >= 0 and self.item < len(self.items):
-                self.man.add_object(self.items[self.item](man=self.man, pde=self.pde, position=target, weapon=LaserRifle))
+                self.man.add_object(self.items[self.item](man=self.man, pde=self.pde, position=target, weapon=LaserMachineGun))
             else:
                 self.item = 0
 

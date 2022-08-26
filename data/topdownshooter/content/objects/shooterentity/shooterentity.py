@@ -199,4 +199,5 @@ class ShooterEntity(Actor):
 
     def deconstruct(self):
         self.healthbar.deconstruct()
+        self.healthbar = None
         return super().deconstruct()

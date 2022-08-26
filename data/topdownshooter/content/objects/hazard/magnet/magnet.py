@@ -47,7 +47,7 @@ class Magnet(Actor):
 
     def update(self):
         if len(self.attached) > 20:
-            self.attached[0].deconstruct()
+            self.attached[0].deconstruct(outer=self)
             self.attached.remove(self.attached[0])
         self.area.rect.center = self.rect.center
         return super().update()
