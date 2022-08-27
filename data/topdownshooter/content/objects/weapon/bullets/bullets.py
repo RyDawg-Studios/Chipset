@@ -84,16 +84,17 @@ class Grenade(Bullet):
         
 
     def update(self):
-        self.fusetime += 1
-        if self.fusetime >= self.fuse:
-            self.explode()
-            self.deconstruct()
 
         if self.speed > 0.3:
             self.speed -= 0.3
         else:
             self.speed = 0
 
+        self.fusetime += 1
+        if self.fusetime >= self.fuse:
+            self.explode()
+            self.deconstruct()
+            return
         
         return super().update()
 

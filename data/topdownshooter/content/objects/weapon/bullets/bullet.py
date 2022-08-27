@@ -28,17 +28,20 @@ class Bullet(Actor):
 
 
     def update(self):
+        self.components["Sprite"].sprite.rotation = self.rotation
         for upg in self.owner.upgrades:
             upg.onBulletUpdate(bullet=self)
 
         self.movement = self.target * self.speed
-        self.components["Sprite"].sprite.rotation = self.rotation
 
         if self.destroyOnOOB:
             if self.position[0] < -80 or self.position[1] < -80:
                 self.deconstruct()
+                return
             elif self.position[0] > 720 or self.position[1] > 560:
                 self.deconstruct()
+                return
+
 
         return super().update()
 
@@ -47,20 +50,18 @@ class Bullet(Actor):
         pass
 
     def overlap(self, obj):
-        #print(f"Overlapped with {obj.__class__.__name__}")
-        if self.ticks >= 2:
-            if obj != self.owner and obj != self.owner.owner:
-                for upg in self.owner.upgrades:
-                    upg.onHit(bullet=self, damage=self.damage, object=obj)
-                if hasattr(obj, 'hp'):
-                    obj.takedamage(self, self.damage * self.owner.damagemultiplier)
-                    self.man.add_object(obj=Hitmarker(man=self.man, pde=self.pde, position=self.position))
-                    self.hit(obj)
-                    if self.destroyOnCollide:
-                        self.deconstruct(outer=obj)
-                elif isinstance(obj, Tile):
-                    self.hit(obj)
-                    if self.destroyOnCollide:
+        if obj != self.owner and obj != self.owner.owner:
+            for upg in self.owner.upgrades:
+                upg.onHit(bullet=self, damage=self.damage, object=obj)
+            if hasattr(obj, 'hp'):
+                obj.takedamage(self, self.damage * self.owner.damagemultiplier)
+                self.man.add_object(obj=Hitmarker(man=self.man, pde=self.pde, position=self.position))
+                self.hit(obj)
+                if self.destroyOnCollide:
+                    self.deconstruct(outer=obj)
+            elif isinstance(obj, Tile):
+                self.hit(obj)
+                if self.destroyOnCollide:
                         self.deconstruct()
                         
         return super().overlap(obj)

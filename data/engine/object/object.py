@@ -25,7 +25,7 @@ class Object:
         return component in self.components.keys()
             
     def getcomponent(self, component):
-        return self.components(component)
+        return self.components[component]
 
     def getcomponents(self):
         return self.components

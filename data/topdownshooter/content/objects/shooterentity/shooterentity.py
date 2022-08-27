@@ -62,6 +62,7 @@ class ShooterEntity(Actor):
     def update(self):
         if self.dead:
             self.deadticks += 1
+
         self.dodgebuffer()
         self.weaponoffset(weapon=self.weapon)
 

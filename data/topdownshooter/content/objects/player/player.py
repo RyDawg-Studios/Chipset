@@ -37,6 +37,7 @@ class ShooterPlayer(ShooterEntity):
 
         if self.deadticks >= 100:
             self.pde.game.restart()
+            return
 
         #self.fo.rect.center = self.cam.rect.center
         return super().update()
