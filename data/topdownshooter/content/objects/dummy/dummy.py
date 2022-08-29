@@ -24,7 +24,7 @@ class Dummy(ShooterEntity):
         self.damagecount += dmg   
         self.totaldamage += dmg   
         self.timestakendamage += 1  
-        self.getcomponent("Text").sprite.text = str(round(self.totaldamage/self.timestakendamage))
+        self.getcomponent("Text").sprite.text = str(round(self.damagecount))
         return super().takedamage(obj, dmg)
 
     def update(self):
@@ -32,4 +32,5 @@ class Dummy(ShooterEntity):
         if self.frames > 60:
             self.frames = 0
             self.damagecount = 0
+            self.timestakendamage = 0
         return super().update()

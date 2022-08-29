@@ -28,7 +28,7 @@ class Bullet(Actor):
 
 
     def update(self):
-        self.components["Sprite"].sprite.rotation = self.rotation
+        self.getcomponent("Sprite").sprite.rotation = self.rotation
         for upg in self.owner.upgrades:
             upg.onBulletUpdate(bullet=self)
 
