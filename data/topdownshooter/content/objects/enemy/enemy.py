@@ -50,7 +50,7 @@ class ShooterEnemy(ShooterEntity):
         self.area.rect.center = self.rect.center
 
 
-        if self.weapon != None and self.pde.game.player != None and self.pde.game.player.dead == False:
+        if self.weapon != None and self.pde.game.player != None and self.pde.game.player.dead == False and self.decompose == False:
             self.weapon.shoot(target=self.pde.game.player.position)
             self.weapon.rotation = objectlookattarget(self.weapon, self.pde.game.player)
 
@@ -84,7 +84,7 @@ class ShooterEnemy(ShooterEntity):
 
     def die(self, killer):
         super().die(killer)
-        self.deconstruct()
+        self.queuedeconstruction()
         return
 
     def printDebugInfo(self):

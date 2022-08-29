@@ -149,8 +149,6 @@ class SplatGun(Weapon):
         self.shotspread = 5
         self.bullet = SplatBullet
 
-    def update(self):
-        return super().update()
 
 class RocketLauncher(Weapon):
     def __init__(self, man, pde, owner, position):

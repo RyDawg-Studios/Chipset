@@ -17,6 +17,6 @@ if __name__ == '__main__':
 #  Fix Double Bullet Overlap  # !!! #(Something to do with order of collision detection, x or y first)
 #  Health Component  #
 #  HasComponent()    #
-#  GetComponents()    #
+#  GetComponents()   #
 #  Change References in Bullet from hasattr('hp') to HasComponent(HealthComponent)  #
 

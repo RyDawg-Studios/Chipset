@@ -30,6 +30,7 @@ class ShooterEntity(Actor):
         self.dead = False
         self.damagable = True
         self.falling = False
+        self.canGrantHP = True
 
         #----------< Dodge Info >----------#
 
@@ -116,7 +117,7 @@ class ShooterEntity(Actor):
         else:
             self.removeweapon()
         if self.weapon != None:
-            self.weapon.deconstruct()
+            self.weapon.queuedeconstruction()
 
 
     def weaponoffset(self, weapon, offset=10):
@@ -135,7 +136,7 @@ class ShooterEntity(Actor):
                 if self.canPickupWeapons:
                     self.dropweapon(rotation=objectlookattarget(self, o))
                     self.changeweapon(o.weapon.__class__)
-                    o.deconstruct()
+                    o.queuedeconstruction()
                     return
             
     def changeweapon(self, cls):
@@ -145,7 +146,7 @@ class ShooterEntity(Actor):
 
     def removeweapon(self):
         if self.weapon != None:
-            self.weapon.deconstruct()
+            self.weapon.queuedeconstruction()
             self.weapon = None
 
     def useitem(self, item):

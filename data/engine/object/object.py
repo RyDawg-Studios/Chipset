@@ -10,13 +10,29 @@ class Object:
         self.replicate = False
         self.pausable = True
         self.paused = False
+        self.decompose = False
+        self.construct()
+
+
+    def construct(self):
+        return
 
     def pause(self):
         if self.pausable:
             self.paused = True
 
     def update(self):
+        self.checkdeconstruct()
         return
+
+    def checkdeconstruct(self):
+        if self.decompose:
+            self.deconstruct()
+        else:
+            return
+
+    def queuedeconstruction(self):
+        self.decompose = True
 
     def removecomponent(self, component):
         self.components.pop(component)
@@ -25,7 +41,8 @@ class Object:
         return component in self.components.keys()
             
     def getcomponent(self, component):
-        return self.components[component]
+        if component in self.components:
+            return self.components[component]
 
     def getcomponents(self):
         return self.components

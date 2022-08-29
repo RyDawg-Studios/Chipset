@@ -28,7 +28,9 @@ class Bullet(Actor):
 
 
     def update(self):
+
         self.getcomponent("Sprite").sprite.rotation = self.rotation
+
         for upg in self.owner.upgrades:
             upg.onBulletUpdate(bullet=self)
 
@@ -36,12 +38,11 @@ class Bullet(Actor):
 
         if self.destroyOnOOB:
             if self.position[0] < -80 or self.position[1] < -80:
-                self.deconstruct()
-                return
+                self.queuedeconstruction()
+                return super().update()
             elif self.position[0] > 720 or self.position[1] > 560:
-                self.deconstruct()
-                return
-
+                self.queuedeconstruction()
+                return super().update()
 
         return super().update()
 
@@ -58,11 +59,13 @@ class Bullet(Actor):
                 self.man.add_object(obj=Hitmarker(man=self.man, pde=self.pde, position=self.position))
                 self.hit(obj)
                 if self.destroyOnCollide:
-                    self.deconstruct(outer=obj)
+                    self.queuedeconstruction()
+                    return True
             elif isinstance(obj, Tile):
                 self.hit(obj)
                 if self.destroyOnCollide:
-                        self.deconstruct()
+                        self.queuedeconstruction()
+                        return True
                         
         return super().overlap(obj)
 

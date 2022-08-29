@@ -8,11 +8,12 @@ from data.topdownshooter.content.tiles.tile import Tile
 class VamprismUpgrade(Upgrade):
     def __init__(self, man, pde, weapon):
         super().__init__(man, pde, weapon, id="Vamprism")
+        self.rate = 0.5
 
     def onHit(self, bullet, damage, object):
         if isinstance(object, ShooterEntity):
-            if self.weapon.owner is not None:
-                self.weapon.owner.hp += damage
+            if self.weapon.owner is not None and object.canGrantHP:
+                self.weapon.owner.hp += (damage * self.rate)
         return super().onHit(bullet, damage, object)
 
 class SplitStreamUpgrade(Upgrade):

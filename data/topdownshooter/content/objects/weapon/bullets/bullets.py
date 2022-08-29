@@ -93,8 +93,7 @@ class Grenade(Bullet):
         self.fusetime += 1
         if self.fusetime >= self.fuse:
             self.explode()
-            self.deconstruct()
-            return
+            self.queuedeconstruction()
         
         return super().update()
 
@@ -146,7 +145,7 @@ class Grenade(Bullet):
                             self.collide(self, "Top")
 
     def explode(self):
-        e = self.man.add_object(obj=self.explosion(man=self.man, pde=self.pde, owner=self, position = self.position, scale = [128, 128]))
+        self.man.add_object(obj=Explosion(man=self.man, pde=self.pde, owner=self, position=self.rect.center, scale=[128, 128]))
 
 class LaserBullet(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
@@ -201,7 +200,7 @@ class Electrosphere(Bullet):
         if self.ticks >= self.lifetime - 1:
             self.explode()
             
-        return super().update()
+        super().update()
 
     def collide(self, obj, side):
         if side != self.lastoverlap:
@@ -263,7 +262,7 @@ class Electrosphere(Bullet):
         for mine in self.mines:
             mine.explode()
         e = self.man.add_object(obj=self.explosion(man=self.man, pde=self.pde, owner=self, position = self.position, scale = [128, 128]))
-        self.deconstruct()
+        self.queuedeconstruction()
 
     def deconstruct(self, outer=None):
         return super().deconstruct(outer)
@@ -287,11 +286,12 @@ class SplatBullet(Bullet):
         return super().hit(obj)
 
     def update(self):
+        super().update()
         self.splatticks += 1
         if self.splatticks >= self.splattime:
             self.splat()
-            self.deconstruct()
-        return super().update()
+            self.queuedeconstruction()
+            return
 
     def splat(self):
         self.man.add_object(obj=Splat(man=self.man, pde=self.pde, position=list(self.rect.center), owner=self, color=self.color))
@@ -302,13 +302,13 @@ class Rocket(Bullet):
         self.speed = 10
         self.damage = 15
         self.reachedTarget = False
-
-    def update(self):
-        return super().update()
+        self.spawnedRocket = False
 
     def hit(self, object):
         if isinstance(object, ShooterEntity) or isinstance(object, Tile):
-            self.man.add_object(obj=Explosion(man=self.man, pde=self.pde, owner=self, position=self.rect.center, scale=[64, 64]))
+            if not self.spawnedRocket:
+                self.man.add_object(obj=Explosion(man=self.man, pde=self.pde, owner=self, position=self.rect.center, scale=[128, 128]))
+                self.spawnedRocket = True
         return super().hit(object)
 
 class LaserBullet2(Bullet):
@@ -316,5 +316,4 @@ class LaserBullet2(Bullet):
         super().__init__(man, pde, owner, position, target, scale = [32, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\laserrifle\chainriflebullet.png')
         self.speed = 15
         self.damage = 15
-        self.reachedTarget = False
 
