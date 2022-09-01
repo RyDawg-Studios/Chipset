@@ -78,6 +78,7 @@ class Actor(Object):
         return super().update()
 
     def getoverlaps(self):
+        self.overlapInfo["Objects"] = []
         hits = []
         if self.checkForOverlap:
             for object in list(self.pde.level_manager.level.objectManager.objects):
@@ -88,7 +89,7 @@ class Actor(Object):
                                 self.overlap(object)
                             self.whileoverlap(object)
                             hits.append(object)
-                if object not in list(self.pde.level_manager.level.objectManager.objects):
+                if object not in list(self.pde.level_manager.level.objectManager.objects) and object in self.overlapInfo["Objects"]:
                     self.overlapInfo["Objects"].remove(object)
         self.overlapInfo["Objects"] = hits
         return hits

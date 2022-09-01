@@ -9,7 +9,8 @@ class ObjectManager:
         self.clearing = False
 
     def add_object(self, obj):
-        self.objects.append(obj)
+        if obj not in self.objects:
+            self.objects.append(obj)
         return obj
 
     def remove_object(self, obj, outer=None):
@@ -34,6 +35,14 @@ class ObjectManager:
             
         self.objects = []
 
+    def printobjects(self):
+        print("----------------< Objects >----------------")
+        i=0
+        for o in self.objects:
+            print(o)
+            i += 1
+        print(f"Count: {i}")
+        
 
 
     def getPlayers(self):
