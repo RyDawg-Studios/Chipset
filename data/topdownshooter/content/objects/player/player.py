@@ -47,4 +47,5 @@ class ShooterPlayer(ShooterEntity):
         self.canMove = False
         self.canShoot = False
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\deadme.png', layer=2)
+        self.dropweapon()
         return super().die(killer)

@@ -46,12 +46,14 @@ class PickupWeapon(Actor):
         self.hoverframes += 1
         if self.infobox is None and self.hoverframes >= 30:
             self.infobox = self.man.add_object(obj=InfoBox(man=self.man, pde=self.pde, weapon=self.weapon))
+        return
 
     def whilenothovered(self):
         if self.infobox is not None:
             self.infobox.deconstruct()
             self.infobox = None
         self.hoverframes = 0
+        return
 
     def deconstruct(self):
         if self.infobox is not None:

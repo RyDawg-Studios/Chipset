@@ -100,7 +100,7 @@ class Weapon(Actor):
         return super().update()
 
     def pickup(self):
-        pass
+        return
 
     def deconstruct(self):
         self.owner = None

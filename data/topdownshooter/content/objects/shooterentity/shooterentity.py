@@ -134,9 +134,10 @@ class ShooterEntity(Actor):
         for o in self.overlapInfo["Objects"]:
             if o.__class__ == PickupWeapon:
                 if self.canPickupWeapons:
+                    print(o)
                     self.dropweapon(rotation=objectlookattarget(self, o))
                     self.changeweapon(o.weapon.__class__)
-                    o.deconstruct()
+                    o.queuedeconstruction()
                     return
             
     def changeweapon(self, cls):
@@ -145,7 +146,7 @@ class ShooterEntity(Actor):
         return
 
     def removeweapon(self):
-        if self.weapon != None:
+        if self.weapon is not None:
             self.weapon.queuedeconstruction()
             self.weapon = None
 

@@ -71,11 +71,11 @@ class Actor(Object):
 
 
     def update(self):
-        super().update()
         self.ticks += 1    
         self.checklifetime() 
         self.getoverlaps()
         self.move(self.movement)
+        return super().update()
 
     def getoverlaps(self):
         hits = []
@@ -88,6 +88,8 @@ class Actor(Object):
                                 self.overlap(object)
                             self.whileoverlap(object)
                             hits.append(object)
+                if object not in list(self.pde.level_manager.level.objectManager.objects):
+                    self.overlapInfo["Objects"].remove(object)
         self.overlapInfo["Objects"] = hits
         return hits
 
@@ -171,3 +173,7 @@ class Actor(Object):
                         self.rect.top = object.rect.bottom
                         self.collideInfo["Top"] = True
                         object.collide(self, "Bottom")
+
+    def deconstruct(self, outer=None):
+        self.collideInfo["Objects"] = []
+        return super().deconstruct(outer)
