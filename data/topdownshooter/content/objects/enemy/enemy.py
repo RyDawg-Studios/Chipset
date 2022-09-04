@@ -73,7 +73,6 @@ class ShooterEnemy(ShooterEntity):
         return super().deconstruct()
 
     def takedamage(self, obj, dmg):
-        print(dmg)
         return super().takedamage(obj, dmg)
 
     def overlap(self, obj):

@@ -11,7 +11,6 @@ from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 
 class Weapon(Actor):
     def __init__(self, man, pde, owner, position=[0, 0], id=None, bullet=Bullet):
-        print("Spawned " + str(self))
         #----------< Data Info >----------#
         self.id = id
         if self.id != None:

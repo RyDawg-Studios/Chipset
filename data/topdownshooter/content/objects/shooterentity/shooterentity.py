@@ -134,7 +134,6 @@ class ShooterEntity(Actor):
         for o in self.overlapInfo["Objects"]:
             if o.__class__ == PickupWeapon:
                 if self.canPickupWeapons:
-                    print(o)
                     self.dropweapon(rotation=objectlookattarget(self, o))
                     self.changeweapon(o.weapon.__class__)
                     o.queuedeconstruction()

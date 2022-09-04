@@ -11,7 +11,7 @@ if __name__ == '__main__':
     engine = PyDawgEngine()
 
 
-#~-----< TODO >-----#
+#-------< TODO >-------#
 #  Fix Double Bullet Overlap  # !!! #(Something to do with order of collision detection, x or y first)
 #  Health Component  #
 #  HasComponent()    #
