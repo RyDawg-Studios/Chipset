@@ -4,11 +4,11 @@ from data.engine.sprite.sprite_component import SpriteComponent
 
 class LevelGate(Actor):
     def __init__(self, man, pde, position=[0, 0]):
+        super().__init__(man, pde)
         self.checkForCollision = False
         self.useCenterForPosition = True
         self.position = position
         self.scale =[32, 32]
-        super().__init__(man, pde)
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\mariohitbox.png', layer=8)
 
 

@@ -6,6 +6,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 
 class Explosion(Actor):
     def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=16):
+        super().__init__(man, pde)
         self.position = position
         self.scale = scale
         self.lifetime = lifetime
@@ -13,7 +14,10 @@ class Explosion(Actor):
         self.useCenterForPosition = True
         self.checkForCollision = False
         self.damage = 60
-        super().__init__(man, pde)
+
+
+    def construct(self):
+        super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\anims\explosion\tile000.png', layer=2)
         
         self.components["Anim"] = AnimManager(owner=self, sprite=self.components["Sprite"])

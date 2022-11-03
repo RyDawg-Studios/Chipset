@@ -20,7 +20,7 @@ class ShooterGame(Game):
         return l
 
     def activate(self):
-        self.changelevel(TestLevel)
+        self.changelevel(DevLevel)
         return super().activate()
 
     def restart(self):

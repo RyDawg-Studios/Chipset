@@ -7,6 +7,9 @@ from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvect
 
 class Bullet(Actor):
     def __init__(self, man, pde, owner, position=[0,0], target=[0, 0], scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\assaultrifle\assaultriflebullet.png'):
+        super().__init__(man, pde)
+        self.target = target
+        self.spritePath = sprite
         self.checkForCollision = False
         self.scale = scale
         self.position = position
@@ -18,11 +21,13 @@ class Bullet(Actor):
         self.ignoreCollides = []
         self.destroyOnOOB = True
         self.useCenterForPosition = True
-        super().__init__(man, pde)
-        self.target = getpositionlookatvector(self, target)
+
+    def construct(self):
+        super().construct()
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.spritePath, layer=1)
+        self.target = getpositionlookatvector(self, self.target)
         self.rotation = objectlookatposition(self, self.position + self.target)
         self.movement = self.target * self.speed
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=sprite, layer=1)
 
 
 

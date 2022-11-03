@@ -7,6 +7,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 
 class ShooterCamera(Actor):
     def __init__(self, man, pde, target, position=[0, 0]):
+        super().__init__(man, pde)
         self.position = position
         self.checkForCollision = False
         self.checkForOverlap = False
@@ -14,13 +15,15 @@ class ShooterCamera(Actor):
         self.speed = [8, 8]
         self.target = target
         
-        super().__init__(man, pde)
+        
 
+
+    def construct(self):
+        super().construct()
         if self.pde.config_manager.config["config"]["debugMode"]:
             self.sprite = self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\camera.png', layer=8)
         else:
             self.sprite = None
-
 
         self.components["Projectile"] = ProjectileComponent(owner=self, speed=self.speed)
 

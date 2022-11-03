@@ -6,6 +6,7 @@ from data.engine.widgets.button import Button
 
 class Actor(Object):
     def __init__(self, man, pde):
+        super().__init__(man, pde)
         self.canMove = True
         self.overlapInfo = {"Overlapping" : False, "Objects" : [], "Count": 0}
         self.collideInfo = {"Top": False, "Bottom": False, "Left": False, "Right": False, "Objects": []}
@@ -14,59 +15,46 @@ class Actor(Object):
         self.movement=pygame.Vector2([0, 0])
         self.components = {}
 
-        if not hasattr(self, 'position'):
-            self.position = [0, 0]
-        self.position = pygame.Vector2(self.position)
+        self.position = [0, 0]
 
-        if not hasattr(self, 'scale'):
-            self.scale = [32, 32]
+        self.scale = [32, 32]
 
-        if not hasattr(self, 'rotation'):
-            self.rotation = 0
+        self.rotation = 0
 
-        if not hasattr(self, 'name'):
-            self.name = str(self)
+        self.name = str(self)
         
-        if not hasattr(self, 'maxSpeed'):
-            self.maxSpeed = [2,2]
+        self.maxSpeed = [2,2]
 
-        if not hasattr(self, 'checkForOverlap'):
-            self.checkForOverlap = True
+        self.checkForOverlap = True
 
-        if not hasattr(self, 'checkForCollision'):
-            self.checkForCollision = True
+        self.checkForCollision = True
 
-        if not hasattr(self, 'lifetime'):
-            self.lifetime = -1
+        self.lifetime = -1
 
-        if not hasattr(self, 'speed'):
-            self.speed = [0,0]
+        self.speed = [0,0]
 
-        if not hasattr(self, 'direction'):
-            self.direction = [0,0]
+        self.direction = [0,0]
 
-        if not hasattr(self, 'velocity'):
-            self.velocity = 1
+        self.velocity = 1
 
-        if not hasattr(self, 'useSriteRectForCollision'):
-            self.useSpriteRectForCollision = False
+        self.useSpriteRectForCollision = False
 
-        if not hasattr(self, 'useCenterForPosition'):
-            self.useCenterForPosition = False
+        self.useCenterForPosition = False
 
-        if not hasattr(self, 'rect'):
-            self.rect = pygame.rect.Rect(self.position[0], self.position[1], self.scale[0], self.scale[1])
-            if self.useCenterForPosition:
-                self.rect.center = [self.position[0], self.position[1]]
-
-        if not hasattr(self, 'collideRect'):
-            self.collideRect = self.rect
-
-
-        super().__init__(man, pde)
 
         if self.pde.config_manager.config["config"]["debugMode"]:
             self.components["DebugButton"] = Button(owner=self, bind=self.printDebugInfo)
+
+    def construct(self):
+        super().construct()
+        self.position = pygame.Vector2(self.position)
+        self.rect = pygame.rect.Rect(self.position[0], self.position[1], self.scale[0], self.scale[1])
+        if self.useCenterForPosition:
+            self.rect.center = [self.position[0], self.position[1]]
+
+        self.collideRect = self.rect
+
+        return
 
 
 

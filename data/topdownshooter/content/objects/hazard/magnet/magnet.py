@@ -8,11 +8,11 @@ from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 
 class MagnetArea(Actor):
     def __init__(self, man, pde, owner, position=[0,0]):
+        super().__init__(man, pde)
         self.position = position
         self.scale = [128, 128]
         self.checkForCollision = False
         self.owner = owner
-        super().__init__(man, pde)
 
         if self.pde.config_manager.config["config"]["debugMode"]:
             self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\mariohitbox.png', layer=2)

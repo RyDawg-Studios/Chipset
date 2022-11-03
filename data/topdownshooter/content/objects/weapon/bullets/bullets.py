@@ -17,13 +17,13 @@ from data.topdownshooter.content.tiles.tile import Tile
 
 class HomingActor(Actor):
     def __init__(self, man, pde, position=[0, 0], owner=None):
+        super().__init__(man, pde)
         self.position = position
         self.scale = [400, 400]
         self.owner = owner
         self.target = None
         self.foundtarget = False
         self.checkForCollision = False
-        super().__init__(man, pde)
 
     def overlap(self, obj):
         if self.foundtarget == False:
@@ -43,9 +43,9 @@ class DefaultBullet(Bullet):
         super().__init__(man, pde, owner, position, target)
 
 class DevBullet(Bullet):
-    def __init__(self, man, pde, owner, target=[0,0], position=[0, 0]):
-        self.scale=[12, 12]
-        super().__init__(man, pde, owner, position=position, target=target, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\devbullet.png')
+    def __init__(self, man, pde, owner, target=[0,0], position=[0, 0], scale=[20, 4]):
+        super().__init__(man, pde, owner, position=position, scale=scale,target=target, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\devbullet.png')
+        self.scale = scale
         self.damage = 5
         self.homing = False
         self.hometicks = 0
@@ -69,11 +69,10 @@ class DevBullet(Bullet):
 
 
 class Grenade(Bullet):
-    def __init__(self, man, pde, owner, target=[0,0], position=[0, 0]):
-        self.scale = [20, 14]
+    def __init__(self, man, pde, owner, target=[0,0], scale = [20, 14],position=[0, 0]):
+        super().__init__(man, pde, owner, position=position, scale=scale, target=target, sprite=r'data\topdownshooter\assets\sprites\weapons\grenadelauncher\grenade.png')
         self.owner = owner
         self.lifetime = 120
-        super().__init__(man, pde, owner, position=position, scale=self.scale, target=target, sprite=r'data\topdownshooter\assets\sprites\weapons\grenadelauncher\grenade.png')
         self.destroyOnCollide = False
         self.checkForCollision = True
         self.speed = 12

@@ -15,6 +15,9 @@ class Dummy(ShooterEntity):
         self.frames = 0
         self.totaldamage = 0
         self.timestakendamage = 0
+
+    def construct(self):
+        super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\objects\dummy\dummy.png',layer=2)
         self.components["Text"] = TextComponent(owner=self, text=str(self.damagecount), font=pygame.font.SysFont('impact.ttf', 72), layer=3)
 

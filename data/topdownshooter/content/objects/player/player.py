@@ -15,15 +15,16 @@ class ShooterPlayer(ShooterEntity):
         pde.game.player = self
         self.maxVelocity = 1
         self.velocity = self.maxVelocity
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
-        self.components["PlayerController"] = ShooterController(owner=self)
-        w = chooseRandomWeapon()
         self.pausable = False
 
-        self.weapon = man.add_object(obj=w(man=man, pde=pde, owner=self, position=[self.rect.centerx + 10, self.rect.centery + 10]))
-        self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=pde, position=self.position, target=self))
         #self.fo = self.man.add_object(FadeOut(man=self.man, pde=self.pde))
         self.weaponindx = 0
+
+    def construct(self):
+        super().construct()
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
+        self.components["PlayerController"] = ShooterController(owner=self)
+        self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
 
     def spawnmagnet(self):
         self.man.add_object(Magnet(man=self.man, pde=self.pde, position=self.pde.input_manager.mouse_position))

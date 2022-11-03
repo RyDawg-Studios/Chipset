@@ -34,5 +34,5 @@ class DevLevel(Level):
             weap.deconstruct()
 
         lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[0,200],level="room2"))
-        chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,240], items=[DevGun]))
+        chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,64], items=[DevGun]))
         dummy = self.objectManager.add_object(Dummy(man=self.objectManager, pde=pde, position=[320,-64]))

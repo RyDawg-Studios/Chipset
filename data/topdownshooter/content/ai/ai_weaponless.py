@@ -9,6 +9,7 @@ from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 
 class WeaponlessAI(AIState):
     def __init__(self, man, pde, owner):
+        super().__init__(man, pde, owner)
         self.target = man.add_object(AITarget(man=man, pde=pde, position=[random.randint(0, 600), random.randint(0, 400)]))
         self.weapontarget = None
         self.waitticks = 0
@@ -17,7 +18,6 @@ class WeaponlessAI(AIState):
         self.waittime = random.randint(0, 40)
         self.travelticks = 0
         self.r = 0
-        super().__init__(man, pde, owner)
 
     def update(self):
         if self.weapontarget is None:
@@ -43,6 +43,7 @@ class WeaponlessAI(AIState):
                 self.owner.owner.movement = self.r
             else:
                 self.weapontarget = None
+
         return super().update()
 
 

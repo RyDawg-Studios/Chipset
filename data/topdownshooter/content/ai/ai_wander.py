@@ -6,6 +6,7 @@ from data.topdownshooter.content.ai.ai_target import AITarget
 
 class WanderAI(AIState):
     def __init__(self, man, pde, owner):
+        super().__init__(man, pde, owner)
         self.target = man.add_object(AITarget(man=man, pde=pde, position=[random.randint(0, 600), random.randint(0, 400)]))
         self.waitticks = 0
         self.destination = self.target.position
@@ -13,7 +14,6 @@ class WanderAI(AIState):
         self.waittime = random.randint(0, 40)
         self.travelticks = 0
         self.r = 0
-        super().__init__(man, pde, owner)
 
     def update(self):
         if abs(self.owner.owner.position[0] - self.destination[0]) < 5 and abs(self.owner.owner.position[1] - self.destination[1]) < 5:

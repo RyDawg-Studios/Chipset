@@ -7,6 +7,7 @@ from data.topdownshooter.content.objects.widget.infobox import InfoBox
 
 class PickupWeapon(Actor):
     def __init__(self, man, pde, position=[0, 0], speed=[4, 4], rotation=0, weapon=None):
+        super().__init__(man, pde)
         self.weapon = weapon
         self.position = position
         self.scale = self.weapon.scale
@@ -21,10 +22,11 @@ class PickupWeapon(Actor):
 
         self.infobox = None
 
+    def construct(self):
+        super().construct()
 
-        super().__init__(man, pde)
         self.components['Sprite'] = SpriteComponent(owner=self, sprite=self.weapon.components["Sprite"].path, layer=1)
-        self.components["Projectile"] = ProjectileComponent(owner=self, rotation=self.rotation, speed=speed)
+        self.components["Projectile"] = ProjectileComponent(owner=self, rotation=self.rotation, speed=self.speed)
         self.components["Button"] = Button(owner=self)
         self.components["Button"].whilehovered = self.whilehovered
         self.components["Button"].whilenothovered = self.whilenothovered

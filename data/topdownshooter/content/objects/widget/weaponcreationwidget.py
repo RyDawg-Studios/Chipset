@@ -25,13 +25,13 @@ class UpgradeSlot(Actor):
 
 class UpgradeSwitchButton(Actor):
     def __init__(self, man, pde, position=[0, 0], side='left', slot=None, widget=None):
+        super().__init__(man, pde)
         self.position = position
         self.scale = [20, 40]
         self.useCenterForPosition = True
         self.side = side
         self.slot = slot
         self.widget = widget
-        super().__init__(man, pde)
         self.components["Sprite"] = SpriteComponent(owner=self, sprite='', layer=0)
         self.components["Button"] = Button(owner=self, bind=self.click)
 

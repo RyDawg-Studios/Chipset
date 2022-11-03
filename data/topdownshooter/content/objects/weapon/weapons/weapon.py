@@ -11,6 +11,7 @@ from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 
 class Weapon(Actor):
     def __init__(self, man, pde, owner, position=[0, 0], id=None, bullet=Bullet):
+        super().__init__(man, pde)
         #----------< Data Info >----------#
         self.id = id
         if self.id != None:
@@ -61,9 +62,10 @@ class Weapon(Actor):
 
 
 
-        super().__init__(man, pde)
-        
+    def construct(self):
+        super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.sprite, layer=3)
+        
 
 
     def shoot(self, target):

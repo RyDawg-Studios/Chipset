@@ -8,6 +8,8 @@ from data.topdownshooter.content.objects.shooterentity.shooterentity import Shoo
 
 class Splat(Actor):
     def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=360, color='blue'):
+        super().__init__(man, pde)
+        self.color = color
         self.position = position
         self.scale = scale
         self.lifetime = lifetime
@@ -16,10 +18,12 @@ class Splat(Actor):
         self.checkForCollision = False
         self.objects = []
         self.rotation = random.randint(0, 360)
-        super().__init__(man, pde)
-        if color == 'blue':
+    
+    def construct(self):
+        super().construct()
+        if self.color == 'blue':
             self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\weapons\splatgun\splatblue.png', layer=0)
-        elif color == 'orange':
+        elif self.color == 'orange':
             self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\weapons\splatgun\splatorange.png', layer=0)
 
     def update(self):

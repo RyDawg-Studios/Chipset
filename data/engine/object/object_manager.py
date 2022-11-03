@@ -11,6 +11,7 @@ class ObjectManager:
     def add_object(self, obj):
         if obj not in self.objects:
             self.objects.append(obj)
+            obj.construct()
         return obj
 
     def remove_object(self, obj, outer=None):
