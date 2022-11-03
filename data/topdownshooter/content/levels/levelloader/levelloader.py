@@ -12,9 +12,9 @@ from data.topdownshooter.content.tiles.tile import Tile
 
 class LevelLoader(Actor):
     def __init__(self, man, pde, position=[0, 0], level="default"):
+        super().__init__(man, pde)
         self.position=position
         self.scale =[0, 0]
-        super().__init__(man, pde)
         f = open(r"data\topdownshooter\data\leveldata.json")
         self.checkForCollision = False
         self.checkForOverlap = False
@@ -26,19 +26,19 @@ class LevelLoader(Actor):
         self.objectkey = {'x': ShooterEnemy, 'p': ShooterPlayer, 'n': LevelGate}
 
 
-        self.placeobjects()
+        self.placetiles()
 
-    def placeobjects(self):
+    def placetiles(self):
         for rinx, row in enumerate(self.levels[self.level]["layers"][0]):
             for oinx, obj in enumerate(row):
                 if obj != '#':
                     o = self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[(oinx*32) + 16 + self.position[0], (rinx*32+ 16)+ self.position[1]], sprite=self.tilekey[obj]))
                     self.tiles.append(o)
 
-    def deconstruct(self):
+    def deconstruct(self, outer):
         for o in self.tiles:
             o.deconstruct()
-        return super().deconstruct()
+        return super().deconstruct(outer=outer)
 
     
         

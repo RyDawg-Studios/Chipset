@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
 
 #-------< TODO >-------#
-#  Fix Double Bullet Overlap  # !!! #(Something to do with order of collision detection, x or y first)
+#  Fix AI freaking out when not having a weapon #
 #  Health Component  #
 #  HasComponent()    #
 #  GetComponents()   #

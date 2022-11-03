@@ -35,9 +35,9 @@ class DisplayManager:
 
     def configurewindow(self):
         if self.pde.config_manager.config["config"]["fullscreen"]:
-            self.screen = pygame.display.set_mode((640, 480), pygame.FULLSCREEN)
+            self.screen = pygame.display.set_mode(self.pde.config_manager.config["config"]["dimensions"], pygame.FULLSCREEN)
         else:
-            self.screen = pygame.display.set_mode((640, 480))
+            self.screen = pygame.display.set_mode(self.pde.config_manager.config["config"]["dimensions"])
 
 
 

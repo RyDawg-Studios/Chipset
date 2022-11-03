@@ -10,8 +10,6 @@ class ShooterEntity(Actor):
         super().__init__(man, pde)
         #----------< Transform Info >----------#
 
-        if position is None: position = [0,0]
-        if scale is None: scale = [32, 32]
         self.position = position
         self.scale = scale
         self.useCenterForPosition = True

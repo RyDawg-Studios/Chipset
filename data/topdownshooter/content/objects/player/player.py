@@ -4,7 +4,6 @@ from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
 from data.topdownshooter.content.objects.player.shooter_controller import ShooterController
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
-from data.topdownshooter.fl.game_fl import chooseRandomWeapon
 
 
 class ShooterPlayer(ShooterEntity):
@@ -12,7 +11,6 @@ class ShooterPlayer(ShooterEntity):
         super().__init__(man, pde, position)
         self.maxhp = 400
         self.hp = 400
-        pde.game.player = self
         self.maxVelocity = 1
         self.velocity = self.maxVelocity
         self.pausable = False
@@ -22,9 +20,12 @@ class ShooterPlayer(ShooterEntity):
 
     def construct(self):
         super().construct()
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
         self.components["PlayerController"] = ShooterController(owner=self)
-        self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
+        
+        self.cam = None
+        
+        #self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
 
     def spawnmagnet(self):
         self.man.add_object(Magnet(man=self.man, pde=self.pde, position=self.pde.input_manager.mouse_position))

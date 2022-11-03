@@ -4,6 +4,7 @@ from data.topdownshooter.content.levels.ShooterLevel import ShooterLevel
 from data.topdownshooter.content.levels.StartLevel import StartLevel
 from data.topdownshooter.content.levels.morphlevel import MorphLevel
 from data.topdownshooter.content.levels.TestLevel import TestLevel
+from data.topdownshooter.content.levels.GeneratedLevel import GeneratedLevel
 
 class ShooterGame(Game):
     def __init__(self, pde):
@@ -20,7 +21,7 @@ class ShooterGame(Game):
         return l
 
     def activate(self):
-        self.changelevel(DevLevel)
+        self.changelevel(GeneratedLevel)
         return super().activate()
 
     def restart(self):

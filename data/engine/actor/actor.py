@@ -2,10 +2,12 @@ import gc
 import pygame
 from data.engine.object.object import Object
 from data.engine.widgets.button import Button
+from data.engine.sprite.sprite_component import SpriteComponent
+
 
 
 class Actor(Object):
-    def __init__(self, man, pde):
+    def __init__(self, man, pde, position=[0,0], scale=[32,32], checkForOverlap=True, checkForCollision=True, useCenterForPosition=False):
         super().__init__(man, pde)
         self.canMove = True
         self.overlapInfo = {"Overlapping" : False, "Objects" : [], "Count": 0}
@@ -15,9 +17,9 @@ class Actor(Object):
         self.movement=pygame.Vector2([0, 0])
         self.components = {}
 
-        self.position = [0, 0]
+        self.position = position
 
-        self.scale = [32, 32]
+        self.scale = scale
 
         self.rotation = 0
 
@@ -25,9 +27,9 @@ class Actor(Object):
         
         self.maxSpeed = [2,2]
 
-        self.checkForOverlap = True
+        self.checkForOverlap = checkForOverlap
 
-        self.checkForCollision = True
+        self.checkForCollision = checkForCollision
 
         self.lifetime = -1
 
@@ -39,7 +41,7 @@ class Actor(Object):
 
         self.useSpriteRectForCollision = False
 
-        self.useCenterForPosition = False
+        self.useCenterForPosition = useCenterForPosition
 
 
         if self.pde.config_manager.config["config"]["debugMode"]:
@@ -49,6 +51,10 @@ class Actor(Object):
         super().construct()
         self.position = pygame.Vector2(self.position)
         self.rect = pygame.rect.Rect(self.position[0], self.position[1], self.scale[0], self.scale[1])
+
+        if self.pde.config_manager.config["config"]["debugMode"]:
+            self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\mariohitbox.png', layer=4)
+
         if self.useCenterForPosition:
             self.rect.center = [self.position[0], self.position[1]]
 
@@ -122,9 +128,9 @@ class Actor(Object):
         return
 
     def scrollcameratocenterx(self):
-        self.pde.display_manager.scroll[0] = (self.rect.centerx - 320)
+        self.pde.display_manager.scroll[0] = (self.rect.centerx - self.pde.config_manager.config["config"]["dimensions"][0]/2)
     def scrollcameratocentery(self):
-        self.pde.display_manager.scroll[1] = (self.rect.centery - 240)
+        self.pde.display_manager.scroll[1] = (self.rect.centery - self.pde.config_manager.config["config"]["dimensions"][1]/2)
 
     def printDebugInfo(self):
         print(f"Name: {str(self)}\n   Position: {self.position}\n   Scale: {self.scale}\n   Rotation: {self.rotation}\n   Movement: {self.movement}\n   Overlap Info: {self.overlapInfo}\n   Collide Info: {self.collideInfo}\n   Components: {self.components.keys()}")

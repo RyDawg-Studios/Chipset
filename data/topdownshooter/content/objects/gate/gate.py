@@ -9,7 +9,11 @@ class LevelGate(Actor):
         self.useCenterForPosition = True
         self.position = position
         self.scale =[32, 32]
+
+    def construct(self):
+        super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\mariohitbox.png', layer=8)
+        print("Hello!")
 
 
     def overlap(self, obj):
