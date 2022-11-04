@@ -25,7 +25,7 @@ class DevLevel(Level):
 
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[732/2, 412/2]))
         p.removeweapon()
-        self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[732/2, 412/2], weapon=LaserMachineGun))
+        #self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[732/2, 412/2], weapon=LaserMachineGun))
         itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle]
 
         for inx, w in enumerate(itemlist):

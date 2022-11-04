@@ -38,6 +38,7 @@ class ShooterEnemy(ShooterEntity):
         self.speed = self.defaultspeed
         self.rotation = 0
         self.ticksSinceWeapon = 0
+        self.bleed = True
 
     def construct(self):
         super().construct()
