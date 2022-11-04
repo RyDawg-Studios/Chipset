@@ -35,7 +35,7 @@ class LevelLoader(Actor):
                     o = self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[(oinx*32) + 16 + self.position[0], (rinx*32+ 16)+ self.position[1]], sprite=self.tilekey[obj]))
                     self.tiles.append(o)
 
-    def deconstruct(self, outer):
+    def deconstruct(self, outer=None):
         for o in self.tiles:
             o.deconstruct()
         return super().deconstruct(outer=outer)
