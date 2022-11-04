@@ -14,6 +14,7 @@ class ShooterPlayer(ShooterEntity):
         self.maxVelocity = 1
         self.velocity = self.maxVelocity
         self.pausable = False
+        self.bleed = True
 
         #self.fo = self.man.add_object(FadeOut(man=self.man, pde=self.pde))
         self.weaponindx = 0
@@ -23,9 +24,7 @@ class ShooterPlayer(ShooterEntity):
         self.components["PlayerController"] = ShooterController(owner=self)
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
         
-        self.cam = None
-        
-        #self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
+        self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
 
     def spawnmagnet(self):
         self.man.add_object(Magnet(man=self.man, pde=self.pde, position=self.pde.input_manager.mouse_position))

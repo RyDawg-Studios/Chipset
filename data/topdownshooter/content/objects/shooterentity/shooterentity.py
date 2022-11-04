@@ -1,5 +1,7 @@
+import random
 from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookattarget
+from data.topdownshooter.content.objects.particles.blood import Blood
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
 from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
@@ -44,6 +46,10 @@ class ShooterEntity(Actor):
         self.canPickupWeapons = True
         self.canCollectExp = True
         self.canShoot = True
+        
+        #----------< Visual Info >----------#
+
+        self.bleed = False
 
         #----------< Timer Info >----------#
 
@@ -76,6 +82,11 @@ class ShooterEntity(Actor):
         return super().collide(obj, side)
 
     def takedamage(self, obj, dmg):
+
+        if self.bleed:
+            if random.randint(0, 3) == 3:
+                self.man.add_object(obj=Blood(man=self.man, pde=self.pde, position=obj.rect.center))
+
         if self.damagable:
             self.hp -= dmg
             if self.hp <= 0 and self.hp != -1:
