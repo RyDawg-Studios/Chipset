@@ -7,7 +7,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 
 
 class Actor(Object):
-    def __init__(self, man, pde, position=[0,0], scale=[32,32], checkForOverlap=True, checkForCollision=True, useCenterForPosition=False):
+    def __init__(self, man, pde, position=[0,0], scale=[32,32], checkForOverlap=True, checkForCollision=True, useCenterForPosition=False, lifetime=-1):
         super().__init__(man, pde)
         self.canMove = True
         self.overlapInfo = {"Overlapping" : False, "Objects" : [], "Count": 0}
@@ -31,7 +31,7 @@ class Actor(Object):
 
         self.checkForCollision = checkForCollision
 
-        self.lifetime = -1
+        self.lifetime = lifetime
 
         self.speed = [0,0]
 
