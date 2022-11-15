@@ -147,7 +147,7 @@ class ShooterEntity(Actor):
                 if self.canPickupWeapons:
                     self.dropweapon(rotation=objectlookattarget(self, o))
                     self.changeweapon(o.weapon.__class__)
-                    o.queuedeconstruction()
+                    o.deconstruct()
                     return
             
     def changeweapon(self, cls):

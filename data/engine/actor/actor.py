@@ -67,7 +67,6 @@ class Actor(Object):
     def update(self):
         self.ticks += 1    
         self.checklifetime() 
-        self.getoverlaps()
         self.move(self.movement)
         return super().update()
 

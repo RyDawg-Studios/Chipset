@@ -15,3 +15,7 @@ class Hitmarker(Actor):
     def construct(self):
         super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\weapons\hitmarker\hm.png', layer=4)
+
+    def update(self):
+        self.ticks += 1    
+        self.checklifetime()

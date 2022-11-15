@@ -42,7 +42,6 @@ class PickupWeapon(Actor):
             self.components["Projectile"].speed[0] = 0
         if self.components["Projectile"].speed[1] < 0:
             self.components["Projectile"].speed[1] = 0
-        return super().update()
 
     def whilehovered(self):
         self.hoverframes += 1
