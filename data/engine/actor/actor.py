@@ -53,7 +53,7 @@ class Actor(Object):
         self.rect = pygame.rect.Rect(self.position[0], self.position[1], self.scale[0], self.scale[1])
 
         if self.pde.config_manager.config["config"]["debugMode"]:
-            self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\mariohitbox.png', layer=4)
+            self.components["DebugSprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\mariohitbox.png', layer=4)
 
         if self.useCenterForPosition:
             self.rect.center = [self.position[0], self.position[1]]
