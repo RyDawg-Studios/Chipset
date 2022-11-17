@@ -24,10 +24,10 @@ class Bullet(Actor):
 
     def construct(self):
         super().construct()
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.spritePath, layer=1)
         self.target = getpositionlookatvector(self, self.target)
         self.rotation = objectlookatposition(self, self.position + self.target)
         self.movement = self.target * self.speed
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.spritePath, layer=1)
 
 
 

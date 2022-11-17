@@ -9,12 +9,11 @@ from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
 
 class ShooterEntity(Actor):
     def __init__(self, man, pde, position=[0, 0], scale=[32, 32], maxhp=100):
-        super().__init__(man, pde)
+        super().__init__(man, pde, useCenterForPosition=True)
         #----------< Transform Info >----------#
 
         self.position = position
         self.scale = scale
-        self.useCenterForPosition = True
         self.maxVelocity = 0
 
 
@@ -77,7 +76,7 @@ class ShooterEntity(Actor):
             self.fall()
 
         if self.speed > 3:
-            self.speed -= 0.5
+            self.speed -= 0.4
 
         return super().update()
 

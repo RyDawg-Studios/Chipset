@@ -4,6 +4,7 @@ from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
 from data.topdownshooter.content.objects.player.shooter_controller import ShooterController
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
+from data.topdownshooter.content.objects.widget.fadeout import FadeOut
 
 
 class ShooterPlayer(ShooterEntity):
@@ -16,7 +17,6 @@ class ShooterPlayer(ShooterEntity):
         self.pausable = False
         self.bleed = True
 
-        #self.fo = self.man.add_object(FadeOut(man=self.man, pde=self.pde))
         self.weaponindx = 0
 
     def construct(self):
