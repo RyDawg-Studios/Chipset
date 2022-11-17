@@ -31,6 +31,7 @@ class ShooterEntity(Actor):
         self.damagable = True
         self.falling = False
         self.canGrantHP = True
+        self.speed = 3
 
         #----------< Dodge Info >----------#
 
@@ -58,8 +59,7 @@ class ShooterEntity(Actor):
     def construct(self):
         super().construct()
         self.healthbar = self.man.add_object(obj=HealthBar(man=self.man, pde=self.pde, owner=self))
-
-
+        return
 
     def shootweapon(self, target):
         if self.weapon != None and self.canShoot:
@@ -75,6 +75,9 @@ class ShooterEntity(Actor):
 
         if self.falling:
             self.fall()
+
+        if self.speed > 3:
+            self.speed -= 0.5
 
         return super().update()
 
@@ -97,28 +100,17 @@ class ShooterEntity(Actor):
             return False
 
     def dodgeroll(self):
-        self.damagable = False
-        if self.movement[0] != 0 and abs(self.movement[0]) == abs(self.movement[1]):
-            self.rect.centerx += (self.movement[0] * 3) * 0.6
-            self.rect.centery += (self.movement[1] * 3) * 0.6
-        else:
-            self.rect.centerx += (self.movement[0] * 3)
-            self.rect.centery += (self.movement[1] * 3)
+        self.speed = 10
+        return
 
     def dodgebuffer(self):
         self.dodgecooldown += 1
         if self.dodgecooldown >= self.dodgecooldowntime:
             if self.dodging:
-                self.dodgeframe += 1
                 self.dodgeroll()
-                if self.dodgeframe >= self.dodgetime:
-                    self.dodging = False
-                    self.dodgeframe = 0
-                    self.dodgecooldown = 0
-                    self.damagable = True
-        else:
-            self.dodging = False
-
+                self.dodgecooldown = 0
+                self.dodging = False
+        return
 
     def die(self, killer):
         self.dead = True
@@ -166,7 +158,7 @@ class ShooterEntity(Actor):
 
     def checkXcollision(self, movement):
         if self.canMove:
-            self.rect.x += self.movement.x * self.velocity
+            self.rect.x += self.movement.x * self.speed
             hits = self.getoverlaps()  
             for object in hits:
                 if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
@@ -181,10 +173,11 @@ class ShooterEntity(Actor):
                             self.rect.left = object.rect.right
                             self.collideInfo["Left"] = True
                             object.collide(self, "Right")
+        return
 
     def checkYcollision(self, movement):
         if self.canMove:
-            self.rect.y += self.movement.y * self.velocity
+            self.rect.y += self.movement.y * self.speed
             hits = self.getoverlaps()  
             for object in hits:
                 if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
@@ -199,6 +192,7 @@ class ShooterEntity(Actor):
                             self.rect.top = object.rect.bottom
                             self.collideInfo["Top"] = True
                             object.collide(self, "Bottom")
+        return
 
     def fall(self):
         self.canMove = False

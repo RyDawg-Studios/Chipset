@@ -25,15 +25,13 @@ class Actor(Object):
 
         self.name = str(self)
         
-        self.maxSpeed = [2,2]
-
         self.checkForOverlap = checkForOverlap
 
         self.checkForCollision = checkForCollision
 
         self.lifetime = lifetime
 
-        self.speed = [0,0]
+        self.speed = 3
 
         self.direction = [0,0]
 

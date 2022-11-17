@@ -34,8 +34,7 @@ class ShooterEnemy(ShooterEntity):
         self.weapon = weapon
         self.maxVelocity = velocity
         self.velocity = self.maxVelocity
-        self.defaultspeed = [8, 8]
-        self.speed = self.defaultspeed
+        self.speed = 3
         self.rotation = 0
         self.ticksSinceWeapon = 0
         self.bleed = True
