@@ -14,9 +14,6 @@ class MagnetArea(Actor):
         self.checkForCollision = False
         self.owner = owner
 
-        if self.pde.config_manager.config["config"]["debugMode"]:
-            self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\mariohitbox.png', layer=2)
-    
     def overlap(self, obj):
         if isinstance(obj, Bullet):
             obj.rotation = objectlookattarget(obj, self)
@@ -33,16 +30,20 @@ class MagnetArea(Actor):
 
 class Magnet(Actor):
     def __init__(self, man, pde, position=[0,0], rotation=0):
+        super().__init__(man, pde)
         self.position = position
         self.scale = [3,24]
         self.rotation = rotation
         self.checkForCollision = False
         self.attached = []
         self.lifetime = 400
-        super().__init__(man, pde)
-        self.area = self.man.add_object(MagnetArea(man=self.man, pde=pde, owner=self, position=self.position))
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\objects\magnet\magnet.png', layer=1)
         self.explosion = Explosion
+
+    def construct(self):
+        super().construct()
+        self.area = self.man.add_object(MagnetArea(man=self.man, pde=self.pde, owner=self, position=self.position))
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\objects\magnet\magnet.png', layer=1)
+
 
 
     def update(self):
