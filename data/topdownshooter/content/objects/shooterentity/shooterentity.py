@@ -110,6 +110,8 @@ class ShooterEntity(Actor):
                 self.dodgeroll()
                 self.dodgecooldown = 0
                 self.dodging = False
+        else:
+            self.dodging = False
         return
 
     def die(self, killer):
