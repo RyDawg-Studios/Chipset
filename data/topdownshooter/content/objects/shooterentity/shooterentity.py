@@ -74,17 +74,11 @@ class ShooterEntity(Actor):
 
         if self.falling:
             self.fall()
-
         if self.speed > 3:
             self.speed -= 0.4
-
         return super().update()
 
-    def collide(self, obj, side):
-        return super().collide(obj, side)
-
     def takedamage(self, obj, dmg):
-
         if self.bleed:
             if random.randint(0, 3) == 3:
                 self.man.add_object(obj=Blood(man=self.man, pde=self.pde, position=obj.rect.center))
@@ -159,7 +153,7 @@ class ShooterEntity(Actor):
 
     def checkXcollision(self, movement):
         if self.canMove:
-            self.rect.x += self.movement.x * self.speed
+            self.rect.x += self.movement.x * round(self.speed)
             hits = self.getoverlaps()  
             for object in hits:
                 if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
@@ -178,7 +172,7 @@ class ShooterEntity(Actor):
 
     def checkYcollision(self, movement):
         if self.canMove:
-            self.rect.y += self.movement.y * self.speed
+            self.rect.y += self.movement.y * round(self.speed)
             hits = self.getoverlaps()  
             for object in hits:
                 if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
