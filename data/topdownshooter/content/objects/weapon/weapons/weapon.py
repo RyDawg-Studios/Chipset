@@ -81,6 +81,7 @@ class Weapon(Actor):
                 bullet_target = with_spread.rotate(shot) + self.position
                 
                 b = self.man.add_object(obj=self.bullet(man=self.man, pde=self.pde, owner=self, target=bullet_target, position=self.rect.center))
+                self.components["Sprite"].sprite.rotation = b.rotation
                 for u in self.upgrades:
                     u.onShot(bullet=b, target=target)
 
@@ -90,8 +91,9 @@ class Weapon(Actor):
         return bs
                 
     def update(self):
+        if not self.shooting:
+            self.components["Sprite"].sprite.rotation = self.rotation
         self.shottick += 1
-        self.components["Sprite"].sprite.rotation = self.rotation
         if self.shooting:
             self.shottime += 1
         else:
