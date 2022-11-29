@@ -1,4 +1,5 @@
 from data.engine.sprite.sprite_component import SpriteComponent
+from data.engine.widgets.element.e_button import ButtonElement
 from data.engine.widgets.text import TextComponent
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 import pygame
@@ -7,8 +8,7 @@ import pygame
 
 
 class Dummy(ShooterEntity):
-    def __init__(self, man, pde, position=..., maxhp=100):
-        scale = [32, 48]
+    def __init__(self, man, pde, position=..., scale=[32, 48], maxhp=100):
         super().__init__(man, pde, position, scale, maxhp)
         self.canGrantHP = False
         self.damagecount = 0
