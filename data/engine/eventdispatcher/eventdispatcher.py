@@ -9,6 +9,6 @@ class EventDispatcher():
     def bind(self, func):
         self.bindings.append(func)
 
-    def call(self, *args):
+    def call(self, **kwargs):
         for f in self.bindings:
-            f(args)
+            f(**kwargs)
