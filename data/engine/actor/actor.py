@@ -9,38 +9,40 @@ from data.engine.sprite.sprite_component import SpriteComponent
 class Actor(Object):
     def __init__(self, man, pde, position=[0,0], scale=[32,32], checkForOverlap=True, checkForCollision=True, useCenterForPosition=False, lifetime=-1):
         super().__init__(man, pde)
+
+        # -----< Actor Info >----- #
+
+        self.name = str(self)
+        self.components = {}
+
+        # -----< Transform Info >----- #
+
+        self.position = position
+        self.scale = scale
+        self.rotation = 0
         self.canMove = True
+        self.movement=pygame.Vector2([0, 0])
+        self.useCenterForPosition = useCenterForPosition
+
+        self.direction = [0,0]
+        self.speed = 3
+        self.velocity = 1
+
+        # -----< Lifetime Info >----- #
+
+        self.ticks = 0
+        self.lifetime = lifetime
+
+        # -----< Collision Info >----- #
+
         self.overlapInfo = {"Overlapping" : False, "Objects" : [], "Count": 0}
         self.collideInfo = {"Top": False, "Bottom": False, "Left": False, "Right": False, "Objects": []}
         self.collisionThreshHold = 2
-        self.ticks = 0
-        self.movement=pygame.Vector2([0, 0])
-        self.components = {}
-
-        self.position = position
-
-        self.scale = scale
-
-        self.rotation = 0
-
-        self.name = str(self)
-        
         self.checkForOverlap = checkForOverlap
-
         self.checkForCollision = checkForCollision
-
-        self.lifetime = lifetime
-
-        self.speed = 3
-
-        self.direction = [0,0]
-
-        self.velocity = 1
-
         self.useSpriteRectForCollision = False
 
-        self.useCenterForPosition = useCenterForPosition
-
+        # -----< Debug Info >----- #
 
         if self.pde.config_manager.config["config"]["debugMode"]:
             self.components["DebugButton"] = Button(owner=self, bind=self.printDebugInfo)
