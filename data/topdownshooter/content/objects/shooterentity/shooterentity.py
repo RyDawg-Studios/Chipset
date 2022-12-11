@@ -1,6 +1,7 @@
 import random
 from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookattarget
+from data.engine.particle.particle_emitter import ParticleEmitter
 from data.topdownshooter.content.objects.particles.blood import Blood
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
@@ -57,6 +58,9 @@ class ShooterEntity(Actor):
 
     def construct(self):
         super().construct()
+
+        self.components["Particle"] = ParticleEmitter(owner=self)
+
         self.healthbar = self.man.add_object(obj=HealthBar(man=self.man, pde=self.pde, owner=self))
         return
 
@@ -66,6 +70,8 @@ class ShooterEntity(Actor):
             return shot
 
     def update(self):
+        self.components["Particle"].createtemplate(name="blood", sprite=r"data\topdownshooter\assets\sprites\objects\blood\blood.png", position=[self.rect.centerx, self.rect.centery], scale=[16, 16], rotation=0, velocity=[random.uniform(-1, 1),-5], lifetime=200, gravity=0.1)
+        
         if self.dead:
             self.deadticks += 1
 
@@ -80,8 +86,9 @@ class ShooterEntity(Actor):
 
     def takedamage(self, obj, dmg):
         if self.bleed:
-            if random.randint(0, 3) == 3:
-                self.man.add_object(obj=Blood(man=self.man, pde=self.pde, position=obj.rect.center))
+            bleed = random.choice([True, False])
+            if bleed:
+                self.components["Particle"].particles.append(self.components["Particle"].templates["blood"])
 
         if self.damagable:
             self.hp -= dmg

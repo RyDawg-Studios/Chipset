@@ -1,4 +1,6 @@
+import random
 from data.engine.fl.world_fl import objectlookatposition
+from data.engine.particle.particle_emitter import ParticleEmitter
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
@@ -32,6 +34,8 @@ class ShooterPlayer(ShooterEntity):
     def update(self):
         self.pde.game.player = self
         self.components["Sprite"].scale = self.scale
+
+
 
         if self.weapon != None:
             self.weapon.rotation = objectlookatposition(self.weapon, self.pde.input_manager.mouse_position)

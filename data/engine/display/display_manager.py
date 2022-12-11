@@ -16,6 +16,7 @@ class DisplayManager:
         self.configurewindow()
 
     def update(self):
+        pygame.display.update()
         
         if self.bg == False:
             self.screen.fill((0,0,0))
@@ -31,7 +32,6 @@ class DisplayManager:
         self.group.update()
         self.group.draw(self.screen)
 
-        pygame.display.update()
 
     def configurewindow(self):
         if self.pde.config_manager.config["config"]["fullscreen"]:

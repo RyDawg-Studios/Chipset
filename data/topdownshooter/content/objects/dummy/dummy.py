@@ -11,6 +11,7 @@ class Dummy(ShooterEntity):
     def __init__(self, man, pde, position=..., scale=[32, 48], maxhp=100):
         super().__init__(man, pde, position, scale, maxhp)
         self.canGrantHP = False
+        self.bleed = True
         self.damagecount = 0
         self.frames = 0
         self.totaldamage = 0

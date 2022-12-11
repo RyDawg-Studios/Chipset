@@ -59,7 +59,6 @@ class Actor(Object):
             self.rect.center = [self.position[0], self.position[1]]
 
         self.collideRect = self.rect
-
         return
 
 
