@@ -33,6 +33,6 @@ class DevLevel(Level):
             self.objectManager.add_object(PickupWeapon(man=self.objectManager, pde=self.pde, position=[(inx) * 64, 0], speed=[0, 0], weapon=weap))
             weap.deconstruct()
 
-        lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[0,200],level="room2"))
+        #lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[0,200],level="room2"))
         chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,64], items=[DevGun]))
         dummy = self.objectManager.add_object(Dummy(man=self.objectManager, pde=pde, position=[320,-64]))

@@ -75,14 +75,12 @@ class Actor(Object):
         if self.checkForOverlap:
             for object in list(self.pde.level_manager.level.objectManager.objects):
                 if isinstance(object, Actor):
-                    if self.checkForOverlap and object.checkForOverlap:
+                    if self.checkForOverlap:
                         if self.collideRect.colliderect(object.collideRect) and object != self and not object.decompose:
                             if object not in self.overlapInfo["Objects"]:
                                 self.overlap(object)
                             self.whileoverlap(object)
                             hits.append(object)
-                if object not in list(self.pde.level_manager.level.objectManager.objects) and object in self.overlapInfo["Objects"]:
-                    self.overlapInfo["Objects"].remove(object)
         self.overlapInfo["Objects"] = hits
         return hits
 

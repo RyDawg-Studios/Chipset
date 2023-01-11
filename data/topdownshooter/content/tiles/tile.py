@@ -10,6 +10,7 @@ class Tile(Actor):
         self.position = position
         self.scale =[32, 32]
         self.useCenterForPosition = True
+        self.canMove = False
 
     def construct(self):
         super().construct()
