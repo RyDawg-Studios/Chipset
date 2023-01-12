@@ -70,7 +70,7 @@ class ShooterEntity(Actor):
             return shot
 
     def update(self):
-        self.components["Particle"].createtemplate(name="blood", sprite=r"data\topdownshooter\assets\sprites\objects\blood\blood.png", position=[self.rect.centerx, self.rect.centery], scale=[16, 16], rotation=0, velocity=[random.uniform(-1, 1),-5], lifetime=200, gravity=0.1)
+        self.components["Particle"].createtemplate(name="blood", sprite=r"data\topdownshooter\assets\sprites\objects\blood\blood.png", position=[self.rect.centerx, self.rect.centery], scale=[16, 16], rotation=0, velocity=[random.uniform(-1, 1),-5], lifetime=20, gravity=0.2)
         
         if self.dead:
             self.deadticks += 1

@@ -21,7 +21,6 @@ class PyDawgEngine:
         game = ShooterGame
 
         self.game = game(pde=self)
-        
 
         self.event_manager = EventManager(pde=self)
         self.event_manager.active = True
@@ -51,7 +50,7 @@ class PyDawgEngine:
 
         self.clock = pygame.time.Clock()
         self.dt = 0
-        self.targetFPS = 30
+        self.targetFPS = 60
         self.fps = 0
 
         self.startengine()
@@ -84,7 +83,7 @@ class PyDawgEngine:
         self.player_manager.update()
         self.game.update()
 
-        self.dt = self.clock.tick(60) * 0.001 * self.targetFPS
+        self.dt = self.clock.tick(self.targetFPS) * 0.001 * self.targetFPS
         self.fps = round(self.clock.get_fps())
 
         pygame.display.set_caption(str(self.fps))

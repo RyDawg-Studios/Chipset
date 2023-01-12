@@ -5,7 +5,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 
 class Blood(Actor):
     def __init__(self, man, pde, position=[0,0]):
-        super().__init__(man, pde, position=position, scale=[16, 16], lifetime=360, checkForCollision=False, checkForOverlap=False)
+        super().__init__(man, pde, position=position, scale=[16, 16], lifetime=100, checkForCollision=False, checkForOverlap=False)
         return
 
     def construct(self):
