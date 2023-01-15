@@ -70,7 +70,6 @@ class ShooterEntity(Actor):
             return shot
 
     def update(self):
-        self.components["Particle"].createtemplate(name="blood", sprite=r"data\topdownshooter\assets\sprites\objects\blood\blood.png", position=[self.rect.centerx, self.rect.centery], scale=[16, 16], rotation=0, velocity=[random.uniform(-1, 1),-5], lifetime=20, gravity=0.2)
         
         if self.dead:
             self.deadticks += 1
@@ -88,8 +87,8 @@ class ShooterEntity(Actor):
         if self.bleed:
             bleed = random.choice([True, False])
             if bleed:
-                self.components["Particle"].particles.append(self.components["Particle"].templates["blood"])
-
+                #self.components["Particle"].particles.append(self.components["Particle"].templates["blood"])
+                pass
         if self.damagable:
             self.hp -= dmg
             if self.hp <= 0 and self.hp != -1:
