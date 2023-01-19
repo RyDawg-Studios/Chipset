@@ -40,6 +40,13 @@ class ExplosiveBulletsUpgrade(Upgrade):
             self.man.add_object(obj=Explosion(man=self.man, pde=self.pde, owner=bullet, position=bullet.rect.center, scale=[32, 32]))
         return super().onHit(bullet, damage, object)
 
+class SecondWindUpgrade(Upgrade):
+    def __init__(self, man, pde, weapon):
+        super().__init__(man, pde, weapon, id="SecondWind")
+
+    def onShot(self, bullet, target):
+        super().onShot(bullet, target)
+        self.weapon.owner.dodgerollcooldown = 200
 
 
 

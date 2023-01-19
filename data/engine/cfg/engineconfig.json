@@ -4,7 +4,7 @@
         "caption": "Chipset",
         "dimensions": [640, 480],
         "icon": "r'data\\assets\\sprites\\me.png'",
-        "fullscreen": true,
+        "fullscreen": false,
         "hideMouseCursor": false,
         "debugMode": false,
 

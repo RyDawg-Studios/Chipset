@@ -57,5 +57,17 @@
             {
                 "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\upgrades\\disarmament.png"
             }
+        },
+    "SecondWind":
+        {
+            "textinfo":
+            {
+                "name": "Second Wind",
+                "desc": "Shooting refreshes your dash, and shots fired after a dash deal slightly more damage."
+            },
+            "spriteinfo":
+            {
+                "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\upgrades\\disarmament.png"
+            }
         }
 }

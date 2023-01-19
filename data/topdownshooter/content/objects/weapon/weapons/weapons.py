@@ -4,7 +4,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, LaserBullet2, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet
-from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, SplitStreamUpgrade, VamprismUpgrade
+from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
 
 
 
@@ -39,7 +39,7 @@ class SMG(Weapon):
 class DevGun(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="Devgun", position=position)
-        self.upgrades = [VamprismUpgrade(man=self.man, pde=self.pde, weapon=self), DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self), SplitStreamUpgrade(man=self.man, pde=self.pde, weapon=self)]
+        self.upgrades = [SecondWindUpgrade(man=self.man, pde=self.pde, weapon=self), DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self), SplitStreamUpgrade(man=self.man, pde=self.pde, weapon=self)]
         self.bullet = DevBullet
 
 class LaserRifle(Weapon):
