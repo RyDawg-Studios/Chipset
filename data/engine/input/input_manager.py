@@ -1,6 +1,8 @@
 import pygame
 import sys
 
+from data.engine.eventdispatcher.eventdispatcher import EventDispatcher
+
 
 class InputManager():
     def __init__(self, pde):
@@ -13,10 +15,13 @@ class InputManager():
         self.controller_inputs = []
         self.joystick_inputs = None
         self.hat_inputs = (0, 0)
+
+        self.on_input_event = EventDispatcher()
  
     def activate(self):
         self.joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
         for j in self.joysticks:
+            print(j)
             j.init()
 
     def update(self):
@@ -29,6 +34,7 @@ class InputManager():
             self.key_inputs.append(event.key)
             for pc in self.pde.player_manager.player_controllers:
                 pc.on_input(event.key)
+            self.on_input_event.call(event.unicode)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             for pc in self.pde.player_manager.player_controllers:
@@ -57,9 +63,7 @@ class InputManager():
         else:
             self.hat_inputs = (0, 0)
 
-
-
-
         if pygame.K_ESCAPE in self.key_inputs:
+            self.pde.network_manager.disconnect()
             pygame.quit()
             sys.exit()

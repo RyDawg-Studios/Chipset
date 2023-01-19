@@ -1,5 +1,6 @@
 import pygame
 import _thread as threading
+
 from data.engine.display.display_manager import DisplayManager
 from data.engine.event.event_manager import EventManager
 from data.engine.input.input_manager import InputManager
@@ -12,7 +13,7 @@ from data.engine.cfg.config_manager import ConfigManager
 from data.engine.sprite.sprite_manager import SpriteManager
 from data.engine.debug.debugGame import DebugGame
 from data.engine.networking.network import Network
-from data.topdownshooter.TopDownShooter import ShooterGame as ShooterGame
+from data.topdownshooter.TopDownShooter import ShooterGame
 
 class PyDawgEngine:
 
@@ -21,6 +22,7 @@ class PyDawgEngine:
         game = ShooterGame
 
         self.game = game(pde=self)
+        
 
         self.event_manager = EventManager(pde=self)
         self.event_manager.active = True
@@ -46,11 +48,14 @@ class PyDawgEngine:
         self.display_manager = DisplayManager(pde=self)
         self.display_manager.active = True
 
+        self.network_manager = NetworkManager(pde=self)
+        self.network_manager.active = True
+
         self.active = False
 
         self.clock = pygame.time.Clock()
         self.dt = 0
-        self.targetFPS = 60
+        self.targetFPS = 30
         self.fps = 0
 
         self.startengine()
@@ -83,10 +88,10 @@ class PyDawgEngine:
         self.player_manager.update()
         self.game.update()
 
-        self.dt = self.clock.tick(self.targetFPS) * 0.001 * self.targetFPS
+        self.dt = self.clock.tick(60) * 0.001 * self.targetFPS
         self.fps = round(self.clock.get_fps())
 
-        pygame.display.set_caption(str(self.fps))
+        #pygame.display.set_caption(str(self.fps))
 
 
         

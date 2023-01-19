@@ -12,7 +12,7 @@ class PickupWeapon(Actor):
         self.position = position
         self.scale = self.weapon.scale
         self.checkForCollision = False
-        self.checkForOverlap = False
+        self.checkForOverlap = True
         self.useCenterForPosition = True
         self.speed = speed
         self.rotation = rotation

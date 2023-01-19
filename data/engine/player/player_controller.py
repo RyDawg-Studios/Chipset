@@ -1,16 +1,9 @@
 from data.engine.component.component import Component
 
 class PlayerController(Component):
-    def __init__(self, owner, **kwargs) -> None:
-        super().__init__(owner, **kwargs)
+    def __init__(self, owner) -> None:
+        super().__init__(owner)
         self.inpman = self.owner.pde.input_manager
-
-        
-        
-        if len(self.inpman.joysticks) > 0:
-            self.resetPos = False
-        else:
-            self.resetPos = True
 
     def update(self):
         if self.owner is not None:

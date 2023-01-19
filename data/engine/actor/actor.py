@@ -64,11 +64,27 @@ class Actor(Object):
 
 
     def update(self):
-        super().update()
         self.ticks += 1    
         self.checklifetime() 
         self.move(self.movement)
+        return super().update()
 
+    def getoverlaps(self):
+        self.overlapInfo["Objects"] = []
+        hits = []
+        if self.checkForOverlap:
+            for object in list(self.pde.level_manager.level.objectManager.objects):
+                if isinstance(object, Actor):
+                    if self.checkForOverlap and object.checkForOverlap:
+                        if self.collideRect.colliderect(object.collideRect) and object != self and not object.decompose:
+                            if object not in self.overlapInfo["Objects"]:
+                                self.overlap(object)
+                            self.whileoverlap(object)
+                            hits.append(object)
+                if object not in list(self.pde.level_manager.level.objectManager.objects) and object in self.overlapInfo["Objects"]:
+                    self.overlapInfo["Objects"].remove(object)
+        self.overlapInfo["Objects"] = hits
+        return hits
 
     def checkoverlaps(self):
         return
@@ -100,20 +116,22 @@ class Actor(Object):
         elif self.movement[0] > 0:
             self.direction = 1
 
-    def getoverlaps(self):
-        self.overlapInfo["Objects"] = []
-        hits = []
-        if self.checkForOverlap:
-            for object in list(self.pde.level_manager.level.objectManager.objects):
-                if isinstance(object, Actor):
-                    if self.checkForOverlap:
-                        if self.collideRect.colliderect(object.collideRect) and object != self and not object.decompose:
-                            if object not in self.overlapInfo["Objects"]:
-                                self.overlap(object)
-                            self.whileoverlap(object)
-                            hits.append(object)
-        self.overlapInfo["Objects"] = hits
-        return hits
+
+    def checklifetime(self):
+        if self.ticks >= self.lifetime and self.lifetime != -1:
+            self.expire()
+            self.deconstruct()
+
+    def expire(self): #Runs before deconstruct.
+        return
+
+    def scrollcameratocenterx(self):
+        self.pde.display_manager.scroll[0] = (self.rect.centerx - self.pde.config_manager.config["config"]["dimensions"][0]/2)
+    def scrollcameratocentery(self):
+        self.pde.display_manager.scroll[1] = (self.rect.centery - self.pde.config_manager.config["config"]["dimensions"][1]/2)
+
+    def printDebugInfo(self):
+        print(f"Name: {str(self)}\n   Position: {self.position}\n   Scale: {self.scale}\n   Rotation: {self.rotation}\n   Movement: {self.movement}\n   Overlap Info: {self.overlapInfo}\n   Collide Info: {self.collideInfo}\n   Components: {self.components.keys()}")
 
     def checkXcollision(self, movement):
         if self.canMove:
@@ -148,23 +166,6 @@ class Actor(Object):
                         self.rect.top = object.rect.bottom
                         self.collideInfo["Top"] = True
                         object.collide(self, "Bottom")
-
-    def checklifetime(self):
-        if self.ticks >= self.lifetime and self.lifetime != -1:
-            self.expire()
-            self.deconstruct()
-
-    def expire(self): #Runs before deconstruct.
-        return
-
-    def scrollcameratocenterx(self):
-        self.pde.display_manager.scroll[0] = (self.rect.centerx - self.pde.config_manager.config["config"]["dimensions"][0]/2)
-    def scrollcameratocentery(self):
-        self.pde.display_manager.scroll[1] = (self.rect.centery - self.pde.config_manager.config["config"]["dimensions"][1]/2)
-
-    def printDebugInfo(self):
-        print(f"Name: {str(self)}\n   Position: {self.position}\n   Scale: {self.scale}\n   Rotation: {self.rotation}\n   Movement: {self.movement}\n   Overlap Info: {self.overlapInfo}\n   Collide Info: {self.collideInfo}\n   Components: {self.components.keys()}")
-
 
     def deconstruct(self, outer=None):
         self.collideInfo["Objects"] = []

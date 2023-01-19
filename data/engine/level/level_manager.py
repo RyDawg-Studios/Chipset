@@ -18,6 +18,7 @@ class LevelManager:
         self.level = None
         self.level = level
         level.active = active
+        return self.level
 
     def update(self):
         self.level.update()

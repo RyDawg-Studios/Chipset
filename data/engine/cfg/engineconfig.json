@@ -11,7 +11,7 @@
         "network":
         {
             "connectToServer": false,
-            "address": "69.420.1337.515"
+            "address": "127.0.0.1"
         }
     }
 }

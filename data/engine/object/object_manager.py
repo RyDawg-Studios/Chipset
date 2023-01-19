@@ -36,6 +36,13 @@ class ObjectManager:
             
         self.objects = []
 
+    def printobjects(self):
+        print("----------------< Objects >----------------")
+        i=0
+        for o in self.objects:
+            print(o)
+            i += 1
+        print(f"Count: {i}")
         
     def getPlayers(self):
         for obj in list(self.objects.values()):
