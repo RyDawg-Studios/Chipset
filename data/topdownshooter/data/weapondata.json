@@ -245,5 +245,24 @@
             "shotangles": [0],
             "damagemultiplier": 1
         }
+    },
+    "TurretHead":
+    {
+        "textinfo":{
+            "name": "Turret Head",
+            "desc": "ToDo",
+            "flavor": "Todo"
+        },
+        "transforminfo":{
+            "scale": [48, 48],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\turret\\turret_head.png"
+
+        },
+        "statinfo":{
+            "firerate": 10,
+            "shotspread": 4,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
     }
 }

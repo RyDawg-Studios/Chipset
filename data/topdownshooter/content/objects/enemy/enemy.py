@@ -42,11 +42,11 @@ class ShooterEnemy(ShooterEntity):
     def construct(self):
         super().construct()
 
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\badme.png', layer=2)
-        self.ai = self.components["AI"] = AIComponent(owner=self)
-        self.ai.addstate(name="wander", state=WanderAI)
-        self.ai.addstate(name="weaponless", state=WeaponlessAI)
-        self.ai.state = "wander"
+        #self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\badme.png', layer=2)
+        #self.ai = self.components["AI"] = AIComponent(owner=self)
+        #self.ai.addstate(name="wander", state=WanderAI)
+        #self.ai.addstate(name="weaponless", state=WeaponlessAI)
+        #self.ai.state = "wander"
 
         self.area = self.man.add_object(obj=EnemyPickupArea(man=self.man, pde=self.pde, position=self.rect.center))
 
@@ -63,15 +63,15 @@ class ShooterEnemy(ShooterEntity):
             self.weapon.shoot(target=self.pde.game.player.position)
             self.weapon.rotation = objectlookattarget(self.weapon, self.pde.game.player)
 
-        if self.weapon is None:
-            self.ticksSinceWeapon += 1
-            if self.ai.state != 'weaponless':
-                self.ai.state = 'weaponless'
-        elif self.weapon is not None:
-            if self.ai.state != 'wander':
-                self.ai.state = 'wander'
-            else:
-                self.ticksSinceWeapon = 0
+        #if self.weapon is None:
+        #    self.ticksSinceWeapon += 1
+            #if self.ai.state != 'weaponless':
+            #    self.ai.state = 'weaponless'
+        #elif self.weapon is not None:
+            #if self.ai.state != 'wander':
+            #    self.ai.state = 'wander'
+            #else:
+                #self.ticksSinceWeapon = 0
             
 
         return super().update()

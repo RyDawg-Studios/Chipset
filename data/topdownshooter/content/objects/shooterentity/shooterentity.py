@@ -21,6 +21,7 @@ class ShooterEntity(Actor):
         #----------< Weapon Info >----------#
         
         self.weapon = None
+        self.weaponoffset = 10
         self.item = None
 
         #----------< Stat Info >----------#
@@ -75,7 +76,7 @@ class ShooterEntity(Actor):
             self.deadticks += 1
 
         self.dodgebuffer()
-        self.weaponoffset(weapon=self.weapon)
+        self.offsetweapon(weapon=self.weapon, offset=self.weaponoffset)
 
         if self.falling:
             self.fall()
@@ -124,7 +125,7 @@ class ShooterEntity(Actor):
             self.weapon.queuedeconstruction()
 
 
-    def weaponoffset(self, weapon, offset=10):
+    def offsetweapon(self, weapon, offset=10):
         if weapon != None:
             weapon.rect.centerx = self.rect.centerx + offset
             weapon.rect.centery = self.rect.centery + offset
