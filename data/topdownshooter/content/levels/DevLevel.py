@@ -38,4 +38,4 @@ class DevLevel(Level):
         chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,64], items=[DevGun]))
         dummy = self.objectManager.add_object(Dummy(man=self.objectManager, pde=pde, position=[320,-64]))
 
-        t = self.objectManager.add_object(Turret(man=self.objectManager, pde=pde, position=[320,-128]))
+        #t = self.objectManager.add_object(Turret(man=self.objectManager, pde=pde, position=[320,-128]))

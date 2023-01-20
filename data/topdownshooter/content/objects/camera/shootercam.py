@@ -32,25 +32,11 @@ class ShooterCamera(Actor):
         self.scrollcameratocenterx()
         self.scrollcameratocentery()
 
-        dist = abs(math.hypot(self.rect.centerx - self.target.rect.centerx, self.rect.centery-self.target.rect.centery))
-        if dist < 50:
-            self.speed = [dist/10, dist/10]
-        
-        if dist > 150:
-            if self.speed[0] < 8:
-                self.speed[0] += 0.1
-                self.speed[1] += 0.1
-        else:
-            if self.speed[0] > 4:
-                self.speed[0] -= 0.1
-                self.speed[1] -= 0.1
 
+        self.rect.centerx = round(self.target.position[0] - ((self.target.position[0] - self.pde.mouse_manager.pos[0]) / 5))
 
+        self.rect.centery = round(self.target.position[1] - ((self.target.position[1] - self.pde.mouse_manager.pos[1]) / 5))
 
-        self.rotation = objectlookattarget(self, self.target)
-        self.components["Projectile"].speed = self.speed
-        if self.sprite is not None:
-            self.components["Sprite"].sprite.rotation = self.rotation
         
         return super().update()
 
