@@ -12,10 +12,12 @@ class NameText(Actor):
         self.box = box
         self.checkForCollision = False
         self.checkForOverlap = False
+        self.useCenterForPosition = True
+
 
     def construct(self):
         super().construct()
-        self.components["nametext"] = TextComponent(owner=self, text=self.box.weapon.name, font=pygame.font.SysFont('impact.ttf', 72), layer=3)
+        self.components["nametext"] = TextComponent(owner=self, text=self.box.weapon.name, font=pygame.font.SysFont('impact.ttf', 16), layer=3)
 
     def update(self):
         self.rect.topleft = [self.box.rect.topleft[0] + 5, self.box.rect.topleft[1] + 5]
@@ -29,10 +31,11 @@ class FireRateText(Actor):
         self.box = box
         self.checkForCollision = False
         self.checkForOverlap = False
+        self.useCenterForPosition = True
 
     def construct(self):
         super().construct()
-        self.components["frtext"] = TextComponent(owner=self, text=f"Shot Delay: {self.box.weapon.firerate}", font=pygame.font.SysFont('impact.ttf', 72), layer=3)
+        self.components["frtext"] = TextComponent(owner=self, text=f"Shot Delay: {self.box.weapon.firerate}", font=pygame.font.SysFont('impact.ttf', 12), layer=3)
         self.rect.topleft = [self.box.rect.topleft[0]+ 5, self.box.rect.topleft[1] + 27]
 
     def update(self):
@@ -47,10 +50,11 @@ class DamageMultText(Actor):
         self.box = box
         self.checkForCollision = False
         self.checkForOverlap = False
+        self.useCenterForPosition = True
 
     def construct(self):
         super().construct()
-        self.components["multtext"] = TextComponent(owner=self, text=f"Damage Multiplier: x{self.box.weapon.damagemultiplier}", font=pygame.font.SysFont('impact.ttf', 72), layer=3)
+        self.components["multtext"] = TextComponent(owner=self, text=f"Damage Multiplier: x{self.box.weapon.damagemultiplier}", font=pygame.font.SysFont('impact.ttf', 12), layer=3)
         self.rect.topleft = [self.box.rect.topleft[0]+5, self.box.rect.topleft[1] + 37]
 
     def update(self):
@@ -65,10 +69,11 @@ class AccuracyText(Actor):
         self.box = box
         self.checkForCollision = False
         self.checkForOverlap = False
+        self.useCenterForPosition = True
 
     def construct(self):
         super().construct()
-        self.components["acctext"] = TextComponent(owner=self, text=f"Spread: {self.box.weapon.shotspread}", font=pygame.font.SysFont('impact.ttf', 72), layer=3)
+        self.components["acctext"] = TextComponent(owner=self, text=f"Spread: {self.box.weapon.shotspread}", font=pygame.font.SysFont('impact.ttf', 12), layer=3)
         self.rect.topleft = [self.box.rect.topleft[0]+5, self.box.rect.topleft[1] + 47]
 
 
@@ -87,7 +92,7 @@ class UpgradeIcon(Actor):
         self.box = box
         self.useCenterForPosition = True
         self.checkForCollision = False
-        self.checkForOverlap = False
+        self.useCenterForPosition = True
         self.upgradedata = json.load(open(r"data\topdownshooter\data\upgradedata.json"))
 
     def construct(self):
@@ -130,6 +135,7 @@ class InfoBox(Actor):
         self.weapon = weapon
         self.checkForCollision = False
         self.checkForOverlap = False
+        self.useCenterForPosition = True
 
     
     def construct(self):
