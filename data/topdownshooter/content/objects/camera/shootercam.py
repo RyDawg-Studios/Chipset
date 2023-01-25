@@ -35,7 +35,7 @@ class ShooterCamera(Actor):
 
         self.rect.centerx = round(self.target.position[0] - ((self.target.position[0] - self.pde.mouse_manager.pos[0]) / 5))
 
-        self.rect.centery = round(self.target.position[1] - ((self.target.position[1] - self.pde.mouse_manager.pos[1]) / 5))
+        self.rect.centery = round(self.target.position[1] - ((self.target.position[1] - self.pde.mouse_manager.pos[1]) / 4))
 
         
         return super().update()
