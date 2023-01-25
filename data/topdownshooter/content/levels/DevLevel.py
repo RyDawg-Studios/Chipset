@@ -25,6 +25,7 @@ class DevLevel(Level):
         self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\bg.png')
 
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[732/2, 412/2]))
+        self.pde.game.player = p
         p.removeweapon()
         #self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[732/2, 412/2], weapon=LaserMachineGun))
         itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle]

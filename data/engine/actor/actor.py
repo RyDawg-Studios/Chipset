@@ -21,7 +21,7 @@ class Actor(Object):
         self.scale = scale
         self.rotation = 0
         self.canMove = True
-        self.movement=pygame.Vector2([0, 0])
+        self.movement = pygame.Vector2([0, 0])
         self.useCenterForPosition = useCenterForPosition
 
         self.direction = [0,0]

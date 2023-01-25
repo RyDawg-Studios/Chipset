@@ -18,7 +18,7 @@ class ObjectManager:
         if obj in self.objects:
             self.objects.remove(obj)
         else:
-            print(f"ObjectManager.remove_object failed to remove {obj.__class__.__name__} because it was not found. Outer was {outer}")
+            return
 
 
     def update(self):
