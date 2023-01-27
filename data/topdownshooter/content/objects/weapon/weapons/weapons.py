@@ -192,11 +192,6 @@ class ChainRifle(Weapon):
         super().__init__(man, pde, owner, id="ChainRifle", position=position)
         self.bullet = LaserBullet2
 
-        #----------< Weapon Info >----------#
-
-        self.shotspread = 2
-        self.firerate = 15
-
 class TurretHead(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="TurretHead", position=position)
