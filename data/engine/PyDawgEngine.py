@@ -50,6 +50,7 @@ class PyDawgEngine:
 
         self.network_manager = NetworkManager(pde=self)
         self.network_manager.active = True
+        
 
         self.active = False
 

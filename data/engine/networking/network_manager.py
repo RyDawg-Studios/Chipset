@@ -18,8 +18,7 @@ class NetworkManager():
     def network_thread(self):
         if self.pde.config_manager.config["config"]["network"]["connectToServer"]:
             self.network = Network(owner=self, server="127.0.0.1")
-            self.network.connect()
-            self.onjoinednetwork.call()
+            print("Network Active")
 
         while self.active:
             self.network.update()
