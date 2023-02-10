@@ -24,6 +24,9 @@ class Upgrade(Object):
     def update(self):
         return super().update()
 
+    def onAltShot(self, target):
+        return
+
     def onShot(self, bullet, target):
         return bullet, target
 

@@ -5,7 +5,7 @@ from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, LaserBullet2, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, TurretBullet
-from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
+from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, GrenadeLauncherUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
 
 
 
@@ -40,7 +40,7 @@ class SMG(Weapon):
 class DevGun(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="Devgun", position=position)
-        self.upgrades = [VamprismUpgrade(man=self.man, pde=self.pde, weapon=self), DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self), SplitStreamUpgrade(man=self.man, pde=self.pde, weapon=self)]
+        self.upgrades = [GrenadeLauncherUpgrade(man=self.man, pde=self.pde, weapon=self), DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self), SplitStreamUpgrade(man=self.man, pde=self.pde, weapon=self)]
         self.bullet = DevBullet
 
 class LaserRifle(Weapon):
@@ -57,7 +57,7 @@ class LaserRifle(Weapon):
   
         return super().update()
 
-    def shoot(self, angle, target):
+    def shoot(self, target, bullet):
         self.shooting = True
         return []
 
@@ -76,26 +76,16 @@ class ElectroLauncher(Weapon):
         super().__init__(man, pde, owner, id="ElectroLauncher", position=position)
         self.bullet = Electrosphere
 
-class LingerTest(Weapon):
-    def __init__(self, man, pde, owner, position):
-        self.scale = [37, 16]
-        self.firerate = 1000
-        super().__init__(man, pde, owner, sprite='')
-
-    def shoot(self, target):
-        self.pde.game.activate()
-        return super().shoot(target)
-
 class SpawnerWeapon(Weapon):
     def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, position=position, id="DebugGun")
         self.scale = [46, 22]
         self.firerate = 60
         self.item = 0
         self.items = [DefaultEnemy]
         self.shot = False
-        super().__init__(man, pde, owner, position=position)
 
-    def shoot(self, target):
+    def shoot(self, target, bullet):
         self.shooting = True
         if not self.shot:
 
@@ -202,3 +192,22 @@ class TurretHead(Weapon):
         super().__init__(man, pde, owner, id="TurretHead", position=position)
         self.bullet = TurretBullet
 
+class LaserPistol(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="LaserPistol", position=position)
+        self.shot = False
+        self.bullet = TurretBullet
+
+    def shoot(self, target):
+        self.shooting = True
+        if not self.shot:
+            super().shoot(target)
+            self.shot = True
+            return
+
+    def update(self):
+        if self.shot == True and self.shooting == False:
+            self.shot = False
+        if not self.shooting:
+            self.shooting = False
+        return super().update()

@@ -11,6 +11,8 @@ class ShooterController(PlayerController):
             self.owner.pde.game.activate()
         if input == pygame.K_LSHIFT:
             self.owner.dodging = True
+        if input == pygame.K_LALT:
+            self.owner.altShot(target=self.owner.pde.input_manager.mouse_position)
         if input == pygame.K_f:
             self.owner.interact()
         if input == pygame.K_q:

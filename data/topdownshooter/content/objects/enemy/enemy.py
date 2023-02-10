@@ -44,7 +44,7 @@ class ShooterEnemy(ShooterEntity):
         self.area.rect.center = self.rect.center
 
         if self.weapon != None and self.pde.game.player != None and self.pde.game.player.dead == False and self.decompose == False:
-            self.weapon.shoot(target=self.pde.game.player.position)
+            self.weapon.shoot(target=self.pde.game.player.position, bullet=self.weapon.bullet)
             self.weapon.rotation = objectlookattarget(self.weapon, self.pde.game.player)
 
 

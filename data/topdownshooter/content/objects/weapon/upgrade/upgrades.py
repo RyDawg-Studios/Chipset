@@ -1,6 +1,7 @@
 import random
 from data.topdownshooter.content.objects.hazard.explosion.explosion import Explosion
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
+from data.topdownshooter.content.objects.weapon.bullets.bullets import Grenade
 from data.topdownshooter.content.objects.weapon.upgrade.upgrade import Upgrade
 from data.topdownshooter.content.tiles.tile import Tile
 
@@ -47,6 +48,21 @@ class SecondWindUpgrade(Upgrade):
     def onShot(self, bullet, target):
         super().onShot(bullet, target)
         self.weapon.owner.dodgerollcooldown = 200
+
+class GrenadeLauncherUpgrade(Upgrade):
+    def __init__(self, man, pde, weapon):
+        super().__init__(man, pde, weapon, id="GrenadeUpgrade")
+        self.shotTicks = 0
+
+    def update(self):
+        super().update()
+        self.shotTicks += 1
+
+    def onAltShot(self, target):
+        super().onAltShot(target)
+        if self.shotTicks >= 120:
+            self.weapon.shoot(target=target, bullet=Grenade)
+            self.shotTicks = 0
 
 
 

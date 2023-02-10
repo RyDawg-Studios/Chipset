@@ -69,5 +69,17 @@
             {
                 "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\upgrades\\disarmament.png"
             }
-        }
+        },
+        "GrenadeUpgrade":
+            {
+                "textinfo":
+                {
+                    "name": "Grenade Launcher",
+                    "desc": "Shoots a grenade. Includes properties of other upgrades."
+                },
+                "spriteinfo":
+                {
+                    "sprite": "data\\topdownshooter\\assets\\sprites\\objects\\upgrades\\disarmament.png"
+                }
+            }
 }

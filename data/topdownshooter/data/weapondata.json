@@ -4,7 +4,7 @@
         "textinfo":{
             "name": "Automatic Rifle",
             "desc": "A well rounded, medium fire rate, medium damage automatic rifle.",
-            "flavor": "Good o'l reliable."
+            "flavor": "O'l reliable."
         },
         "transforminfo":{
             "scale": [40, 14],
@@ -118,7 +118,7 @@
         "textinfo":{
             "name": "Grenade Launcher",
             "desc": "The Grenade Launcher fires the Grenade projectile, which bounces off walls and explodes after a short time.",
-            "flavor": "I wrote a whole seperate physics engine for this."
+            "flavor": "I wrote a whole seperate physics framework for this."
         },
         "transforminfo":{
             "scale": [56, 22],
@@ -264,5 +264,44 @@
             "shotangles": [0],
             "damagemultiplier": 1
         }
+    },
+    "LaserPistol":
+    {
+        "textinfo":{
+            "name": "Laser Pistol",
+            "desc": "ToDo",
+            "flavor": "Todo"
+        },
+        "transforminfo":{
+            "scale": [36, 18],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\laserpistol\\laserpistol.png"
+
+        },
+        "statinfo":{
+            "firerate": 0,
+            "shotspread": 4,
+            "shotangles": [0],
+            "damagemultiplier": 1.1
+        }
+    },
+    "DebugGun":
+    {
+        "textinfo":{
+            "name": "Tool Gun",
+            "desc": "Debug Entity Spawner",
+            "flavor": "Current Entity: None"
+        },
+        "transforminfo":{
+            "scale": [30, 12],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\zapinator\\zapinator.png"
+
+        },
+        "statinfo":{
+            "firerate": 0,
+            "shotspread": 0,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
     }
+    
 }

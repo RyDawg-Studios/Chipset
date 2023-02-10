@@ -61,12 +61,12 @@ class PyDawgEngine:
         self.startengine()
 
     def startengine(self):
-        for man in [self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
+        for man in [self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager, self.network_manager]:
             if man.active == False:
                 raise Exception(str(man) + " Was not active on engine start. Did you properly initialize it?")
             else: man.active == True
 
-        for man in [self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
+        for man in [self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager, self.network_manager]:
             if man.active == False:
                 raise Exception(str(man) + " Was not active on engine start. Did you properly initialize it?")
             else: man.activate()

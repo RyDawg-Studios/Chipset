@@ -67,8 +67,13 @@ class ShooterEntity(Actor):
 
     def shootweapon(self, target):
         if self.weapon != None and self.canShoot:
-            shot = self.weapon.shoot(target)
+            shot = self.weapon.shoot(target, self.weapon.bullet)
             return shot
+
+    def altShot(self, target):
+        if self.weapon != None:
+            self.weapon.altShot(target)
+
 
     def update(self):
         

@@ -7,7 +7,7 @@ pygame.font.init()
 pygame.joystick.init()
 
 #Create Engine Object
-if __name__ == '__main__':
+if __name__ == '__main__':           
     engine = PyDawgEngine()
 
 #-------< TODO >-------#
