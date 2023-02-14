@@ -23,6 +23,9 @@ class ShooterController(PlayerController):
             self.owner.spawnmagnet()
         if input == pygame.K_F1:
             self.owner.pde.level_manager.level.objectManager.printobjects()
+        if input == pygame.K_j:
+            self.owner.pde.network_manager.activate()
+
         return super().on_input(input)
 
     def manage_input(self):

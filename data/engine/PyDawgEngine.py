@@ -50,6 +50,7 @@ class PyDawgEngine:
 
         self.network_manager = NetworkManager(pde=self)
         self.network_manager.active = True
+        
 
         self.active = False
 
@@ -91,7 +92,7 @@ class PyDawgEngine:
         self.dt = self.clock.tick(60) * 0.001 * self.targetFPS
         self.fps = round(self.clock.get_fps())
 
-        #pygame.display.set_caption(str(self.fps))
+        pygame.display.set_caption(str(self.fps))
 
 
         

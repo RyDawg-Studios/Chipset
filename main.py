@@ -16,4 +16,3 @@ if __name__ == '__main__':
 #  HasComponent()    #
 #  GetComponents()   #
 #  Change References in Bullet from hasattr('hp') to HasComponent(HealthComponent) (Make an HP component while you're at it) #
-
