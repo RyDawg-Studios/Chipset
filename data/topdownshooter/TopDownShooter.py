@@ -10,6 +10,7 @@ class ShooterGame(Game):
     def __init__(self, pde):
         self.player = None
         self.currentlevel = None
+        self.currentRoomNumber = 1
         super().__init__(pde)
 
     

@@ -1,7 +1,4 @@
 import json
-import math
-from msilib.schema import Upgrade
-import random
 
 import pygame
 from data.engine.actor.actor import Actor
@@ -14,6 +11,7 @@ class Weapon(Actor):
         super().__init__(man, pde)
         #----------< Data Info >----------#
         self.id = id
+
         if self.id != None:
             weapondata = json.load(open(r"data\topdownshooter\data\weapondata.json"))[self.id]
 
@@ -28,6 +26,7 @@ class Weapon(Actor):
             self.name = weapondata['textinfo']['name']
             self.description = weapondata['textinfo']['desc']
             self.flavor = weapondata['textinfo']['flavor']
+
         else:
             self.scale = [20, 10]
             self.sprite = ''
@@ -39,7 +38,7 @@ class Weapon(Actor):
 
             self.name = 'Default Name'
             self.description = 'Default Description'
-            self.flavor = 'Devault Flavor'
+            self.flavor = 'Default Flavor'
             
 
         #----------< Actor Info >----------#
@@ -59,13 +58,13 @@ class Weapon(Actor):
 
         #----------< Weapon Info >----------#
         self.upgrades = []
+        self.uiOverride = None
 
 
 
     def construct(self):
         super().construct()
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.sprite, layer=3)
-        
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.sprite, layer=3)        
 
 
     def shoot(self, target, bullet):

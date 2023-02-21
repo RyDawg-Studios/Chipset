@@ -17,5 +17,5 @@ generation:
 
 	- Enemy Loot Table:
 		- Make a list with all weapons and upgrades in ascending complexity/strength.
-		- "Middle" index will be complexity, and 3 or 4 indexes in both directions will be considered.
+		- "Middle" index will be complexity - 1, and 3 or 4 indexes in both directions will be considered.
 		- Further the weapon/index is from middle index, rarer it is, making stronger/weaker items for current complexity more rare.
