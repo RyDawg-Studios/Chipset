@@ -19,6 +19,7 @@ class ShooterPlayer(ShooterEntity):
         self.pausable = False
         self.bleed = True
 
+        print("Hey")
         self.weaponindx = 0
 
     def construct(self):

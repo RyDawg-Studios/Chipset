@@ -1,0 +1,26 @@
+Weapon Ideas:
+
+Rythm Gun:
+	- Auto Aim
+	- Arrows fall to the tune of the bg music
+	- Arrow keys to play rythm game
+	- Successfully hitting a note shoots gun in direction of target
+	- Accuracy/Damage determined by note accuracy
+
+Laser Cage:
+	- Fire places nodes accross floor (Max like 15 or smth)
+	- Alt fire creates a cage that damages enemies by connecting each node with a line of electricity or whatever
+
+Marksman:
+	- Literally the Ultrakill marksman
+	- Alt fire flicks coin, flashes at peak of parabola
+	- Shooting will ricochet into nearest enemy to coin
+	- Shooting while flashing ricochets into nearest 2 enemies
+
+AWP:
+	- Same AWP from ETG
+	- Does more damage if you spin a circle before shooting
+	- Just keep a list of the last 4 quadrants of the screen the mouse was on
+	- If they're in order then it counts as a spin
+
+

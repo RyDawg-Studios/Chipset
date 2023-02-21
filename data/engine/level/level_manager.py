@@ -10,6 +10,7 @@ class LevelManager:
     def clearlevel(self):
         if self.level is not None:
             self.level.objectManager.clear()
+            self.level = None
 
     def addlevel(self, level, name, active):
         if self.level is not None:

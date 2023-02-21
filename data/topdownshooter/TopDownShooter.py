@@ -15,7 +15,7 @@ class ShooterGame(Game):
 
     
     def changelevel(self, level):
-        self.clearObjectManager()
+        self.pde.level_manager.clearlevel()
         self.currentlevel = level
         l = self.pde.level_manager.addlevel(level=level(man=self.pde.level_manager, pde=self.pde), 
                                                                         name="Main", active=True)

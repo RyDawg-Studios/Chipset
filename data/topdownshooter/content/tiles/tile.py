@@ -8,7 +8,7 @@ class Tile(Actor):
         self.owner = owner
         self.spritePath = sprite
         self.position = position
-        self.scale =[32, 32]
+        self.scale =[16, 16]
         self.useCenterForPosition = True
         self.canMove = False
 

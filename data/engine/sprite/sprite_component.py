@@ -43,8 +43,7 @@ class Sprite(pygame.sprite.Sprite):
         self.rect.center = self.parent.rect.center
 
     def update(self):
-        if (self.parent.position[0] >= 0 and self.parent.position[1] >=0) or (self.parent.position[0] <= 720 and self.parent.position[1] <= 600):
-            self.updatetransform()
+        self.updatetransform()
         return super().update()
 
     
