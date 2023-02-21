@@ -1,0 +1,21 @@
+Room complexity algorithm:
+
+all it takes is an int, can be any whole number > 0.
+
+complexity includes:
+	- actual shape of the room (low numbers are boxy, high numbers are more abstract, possibly with corridors)
+	- obsticles in the room such as walls and hazards
+	- number of enemies
+	- variety of loot found on enemies
+
+generation:
+	- Room Shape:
+		- Generate random points in given space
+		- Generate rectangles where the center is at each point with tiles (size determined by complexity)
+		- Remove all inner tiles
+		- A* or some bs to each room if there are any detached rectangles to generate corridors
+
+	- Enemy Loot Table:
+		- Make a list with all weapons and upgrades in ascending complexity/strength.
+		- "Middle" index will be complexity, and 3 or 4 indexes in both directions will be considered.
+		- Further the weapon/index is from middle index, rarer it is, making stronger/weaker items for current complexity more rare.
