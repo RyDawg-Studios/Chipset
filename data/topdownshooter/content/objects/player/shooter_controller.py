@@ -21,8 +21,6 @@ class ShooterController(PlayerController):
             self.owner.dead = True
         if input == pygame.K_m:
             self.owner.spawnmagnet()
-        if input == pygame.K_F1:
-            self.owner.pde.level_manager.level.objectManager.printobjects()
         if input == pygame.K_j:
             self.owner.pde.network_manager.activate()
 

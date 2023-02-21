@@ -163,10 +163,10 @@ class Revolver(Weapon):
         self.shot = False
         self.bullet = RevolverBullet
 
-    def shoot(self, target):
+    def shoot(self, target, bullet):
         self.shooting = True
         if not self.shot:
-            super().shoot(target)
+            super().shoot(target, bullet)
             self.shot = True
             return
 
@@ -193,10 +193,10 @@ class LaserPistol(Weapon):
         self.shot = False
         self.bullet = TurretBullet
 
-    def shoot(self, target):
+    def shoot(self, target, bullet):
         self.shooting = True
         if not self.shot:
-            super().shoot(target)
+            super().shoot(target, bullet)
             self.shot = True
             return
 

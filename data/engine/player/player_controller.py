@@ -1,3 +1,4 @@
+import pygame
 from data.engine.component.component import Component
 
 class PlayerController(Component):
@@ -22,8 +23,9 @@ class PlayerController(Component):
         pass
 
     def on_input(self, input):
-        pass
-
+        if input == pygame.K_F1:
+            self.owner.pde.level_manager.level.objectManager.printobjects()
+            
     def on_mouse(self, button):
         pass
 
