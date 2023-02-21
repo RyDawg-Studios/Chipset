@@ -1,5 +1,9 @@
 import pygame
 import json
+from data.engine.debug.debugObject import TestSpriteActor
+
+from data.engine.object.object_manager import ObjectManager
+
 
 
 class DisplayManager:
@@ -10,12 +14,16 @@ class DisplayManager:
         self.bg = False
         self.bgimg = ''
         self.scroll = [0, 0]
+
+        self.userInterface = None
         
 
     def activate(self):
         self.configurewindow()
+        self.userInterface = ObjectManager(pde=self.pde)
 
     def update(self):
+        self.userInterface.update()
         pygame.display.update()
         
         if self.bg == False:
@@ -28,6 +36,7 @@ class DisplayManager:
                 if object.scroll == True:
                     object.rect.centerx -= self.scroll[0]
                     object.rect.centery -= self.scroll[1]
+                    
 
         self.group.update()
         self.group.draw(self.screen)
