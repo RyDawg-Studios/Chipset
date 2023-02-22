@@ -30,6 +30,7 @@ class PlayerController(Component):
         pass
 
     def deconstruct(self):
-        if self in self.owner.pde.player_manager.player_controllers:
-            self.owner.pde.player_manager.player_controllers.remove(self)
+        if self.owner is not None:
+            if self in self.owner.pde.player_manager.player_controllers:
+                self.owner.pde.player_manager.player_controllers.remove(self)
         return super().deconstruct()

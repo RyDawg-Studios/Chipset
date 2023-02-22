@@ -48,7 +48,6 @@ class Sprite(pygame.sprite.Sprite):
 
     
     def deconstruct(self):
-        self.parent.pde.display_manager.group.remove(self)
         self.kill()
         return
 
@@ -66,9 +65,10 @@ class SpriteComponent(Component):
         self.sprite = Sprite(parent=owner, sprite=sprite, layer=layer, rotation=self.owner.rotation, scale=self.owner.scale)
 
     def update(self):
-        self.sprite.update()
         super().update()
+        self.sprite.update()
 
     def deconstruct(self):
-        self.sprite.deconstruct()
         super().deconstruct()
+        self.sprite.deconstruct()
+        self.sprite = None

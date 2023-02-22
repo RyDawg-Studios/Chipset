@@ -8,7 +8,7 @@ class ShooterController(PlayerController):
 
     def on_input(self, input):
         if input == pygame.K_l:
-            self.owner.pde.game.activate()
+            self.owner.pde.game.restart()
         if input == pygame.K_LSHIFT:
             self.owner.dodging = True
         if input == pygame.K_LALT:

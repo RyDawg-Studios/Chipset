@@ -30,6 +30,9 @@ class DisplayManager:
             self.screen.fill((0,0,0))
         else:
             self.screen.blit(self.bg, (0, 0))
+            
+        self.group.update()
+        self.group.draw(self.screen)
 
         for object in list(self.pde.level_manager.level.objectManager.objects):
             if hasattr(object, "rect"):
@@ -38,8 +41,6 @@ class DisplayManager:
                     object.rect.centery -= self.scroll[1]
                     
 
-        self.group.update()
-        self.group.draw(self.screen)
 
 
     def configurewindow(self):

@@ -32,7 +32,7 @@ class ObjectManager:
 
     def clear(self):
         for obj in self.objects:
-            obj.queuedeconstruction()
+            obj.deconstruct()
             
         self.objects = []
 
