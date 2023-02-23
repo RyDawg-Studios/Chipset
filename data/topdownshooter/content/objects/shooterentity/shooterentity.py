@@ -76,6 +76,7 @@ class ShooterEntity(Actor):
 
 
     def update(self):
+        super().update()
         
         if self.dead:
             self.deadticks += 1
@@ -87,7 +88,6 @@ class ShooterEntity(Actor):
             self.fall()
         if self.speed > 3:
             self.speed -= 0.4
-        return super().update()
 
     def takedamage(self, obj, dmg):
         if self.bleed:
@@ -131,7 +131,7 @@ class ShooterEntity(Actor):
 
 
     def offsetweapon(self, weapon, offset=10):
-        if weapon != None:
+        if weapon is not None:
             weapon.rect.centerx = self.rect.centerx + offset
             weapon.rect.centery = self.rect.centery + offset
 

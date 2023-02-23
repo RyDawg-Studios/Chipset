@@ -302,6 +302,25 @@
             "shotangles": [0],
             "damagemultiplier": 1
         }
+    },
+    "Pistol":
+    {
+        "textinfo":{
+            "name": "Pistol",
+            "desc": "Starter weapon",
+            "flavor": "Everyone's gotta start somewhere."
+        },
+        "transforminfo":{
+            "scale": [21, 15],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\pistol\\pistol.png"
+
+        },
+        "statinfo":{
+            "firerate": 20,
+            "shotspread": 2,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
     }
     
 }

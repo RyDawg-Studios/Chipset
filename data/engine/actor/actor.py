@@ -61,8 +61,6 @@ class Actor(Object):
         self.collideRect = self.rect
         return
 
-
-
     def update(self):
         self.ticks += 1    
         self.checklifetime() 

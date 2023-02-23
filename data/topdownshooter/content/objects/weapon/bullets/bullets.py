@@ -322,3 +322,9 @@ class TurretBullet(Bullet):
         self.speed = 30
         self.damage = 4
 
+class PistolBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale=[12, 3], sprite=r'data\topdownshooter\assets\sprites\weapons\pistol\pistolbullet.png')
+        self.speed = 18
+        self.damage = 8
+

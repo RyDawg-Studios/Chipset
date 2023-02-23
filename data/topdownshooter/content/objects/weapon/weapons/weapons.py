@@ -4,7 +4,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
-from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, LaserBullet2, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, TurretBullet
+from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, TurretBullet, PistolBullet
 from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, GrenadeLauncherUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
 
 
@@ -192,6 +192,26 @@ class LaserPistol(Weapon):
         super().__init__(man, pde, owner, id="LaserPistol", position=position)
         self.shot = False
         self.bullet = TurretBullet
+
+    def shoot(self, target, bullet):
+        self.shooting = True
+        if not self.shot:
+            super().shoot(target, bullet)
+            self.shot = True
+            return
+
+    def update(self):
+        if self.shot == True and self.shooting == False:
+            self.shot = False
+        if not self.shooting:
+            self.shooting = False
+        return super().update()
+
+class Pistol(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="Pistol", position=position)
+        self.shot = False
+        self.bullet = PistolBullet
 
     def shoot(self, target, bullet):
         self.shooting = True

@@ -16,7 +16,6 @@ class LevelGenerator(Actor):
     def generate_points(self):
         for i in range(8):
             self.points.append([random.randint(0, self.scale[0]*2), random.randint(0, self.scale[1]*2)])
-        print(self.points)
 
     def generate_rects(self):
         for point in self.points:
