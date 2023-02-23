@@ -15,6 +15,7 @@ class LevelGenerator(Actor):
         self.fullrects = []
         self.whitespace = []
         self.points = []
+        self.safetiles = []
 
     def generate_points(self):
         for i in range(8):
@@ -52,16 +53,20 @@ class LevelGenerator(Actor):
                 if tile not in self.whitespace:
                     self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[tile[0]*16 + 16, tile[1]*16 + 16], sprite=r'data\topdownshooter\assets\sprites\tiles\wall1.png'))
 
-    def generate_safe_spawnpoint(self):
+    def generate_safe_spawnpoints(self):
         safe = []
         for point in self.whitespace:
             for rect in self.rects:
                 for tile in rect:
                     if getpointdistance(tile[0], tile[1], point[0], point[1]) > 64:
                         safe.append(point)
+        
+        self.safetiles = safe
 
-        point = random.choice(safe)
-        return [point[0]*16 + 8, point[1]*16 + 8]
+    def get_spawnpoint(self):
+        point = random.choice(self.safetiles)
+
+        return [point[0]*16+8, point[1]*16+8]
 
 
 
@@ -70,3 +75,4 @@ class LevelGenerator(Actor):
         self.generate_points()
         self.generate_rects()
         self.generate_tiles()
+        self.generate_safe_spawnpoints()
