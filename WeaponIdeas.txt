@@ -13,7 +13,7 @@ Laser Cage:
 
 Marksman:
 	- Literally the Ultrakill marksman
-	- Alt fire flicks coin, flashes at peak of parabola
+	- Alt fire flicks coin, flashes at peak of arc
 	- Shooting will ricochet into nearest enemy to coin
 	- Shooting while flashing ricochets into nearest 2 enemies
 
@@ -22,5 +22,11 @@ AWP:
 	- Does more damage if you spin a circle before shooting
 	- Just keep a list of the last 4 quadrants of the screen the mouse was on
 	- If they're in order then it counts as a spin
+
+Gun that shoots knives:
+	- You'll never guess how this one works.
+	- Probably semi auto?
+	
+
 
 

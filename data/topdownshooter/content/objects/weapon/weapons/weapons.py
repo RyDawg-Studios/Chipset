@@ -3,6 +3,7 @@ from data.engine.fl.world_fl import objectlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
+from data.topdownshooter.content.objects.hazard.jumpscare.jumpscare import Jumpscare
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, TurretBullet, PistolBullet
 from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, GrenadeLauncherUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
@@ -226,3 +227,30 @@ class Pistol(Weapon):
         if not self.shooting:
             self.shooting = False
         return super().update()
+
+class RiskGun(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="RiskGun", position=position)
+        self.shot = False
+        self.bullet = Rocket
+
+    def shoot(self, target, bullet):
+        risk = random.randint(0, 100)
+        if risk == 69:
+            self.jumpscare()
+
+        self.shooting = True
+        if not self.shot:
+            super().shoot(target, bullet)
+            self.shot = True
+            return
+
+    def update(self):
+        if self.shot == True and self.shooting == False:
+            self.shot = False
+        if not self.shooting:
+            self.shooting = False
+        return super().update()
+
+    def jumpscare(self):
+        self.pde.display_manager.userInterface.add_object(obj=Jumpscare(man=self.pde.display_manager.userInterface, pde=self.pde))

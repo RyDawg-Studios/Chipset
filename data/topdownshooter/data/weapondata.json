@@ -321,6 +321,25 @@
             "shotangles": [0],
             "damagemultiplier": 1
         }
+    },
+    "RiskGun":
+    {
+        "textinfo":{
+            "name": "Risky Gun",
+            "desc": "A gun that has a 1/100 chance of showing 2 dudes kissing every time you fire.",
+            "flavor": "Are you willing to roll the dice?"
+        },
+        "transforminfo":{
+            "scale": [56, 22],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\riskgun\\riskgun.png"
+
+        },
+        "statinfo":{
+            "firerate": 20,
+            "shotspread": 0,
+            "shotangles": [-5, 5],
+            "damagemultiplier": 1.5
+        }
     }
     
 }
