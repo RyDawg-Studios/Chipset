@@ -63,6 +63,13 @@ def getobjectdistance(object1, object2):
 
     return abs(y2-y1/x2-x1)
 
+def getpointdistance(x1, y1, x2, y2):
+    try:
+        a = abs(y2-y1/x2-x1)
+    except ZeroDivisionError:
+        a = 0
+    return a
+
 def normal_cut(mean,std):
     """ Returns a value from a normal distribution, but limited to +-3std (no extreme outliers allowed)"""
     x = random.gauss(mean,std)

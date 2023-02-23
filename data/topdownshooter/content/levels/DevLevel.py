@@ -13,7 +13,7 @@ from data.topdownshooter.content.objects.shooterentity.shooterentity import Shoo
 from data.topdownshooter.content.objects.turret.turret import Turret
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
-from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutomaticRifle, ChainRifle, DevGun, ElectroLauncher, Enderpearl, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, Revolver, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
+from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutomaticRifle, ChainRifle, DevGun, ElectroLauncher, Enderpearl, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
 
 
@@ -27,7 +27,7 @@ class DevLevel(Level):
         self.pde.game.player = p
         p.removeweapon()
         #self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[732/2, 412/2], weapon=LaserMachineGun))
-        itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle, LaserPistol]
+        itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle, LaserPistol, Pistol, RiskGun]
 
         for inx, w in enumerate(itemlist):
             weap = self.objectManager.add_object(obj=w(man=self.objectManager, pde=self.pde, owner=None, position=[0,0]))

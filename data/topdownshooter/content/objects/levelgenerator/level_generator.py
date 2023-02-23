@@ -1,5 +1,8 @@
 import random
+
+import pygame
 from data.engine.actor.actor import Actor
+from data.engine.fl.world_fl import getpointdistance
 from data.topdownshooter.content.tiles.tile import Tile
 
 
@@ -43,13 +46,22 @@ class LevelGenerator(Actor):
                     if point not in rect:
                         self.whitespace.append(point)
 
-
-            
     def generate_tiles(self):
         for rect in self.rects:
             for tile in rect:
                 if tile not in self.whitespace:
                     self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[tile[0]*16 + 16, tile[1]*16 + 16], sprite=r'data\topdownshooter\assets\sprites\tiles\wall1.png'))
+
+    def generate_safe_spawnpoint(self):
+        safe = []
+        for point in self.whitespace:
+            for rect in self.rects:
+                for tile in rect:
+                    if getpointdistance(tile[0], tile[1], point[0], point[1]) > 64:
+                        safe.append(point)
+
+        point = random.choice(safe)
+        return [point[0]*16 + 8, point[1]*16 + 8]
 
 
 
