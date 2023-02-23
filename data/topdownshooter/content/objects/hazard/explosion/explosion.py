@@ -5,7 +5,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 
 
 class Explosion(Actor):
-    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=16):
+    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=16, damage=60):
         super().__init__(man, pde)
         self.position = position
         self.scale = scale
@@ -13,7 +13,7 @@ class Explosion(Actor):
         self.owner = owner
         self.useCenterForPosition = True
         self.checkForCollision = False
-        self.damage = 60
+        self.damage = damage
 
 
     def construct(self):
@@ -30,6 +30,6 @@ class Explosion(Actor):
         if self.ticks == 1:
             for object in self.overlapInfo["Objects"]:
                 if hasattr(object, 'hp'):
-                    object.takedamage(self, 60)
+                    object.takedamage(self, self.damage)
         return super().update()
 

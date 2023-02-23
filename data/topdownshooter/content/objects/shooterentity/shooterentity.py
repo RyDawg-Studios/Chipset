@@ -1,5 +1,6 @@
 import random
 from data.engine.actor.actor import Actor
+from data.engine.eventdispatcher.eventdispatcher import EventDispatcher
 from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookattarget
 from data.engine.particle.particle_emitter import ParticleEmitter
 from data.topdownshooter.content.objects.particles.blood import Blood
@@ -9,7 +10,7 @@ from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
 
 
 class ShooterEntity(Actor):
-    def __init__(self, man, pde, position=[0, 0], scale=[32, 32], maxhp=100):
+    def __init__(self, man, pde, position=[0, 0], scale=[32, 32], maxhp=100, hp=100):
         super().__init__(man, pde, useCenterForPosition=True)
         #----------< Transform Info >----------#
 
@@ -27,7 +28,7 @@ class ShooterEntity(Actor):
         #----------< Stat Info >----------#
 
         self.maxhp = maxhp
-        self.hp = self.maxhp
+        self.hp = hp
         self.dead = False
         self.damagable = True
         self.falling = False
@@ -57,6 +58,10 @@ class ShooterEntity(Actor):
 
         self.deadticks = 0
 
+        #----------< Event Dispatchers >----------#
+
+        self.onDeathEvent = EventDispatcher()
+
     def construct(self):
         super().construct()
 
@@ -77,6 +82,9 @@ class ShooterEntity(Actor):
 
     def update(self):
         super().update()
+
+        self.pde.game.playerData.hp = self.hp
+        self.pde.game.playerData.loadout[0] = self.weapon.__class__
         
         if self.dead:
             self.deadticks += 1
@@ -120,6 +128,7 @@ class ShooterEntity(Actor):
         return
 
     def die(self, killer):
+        self.onDeathEvent.call(self, killer)
         self.dead = True
         if killer is not None:
             rot = killer.rotation

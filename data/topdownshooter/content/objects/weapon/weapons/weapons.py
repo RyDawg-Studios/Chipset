@@ -191,22 +191,8 @@ class TurretHead(Weapon):
 class LaserPistol(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="LaserPistol", position=position)
-        self.shot = False
         self.bullet = TurretBullet
 
-    def shoot(self, target, bullet):
-        self.shooting = True
-        if not self.shot:
-            super().shoot(target, bullet)
-            self.shot = True
-            return
-
-    def update(self):
-        if self.shot == True and self.shooting == False:
-            self.shot = False
-        if not self.shooting:
-            self.shooting = False
-        return super().update()
 
 class Pistol(Weapon):
     def __init__(self, man, pde, owner, position):

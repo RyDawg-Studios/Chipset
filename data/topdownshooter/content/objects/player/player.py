@@ -10,10 +10,10 @@ from data.topdownshooter.content.objects.widget.fadeout import FadeOut
 
 
 class ShooterPlayer(ShooterEntity):
-    def __init__(self, man, pde, position=None):
-        super().__init__(man, pde, position)
+    def __init__(self, man, pde, position=None, hp=400):
+        super().__init__(man, pde, position=position)
         self.maxhp = 400
-        self.hp = 400
+        self.hp = hp
         self.maxVelocity = 1
         self.velocity = self.maxVelocity
         self.pausable = False
@@ -27,6 +27,8 @@ class ShooterPlayer(ShooterEntity):
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
         
         self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
+
+        
 
     def spawnmagnet(self):
         self.man.add_object(Magnet(man=self.man, pde=self.pde, position=self.pde.input_manager.mouse_position))
@@ -48,9 +50,10 @@ class ShooterPlayer(ShooterEntity):
         return super().update()
 
     def die(self, killer):
+        super().die(killer)
         self.pde.game.player = None
         self.canMove = False
         self.canShoot = False
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\deadme.png', layer=2)
         self.dropweapon()
-        return super().die(killer)
+        self.pde.game.game_over()

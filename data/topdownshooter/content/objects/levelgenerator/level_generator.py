@@ -3,11 +3,14 @@ import random
 import pygame
 from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import getpointdistance
+from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
+from data.topdownshooter.content.objects.hazard.hole.hole import Hole
+from data.topdownshooter.content.objects.weapon.weapons.weapons import LaserMachineGun, LaserPistol, Pistol
 from data.topdownshooter.content.tiles.tile import Tile
 
 
 class LevelGenerator(Actor):
-    def __init__(self, man, pde, position=[], scale=[], checkForOverlap=False, checkForCollision=False, useCenterForPosition=False, lifetime=-1, complexity=0):
+    def __init__(self, man, pde, position=[], scale=[], checkForOverlap=False, checkForCollision=False, useCenterForPosition=False, lifetime=-1, complexity=1):
         super().__init__(man, pde, position, scale, checkForOverlap, checkForCollision, useCenterForPosition, lifetime)
         self.complexity = complexity
         self.tiles = []
@@ -16,6 +19,8 @@ class LevelGenerator(Actor):
         self.whitespace = []
         self.points = []
         self.safetiles = []
+        self.enemies = []
+
 
     def generate_points(self):
         for i in range(8):
@@ -63,10 +68,30 @@ class LevelGenerator(Actor):
         
         self.safetiles = safe
 
+
+    def generate_enemy_spawnpoints(self):
+        for i in range(self.generate_enemy_count(complexity=self.complexity)):
+            n = self.man.add_object(DefaultEnemy(man=self.man, pde=self.pde, position=self.get_spawnpoint(), weapon=LaserPistol))
+            n.onDeathEvent.bind(self.on_enemy_killed)
+            self.enemies.append(n)
+
+
     def get_spawnpoint(self):
         point = random.choice(self.safetiles)
 
         return [point[0]*16+8, point[1]*16+8]
+
+    def generate_enemy_count(self, complexity):
+        waves = complexity**(1/3)
+        return round(waves)
+
+    def on_enemy_killed(self, enemy, killer):
+        n = enemy
+        if enemy in self.enemies:
+            self.enemies.remove(enemy)
+        
+        if len(self.enemies) == 0:
+            self.man.add_object(Hole(man=self.man, pde=self.pde, position=n.position))
 
 
 
@@ -76,3 +101,4 @@ class LevelGenerator(Actor):
         self.generate_rects()
         self.generate_tiles()
         self.generate_safe_spawnpoints()
+        self.generate_enemy_spawnpoints()
