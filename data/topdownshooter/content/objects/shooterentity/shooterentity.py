@@ -144,9 +144,14 @@ class ShooterEntity(Actor):
             weapon.rect.centerx = self.rect.centerx + offset
             weapon.rect.centery = self.rect.centery + offset
 
-    def dropweapon(self, rotation=0):
+    def dropweapon(self, rotation=0, weapon=None):
+        if weapon == None:
+            w = self.weapon
+        else:
+            w = weapon
+
         if self.weapon != None:
-            self.man.add_object(obj=PickupWeapon(man=self.man, pde=self.pde, position=list(self.rect.center), rotation=rotation, weapon=self.weapon, speed=[4, 4]))
+            self.man.add_object(obj=PickupWeapon(man=self.man, pde=self.pde, position=list(self.rect.center), rotation=rotation, weapon=w, speed=[4, 4]))
             self.removeweapon()
 
     def interact(self):

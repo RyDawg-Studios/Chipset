@@ -1,8 +1,6 @@
 import random
 from data.engine.fl.world_fl import objectlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
-from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
-from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.hazard.jumpscare.jumpscare import Jumpscare
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, TurretBullet, PistolBullet
@@ -83,7 +81,7 @@ class SpawnerWeapon(Weapon):
         self.scale = [46, 22]
         self.firerate = 60
         self.item = 0
-        self.items = [DefaultEnemy]
+        self.items = []
         self.shot = False
 
     def shoot(self, target, bullet):
@@ -240,3 +238,19 @@ class RiskGun(Weapon):
 
     def jumpscare(self):
         self.pde.display_manager.userInterface.add_object(obj=Jumpscare(man=self.pde.display_manager.userInterface, pde=self.pde))
+
+class Medpack(Weapon):
+    def __init__(self, man, pde, owner, position, lifetime = -1):
+        super().__init__(man, pde, owner, id="Medpack", position=position, lifetime=lifetime)
+        self.bullet = None
+
+    def shoot(self, target, bullet):
+        self.owner.hp += 75
+        for component in self.components.values():
+            component.update()
+        self.owner.weapon = None
+        self.deconstruct()
+
+    def update(self):
+        super().update()
+

@@ -340,6 +340,25 @@
             "shotangles": [-5, 5],
             "damagemultiplier": 1.5
         }
+    },
+    "Medpack":
+    {
+        "textinfo":{
+            "name": "Medpack",
+            "desc": "Heals you when used. Single use.",
+            "flavor": "All Patched Up"
+        },
+        "transforminfo":{
+            "scale": [32, 32],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\medkit\\medkit.png"
+
+        },
+        "statinfo":{
+            "firerate": 100,
+            "shotspread": 0,
+            "shotangles": [0],
+            "damagemultiplier": 0
+        }
     }
     
 }

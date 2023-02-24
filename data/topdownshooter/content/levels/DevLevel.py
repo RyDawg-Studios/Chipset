@@ -8,7 +8,6 @@ from data.topdownshooter.content.objects.dummy.dummy import Dummy
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.exp.exp import EXP
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
-from data.topdownshooter.content.objects.items.medpack import Medpack
 from data.topdownshooter.content.objects.player.player import ShooterPlayer
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.turret.turret import Turret
@@ -38,5 +37,3 @@ class DevLevel(Level):
         lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[0,200],level="room2"))
         chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,64], items=[DevGun]))
         dummy = self.objectManager.add_object(Dummy(man=self.objectManager, pde=pde, position=[320,-64]))
-
-        medpack = self.objectManager.add_object(Medpack(man=self.objectManager, pde=pde, position=[320,0]))

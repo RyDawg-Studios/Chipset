@@ -7,7 +7,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 
 class Weapon(Actor):
-    def __init__(self, man, pde, owner, position=[0, 0], id=None, bullet=Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], id=None, bullet=Bullet, lifetime = -1):
         super().__init__(man, pde)
         #----------< Data Info >----------#
         self.id = id
@@ -47,6 +47,7 @@ class Weapon(Actor):
         self.checkForCollision = False
         self.checkForOverlap = False
         self.useCenterForPosition = True
+        self.lifetime = lifetime
 
 
         #----------< Shot Info >----------#

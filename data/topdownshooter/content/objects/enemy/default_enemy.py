@@ -3,7 +3,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 from data.engine.ai.ai_component import AIComponent
 from data.topdownshooter.content.ai.ai_wander import WanderAI
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
-from data.topdownshooter.content.objects.items.medpack import Medpack
+from data.topdownshooter.content.objects.weapon.weapons.weapons import Medpack
 
 
 class DefaultEnemy(ShooterEnemy):
@@ -21,6 +21,7 @@ class DefaultEnemy(ShooterEnemy):
         super().update()
 
     def die(self, killer):
+        if random.randint(1,1) == 1:
+            med = self.man.add_object(Medpack(man=self.man, pde=self.pde, position=self.position, owner=self, lifetime=1))
+            self.dropweapon(rotation=random.randint(0, 360), weapon=med)
         super().die(killer)
-        if random.randint(1,4) == 1:
-            self.man.add_object(Medpack(man=self.man, pde=self.pde, position=self.position))

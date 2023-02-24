@@ -19,7 +19,10 @@ class GeneratedLevel(Level):
         l = self.objectManager.add_object(LevelGenerator(man=self.objectManager, pde=pde, position=[0,0], scale=[16, 16], complexity=self.pde.game.currentRoomNumber))
         pos = random.choice(l.whitespace)
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=l.get_spawnpoint(), hp=self.pde.game.playerData.hp))
-        p.weapon = self.objectManager.add_object(obj=self.pde.game.playerData.loadout[0](man=self.objectManager, pde=self.pde, owner=p, position=[0,0]))
+        w = self.pde.game.playerData.loadout[0]
+        if w is not None:
+            w = self.pde.game.playerData.loadout[0](man=self.objectManager, pde=self.pde, owner=p, position=[0,0])
+        p.weapon = self.objectManager.add_object(obj=w)
         
 
 
