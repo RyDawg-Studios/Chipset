@@ -167,7 +167,7 @@ class RevolverBullet(Bullet):
 class ShotgunBullet(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, sprite=r'data\topdownshooter\assets\sprites\weapons\shotgun\shotgunbullet.png')
-        self.damage = 8
+        self.damage = 6
 
 
 class SMGBullet(Bullet):

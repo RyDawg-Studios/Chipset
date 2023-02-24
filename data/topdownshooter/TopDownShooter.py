@@ -40,7 +40,6 @@ class ShooterGame(Game):
     def activate(self):
         super().activate()
         self.changelevel(GeneratedLevel)
-        self.pde.display_manager.userInterface.add_object(LevelText(man=self.pde.display_manager.userInterface, pde=self.pde))
 
     def restart(self):
         self.pde.player_manager.clear()

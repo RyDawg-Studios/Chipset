@@ -14,7 +14,7 @@ class Bullet(Actor):
         self.scale = scale
         self.position = position
         self.speed = 24
-        self.damage = 4
+        self.damage = 2
         self.owner = owner
         self.kb = 2
         self.destroyOnCollide = True

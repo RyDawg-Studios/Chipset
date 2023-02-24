@@ -2,10 +2,10 @@ import random
 
 import pygame
 from data.engine.actor.actor import Actor
-from data.engine.fl.world_fl import getpointdistance
+from data.engine.fl.world_fl import getpointdistance, normal_cut
 from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
 from data.topdownshooter.content.objects.hazard.hole.hole import Hole
-from data.topdownshooter.content.objects.weapon.weapons.weapons import LaserMachineGun, LaserPistol, Pistol
+from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutomaticRifle, ChainRifle, DevGun, ElectroLauncher, Enderpearl, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
 from data.topdownshooter.content.tiles.tile import Tile
 
 
@@ -20,6 +20,7 @@ class LevelGenerator(Actor):
         self.points = []
         self.safetiles = []
         self.enemies = []
+        self.weaponladder = [LaserPistol, SMG, Shotgun, AutomaticRifle, SniperRifle, GrenadeLauncher, LaserMachineGun, RocketLauncher, ElectroLauncher, ChainRifle, RiskGun]
 
 
     def generate_points(self):
@@ -71,7 +72,7 @@ class LevelGenerator(Actor):
 
     def generate_enemy_spawnpoints(self):
         for i in range(self.generate_enemy_count(complexity=self.complexity)):
-            n = self.man.add_object(DefaultEnemy(man=self.man, pde=self.pde, position=self.get_spawnpoint(), weapon=LaserPistol))
+            n = self.man.add_object(DefaultEnemy(man=self.man, pde=self.pde, position=self.get_spawnpoint(), weapon=self.weaponladder[abs(round(normal_cut(self.complexity, 1, 1)))]))
             n.onDeathEvent.bind(self.on_enemy_killed)
             self.enemies.append(n)
 

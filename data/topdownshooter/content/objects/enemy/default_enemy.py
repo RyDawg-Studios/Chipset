@@ -1,7 +1,9 @@
+import random
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.engine.ai.ai_component import AIComponent
 from data.topdownshooter.content.ai.ai_wander import WanderAI
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
+from data.topdownshooter.content.objects.items.medpack import Medpack
 
 
 class DefaultEnemy(ShooterEnemy):
@@ -17,3 +19,8 @@ class DefaultEnemy(ShooterEnemy):
 
     def update(self):
         super().update()
+
+    def die(self, killer):
+        super().die(killer)
+        if random.randint(1,4) == 1:
+            self.man.add_object(Medpack(man=self.man, pde=self.pde, position=self.position))
