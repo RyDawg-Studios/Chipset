@@ -63,7 +63,7 @@ class ShooterEnemy(ShooterEntity):
 
     def die(self, killer):
         super().die(killer)
-        self.queuedeconstruction()
+        self.deconstruct()
         return
 
     def printDebugInfo(self):

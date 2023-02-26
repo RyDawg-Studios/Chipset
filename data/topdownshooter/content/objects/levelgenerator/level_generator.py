@@ -20,11 +20,11 @@ class LevelGenerator(Actor):
         self.points = []
         self.safetiles = []
         self.enemies = []
-        self.weaponladder = [LaserPistol, SMG, Shotgun, AutomaticRifle, SniperRifle, GrenadeLauncher, LaserMachineGun, RocketLauncher, ElectroLauncher, ChainRifle, RiskGun]
+        self.weaponladder = [LaserPistol, SMG, Shotgun, AutomaticRifle, SniperRifle, GrenadeLauncher, LaserMachineGun, RocketLauncher, ChainRifle, RiskGun]
 
 
     def generate_points(self):
-        for i in range(8):
+        for i in range(6):
             self.points.append([random.randint(0, self.scale[0]*2), random.randint(0, self.scale[1]*2)])
 
     def generate_rects(self):

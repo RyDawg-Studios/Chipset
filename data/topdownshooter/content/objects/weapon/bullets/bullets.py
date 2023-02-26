@@ -179,33 +179,35 @@ class SMGBullet(Bullet):
 class Electrosphere(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[16, 16], sprite=r'data\topdownshooter\assets\sprites\weapons\electrospherelauncher\electroball.png')
-        self.lifetime = 300
         self.speed = 8
         self.destroyOnCollide = False
         self.checkForCollision = True
         self.mines = []
         self.trailticks = 0
         self.destroyOnOOB = False
+        self.exploding = False
 
         self.explosion = Explosion
+        self.explodeticks = 0
         self.lastoverlap = None
 
     def update(self):
+        super().update()
         self.trailticks += 1
         if self.trailticks >= 6:
             self.trailticks = 0
             self.mines.append(self.man.add_object(obj=Mine(man=self.man, pde=self.pde, position=self.position, rotation=self.rotation)))
-            
-        if self.ticks >= self.lifetime - 1:
+
+        if self.exploding:
             self.explode()
             
-        super().update()
 
     def collide(self, obj, side):
         if side != self.lastoverlap:
             r = random.randint(0, 100)
-            if r <= 5:
-                self.explode()
+            if r <= 25:
+                self.exploding = True
+
 
 
         if side == "Left":
@@ -258,13 +260,14 @@ class Electrosphere(Bullet):
                             self.collide(self, "Top")
 
     def explode(self):
-        for mine in self.mines:
-            mine.explode()
-        e = self.man.add_object(obj=self.explosion(man=self.man, pde=self.pde, owner=self, position = self.position, scale = [128, 128]))
-        self.queuedeconstruction()
+        if self.explodeticks < len(self.mines):
+            self.mines[self.explodeticks].explode()
+            self.explodeticks += 1
+        else:
+            e = self.man.add_object(obj=self.explosion(man=self.man, pde=self.pde, owner=self, position = self.position, scale = [128, 128]))
+            self.deconstruct()
 
-    def deconstruct(self, outer=None):
-        return super().deconstruct(outer)
+
 
 
 class SplatBullet(Bullet):

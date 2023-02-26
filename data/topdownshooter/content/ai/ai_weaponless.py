@@ -21,6 +21,7 @@ class WeaponlessAI(AIState):
 
     def update(self):
         if self.weapontarget is None:
+            print("sees weapon")
             for i in self.owner.owner.area.overlapInfo["Objects"]:
                 if isinstance(i, PickupWeapon):
                     self.weapontarget = i

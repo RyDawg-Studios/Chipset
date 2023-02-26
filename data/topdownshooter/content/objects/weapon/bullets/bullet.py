@@ -43,7 +43,7 @@ class Bullet(Actor):
             elif self.position[0] > 720 or self.position[1] > 560:
                 self.deconstruct()
 
-        return super().update()
+        super().update()
         
 
 
