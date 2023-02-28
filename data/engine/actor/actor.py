@@ -108,13 +108,6 @@ class Actor(Object):
         self.scale[0] = self.rect.size[0]
         self.scale[1] = self.rect.size[1]
 
-        if self.movement[0] < 0:
-            self.direction = -1
-
-        elif self.movement[0] > 0:
-            self.direction = 1
-
-
     def checklifetime(self):
         if self.ticks >= self.lifetime and self.lifetime != -1:
             self.expire()

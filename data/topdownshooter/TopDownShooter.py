@@ -39,7 +39,7 @@ class ShooterGame(Game):
 
     def activate(self):
         super().activate()
-        self.changelevel(DevLevel)
+        self.changelevel(GeneratedLevel)
 
     def restart(self):
         self.pde.player_manager.clear()

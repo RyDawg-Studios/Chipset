@@ -5,7 +5,7 @@ class ShooterController(PlayerController):
     def __init__(self, owner):
         super().__init__(owner)
         self.resetPos = True
-        self.movementaxis = [0, 0]
+        self.axis = [0, 0, 0, 0, 0, 0]
 
     def on_input(self, input):
         super().on_input(input)
@@ -49,12 +49,18 @@ class ShooterController(PlayerController):
         return super().manage_input()
     
     def on_joystick(self, event):
-        if event.axis < 2:
-            self.movementaxis[event.axis] = round(event.value)
+        if event.axis <= 6:
+            self.axis[event.axis] = event.value
+
+        
 
         return super().on_joystick(event)
     
     def update(self):
         super().update()
         if len(self.inpman.joysticks) > 0:
-            self.owner.movement = self.movementaxis
+            self.owner.movement = [round(self.axis[0]), round(self.axis[1])]
+
+            if self.axis[5] > .5:
+                if self.owner.weapon is not None:
+                    self.owner.shootweapon(target=pygame.Vector2(self.owner.weapon.position) + (pygame.Vector2(self.axis[2], self.axis[3])*30))
