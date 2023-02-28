@@ -2,6 +2,7 @@ from data.engine.ai.ai_state import AIState
 from data.engine.fl.world_fl import objectlookatposition, getpositionlookatvector
 import random
 from data.topdownshooter.content.ai.ai_target import AITarget
+import pygame
 
 
 class WanderAI(AIState):
@@ -16,7 +17,8 @@ class WanderAI(AIState):
         self.r = 0
 
     def update(self):
-        if abs(self.owner.owner.position[0] - self.destination[0]) < 5 and abs(self.owner.owner.position[1] - self.destination[1]) < 5:
+        super().update()
+        if pygame.Vector2.distance_to(pygame.Vector2(self.owner.owner.position), pygame.Vector2(self.target.position)) < 5:
             self.waitticks += 1
             self.owner.owner.movement = [0, 0]
             if self.waitticks >= self.waittime:
@@ -27,7 +29,6 @@ class WanderAI(AIState):
                 self.picknewlocation()
             self.r = getpositionlookatvector(self.owner.owner, self.destination)
             self.owner.owner.movement = self.r
-        return super().update()
 
 
     def picknewlocation(self):
