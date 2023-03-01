@@ -1,4 +1,5 @@
 import random
+from types import NoneType
 from data.engine.level.level import Level
 from data.topdownshooter.content.levels.levelloader.levelloader import LevelLoader
 from data.topdownshooter.content.levels.levelloader.room import Room
@@ -16,17 +17,19 @@ class GeneratedLevel(Level):
         self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\bg.png')
 
 
-        l = self.objectManager.add_object(LevelGenerator(man=self.objectManager, pde=pde, position=[0,0], scale=[16, 16], complexity=self.pde.game.currentRoomNumber))
+        l = self.objectManager.add_object(LevelGenerator(man=self.objectManager, pde=pde, position=[0,0], scale=[10, 10], complexity=self.pde.game.currentRoomNumber))
         pos = random.choice(l.whitespace)
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=l.get_spawnpoint(), hp=self.pde.game.playerData.hp))
 
         x = self.pde.game.playerData.loadout[0]
+        print(x)
 
-        if x.__class__ is not None:
+        if x is not NoneType:
             w = x(man=self.objectManager, pde=self.pde, owner=p, position=[0,0])
+            p.weapon = self.objectManager.add_object(obj=w)
         else:
             w = None
-        p.weapon = self.objectManager.add_object(obj=w)
+            p.weapon = w
         
 
 

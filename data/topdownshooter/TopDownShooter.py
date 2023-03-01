@@ -18,7 +18,9 @@ class ShooterGame(Game):
         self.playerData = PlayerDataObject()
 
     def game_over(self):
-        self.__init__(pde=self.pde)
+        self.playerData = PlayerDataObject()
+        self.currentRoomNumber = 1
+        self.restart()
 
 
     def next_room(self):
@@ -39,7 +41,7 @@ class ShooterGame(Game):
 
     def activate(self):
         super().activate()
-        self.changelevel(GeneratedLevel)
+        self.changelevel(DevLevel)
 
     def restart(self):
         self.pde.player_manager.clear()

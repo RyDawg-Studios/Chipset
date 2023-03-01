@@ -55,7 +55,8 @@ class ShooterPlayer(ShooterEntity):
     def settargetposition(self):
         if len(self.pde.input_manager.joysticks) > 0:
             if self.weapon is not None:
-                self.target = pygame.Vector2(self.weapon.rect.center) + (pygame.Vector2(round(self.components["PlayerController"].axis[2], 1), round(self.components["PlayerController"].axis[3], 1)) * 50)
+                self.target = pygame.Vector2(self.weapon.rect.center) + (pygame.Vector2(round(self.components["PlayerController"].axis[2], 2), round(self.components["PlayerController"].axis[3], 2)) * 50)
+                self.cam.rect.center = self.target
         else:
             self.target = self.pde.input_manager.mouse_position
 
@@ -72,6 +73,7 @@ class ShooterPlayer(ShooterEntity):
             self.weapon.rotation = objectlookatposition(self.weapon, self.target)
 
         if self.deadticks >= 100:
+            self.pde.game.game_over()
             self.pde.game.restart()
             return
 
@@ -84,4 +86,3 @@ class ShooterPlayer(ShooterEntity):
         self.canShoot = False
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\deadme.png', layer=2)
         self.dropweapon()
-        self.pde.game.game_over()

@@ -52,6 +52,9 @@ class ShooterController(PlayerController):
         if event.axis <= 6:
             self.axis[event.axis] = event.value
 
+        if self.axis[4] > 0.5:
+            self.owner.dodging = True
+
         
 
         return super().on_joystick(event)

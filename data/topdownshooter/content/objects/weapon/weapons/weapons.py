@@ -3,7 +3,7 @@ from data.engine.fl.world_fl import objectlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.hazard.jumpscare.jumpscare import Jumpscare
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
-from data.topdownshooter.content.objects.weapon.bullets.bullets import DefaultBullet, DevBullet, Electrosphere, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, TurretBullet, PistolBullet
+from data.topdownshooter.content.objects.weapon.bullets.bullets import Coin, DefaultBullet, DevBullet, Electrosphere, FireBall, Flame, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, TurretBullet, PistolBullet
 from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, GrenadeLauncherUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
 
 
@@ -111,7 +111,7 @@ class Enderpearl(Weapon):
         self.shot = False
         super().__init__(man, pde, owner, position=position)
 
-    def shoot(self, target):
+    def shoot(self, target, bullet):
         self.shooting = True
         if not self.shot:
 
@@ -253,4 +253,37 @@ class Medpack(Weapon):
 
     def update(self):
         super().update()
+
+class FlamePistol(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="FlamePistol", position=position)
+        self.bullet = FireBall
+
+class LooseChange(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="LooseChange", position=position)
+        self.bullet = Coin
+
+class Musket(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="Musket", position=position)
+        self.bullet = SniperBullet
+
+    def update(self):
+        if self.owner.movement[0] != 0 or self.owner.movement[1] != 0:
+            self.shotspread = 10
+        else:
+            self.shotspread = 2
+        return super().update()
+    
+class AutoShotgun(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="AutoShotgun", position=position)
+        self.bullet = ShotgunBullet
+
+class Flamethrower(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="Flamethrower", position=position)
+        self.bullet = Flame
+
 

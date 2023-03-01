@@ -11,7 +11,7 @@ from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
 
 class ShooterEntity(Actor):
     def __init__(self, man, pde, position=[0, 0], scale=[32, 32], maxhp=100, hp=100):
-        super().__init__(man, pde, useCenterForPosition=True)
+        super().__init__(man, pde, useCenterForPosition=False)
         #----------< Transform Info >----------#
 
         self.position = position
@@ -98,11 +98,6 @@ class ShooterEntity(Actor):
             self.speed -= 0.4
 
     def takedamage(self, obj, dmg):
-        if self.bleed:
-            bleed = random.choice([True, False])
-            if bleed:
-                #self.components["Particle"].particles.append(self.components["Particle"].templates["blood"])
-                pass
         if self.damagable:
             self.hp -= dmg
             if self.hp <= 0 and self.hp != -1:

@@ -21,6 +21,7 @@ class Bullet(Actor):
         self.ignoreCollides = []
         self.destroyOnOOB = True
         self.useCenterForPosition = True
+        self.piercing = False
 
     def construct(self):
         super().construct()
@@ -30,30 +31,26 @@ class Bullet(Actor):
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.spritePath, layer=1)
 
     def update(self):
-        self.components["Sprite"].sprite.rotation = self.rotation
-
-        for upg in self.owner.upgrades:
-            upg.onBulletUpdate(bullet=self)
-
-        self.movement = self.target * self.speed
-
-        if self.destroyOnOOB:
-            if self.position[0] < -80 or self.position[1] < -80:
-                self.deconstruct()
-            elif self.position[0] > 720 or self.position[1] > 560:
-                self.deconstruct()
-
         super().update()
-        
+        if not self.paused:
+            self.components["Sprite"].sprite.rotation = self.rotation
 
+            for upg in self.owner.upgrades:
+                upg.onBulletUpdate(bullet=self)
 
+            self.movement = self.target * self.speed
 
-
+            if self.destroyOnOOB:
+                if self.position[0] < -80 or self.position[1] < -80:
+                    self.deconstruct()
+                elif self.position[0] > 720 or self.position[1] > 560:
+                    self.deconstruct()
 
     def onshot(self):
         pass
 
     def overlap(self, obj):
+        super().overlap(obj)
         if obj != self.owner and obj != self.owner.owner:
             for upg in self.owner.upgrades:
                 upg.onHit(bullet=self, damage=self.damage, object=obj)
@@ -61,7 +58,7 @@ class Bullet(Actor):
                 obj.takedamage(self, self.damage * self.owner.damagemultiplier)
                 self.man.add_object(obj=Hitmarker(man=self.man, pde=self.pde, position=self.position))
                 self.hit(obj)
-                if self.destroyOnCollide:
+                if self.destroyOnCollide and not self.piercing:
                     self.deconstruct()
                     return True
             elif isinstance(obj, Tile):
@@ -70,12 +67,11 @@ class Bullet(Actor):
                         self.deconstruct()
                         return True
                         
-        return super().overlap(obj)
 
     def hit(self, obj):
         return
 
     def deconstruct(self, outer=None):
+        super().deconstruct(outer)
         for upg in self.owner.upgrades:
             upg.onBulletDestruction(bullet=self)
-        return super().deconstruct(outer)

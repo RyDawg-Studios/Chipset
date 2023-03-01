@@ -1,4 +1,4 @@
-from data.topdownshooter.content.objects.weapon.weapons.weapons import DevGun, ElectroLauncher, Pistol, RiskGun
+from data.topdownshooter.content.objects.weapon.weapons.weapons import AutoShotgun, DevGun, ElectroLauncher, FlamePistol, LooseChange, Musket, Pistol, RiskGun
 
 
 class PlayerDataObject:

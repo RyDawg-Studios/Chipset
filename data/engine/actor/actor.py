@@ -62,10 +62,10 @@ class Actor(Object):
         return
 
     def update(self):
+        super().update()
         self.ticks += 1    
         self.checklifetime() 
         self.move(self.movement)
-        return super().update()
 
     def getoverlaps(self):
         self.overlapInfo["Objects"] = []

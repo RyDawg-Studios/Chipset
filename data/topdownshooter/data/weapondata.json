@@ -270,7 +270,7 @@
         "textinfo":{
             "name": "Laser Pistol",
             "desc": "ToDo",
-            "flavor": "Todo"
+            "flavor": "ToDo"
         },
         "transforminfo":{
             "scale": [36, 18],
@@ -358,6 +358,101 @@
             "shotspread": 0,
             "shotangles": [0],
             "damagemultiplier": 0
+        }
+    },
+    "FlamePistol":
+    {
+        "textinfo":{
+            "name": "Flame Pistol",
+            "desc": "Shoots Fireballs",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [21, 15],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\flamepistol\\flamepistol.png"
+
+        },
+        "statinfo":{
+            "firerate": 16,
+            "shotspread": 2,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "LooseChange":
+    {
+        "textinfo":{
+            "name": "Loose Change",
+            "desc": "Shoots Coins",
+            "flavor": "Nickle and Diming"
+        },
+        "transforminfo":{
+            "scale": [52, 18],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\loosechange\\loosechange.png"
+
+        },
+        "statinfo":{
+            "firerate": 5,
+            "shotspread": 4,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "Musket":
+    {
+        "textinfo":{
+            "name": "Musket",
+            "desc": "More accurate if you're standing still.",
+            "flavor": "Ride at Dawn"
+        },
+        "transforminfo":{
+            "scale": [56, 18],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\musket\\musket.png"
+
+        },
+        "statinfo":{
+            "firerate": 75,
+            "shotspread": 1,
+            "shotangles": [0],
+            "damagemultiplier": 0.65
+        }
+    },
+    "AutoShotgun":
+    {
+        "textinfo":{
+            "name": "Auto Shotgun",
+            "desc": "Automatic Shotgun",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [46, 26],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\autoshotgun\\autoshotgun.png"
+
+        },
+        "statinfo":{
+            "firerate": 15,
+            "shotspread": 2,
+            "shotangles": [-10, -5, 0, 5, 10],
+            "damagemultiplier": 0.5
+        }
+    },
+    "Flamethrower":
+    {
+        "textinfo":{
+            "name": "Flamethrower",
+            "desc": "Shoots Flames",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [54, 16],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\flamethrower\\flamethrower.png"
+
+        },
+        "statinfo":{
+            "firerate": 3,
+            "shotspread": 0,
+            "shotangles": [0],
+            "damagemultiplier": 1
         }
     }
     

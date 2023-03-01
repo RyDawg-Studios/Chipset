@@ -155,7 +155,7 @@ class LaserBullet(Bullet):
 class SniperBullet(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[24, 3], sprite=r'data\topdownshooter\assets\sprites\weapons\sniper\sniperbullet.png')
-        self.speed = 48
+        self.speed = 24
         self.damage = random.randint(80, 120)
 
 class RevolverBullet(Bullet):
@@ -168,6 +168,13 @@ class ShotgunBullet(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, sprite=r'data\topdownshooter\assets\sprites\weapons\shotgun\shotgunbullet.png')
         self.damage = 6
+        self.speed = 18
+
+    def update(self):
+        super().update()
+        self.speed -= 0.75
+        if self.speed < 4:
+            self.deconstruct()
 
 
 class SMGBullet(Bullet):
@@ -330,4 +337,36 @@ class PistolBullet(Bullet):
         super().__init__(man, pde, owner, position, target, scale=[12, 3], sprite=r'data\topdownshooter\assets\sprites\weapons\pistol\pistolbullet.png')
         self.speed = 18
         self.damage = 8
+
+class FireBall(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale = [26, 12], sprite=r'data\topdownshooter\assets\sprites\weapons\flamepistol\fireball.png')
+        self.speed = 12
+        self.damage = 12
+
+class Coin(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale = [4,4], sprite=r'data\topdownshooter\assets\sprites\weapons\loosechange\coin.png')
+        self.speed = 20
+        self.damage = 5
+
+class Flame(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target,scale=[26,12], sprite=r'data\topdownshooter\assets\sprites\weapons\flamepistol\fireball.png')
+        self.damage = 0.45
+        self.speed = 18
+        self.size = self.scale.copy()
+        self.piercing = True
+
+    def update(self):
+        super().update()
+        if not self.paused:
+            self.speed -= 0.75
+            
+            self.size[1] += 1
+            self.components["Sprite"].sprite.scale = self.size
+
+            if self.speed < 4:
+                self.deconstruct()
+
 

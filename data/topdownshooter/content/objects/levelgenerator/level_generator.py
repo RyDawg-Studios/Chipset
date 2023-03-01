@@ -5,7 +5,7 @@ from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import getpointdistance, normal_cut
 from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
 from data.topdownshooter.content.objects.hazard.hole.hole import Hole
-from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutomaticRifle, ChainRifle, DevGun, ElectroLauncher, Enderpearl, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
+from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutoShotgun, AutomaticRifle, ChainRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Musket, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
 from data.topdownshooter.content.tiles.tile import Tile
 
 
@@ -20,18 +20,18 @@ class LevelGenerator(Actor):
         self.points = []
         self.safetiles = []
         self.enemies = []
-        self.weaponladder = [LaserPistol, SMG, Shotgun, AutomaticRifle, SniperRifle, GrenadeLauncher, LaserMachineGun, RocketLauncher, ChainRifle, RiskGun]
+        self.weaponladder = [LaserPistol, SMG, AutomaticRifle, Musket, Shotgun, LooseChange, GrenadeLauncher, FlamePistol, LaserMachineGun, SniperRifle, RocketLauncher, ChainRifle, AutoShotgun, RiskGun]
 
 
     def generate_points(self):
-        for i in range(6):
+        for i in range(5):
             self.points.append([random.randint(0, self.scale[0]*2), random.randint(0, self.scale[1]*2)])
 
     def generate_rects(self):
         for point in self.points:
             rect = []
-            x = random.randint(8, 12)
-            y = random.randint(8, 12)
+            x = random.randint(10, 14)
+            y = random.randint(10, 14)
 
             o = [point[0]-x, point[1]+y]
 
@@ -64,7 +64,7 @@ class LevelGenerator(Actor):
         for point in self.whitespace:
             for rect in self.rects:
                 for tile in rect:
-                    if getpointdistance(tile[0], tile[1], point[0], point[1]) > 64:
+                    if getpointdistance(tile[0], tile[1], point[0], point[1]) > 16:
                         safe.append(point)
         
         self.safetiles = safe
@@ -83,7 +83,7 @@ class LevelGenerator(Actor):
         return [point[0]*16+8, point[1]*16+8]
 
     def generate_enemy_count(self, complexity):
-        waves = complexity**(1/3)
+        waves = complexity**(1/3)+1
         return round(waves)
 
     def on_enemy_killed(self, enemy, killer):

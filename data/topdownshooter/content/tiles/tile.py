@@ -12,6 +12,12 @@ class Tile(Actor):
         self.useCenterForPosition = True
         self.canMove = False
 
+    def checkXcollision(self, movement):
+        return 
+    
+    def checkYcollision(self, movement):
+        return 
+
     def construct(self):
         super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.spritePath, layer=4)

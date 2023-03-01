@@ -12,7 +12,7 @@ class EnemyPickupArea(Actor):
         super().__init__(man, pde)
         self.position = position
         self.scale = [256, 256]
-        self.useCenterForPosition = True
+        self.useCenterForPosition = False
         self.checkForCollision = False
 
     def construct(self):

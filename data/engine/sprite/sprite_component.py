@@ -43,8 +43,8 @@ class Sprite(pygame.sprite.Sprite):
         self.rect.center = self.parent.rect.center
 
     def update(self):
+        super().update()
         self.updatetransform()
-        return super().update()
 
     
     def deconstruct(self):
