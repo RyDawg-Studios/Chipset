@@ -202,7 +202,7 @@
 
         },
         "statinfo":{
-            "firerate": 25,
+            "firerate": 55,
             "shotspread": 3,
             "shotangles": [0],
             "damagemultiplier": 1
@@ -278,10 +278,10 @@
 
         },
         "statinfo":{
-            "firerate": 30,
-            "shotspread": 4,
+            "firerate": 15,
+            "shotspread": 1,
             "shotangles": [0],
-            "damagemultiplier": 1.1
+            "damagemultiplier": 1.3
         }
     },
     "DebugGun":

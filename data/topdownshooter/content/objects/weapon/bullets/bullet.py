@@ -56,7 +56,7 @@ class Bullet(Actor):
                 upg.onHit(bullet=self, damage=self.damage, object=obj)
             if hasattr(obj, 'hp'):
                 obj.takedamage(self, self.damage * self.owner.damagemultiplier)
-                self.man.add_object(obj=Hitmarker(man=self.man, pde=self.pde, position=self.position))
+                self.pde.display_manager.userInterface.add_object(obj=Hitmarker(man=self.pde.display_manager.userInterface, pde=self.pde, position=self.position))
                 self.hit(obj)
                 if self.destroyOnCollide and not self.piercing:
                     self.deconstruct()

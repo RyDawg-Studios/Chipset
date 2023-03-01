@@ -32,7 +32,7 @@ class LevelLoader(Actor):
         for rinx, row in enumerate(self.levels[self.level]["layers"][0]):
             for oinx, obj in enumerate(row):
                 if obj != '#':
-                    o = self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[(oinx*32) + 16 + self.position[0], (rinx*32+ 16)+ self.position[1]], sprite=self.tilekey[obj]))
+                    o = self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[(oinx*16) + 16 + self.position[0], (rinx*16+ 16)+ self.position[1]], sprite=self.tilekey[obj]))
                     self.tiles.append(o)
 
     def deconstruct(self, outer=None):

@@ -159,22 +159,7 @@ class RocketLauncher(Weapon):
 class Revolver(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="Revolver", position=position)
-        self.shot = False
         self.bullet = RevolverBullet
-
-    def shoot(self, target, bullet):
-        self.shooting = True
-        if not self.shot:
-            super().shoot(target, bullet)
-            self.shot = True
-            return
-
-    def update(self):
-        if self.shot == True and self.shooting == False:
-            self.shot = False
-        if not self.shooting:
-            self.shooting = False
-        return super().update()
 
 class ChainRifle(Weapon):
     def __init__(self, man, pde, owner, position):
@@ -191,26 +176,10 @@ class LaserPistol(Weapon):
         super().__init__(man, pde, owner, id="LaserPistol", position=position)
         self.bullet = TurretBullet
 
-
 class Pistol(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="Pistol", position=position)
-        self.shot = False
         self.bullet = PistolBullet
-
-    def shoot(self, target, bullet):
-        self.shooting = True
-        if not self.shot:
-            super().shoot(target, bullet)
-            self.shot = True
-            return
-
-    def update(self):
-        if self.shot == True and self.shooting == False:
-            self.shot = False
-        if not self.shooting:
-            self.shooting = False
-        return super().update()
 
 class RiskGun(Weapon):
     def __init__(self, man, pde, owner, position):
