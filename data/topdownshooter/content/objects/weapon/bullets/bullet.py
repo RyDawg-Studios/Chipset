@@ -23,6 +23,7 @@ class Bullet(Actor):
         self.useCenterForPosition = True
         self.piercing = False
 
+
     def construct(self):
         super().construct()
         self.target = getpositionlookatvector(self, self.target)
