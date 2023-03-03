@@ -66,7 +66,8 @@ class SpriteComponent(Component):
 
     def update(self):
         super().update()
-        self.sprite.update()
+        if self.sprite is not None:
+            self.sprite.update()
 
     def deconstruct(self):
         super().deconstruct()

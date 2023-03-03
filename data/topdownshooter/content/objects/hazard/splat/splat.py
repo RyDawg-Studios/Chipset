@@ -16,6 +16,7 @@ class Splat(Actor):
         self.owner = owner
         self.useCenterForPosition = True
         self.checkForCollision = False
+        self.checkForOverlap = False
         self.objects = []
         self.rotation = random.randint(0, 360)
     
@@ -27,16 +28,6 @@ class Splat(Actor):
             self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\weapons\splatgun\splatorange.png', layer=0)
 
     def update(self):
-        for object in self.overlapInfo["Objects"]:
-            if isinstance(object, ShooterEntity):
-                self.objects.append(object)
-
-        for object in self.objects:
-            if object not in self.overlapInfo["Objects"]:
-                object.velocity = object.maxVelocity
-            else:
-                if object.velocity != object.maxVelocity / 2 and object != self.owner.owner.owner:
-                    object.velocity = object.maxVelocity / 2
 
         if self.ticks >= 300:
             self.components["Sprite"].sprite.opacity -= 5

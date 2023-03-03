@@ -454,6 +454,25 @@
             "shotangles": [0],
             "damagemultiplier": 1
         }
+    },
+    "DartRifle":
+    {
+        "textinfo":{
+            "name": "Dart Rifle",
+            "desc": "Well-rounded Automatic Rifle.",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [62, 32],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\dartrifle\\dartrifle.png"
+
+        },
+        "statinfo":{
+            "firerate": 12,
+            "shotspread": 2,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
     }
     
 }

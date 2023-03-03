@@ -22,7 +22,6 @@ class GeneratedLevel(Level):
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=l.get_spawnpoint(), hp=self.pde.game.playerData.hp))
 
         x = self.pde.game.playerData.loadout[0]
-        print(x)
 
         if x is not NoneType:
             w = x(man=self.objectManager, pde=self.pde, owner=p, position=[0,0])

@@ -6,7 +6,7 @@ from data.engine.fl.world_fl import getpointdistance, normal_cut
 from data.topdownshooter.content.levels.levelloader.levelloader import LevelLoader
 from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
 from data.topdownshooter.content.objects.hazard.hole.hole import Hole
-from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutoShotgun, AutomaticRifle, ChainRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Musket, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
+from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutoShotgun, AutomaticRifle, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Musket, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
 from data.topdownshooter.content.tiles.tile import Tile
 import math
 
@@ -22,7 +22,7 @@ class LevelGenerator(Actor):
         self.points = []
         self.safetiles = []
         self.enemies = []
-        self.weaponladder = [Pistol, Revolver, LaserPistol, SMG, AutomaticRifle, Musket, Shotgun, LooseChange, GrenadeLauncher, FlamePistol, LaserMachineGun, SniperRifle, RocketLauncher, ChainRifle, AutoShotgun, Flamethrower]
+        self.weaponladder = [Pistol, Revolver, LaserPistol, Musket, SMG, AutomaticRifle, SplatGun, Shotgun, DartRifle, LooseChange, GrenadeLauncher, FlamePistol, LaserMachineGun, SniperRifle, RocketLauncher, ChainRifle, AutoShotgun, Flamethrower]
 
 
     def generate_points(self):
@@ -32,8 +32,8 @@ class LevelGenerator(Actor):
     def generate_rects(self):
         for point in self.points:
             rect = []
-            x = random.randint(10, 15)
-            y = random.randint(10, 15)
+            x = random.randint(10, 12)
+            y = random.randint(10, 12)
 
             o = [point[0]-x, point[1]+y]
 
@@ -59,7 +59,7 @@ class LevelGenerator(Actor):
         for rect in self.rects:
             for tile in rect:
                 if tile not in self.whitespace:
-                    self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[tile[0]*16 + 16, tile[1]*16 + 16], sprite=r'data\topdownshooter\assets\sprites\tiles\wall1.png'))
+                    self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[tile[0]*24 + 24, tile[1]*24 + 24], sprite=r'data\topdownshooter\assets\sprites\tiles\wall1.png'))
                 
     def generate_safe_spawnpoints(self):
         safe = []

@@ -1,6 +1,7 @@
 from data.engine.game.game import Game
 from data.engine.object.object_manager import ObjectManager
 from data.topdownshooter.content.levels.DevLevel import DevLevel
+from data.topdownshooter.content.levels.MainMenu import MainMenu
 from data.topdownshooter.content.levels.ShooterLevel import ShooterLevel
 from data.topdownshooter.content.levels.StartLevel import StartLevel
 from data.topdownshooter.content.levels.morphlevel import MorphLevel
@@ -41,7 +42,7 @@ class ShooterGame(Game):
 
     def activate(self):
         super().activate()
-        self.changelevel(GeneratedLevel)
+        self.changelevel(MainMenu)
 
     def restart(self):
         self.pde.player_manager.clear()

@@ -59,11 +59,11 @@ class ShooterPlayer(ShooterEntity):
         if len(self.pde.input_manager.joysticks) > 0:
             if self.weapon is not None:
                 self.target = pygame.Vector2(self.weapon.rect.center) + (pygame.Vector2(round(self.components["PlayerController"].axis[2], 2), round(self.components["PlayerController"].axis[3], 2)) * 50)
+                self.cam.rect.center = self.target
             else:
                 self.target = self.position
         else:
             self.target = self.pde.input_manager.mouse_position
-        self.cam.rect.center = self.target
 
     def update(self):
         super().update()

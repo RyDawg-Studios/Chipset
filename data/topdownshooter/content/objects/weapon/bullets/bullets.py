@@ -149,7 +149,7 @@ class Grenade(Bullet):
 class LaserBullet(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\lasermachinegun\laserbullet.png')
-        self.speed = 26
+        self.speed = 20
         self.damage = 5
 
 class SniperBullet(Bullet):
@@ -368,5 +368,11 @@ class Flame(Bullet):
 
             if self.speed < 4:
                 self.deconstruct()
+
+class DartBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\dartrifle\dartbullet.png')
+        self.speed = 22
+        self.damage = 8
 
 
