@@ -10,11 +10,11 @@ class ShooterController(PlayerController):
     def on_input(self, input):
         super().on_input(input)
 
-        if input == pygame.K_l:
+        if input == pygame.K_l or input == 4:
             self.owner.pde.game.restart()
         if input == pygame.K_LSHIFT:
             self.owner.dodging = True
-        if input == pygame.K_LALT:
+        if input == pygame.K_LALT or input == 8:
             self.owner.altShot(target=self.owner.pde.input_manager.mouse_position)
         if input == pygame.K_f or input == 2:
             self.owner.interact()
@@ -29,6 +29,7 @@ class ShooterController(PlayerController):
 
 
     def manage_input(self):
+        super().manage_input()
 
         if pygame.K_RIGHT in self.owner.pde.input_manager.key_inputs or pygame.K_d in self.owner.pde.input_manager.key_inputs:
             self.owner.movement[0] = 1
@@ -46,7 +47,6 @@ class ShooterController(PlayerController):
         if pygame.K_SPACE in self.owner.pde.input_manager.key_inputs:
             self.owner.shootweapon(self.owner.pde.input_manager.mouse_position)
         
-        return super().manage_input()
     
     def on_joystick(self, event):
         if event.axis <= 6:
@@ -66,4 +66,4 @@ class ShooterController(PlayerController):
 
             if self.axis[5] > .5:
                 if self.owner.weapon is not None:
-                    self.owner.shootweapon(target=pygame.Vector2(self.owner.weapon.position) + (pygame.Vector2(self.axis[2], self.axis[3])*30))
+                    self.owner.shootweapon(target=pygame.Vector2(self.owner.weapon.position) + (pygame.Vector2(self.axis[2], self.axis[3])*35))

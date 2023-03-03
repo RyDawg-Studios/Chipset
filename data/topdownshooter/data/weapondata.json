@@ -14,7 +14,7 @@
             "firerate": 12,
             "shotangles": [0],
             "shotspread": 4,
-            "damagemultiplier": 1
+            "damagemultiplier": 1.5
 
         }
     },

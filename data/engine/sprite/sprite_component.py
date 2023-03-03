@@ -4,7 +4,7 @@ from data.engine.component.component import Component
 
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__(self, parent, sprite, rotation, scale, layer: AbstractGroup) -> None:
+    def __init__(self, parent, sprite, rotation, scale, layer: AbstractGroup):
         super().__init__()
         self.parent = parent
         self.layer = layer

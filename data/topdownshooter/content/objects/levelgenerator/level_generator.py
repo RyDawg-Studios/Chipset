@@ -26,14 +26,14 @@ class LevelGenerator(Actor):
 
 
     def generate_points(self):
-        for i in range(5):
+        for i in range(3):
             self.points.append([random.randint(0, self.scale[0]*2), random.randint(0, self.scale[1]*2)])
 
     def generate_rects(self):
         for point in self.points:
             rect = []
-            x = random.randint(10, 14)
-            y = random.randint(10, 14)
+            x = random.randint(10, 15)
+            y = random.randint(10, 15)
 
             o = [point[0]-x, point[1]+y]
 
@@ -59,8 +59,7 @@ class LevelGenerator(Actor):
         for rect in self.rects:
             for tile in rect:
                 if tile not in self.whitespace:
-                    #self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[tile[0]*16 + 16, tile[1]*16 + 16], sprite=r'data\topdownshooter\assets\sprites\tiles\wall1.png'))
-                    pass
+                    self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[tile[0]*16 + 16, tile[1]*16 + 16], sprite=r'data\topdownshooter\assets\sprites\tiles\wall1.png'))
                 
     def generate_safe_spawnpoints(self):
         safe = []

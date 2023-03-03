@@ -79,7 +79,6 @@ class ShooterEntity(Actor):
         if self.weapon != None:
             self.weapon.altShot(target)
 
-
     def update(self):
         super().update()
 

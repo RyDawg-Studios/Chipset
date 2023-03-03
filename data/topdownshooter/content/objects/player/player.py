@@ -8,6 +8,7 @@ from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
 from data.topdownshooter.content.objects.player.shooter_controller import ShooterController
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
+from data.topdownshooter.content.objects.widget.shooterwidget import ShooterWidget
 
 class Crosshair(Actor):
     def __init__(self, man, pde, position) -> None:
@@ -28,6 +29,8 @@ class ShooterPlayer(ShooterEntity):
         self.pausable = False
         self.bleed = True
         self.crosshair = None
+
+        self.ui = self.pde.display_manager.userInterface.add_object(ShooterWidget(man=self.pde.display_manager.userInterface, pde=self.pde))
         
         self.weaponindx = 0
 
@@ -56,9 +59,11 @@ class ShooterPlayer(ShooterEntity):
         if len(self.pde.input_manager.joysticks) > 0:
             if self.weapon is not None:
                 self.target = pygame.Vector2(self.weapon.rect.center) + (pygame.Vector2(round(self.components["PlayerController"].axis[2], 2), round(self.components["PlayerController"].axis[3], 2)) * 50)
-                self.cam.rect.center = self.target
+            else:
+                self.target = self.position
         else:
             self.target = self.pde.input_manager.mouse_position
+        self.cam.rect.center = self.target
 
     def update(self):
         super().update()
@@ -86,3 +91,7 @@ class ShooterPlayer(ShooterEntity):
         self.canShoot = False
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\deadme.png', layer=2)
         self.dropweapon()
+
+    def deconstruct(self):
+        super().deconstruct()
+        self.ui.deconstruct()
