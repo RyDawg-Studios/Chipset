@@ -3,7 +3,7 @@ from data.engine.fl.world_fl import objectlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.hazard.jumpscare.jumpscare import Jumpscare
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
-from data.topdownshooter.content.objects.weapon.bullets.bullets import Coin, DartBullet, DefaultBullet, DevBullet, Electrosphere, FireBall, Flame, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, TurretBullet, PistolBullet
+from data.topdownshooter.content.objects.weapon.bullets.bullets import AntiMatterBullet, Coin, DartBullet, DefaultBullet, DevBullet, Electrosphere, FireBall, Flame, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, StarmadaBullet, TurretBullet, PistolBullet
 from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, GrenadeLauncherUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
 
 
@@ -18,6 +18,7 @@ class Shotgun(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="Shotgun", position=position)
         self.bullet = ShotgunBullet
+        self.ai_state = "short"
 
 class SniperRifle(Weapon):
     def __init__(self, man, pde, owner, position):
@@ -249,14 +250,30 @@ class AutoShotgun(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="AutoShotgun", position=position)
         self.bullet = ShotgunBullet
+        self.ai_state = "short"
+
 
 class Flamethrower(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="Flamethrower", position=position)
         self.bullet = Flame
+        self.ai_state = "short"
+
 
 class DartRifle(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="DartRifle", position=position)
         self.bullet = DartBullet
+
+class Starmada(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="Starmada", position=position)
+        self.bullet = StarmadaBullet
+
+class AntiMatterRifle(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="AntiMatterRifle", position=position)
+        self.bullet = AntiMatterBullet
+
+
 

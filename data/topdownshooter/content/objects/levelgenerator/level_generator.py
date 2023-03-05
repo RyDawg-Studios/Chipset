@@ -6,7 +6,7 @@ from data.engine.fl.world_fl import getpointdistance, normal_cut
 from data.topdownshooter.content.levels.levelloader.levelloader import LevelLoader
 from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
 from data.topdownshooter.content.objects.hazard.hole.hole import Hole
-from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutoShotgun, AutomaticRifle, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Musket, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
+from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutoShotgun, AutomaticRifle, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Musket, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun, Starmada
 from data.topdownshooter.content.tiles.tile import Tile
 import math
 
@@ -22,7 +22,7 @@ class LevelGenerator(Actor):
         self.points = []
         self.safetiles = []
         self.enemies = []
-        self.weaponladder = [Pistol, Revolver, LaserPistol, Musket, SMG, AutomaticRifle, SplatGun, Shotgun, DartRifle, LooseChange, GrenadeLauncher, FlamePistol, LaserMachineGun, SniperRifle, RocketLauncher, ChainRifle, AutoShotgun, Flamethrower]
+        self.weaponladder = [Pistol, Revolver, LaserPistol, Musket, SMG, AutomaticRifle, SplatGun, Shotgun, DartRifle, LooseChange, GrenadeLauncher, FlamePistol, LaserMachineGun, SniperRifle, RocketLauncher, ChainRifle, AutoShotgun, Flamethrower, Starmada]
 
 
     def generate_points(self):
@@ -74,7 +74,7 @@ class LevelGenerator(Actor):
 
     def generate_enemy_spawnpoints(self):
         for i in range(self.generate_enemy_count(complexity=self.complexity)):
-            n = self.man.add_object(DefaultEnemy(man=self.man, pde=self.pde, position=self.get_spawnpoint(), weapon=self.weaponladder[abs(round(normal_cut(self.complexity-1, 1, 1)))]))
+            n = self.man.add_object(DefaultEnemy(man=self.man, pde=self.pde, position=self.get_spawnpoint(), weapon=self.weaponladder[abs(round(normal_cut(self.complexity-1, 1, 2)))]))
             n.onDeathEvent.bind(self.on_enemy_killed)
             self.enemies.append(n)
 

@@ -5,6 +5,7 @@ from data.topdownshooter.content.levels.levelloader.levelloader import LevelLoad
 from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.chest.chest import Chest
 from data.topdownshooter.content.objects.dummy.dummy import Dummy
+from data.topdownshooter.content.objects.enemy.boss_enemy import BossEnemy
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.exp.exp import EXP
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
@@ -13,7 +14,7 @@ from data.topdownshooter.content.objects.shooterentity.shooterentity import Shoo
 from data.topdownshooter.content.objects.turret.turret import Turret
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
-from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutoShotgun, AutomaticRifle, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun
+from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AntiMatterRifle, AutoShotgun, AutomaticRifle, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun, Starmada
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
 
 
@@ -27,7 +28,7 @@ class DevLevel(Level):
         self.pde.game.player = p
         p.removeweapon()
         #self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[732/2, 412/2], weapon=LaserMachineGun))
-        itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle, LaserPistol, Pistol, RiskGun, FlamePistol, LooseChange, AutoShotgun, Flamethrower, DartRifle]
+        itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle, LaserPistol, Pistol, RiskGun, FlamePistol, LooseChange, AutoShotgun, Flamethrower, DartRifle, Starmada, AntiMatterRifle]
 
         c = 0
         r = 0
@@ -43,3 +44,5 @@ class DevLevel(Level):
         lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[320,300],level="room2"))
         chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,-128], items=[DevGun]))
         dummy = self.objectManager.add_object(Dummy(man=self.objectManager, pde=pde, position=[320,-64]))
+
+        #b = self.objectManager.add_object(BossEnemy(man=self.objectManager, pde=pde, position=[320,-64]))

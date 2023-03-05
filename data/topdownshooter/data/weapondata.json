@@ -473,6 +473,44 @@
             "shotangles": [0],
             "damagemultiplier": 1
         }
+    },
+    "Starmada":
+    {
+        "textinfo":{
+            "name": "Starmada Rifle",
+            "desc": "ToDo",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [61, 25],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\starmada\\starmada.png"
+
+        },
+        "statinfo":{
+            "firerate": 6,
+            "shotspread": 1,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "AntiMatterRifle":
+    {
+        "textinfo":{
+            "name": "Anti-Matter Rifle",
+            "desc": "ToDo",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [77, 23],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\antimatterrifle\\antimatterrifle.png"
+
+        },
+        "statinfo":{
+            "firerate": 120,
+            "shotspread": 0,
+            "shotangles": [0],
+            "damagemultiplier": 99999999
+        }
     }
     
 }

@@ -5,6 +5,7 @@ import pygame
 from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import getpositionlookatpositionvector, getpositionlookatvector, objectlookatposition, objectlookattarget, positionlookatposition
 from data.engine.sprite.sprite_component import SpriteComponent
+from data.topdownshooter.content.objects.hazard.blackhole.blackhole import BlackHole
 from data.topdownshooter.content.objects.hazard.explosion.explosion import Explosion
 from data.topdownshooter.content.objects.hazard.mine.mine import Mine
 from data.topdownshooter.content.objects.hazard.splat.splat import Splat
@@ -375,4 +376,27 @@ class DartBullet(Bullet):
         self.speed = 22
         self.damage = 8
 
+class StarmadaBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        color = random.choice(['r', 'o', 'y', 'g', 'b', 'p'])
+        self.color = r"data\topdownshooter\assets\sprites\weapons\starmada\starmada_" + color + ".png"
+
+
+        super().__init__(man, pde, owner, position, target, sprite=self.color)
+        self.speed = 20
+        self.damage = 7
+        self.splatticks = 0
+        self.splattime = random.randint(10, 20)
+
+class AntiMatterBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\antimatterrifle\antimatterbullet.png')
+        self.speed = 40
+        self.damage = 1000
+        self.spawned = False
+
+    def hit(self, obj):
+        if not self.spawned:
+            self.spawned = True
+            b = self.man.add_object(BlackHole(man=self.man, pde=self.pde, position=self.position, owner=self.owner.owner))
 
