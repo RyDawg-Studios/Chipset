@@ -72,7 +72,11 @@ class Actor(Object):
         hits = []
         if self.checkForOverlap:
             if self.quadtree is not None:
-                for object in list(self.quadtree.particles):
+                if self.quadtree.parent is not None:
+                    objects = list(self.quadtree.parent.northEast.particles + self.quadtree.parent.northWest.particles + self.quadtree.parent.southEast.particles + self.quadtree.parent.southWest.particles)
+                else:
+                    objects = list(self.quadtree.particles)
+                for object in objects:
                     if isinstance(object, Actor):
                         if self.checkForOverlap and object.checkForOverlap:
                             if self.collideRect.colliderect(object.collideRect) and object != self and not object.decompose:
@@ -80,7 +84,7 @@ class Actor(Object):
                                     self.overlap(object)
                                 self.whileoverlap(object)
                                 hits.append(object)
-                    if object not in list(self.quadtree.particles) and object in self.overlapInfo["Objects"]:
+                    if object not in objects and object in self.overlapInfo["Objects"]:
                         self.overlapInfo["Objects"].remove(object)
         self.overlapInfo["Objects"] = hits
         return hits

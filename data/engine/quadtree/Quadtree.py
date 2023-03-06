@@ -3,8 +3,9 @@ from pygame.math import Vector2
 from data.engine.quadtree.range import *
 
 class QuadTree:
-    def __init__(self, capacity, boundary, color = (140, 255, 160), thickness=1):
+    def __init__(self, capacity, boundary, parent = None, color = (140, 255, 160), thickness=1):
         self.capacity = capacity
+        self.parent = parent
         self.boundary = boundary
         self.particles = []
         self.color = color
@@ -46,10 +47,10 @@ class QuadTree:
                 parent.scale/2
             )
 
-        self.northWest = QuadTree(self.capacity, boundary_nw, self.color, self.lineThickness)
-        self.northEast = QuadTree(self.capacity, boundary_ne, self.color, self.lineThickness)
-        self.southWest = QuadTree(self.capacity, boundary_sw, self.color, self.lineThickness)
-        self.southEast = QuadTree(self.capacity, boundary_se, self.color, self.lineThickness)
+        self.northWest = QuadTree(self.capacity, boundary_nw, self, self.color, self.lineThickness)
+        self.northEast = QuadTree(self.capacity, boundary_ne, self, self.color, self.lineThickness)
+        self.southWest = QuadTree(self.capacity, boundary_sw, self, self.color, self.lineThickness)
+        self.southEast = QuadTree(self.capacity, boundary_se, self, self.color, self.lineThickness)
 
         for i in range(len(self.particles)):
             self.northWest.insert(self.particles[i])
