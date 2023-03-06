@@ -12,6 +12,7 @@ class Hole(Actor):
         self.scale =[32, 32]
         self.useCenterForPosition = True
         self.checkForCollision = False
+        self.sent = False
 
     def construct(self):
         super().construct()
@@ -22,6 +23,8 @@ class Hole(Actor):
         super().overlap(obj)
         if isinstance(obj, ShooterEntity):
             if self.rect.collidepoint(obj.rect.center):
-                self.pde.game.next_room()
+                if not self.sent:
+                    self.pde.game.next_room()
+                    self.sent = True
 
 

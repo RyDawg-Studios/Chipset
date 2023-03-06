@@ -12,18 +12,12 @@ class Tile(Actor):
         self.useCenterForPosition = True
         self.canMove = False
 
-    def checkXcollision(self, movement):
-        return 
-    
-    def checkYcollision(self, movement):
-        return 
-
     def construct(self):
         super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.spritePath, layer=4)
 
     def update(self):
-        return
+        super().update()
 
 class OverlapTile(Actor):
     def __init__(self, man, pde, position=[0, 0], owner=None, sprite=r'data\assets\sprites\undef.png'):

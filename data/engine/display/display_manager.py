@@ -22,6 +22,7 @@ class DisplayManager:
         self.configurewindow()
         self.userInterface = ObjectManager(pde=self.pde)
         self.particleManager  = ObjectManager(pde=self.pde)
+        self.particleManager.quadtree.color = (255, 255, 0)
 
     def update(self):
         self.userInterface.update()

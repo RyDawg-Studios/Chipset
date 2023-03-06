@@ -81,7 +81,7 @@ class Weapon(Actor):
                 with_spread = shooter_to_target.rotate(normal_cut(0, self.shotspread))
                 bullet_target = with_spread.rotate(shot) + self.position
                 
-                b = self.pde.display_manager.particleManager.add_object(obj=bullet(man=self.man, pde=self.pde, owner=self, target=bullet_target, position=self.rect.center))
+                b = self.man.add_object(obj=bullet(man=self.man, pde=self.pde, owner=self, target=bullet_target, position=self.rect.center))
                 self.components["Sprite"].sprite.rotation = b.rotation
                 for u in self.upgrades:
                     u.onShot(bullet=b, target=target)
