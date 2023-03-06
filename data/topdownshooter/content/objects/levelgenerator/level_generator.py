@@ -8,8 +8,6 @@ from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
 from data.topdownshooter.content.objects.hazard.hole.hole import Hole
 from data.topdownshooter.content.objects.weapon.weapons.weapons import P90, SMG, AutoShotgun, AutomaticRifle, Biblizer, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, Godray, GrenadeLauncher, InfinityRifle, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Musket, Pistol, Revolver, RiskGun, RocketLauncher, Scorcher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun, Starmada
 from data.topdownshooter.content.tiles.tile import Tile
-import math
-
 
 class LevelGenerator(Actor):
     def __init__(self, man, pde, position=[], scale=[], checkForOverlap=False, checkForCollision=False, useCenterForPosition=False, lifetime=-1, complexity=1):
@@ -26,14 +24,14 @@ class LevelGenerator(Actor):
         self.roomoveride = {1: 'room2'}
 
     def generate_points(self):
-        for i in range(3):
+        for i in range(5):
             self.points.append([random.randint(0, self.scale[0]*2), random.randint(0, self.scale[1]*2)])
 
     def generate_rects(self):
         for point in self.points:
             rect = []
-            x = random.randint(10, 12)
-            y = random.randint(10, 12)
+            x = random.randint(10, 14)
+            y = random.randint(10, 14)
 
             o = [point[0]-x, point[1]+y]
 
