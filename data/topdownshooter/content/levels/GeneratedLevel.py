@@ -18,6 +18,7 @@ class GeneratedLevel(Level):
 
 
         l = self.objectManager.add_object(LevelGenerator(man=self.objectManager, pde=pde, position=[0,0], scale=[10, 10], complexity=self.pde.game.currentRoomNumber))
+        l.generate_procedural_room()
         pos = random.choice(l.whitespace)
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=l.get_spawnpoint(), hp=self.pde.game.playerData.hp))
 

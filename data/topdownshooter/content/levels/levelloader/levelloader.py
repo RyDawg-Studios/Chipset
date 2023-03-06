@@ -21,6 +21,7 @@ class LevelLoader(Actor):
         self.levels = json.load(f)
         self.level = level
         self.tiles = []
+        self.whitespace = []
 
         self.tilekey = {'x': r'data\topdownshooter\assets\sprites\tiles\wall1.png'}
         self.objectkey = {'x': ShooterEnemy, 'p': ShooterPlayer, 'n': LevelGate}
@@ -34,6 +35,8 @@ class LevelLoader(Actor):
                 if obj != '#':
                     o = self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[(oinx*24) + 12 + self.position[0], (rinx*24+ 12)+ self.position[1]], sprite=self.tilekey[obj]))
                     self.tiles.append(o)
+                else:
+                    self.whitespace.append([(oinx*24) + 12 + self.position[0], (rinx*24+ 12)+ self.position[1]])
 
     def deconstruct(self, outer=None):
         for o in self.tiles:

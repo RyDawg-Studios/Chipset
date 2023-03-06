@@ -32,7 +32,6 @@ class ShooterGame(Game):
     def allEnemiesKilled(self):
         self.next_room()
 
-    
     def changelevel(self, level):
         self.pde.level_manager.clearlevel()
         self.currentlevel = level

@@ -21,9 +21,11 @@ class DisplayManager:
     def activate(self):
         self.configurewindow()
         self.userInterface = ObjectManager(pde=self.pde)
+        self.particleManager  = ObjectManager(pde=self.pde)
 
     def update(self):
         self.userInterface.update()
+        self.particleManager.update()
         pygame.display.update()
         
         if self.bg == False:
@@ -35,6 +37,12 @@ class DisplayManager:
         self.group.draw(self.screen)
 
         for object in list(self.pde.level_manager.level.objectManager.objects):
+            if hasattr(object, "rect"):
+                if object.scroll == True:
+                    object.rect.centerx -= self.scroll[0]
+                    object.rect.centery -= self.scroll[1]
+
+        for object in list(self.particleManager.objects):
             if hasattr(object, "rect"):
                 if object.scroll == True:
                     object.rect.centerx -= self.scroll[0]

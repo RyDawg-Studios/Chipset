@@ -22,10 +22,6 @@ class WeaponlessAI(AIState):
     def update(self):
         super().update()
         if self.weapontarget is None:
-            for i in self.owner.owner.area.overlapInfo["Objects"]:
-                if isinstance(i, PickupWeapon):
-                    print("sees weapon")
-                    self.weapontarget = i
 
             if abs(self.owner.owner.position[0] - self.destination[0]) < 10 and abs(self.owner.owner.position[1] - self.destination[1]) < 10:
                 self.waitticks += 1

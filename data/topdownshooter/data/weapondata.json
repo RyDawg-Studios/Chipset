@@ -511,6 +511,120 @@
             "shotangles": [0],
             "damagemultiplier": 99999999
         }
+    },
+    "Godray":
+    {
+        "textinfo":{
+            "name": "God-Ray",
+            "desc": "ToDo",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [77, 23],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\godray\\godray.png"
+
+        },
+        "statinfo":{
+            "firerate": 0,
+            "shotspread": 0,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
+    },
+    "Friendship":
+    {
+        "textinfo":{
+            "name": "Friendship",
+            "desc": "ToDo",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [79, 30],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\friendship\\friendship.png"
+
+        },
+        "statinfo":{
+            "firerate": 0,
+            "shotspread": 4,
+            "shotangles": [-5, 5],
+            "damagemultiplier": 1
+        }
+    },
+    "Biblizer":
+    {
+        "textinfo":{
+            "name": "Biblizer",
+            "desc": "ToDo",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [45, 16],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\biblizer\\biblizer.png"
+
+        },
+        "statinfo":{
+            "firerate": 15,
+            "shotspread": 3,
+            "shotangles": [-10, -5, 0, 5, 10],
+            "damagemultiplier": 1
+        }
+    },
+    "P90":
+    {
+        "textinfo":{
+            "name": "P-90",
+            "desc": "ToDo",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [48, 24],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\p90\\p90.png"
+
+        },
+        "statinfo":{
+            "firerate": 5,
+            "shotspread": 3,
+            "shotangles": [0],
+            "damagemultiplier": 1.2
+        }
+    },
+    "Scorcher":
+    {
+        "textinfo":{
+            "name": "Scorcher",
+            "desc": "ToDo",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [104, 44],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\scorcher\\scorcher.png"
+
+        },
+        "statinfo":{
+            "firerate": 3,
+            "shotspread": 0,
+            "shotangles": [5, -5, 0],
+            "damagemultiplier": 0.75
+        }
+    },
+    "InfinityRifle":
+    {
+        "textinfo":{
+            "name": "Infinity Rifle",
+            "desc": "ToDo",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [50, 26],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\infinityrifle\\infinityrifle.png"
+
+        },
+        "statinfo":{
+            "firerate": 12,
+            "shotspread": 1,
+            "shotangles": [-1, 0],
+            "damagemultiplier": 2.2
+        }
     }
     
 }

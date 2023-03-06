@@ -19,7 +19,6 @@ class BlackHole(Actor):
         self.checkForOverlap = False
         self.objects = []
         self.rotation = random.randint(0, 360)
-        print("AH")
     
     def construct(self):
         super().construct()

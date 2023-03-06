@@ -304,7 +304,7 @@ class SplatBullet(Bullet):
             return
 
     def splat(self):
-        self.man.add_object(obj=Splat(man=self.man, pde=self.pde, position=list(self.rect.center), owner=self, color=self.color))
+        self.pde.display_manager.particleManager.add_object(obj=Splat(man=self.man, pde=self.pde, position=list(self.rect.center), owner=self, color=self.color))
 
 class Rocket(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
@@ -400,3 +400,29 @@ class AntiMatterBullet(Bullet):
             self.spawned = True
             b = self.man.add_object(BlackHole(man=self.man, pde=self.pde, position=self.position, owner=self.owner.owner))
 
+class GodrayBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\godray\godraybullet.png')
+        self.lifetime = 360
+        self.speed = 18
+        self.damage = 1
+
+    def update(self):
+        if self.ticks >= 300:
+            self.components["Sprite"].sprite.opacity -= 5
+        super().update()
+
+    def construct(self):
+        super().construct()
+
+class BiblizerBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, sprite=r'data\topdownshooter\assets\sprites\weapons\godray\godraybullet.png')
+        self.damage = 8
+        self.speed = 18
+
+    def update(self):
+        super().update()
+        self.speed -= 0.75
+        if self.speed < 4:
+            self.deconstruct()

@@ -6,7 +6,7 @@ from data.engine.fl.world_fl import getpointdistance, normal_cut
 from data.topdownshooter.content.levels.levelloader.levelloader import LevelLoader
 from data.topdownshooter.content.objects.enemy.default_enemy import DefaultEnemy
 from data.topdownshooter.content.objects.hazard.hole.hole import Hole
-from data.topdownshooter.content.objects.weapon.weapons.weapons import SMG, AutoShotgun, AutomaticRifle, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, GrenadeLauncher, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Musket, Pistol, Revolver, RiskGun, RocketLauncher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun, Starmada
+from data.topdownshooter.content.objects.weapon.weapons.weapons import P90, SMG, AutoShotgun, AutomaticRifle, Biblizer, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, Godray, GrenadeLauncher, InfinityRifle, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Musket, Pistol, Revolver, RiskGun, RocketLauncher, Scorcher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun, Starmada
 from data.topdownshooter.content.tiles.tile import Tile
 import math
 
@@ -22,8 +22,8 @@ class LevelGenerator(Actor):
         self.points = []
         self.safetiles = []
         self.enemies = []
-        self.weaponladder = [Pistol, Revolver, LaserPistol, Musket, SMG, AutomaticRifle, SplatGun, Shotgun, DartRifle, LooseChange, GrenadeLauncher, FlamePistol, LaserMachineGun, SniperRifle, RocketLauncher, ChainRifle, AutoShotgun, Flamethrower, Starmada]
-
+        self.weaponladder = [Pistol, Revolver, LaserPistol, Musket, SMG, AutomaticRifle, P90, SplatGun, Shotgun, DartRifle, LooseChange, GrenadeLauncher, FlamePistol, InfinityRifle, LaserMachineGun, SniperRifle, RocketLauncher, ChainRifle, AutoShotgun, Flamethrower, Starmada, Godray, Biblizer, Scorcher]
+        self.roomoveride = {1: 'room2'}
 
     def generate_points(self):
         for i in range(3):
@@ -66,7 +66,7 @@ class LevelGenerator(Actor):
         for point in self.whitespace:
             for rect in self.rects:
                 for tile in rect:
-                    if getpointdistance(tile[0], tile[1], point[0], point[1]) > 16:
+                    if getpointdistance(tile[0], tile[1], point[0], point[1]) > 24:
                         safe.append(point)
         
         self.safetiles = safe
@@ -74,7 +74,13 @@ class LevelGenerator(Actor):
 
     def generate_enemy_spawnpoints(self):
         for i in range(self.generate_enemy_count(complexity=self.complexity)):
-            n = self.man.add_object(DefaultEnemy(man=self.man, pde=self.pde, position=self.get_spawnpoint(), weapon=self.weaponladder[abs(round(normal_cut(self.complexity-1, 1, 2)))]))
+
+            if self.complexity > len(self.weaponladder) - 1:
+                w = abs(round(normal_cut(len(self.weaponladder)-6, 1, 5)))
+            else:
+                w = abs(round(normal_cut(self.complexity-1, 1, 4)))
+
+            n = self.man.add_object(DefaultEnemy(man=self.man, pde=self.pde, position=self.get_spawnpoint(), weapon=self.weaponladder[w]))
             n.onDeathEvent.bind(self.on_enemy_killed)
             self.enemies.append(n)
 
@@ -103,13 +109,20 @@ class LevelGenerator(Actor):
         if len(self.enemies) == 0:
             self.man.add_object(Hole(man=self.man, pde=self.pde, position=n.position))
 
+    def generate_procedural_room(self):
+        self.generate_points()
+        self.generate_rects()
+        self.generate_tiles() 
+        self.generate_safe_spawnpoints()
+        self.generate_enemy_spawnpoints()
 
+    def generate_determined_room(self):
+        lm = self.man.add_object(LevelLoader(man=self.man, pde=self.pde, position=self.position,level=self.roomoveride[self.pde.game.currentRoomNumber]))
+        self.whitespace = lm.whitespace
+        self.tiles = lm.tiles
 
     def construct(self):
         super().construct()
-        self.generate_points()
-        self.generate_rects()
-        self.generate_tiles()
-        self.generate_safe_spawnpoints()
-        self.generate_enemy_spawnpoints()
-        #self.generate_obstacles()
+
+
+
