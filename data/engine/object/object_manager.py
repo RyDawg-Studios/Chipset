@@ -11,9 +11,9 @@ class ObjectManager:
         self.pde = pde
         self.clearing = False
 
-        self.quadsize = 32
+        self.quadsize = 16
 
-        self.quadtree = QuadTree(self.quadsize, Rectangle(pygame.Vector2(0, 0), pygame.Vector2(640, 480)))
+        self.quadtree = QuadTree(self.quadsize, Rectangle(pygame.Vector2(0, 0), pygame.Vector2(self.pde.config_manager.config["config"]["dimensions"])))
 
     def add_object(self, obj):
         if obj not in self.objects:
@@ -25,13 +25,12 @@ class ObjectManager:
     def remove_object(self, obj, outer=None):
         if obj in self.objects:
             self.objects.remove(obj)
+            return True
         else:
-            return
-
-
+            return False
 
     def update(self):
-        self.quadtree = QuadTree(self.quadsize, Rectangle(pygame.Vector2(0, 0), pygame.Vector2(640, 480)))
+        self.quadtree = QuadTree(self.quadsize, Rectangle(pygame.Vector2(0, 0), pygame.Vector2(self.pde.config_manager.config["config"]["dimensions"])))
         for obj in list(self.objects):
             if not obj.paused:
                 obj.update()
@@ -51,7 +50,7 @@ class ObjectManager:
             
         self.objects = []
 
-        self.quadtree = QuadTree(self.quadsize, Rectangle(pygame.Vector2(0, 0), pygame.Vector2(640, 480)))
+        self.quadtree = QuadTree(self.quadsize, Rectangle(pygame.Vector2(0, 0), pygame.Vector2(self.pde.config_manager.config["config"]["dimensions"])))
 
     def printobjects(self):
         print("----------------< Objects >----------------")

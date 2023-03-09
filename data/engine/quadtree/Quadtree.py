@@ -57,6 +57,7 @@ class QuadTree:
             self.northEast.insert(self.particles[i])
             self.southWest.insert(self.particles[i])
             self.southEast.insert(self.particles[i])
+            
     def insert(self, particle):
         if self.boundary.containsParticle(particle) == False:
             return False
@@ -69,15 +70,17 @@ class QuadTree:
             if self.northWest == None:
                 self.subdivide()
 
+            found = False
+
             if self.northWest.insert(particle):
-                return True
+                found = True
             if self.northEast.insert(particle):
-                return True
+                found = True
             if self.southWest.insert(particle):
-                return True
+                found = True
             if self.southEast.insert(particle):
-                return True
-            return False
+                found = True
+            return found
 
     def queryRange(self, _range):
         particlesInRange = []

@@ -29,8 +29,6 @@ class ShooterPlayer(ShooterEntity):
         self.pausable = False
         self.bleed = True
         self.crosshair = None
-
-        self.ui = self.pde.display_manager.userInterface.add_object(ShooterWidget(man=self.pde.display_manager.userInterface, pde=self.pde))
         
         self.weaponindx = 0
 
@@ -94,4 +92,3 @@ class ShooterPlayer(ShooterEntity):
 
     def deconstruct(self):
         super().deconstruct()
-        self.ui.deconstruct()

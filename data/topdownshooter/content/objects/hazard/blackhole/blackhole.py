@@ -8,7 +8,7 @@ from data.topdownshooter.content.objects.shooterentity.shooterentity import Shoo
 
 
 class BlackHole(Actor):
-    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=360, color='blue'):
+    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=120, color='blue'):
         super().__init__(man, pde)
         self.position = position
         self.scale = scale
@@ -25,11 +25,11 @@ class BlackHole(Actor):
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\objects\blackhole\blackhole.png', layer=0)
 
     def update(self):
-        if self.ticks >= 300:
+        if self.ticks >= 90:
             self.components["Sprite"].sprite.opacity -= 5
 
         if self.pde.game.player is not None:
-             self.pde.game.player.movement += getpositionlookatvector( self.pde.game.player, self.position) * 0.75
+             self.pde.game.player.movement += getpositionlookatvector( self.pde.game.player, self.position) * (pygame.Vector2.distance_to(self.position, self.pde.game.player.position)/250)
         super().update()
 
 

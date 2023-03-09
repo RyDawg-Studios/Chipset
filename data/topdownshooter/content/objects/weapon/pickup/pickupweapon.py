@@ -26,7 +26,12 @@ class PickupWeapon(Actor):
     def construct(self):
         super().construct()
 
-        self.components['Sprite'] = SpriteComponent(owner=self, sprite=self.weapon.components["Sprite"].path, layer=1)
+        try:
+            sprite = self.weapon.components["Sprite"].path
+        except KeyError:
+            self.deconstruct()
+
+        self.components['Sprite'] = SpriteComponent(owner=self, sprite=sprite, layer=1)
         self.components["Projectile"] = ProjectileComponent(owner=self, rotation=self.rotation, speed=self.speed)
         self.components["Button"] = Button(owner=self)
         self.components["Button"].whilehovered = self.whilehovered

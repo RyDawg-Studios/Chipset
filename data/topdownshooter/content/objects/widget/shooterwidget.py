@@ -35,7 +35,7 @@ class LevelText(Actor):
     def construct(self):
         super().construct()
         self.components["Text"] = TextComponent(owner=self, text=f"Level: {self.pde.game.currentRoomNumber}", font=pygame.font.SysFont('impact.ttf', 48), layer=5)
-        self.rect.topright=[640-48,0]
+        self.rect.topright=[1280-48,0]
 
     def updateText(self):
         self.components["Text"].sprite.text = f"Level: {self.pde.game.currentRoomNumber}"

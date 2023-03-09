@@ -78,7 +78,7 @@ class LevelGenerator(Actor):
             else:
                 w = abs(round(normal_cut(self.complexity-1, 1, 4)))
 
-            n = self.man.add_object(DefaultEnemy(man=self.man, pde=self.pde, position=self.get_spawnpoint(), weapon=self.weaponladder[w]))
+            n = self.man.add_object(DefaultEnemy(man=self.man, pde=self.pde, position=self.get_spawnpoint(), weapon=self.weaponladder[w], hp=100*self.complexity**(1/8)))
             n.onDeathEvent.bind(self.on_enemy_killed)
             self.enemies.append(n)
 

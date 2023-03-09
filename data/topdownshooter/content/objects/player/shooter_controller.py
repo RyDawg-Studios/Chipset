@@ -24,8 +24,6 @@ class ShooterController(PlayerController):
             self.owner.dead = True
         if input == pygame.K_m:
             self.owner.spawnmagnet()
-        if input == pygame.K_j:
-            self.owner.pde.network_manager.activate()
 
 
     def manage_input(self):

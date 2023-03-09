@@ -10,7 +10,7 @@ from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 class WeaponlessAI(AIState):
     def __init__(self, man, pde, owner):
         super().__init__(man, pde, owner)
-        self.target = man.add_object(AITarget(man=man, pde=pde, position=[random.randint(0, 600), random.randint(0, 400)]))
+        self.target = man.add_object(AITarget(man=man, pde=pde, position=[random.randint(0, self.pde.config_manager.config["config"]["dimensions"][0]), random.randint(0, self.pde.config_manager.config["config"]["dimensions"][1])]))
         self.weapontarget = None
         self.waitticks = 0
         self.destination = self.target.position
@@ -47,7 +47,7 @@ class WeaponlessAI(AIState):
     def picknewlocation(self):
         self.waitticks = 0
         self.target.deconstruct()
-        self.target = self.man.add_object(AITarget(man=self.man, pde=self.pde, position=[random.randint(0, 600), random.randint(0, 400)]))
+        self.target = self.man.add_object(AITarget(man=self.man, pde=self.pde, position=[random.randint(0, self.pde.config_manager.config["config"]["dimensions"][0]), random.randint(0, self.pde.config_manager.config["config"]["dimensions"][1])]))
         self.destination = self.target.position
         self.travelticks = 0
 

@@ -2,11 +2,11 @@
     "config":
     {
         "caption": "Chipset",
-        "dimensions": [640, 480],
+        "dimensions": [1280, 720],
         "icon": "r'data\\assets\\sprites\\me.png'",
         "fullscreen": false,
         "hideMouseCursor": false,
-        "debugMode": true,
+        "debugMode": false,
 
         "network":
         {

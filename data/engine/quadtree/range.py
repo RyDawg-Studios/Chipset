@@ -7,25 +7,40 @@ class Rectangle:
         self.color = (255, 255, 255)
         self.lineThickness = 1
 
+
     def containsParticle(self, particle):
-        x, y = particle.rect.center
-        bx, by = self.position
-        w, h = self.scale
-        if x >= bx and x <= bx+w and y >= by and y <= by+h:
-            return True
-        else:
+        try:
+            x, y = particle.rect.center
+            bx, by = self.position
+            w, h = self.scale
+            if x >= bx and x <= bx+w and y >= by and y <= by+h:
+                return True
+            else:
+                return False
+        except:
+            return False
+        
+
+    def containsPoint(self, point):
+        try:
+            x, y = point
+            bx, by = self.position
+            w, h = self.scale
+            if x >= bx and x <= bx+w and y >= by and y <= by+h:
+                return True
+            else:
+                return False
+        except:
             return False
 
-    def intersects(self,_range):
-        x, y = self.position
-        w, h = self.scale
-        xr, yr = _range.position
-        wr, hr = _range.scale
-        if xr > x + w or xr+wr < x-w or yr > y + h or yr+hr < y-h:
-            return True
-        else:
-            return False
-
+    def intersects(self, _range):
+        selfrect = pygame.rect.Rect(self.position[0], self.position[1], self.scale[0], self.scale[1])
+        rangerect = pygame.rect.Rect(_range.position[0], _range.position[1], _range.scale[0], _range.scale[1])
+        return pygame.rect.Rect.colliderect(selfrect, rangerect)
+    
+    def getOverlapState(self, object):
+        return
+    
     def Draw(self, screen):
         x, y = self.position
         w, h = self.scale

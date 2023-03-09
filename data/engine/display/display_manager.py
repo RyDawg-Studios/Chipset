@@ -34,9 +34,6 @@ class DisplayManager:
         else:
             self.screen.blit(self.bg, (0, 0))
             
-        self.group.update()
-        self.group.draw(self.screen)
-
         for object in list(self.pde.level_manager.level.objectManager.objects):
             if hasattr(object, "rect"):
                 if object.scroll == True:
@@ -48,6 +45,10 @@ class DisplayManager:
                 if object.scroll == True:
                     object.rect.centerx -= self.scroll[0]
                     object.rect.centery -= self.scroll[1]
+                    
+        self.group.update()
+        self.group.draw(self.screen)
+
                     
 
 

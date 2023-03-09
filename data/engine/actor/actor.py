@@ -73,9 +73,12 @@ class Actor(Object):
         if self.checkForOverlap:
             if self.quadtree is not None:
                 if self.quadtree.parent is not None:
-                    objects = list(self.quadtree.parent.northEast.particles + self.quadtree.parent.northWest.particles + self.quadtree.parent.southEast.particles + self.quadtree.parent.southWest.particles)
+                    #objects = list(self.quadtree.parent.northEast.particles + self.quadtree.parent.northWest.particles + self.quadtree.parent.southEast.particles + self.quadtree.parent.southWest.particles)
+                    objects = list(self.quadtree.particles)
+
                 else:
                     objects = list(self.quadtree.particles)
+
                 for object in objects:
                     if isinstance(object, Actor):
                         if self.checkForOverlap and object.checkForOverlap:

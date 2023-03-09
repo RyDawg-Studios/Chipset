@@ -42,9 +42,7 @@ class Bullet(Actor):
             self.movement = self.target * self.speed
 
             if self.destroyOnOOB:
-                if self.position[0] < -80 or self.position[1] < -80:
-                    self.deconstruct()
-                elif self.position[0] > 720 or self.position[1] > 560:
+                if self.rect.centerx not in range(0, self.pde.config_manager.config["config"]["dimensions"][0]) and self.rect.centery not in range(0, self.pde.config_manager.config["config"]["dimensions"][1]):
                     self.deconstruct()
 
     def onshot(self):
@@ -57,7 +55,8 @@ class Bullet(Actor):
                 upg.onHit(bullet=self, damage=self.damage, object=obj)
             if hasattr(obj, 'hp'):
                 obj.takedamage(self, self.damage * self.owner.damagemultiplier)
-                self.pde.display_manager.userInterface.add_object(obj=Hitmarker(man=self.pde.display_manager.userInterface, pde=self.pde, position=self.position))
+                if len(self.pde.display_manager.userInterface.objects) < 16:
+                    self.pde.display_manager.userInterface.add_object(obj=Hitmarker(man=self.pde.display_manager.userInterface, pde=self.pde, position=self.position))
                 self.hit(obj)
                 if self.destroyOnCollide and not self.piercing:
                     self.deconstruct()

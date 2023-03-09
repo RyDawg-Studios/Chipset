@@ -391,8 +391,8 @@ class StarmadaBullet(Bullet):
 class AntiMatterBullet(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\antimatterrifle\antimatterbullet.png')
-        self.speed = 40
-        self.damage = 1000
+        self.speed = 30
+        self.damage = 100
         self.spawned = False
 
     def hit(self, obj):

@@ -10,8 +10,9 @@ from data.topdownshooter.content.objects.weapon.weapons.weapons import Medpack
 
 
 class DefaultEnemy(ShooterEnemy):
-    def __init__(self, man, pde, position=None, velocity=4, weapon=None):
+    def __init__(self, man, pde, position=None, velocity=4, weapon=None, hp=100):
         super().__init__(man, pde, position, velocity, weapon)
+        self.hp = hp
 
     def construct(self):
         super().construct()

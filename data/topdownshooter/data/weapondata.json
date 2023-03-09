@@ -506,10 +506,10 @@
 
         },
         "statinfo":{
-            "firerate": 120,
-            "shotspread": 0,
+            "firerate": 150,
+            "shotspread": 2,
             "shotangles": [0],
-            "damagemultiplier": 99999999
+            "damagemultiplier": 1
         }
     },
     "Godray":

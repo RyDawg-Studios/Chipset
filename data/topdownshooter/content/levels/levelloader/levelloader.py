@@ -23,8 +23,9 @@ class LevelLoader(Actor):
         self.tiles = []
         self.whitespace = []
 
+        self.objects = {}
+
         self.tilekey = {'x': r'data\topdownshooter\assets\sprites\tiles\wall1.png'}
-        self.objectkey = {'x': ShooterEnemy, 'p': ShooterPlayer, 'n': LevelGate}
 
 
         self.placetiles()
@@ -32,11 +33,18 @@ class LevelLoader(Actor):
     def placetiles(self):
         for rinx, row in enumerate(self.levels[self.level]["layers"][0]):
             for oinx, obj in enumerate(row):
-                if obj != '#':
+                if obj == 'x':
                     o = self.man.add_object(obj=Tile(man=self.man, pde=self.pde, position=[(oinx*24) + 12 + self.position[0], (rinx*24+ 12)+ self.position[1]], sprite=self.tilekey[obj]))
                     self.tiles.append(o)
-                else:
+                elif obj == '#':
                     self.whitespace.append([(oinx*24) + 12 + self.position[0], (rinx*24+ 12)+ self.position[1]])
+                else:
+                    if obj in self.objects.keys():
+                        self.objects[obj].append([(oinx*24) + 12 + self.position[0], (rinx*24+ 12)+ self.position[1]])
+                    else:
+                        self.objects[obj] = [[(oinx*24) + 12 + self.position[0], (rinx*24+ 12)+ self.position[1]]]
+
+
 
     def deconstruct(self, outer=None):
         for o in self.tiles:

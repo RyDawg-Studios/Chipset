@@ -8,7 +8,7 @@ import pygame
 class ShortAI(AIState):
     def __init__(self, man, pde, owner):
         super().__init__(man, pde, owner)
-        self.target = man.add_object(AITarget(man=man, pde=pde, position=[random.randint(0, 600), random.randint(0, 400)]))
+        self.target = man.add_object(AITarget(man=man, pde=pde, position=[random.randint(0, self.pde.config_manager.config["config"]["dimensions"][0]), random.randint(0, self.pde.config_manager.config["config"]["dimensions"][1])]))
         self.waitticks = 0
         self.destination = self.target.position
         self.waitticks = 0
