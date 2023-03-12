@@ -42,7 +42,7 @@ class Bullet(Actor):
             self.movement = self.target * self.speed
 
             if self.destroyOnOOB:
-                if self.rect.centerx not in range(0, self.pde.config_manager.config["config"]["dimensions"][0]) and self.rect.centery not in range(0, self.pde.config_manager.config["config"]["dimensions"][1]):
+                if self.rect.centerx not in range(0, self.pde.config_manager.config["config"]["dimensions"][0]) or self.rect.centery not in range(0, self.pde.config_manager.config["config"]["dimensions"][1]):
                     self.deconstruct()
 
     def onshot(self):
