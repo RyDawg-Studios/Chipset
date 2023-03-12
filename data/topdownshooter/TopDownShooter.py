@@ -42,7 +42,7 @@ class ShooterGame(Game):
 
     def activate(self):
         super().activate()
-        self.changelevel(BossLevel)
+        self.changelevel(MainMenu)
 
     def restart(self):
         self.pde.player_manager.clear()

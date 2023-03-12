@@ -14,6 +14,7 @@ class Actor(Object):
 
         self.name = str(self)
         self.components = {}
+        self.quad = [0, 0]
 
         # -----< Transform Info >----- #
 
@@ -70,25 +71,25 @@ class Actor(Object):
     def getoverlaps(self):
         self.overlapInfo["Objects"] = []
         hits = []
+        objects = []
+        
+        for y in [-1,0 , 1]:
+            for x in [-1, 0, 1]:
+                objs = self.man.quadtree.getQuad(abs(self.quad[0]+x), abs(self.quad[1]+y))
+                if objs is not None:
+                    objects += objs.particles
+            
         if self.checkForOverlap:
-            if self.quadtree is not None:
-                if self.quadtree.parent is not None:
-                    #objects = list(self.quadtree.parent.northEast.particles + self.quadtree.parent.northWest.particles + self.quadtree.parent.southEast.particles + self.quadtree.parent.southWest.particles)
-                    objects = list(self.quadtree.particles)
-
-                else:
-                    objects = list(self.quadtree.particles)
-
-                for object in objects:
-                    if isinstance(object, Actor):
-                        if self.checkForOverlap and object.checkForOverlap:
-                            if self.collideRect.colliderect(object.collideRect) and object != self and not object.decompose:
-                                if object not in self.overlapInfo["Objects"]:
-                                    self.overlap(object)
-                                self.whileoverlap(object)
-                                hits.append(object)
-                    if object not in objects and object in self.overlapInfo["Objects"]:
-                        self.overlapInfo["Objects"].remove(object)
+            for object in objects:
+                if isinstance(object, Actor):
+                    if self.checkForOverlap and object.checkForOverlap:
+                        if self.collideRect.colliderect(object.collideRect) and object != self and not object.decompose:
+                            if object not in self.overlapInfo["Objects"]:
+                                self.overlap(object)
+                            self.whileoverlap(object)
+                            hits.append(object)
+                if object not in objects and object in self.overlapInfo["Objects"]:
+                    self.overlapInfo["Objects"].remove(object)
         self.overlapInfo["Objects"] = hits
         return hits
 

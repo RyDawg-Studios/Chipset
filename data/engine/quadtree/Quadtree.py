@@ -3,84 +3,58 @@ from pygame.math import Vector2
 from data.engine.quadtree.range import *
 
 class QuadTree:
-    def __init__(self, capacity, boundary, parent = None, color = (140, 255, 160), thickness=1):
+    def __init__(self, capacity, boundary, parent = None, color = (140, 255, 160), thickness=1, pde=None):
         self.capacity = capacity
         self.parent = parent
         self.boundary = boundary
         self.particles = []
         self.color = color
         self.lineThickness = thickness
-        self.northWest = None
-        self.northEast = None
-        self.southWest = None
-        self.southEast = None
+        self.bounds = []
+        self.pde = pde
+        self.rows = 9
+        self.columns = 16
+
+        self.subdivide()
 
     def subdivide(self):
         parent = self.boundary
 
-        boundary_nw = Rectangle(
-                Vector2(
-                parent.position.x ,
-                parent.position.y
-                ),
-            parent.scale/2
-            )
-        boundary_ne = Rectangle(
-                Vector2(
-                parent.position.x + parent.scale.x/2,
-                parent.position.y
-                ),
-                parent.scale/2
-            )
-        boundary_sw = Rectangle(
-                Vector2(
-                parent.position.x,
-                parent.position.y + parent.scale.y/2
-                ),
-                parent.scale/2
-            )
-        boundary_se = Rectangle(
-                Vector2(
-                parent.position.x + parent.scale.x/2,
-                parent.position.y + parent.scale.y/2
-                ),
-                parent.scale/2
-            )
-
-        self.northWest = QuadTree(self.capacity, boundary_nw, self, self.color, self.lineThickness)
-        self.northEast = QuadTree(self.capacity, boundary_ne, self, self.color, self.lineThickness)
-        self.southWest = QuadTree(self.capacity, boundary_sw, self, self.color, self.lineThickness)
-        self.southEast = QuadTree(self.capacity, boundary_se, self, self.color, self.lineThickness)
-
-        for i in range(len(self.particles)):
-            self.northWest.insert(self.particles[i])
-            self.northEast.insert(self.particles[i])
-            self.southWest.insert(self.particles[i])
-            self.southEast.insert(self.particles[i])
+        for y in range(self.rows):
+            self.bounds.append([])
+            for x in range(self.columns):
+                self.bounds[y].append(Rectangle(position=Vector2(x*int(self.pde.config_manager.config["config"]["dimensions"][0]/self.columns), y*int(self.pde.config_manager.config["config"]["dimensions"][1]/self.rows)), scale=[int(self.pde.config_manager.config["config"]["dimensions"][0]/self.columns), int(self.pde.config_manager.config["config"]["dimensions"][1]/self.rows)]))
             
     def insert(self, particle):
-        if self.boundary.containsParticle(particle) == False:
-            return False
+        for yinx, y in enumerate(self.bounds):
+            for xinx, x in enumerate(y):
+                if x.containsParticle(particle):
+                    particle.quad = [xinx, yinx]
+                    x.particles.append(particle)
 
-        if len(self.particles) < self.capacity and self.northWest == None:
-            self.particles.append(particle)
-            particle.quadtree = self
+    def getQuad(self, x=0, y=0):
+        if self.isQuadLegit(x, y):
+            return self.bounds[y][x]
+        
+    
+    def isQuadLegit(self, x=0, y=0):
+        isY = False
+        isX = False
+
+        if y in range(len(self.bounds)-1):
+            isY = True
+        else:
+            return False
+        
+        if x in range(len(self.bounds[y])-1):
+            isX = True
+
+        if isX and isY:
             return True
         else:
-            if self.northWest == None:
-                self.subdivide()
+            return False
 
-            found = False
-
-            if self.northWest.insert(particle):
-                found = True
-            if self.northEast.insert(particle):
-                found = True
-            if self.southWest.insert(particle):
-                found = True
-            if self.southEast.insert(particle):
-                found = True
-            return found
+       
 
     def queryRange(self, _range):
         particlesInRange = []
@@ -122,8 +96,7 @@ class QuadTree:
         self.boundary.color = self.color
         self.boundary.lineThickness = self.lineThickness
         self.boundary.Draw(screen)
-        if self.northWest != None:
-            self.northWest.Show(screen)
-            self.northEast.Show(screen)
-            self.southWest.Show(screen)
-            self.southEast.Show(screen)
+        for y in self.bounds:
+            for bound in y:
+                bound.Draw(screen)
+

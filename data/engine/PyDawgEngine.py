@@ -90,5 +90,8 @@ class PyDawgEngine:
 
         pygame.display.set_caption(str(self.fps))
 
+    def quit(self):
+        return
+
 
         

@@ -6,6 +6,7 @@ class Rectangle:
         self.scale = scale
         self.color = (255, 255, 255)
         self.lineThickness = 1
+        self.particles = []
 
 
     def containsParticle(self, particle):
