@@ -304,7 +304,7 @@ class SplatBullet(Bullet):
             return
 
     def splat(self):
-        self.pde.display_manager.particleManager.add_object(obj=Splat(man=self.man, pde=self.pde, position=list(self.rect.center), owner=self, color=self.color))
+        self.pde.display_manager.particleManager.add_object(obj=Splat(man=self.pde.display_manager.particleManager, pde=self.pde, position=list(self.rect.center), owner=self, color=self.color))
 
 class Rocket(Bullet):
     def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):

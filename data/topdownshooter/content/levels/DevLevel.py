@@ -8,6 +8,7 @@ from data.topdownshooter.content.objects.dummy.dummy import Dummy
 from data.topdownshooter.content.objects.enemy.boss_enemy import BossEnemy
 from data.topdownshooter.content.objects.enemy.enemy import ShooterEnemy
 from data.topdownshooter.content.objects.exp.exp import EXP
+from data.topdownshooter.content.objects.hazard.blackhole.blackhole import BlackHole
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
 from data.topdownshooter.content.objects.player.player import ShooterPlayer
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
@@ -45,4 +46,4 @@ class DevLevel(Level):
         chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,-128], items=[DevGun]))
         dummy = self.objectManager.add_object(Dummy(man=self.objectManager, pde=pde, position=[320,-64]))
 
-        #b = self.objectManager.add_object(BossEnemy(man=self.objectManager, pde=pde, position=[320,-64]))
+        #b = self.objectManager.add_object(BlackHole(man=self.objectManager, pde=pde, position=[320,-64], owner=p))

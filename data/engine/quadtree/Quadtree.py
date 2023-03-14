@@ -12,8 +12,8 @@ class QuadTree:
         self.lineThickness = thickness
         self.bounds = []
         self.pde = pde
-        self.rows = 9
-        self.columns = 16
+        self.rows = 6
+        self.columns = 8
 
         self.subdivide()
 

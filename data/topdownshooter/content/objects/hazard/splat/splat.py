@@ -7,7 +7,7 @@ from data.topdownshooter.content.objects.shooterentity.shooterentity import Shoo
 
 
 class Splat(Actor):
-    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=360, color='blue'):
+    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=260, color='blue'):
         super().__init__(man, pde)
         self.color = color
         self.position = position
@@ -29,7 +29,7 @@ class Splat(Actor):
 
     def update(self):
 
-        if self.ticks >= 300:
+        if self.ticks >= 200:
             self.components["Sprite"].sprite.opacity -= 5
         return super().update()
 

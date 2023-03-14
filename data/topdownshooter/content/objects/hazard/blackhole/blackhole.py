@@ -5,10 +5,11 @@ from data.engine.anim.anim_manager import AnimManager
 from data.engine.fl.world_fl import getpositionlookatvector
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
+import data.topdownshooter.content.objects.weapon.bullets.bullets as b
 
 
 class BlackHole(Actor):
-    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=120, color='blue'):
+    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=-1, color='blue'):
         super().__init__(man, pde)
         self.position = position
         self.scale = scale
@@ -30,7 +31,15 @@ class BlackHole(Actor):
 
         if self.pde.game.player is not None:
              self.pde.game.player.movement += getpositionlookatvector( self.pde.game.player, self.position) * (pygame.Vector2.distance_to(self.position, self.pde.game.player.position)/250)
+
+        for object in self.getNeighboringObjects():
+            if isinstance(object, b.Grenade):
+                object.movement += getpositionlookatvector( self.pde.game.player, self.position) * (pygame.Vector2.distance_to(self.position, self.pde.game.player.position)/50)
         super().update()
+
+
+
+        
 
 
 
