@@ -41,7 +41,12 @@ class ShooterPlayer(ShooterEntity):
         
         self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
 
+    def cycleweapon(self):
+        self.currentweapon += 1
+        if self.currentweapon > 6:
+            self.currentweapon = 1
         
+        self.switchweapon(self.currentweapon)
 
     def spawnmagnet(self):
         self.man.add_object(Magnet(man=self.man, pde=self.pde, position=self.pde.input_manager.mouse_position))

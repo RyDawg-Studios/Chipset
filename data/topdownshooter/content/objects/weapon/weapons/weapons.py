@@ -6,9 +6,6 @@ from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 from data.topdownshooter.content.objects.weapon.bullets.bullets import AntiMatterBullet, BiblizerBullet, Coin, DartBullet, DefaultBullet, DevBullet, Electrosphere, FireBall, Flame, GodrayBullet, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, StarmadaBullet, TurretBullet, PistolBullet
 from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, GrenadeLauncherUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
 
-
-
-
 class AutomaticRifle(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="AutomaticRifle", position=position)
@@ -24,7 +21,7 @@ class SniperRifle(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="SniperRifle", position=position)
         self.bullet = SniperBullet
-        self.shottick = 500
+        self.shottick = 0
 
 
     def update(self):

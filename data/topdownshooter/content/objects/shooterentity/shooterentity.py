@@ -115,7 +115,7 @@ class ShooterEntity(Actor):
             self.fall()
         if self.speed > 3:
             self.speed -= 0.4
-
+            
     def takedamage(self, obj, dmg):
         if self.damagable:
             self.hp -= dmg
@@ -159,13 +159,15 @@ class ShooterEntity(Actor):
             weapon.rect.centery = self.rect.centery + offset
 
     def dropweapon(self, rotation=0, weapon=None):
+        
         if weapon == None:
             w = self.weapon
         else:
             w = weapon
 
-        if self.weapon != None:
+        if self.weapon is not None:
             self.man.add_object(obj=PickupWeapon(man=self.man, pde=self.pde, position=list(self.rect.center), rotation=rotation, weapon=w, speed=[4, 4]))
+
             self.removeweapon()
 
     def interact(self):
@@ -184,7 +186,6 @@ class ShooterEntity(Actor):
                 self.switchweapon(self.weapons.index(dc)+1)
             else:
                 self.dropweapon(rotation=objectlookattarget(self, obj))
-                self.weapons.remove(self.weapons[self.currentweapon-1])
                 self.switchweapon(self.currentweapon)
                 self.changeweapon(dc.weaponClass)
         else:
