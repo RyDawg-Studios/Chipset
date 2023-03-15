@@ -215,6 +215,7 @@ class Medpack(Weapon):
     def __init__(self, man, pde, owner, position, lifetime = -1):
         super().__init__(man, pde, owner, id="Medpack", position=position, lifetime=lifetime)
         self.bullet = None
+        self.addToInventory = False
 
     def shoot(self, target, bullet):
         self.owner.hp += 75

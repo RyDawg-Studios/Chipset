@@ -72,6 +72,7 @@ class Weapon(Actor):
         #----------< Weapon Info >----------#
         self.upgrades = []
         self.uiOverride = None
+        self.addToInventory = True
         self.ai_state = "wander"
 
 

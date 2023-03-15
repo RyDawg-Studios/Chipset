@@ -104,9 +104,6 @@ class ShooterEntity(Actor):
 
     def update(self):
         super().update()
-
-        self.pde.game.playerData.hp = self.hp
-        self.pde.game.playerData.loadout[0] = self.weapon.__class__
         
         if self.dead:
             self.deadticks += 1
@@ -182,8 +179,14 @@ class ShooterEntity(Actor):
     def pickupweapon(self, obj):
         dc = WeaponData(weaponClass=obj.weaponData.weaponClass, upgrades=obj.weaponData.weaponUpgrades)
         if len(self.weapons) < self.maxweapons:
-            self.weapons.append(dc)
-            self.switchweapon(self.weapons.index(dc)+1)
+            if obj.weapon.addToInventory:
+                self.weapons.append(dc)
+                self.switchweapon(self.weapons.index(dc)+1)
+            else:
+                self.dropweapon(rotation=objectlookattarget(self, obj))
+                self.weapons.remove(self.weapons[self.currentweapon-1])
+                self.switchweapon(self.currentweapon)
+                self.changeweapon(dc.weaponClass)
         else:
             self.dropweapon(rotation=objectlookattarget(self, obj))
             self.weapons[self.currentweapon-1] = dc

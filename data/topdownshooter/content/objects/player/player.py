@@ -66,6 +66,13 @@ class ShooterPlayer(ShooterEntity):
     def update(self):
         super().update()
         self.pde.game.player = self
+
+        self.pde.game.playerData.hp = self.hp
+        self.pde.game.playerData.loadout = self.weapons.copy()
+        self.pde.game.playerData.currentWeapon = self.currentweapon
+        
+
+
         self.components["Sprite"].scale = self.scale
 
 

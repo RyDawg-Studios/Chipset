@@ -26,14 +26,11 @@ class GeneratedLevel(Level):
         pos = random.choice(l.whitespace)
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=l.get_spawnpoint(), hp=self.pde.game.playerData.hp))
 
-        x = self.pde.game.playerData.loadout[0]
+        pd = self.pde.game.playerData
 
-        if x is not NoneType:
-            w = x(man=self.objectManager, pde=self.pde, owner=p, position=[0,0])
-            p.weapon = self.objectManager.add_object(obj=w)
-        else:
-            w = None
-            p.weapon = w
+        p.weapons = pd.loadout
+        p.currentweapon = pd.currentWeapon
+        p.switchweapon(p.currentweapon)
         
 
 
