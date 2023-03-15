@@ -25,6 +25,10 @@ class ShooterController(PlayerController):
         if input == pygame.K_m:
             self.owner.spawnmagnet()
 
+        if input in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6]:
+            print([pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6].index(input)+1)
+            self.owner.switchweapon([pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6].index(input)+1)
+
 
     def manage_input(self):
         super().manage_input()

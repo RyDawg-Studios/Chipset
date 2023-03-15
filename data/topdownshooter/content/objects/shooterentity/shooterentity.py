@@ -6,6 +6,7 @@ from data.engine.particle.particle_emitter import ParticleEmitter
 from data.topdownshooter.content.objects.particles.blood import Blood
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
+from data.topdownshooter.content.objects.weapon.weapons.weapon import WeaponData
 from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
 
 
@@ -22,8 +23,13 @@ class ShooterEntity(Actor):
         #----------< Weapon Info >----------#
         
         self.weapon = None
+        self.weapons = []
+        self.currentweapon = 1
+        self.maxweapons = 6
         self.weaponoffset = 10
         self.item = None
+
+        self.ignoreEntities = []
 
         #----------< Stat Info >----------#
 
@@ -62,6 +68,8 @@ class ShooterEntity(Actor):
 
         self.onDeathEvent = EventDispatcher()
 
+        
+
     def construct(self):
         super().construct()
 
@@ -69,6 +77,21 @@ class ShooterEntity(Actor):
 
         self.healthbar = self.man.add_object(obj=HealthBar(man=self.man, pde=self.pde, owner=self))
         return
+    
+    def switchweapon(self, index):
+        if index <= len(self.weapons):
+            self.removeweapon()
+            self.weapon = self.man.add_object(obj=self.createweapon(self.weapons[index-1]))
+            self.currentweapon = index
+
+        else:
+            self.removeweapon()
+            self.weapon = None
+
+    def createweapon(self, WeaponData):
+        w = WeaponData.weaponClass(man=self.man, pde=self.pde, owner=self, position=[0,0])
+        w.upgrades = WeaponData.weaponUpgrades.copy()
+        return w
 
     def shootweapon(self, target):
         if self.weapon != None and self.canShoot:
@@ -152,11 +175,22 @@ class ShooterEntity(Actor):
         for o in self.overlapInfo["Objects"]:
             if o.__class__ == PickupWeapon:
                 if self.canPickupWeapons:
-                    self.dropweapon(rotation=objectlookattarget(self, o))
-                    self.changeweapon(o.weapon.__class__)
+                    self.pickupweapon(o)
                     o.deconstruct()
                     return
             
+    def pickupweapon(self, obj):
+        dc = WeaponData(weaponClass=obj.weaponData.weaponClass, upgrades=obj.weaponData.weaponUpgrades)
+        if len(self.weapons) < self.maxweapons:
+            self.weapons.append(dc)
+            self.switchweapon(self.weapons.index(dc)+1)
+        else:
+            self.dropweapon(rotation=objectlookattarget(self, obj))
+            self.weapons[self.currentweapon-1] = dc
+            self.switchweapon(self.weapons.index(dc)+1)
+
+
+
     def changeweapon(self, cls):
         self.removeweapon()
         self.weapon = self.man.add_object(obj=cls(man=self.man, pde=self.pde, owner=self, position=[self.rect.centerx + 10, self.rect.centery + 10]))
@@ -164,7 +198,7 @@ class ShooterEntity(Actor):
 
     def removeweapon(self):
         if self.weapon is not None:
-            self.weapon.queuedeconstruction()
+            self.weapon.deconstruct()
             self.weapon = None
 
     def useitem(self, item):

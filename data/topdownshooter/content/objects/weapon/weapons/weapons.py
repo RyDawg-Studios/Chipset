@@ -24,6 +24,8 @@ class SniperRifle(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="SniperRifle", position=position)
         self.bullet = SniperBullet
+        self.shottick = 500
+
 
     def update(self):
         if self.owner.movement[0] != 0 or self.owner.movement[1] != 0:

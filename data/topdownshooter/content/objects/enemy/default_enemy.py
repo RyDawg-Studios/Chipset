@@ -13,6 +13,7 @@ class DefaultEnemy(ShooterEnemy):
     def __init__(self, man, pde, position=None, velocity=4, weapon=None, hp=100):
         super().__init__(man, pde, position, velocity, weapon)
         self.hp = hp
+        self.ignoreEntities = [DefaultEnemy]
 
     def construct(self):
         super().construct()

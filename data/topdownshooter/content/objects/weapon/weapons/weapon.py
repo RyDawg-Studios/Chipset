@@ -6,6 +6,18 @@ from data.engine.fl.world_fl import getpositionlookatvector, normal_cut, objectl
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 
+
+class WeaponData():
+    def __init__(self, weaponClass=None, upgrades=[]) -> None:
+        self.weaponClass = weaponClass
+        self.weaponUpgrades = upgrades
+
+    def createWeaponData(self, weapon):
+        self.weaponClass = weapon.__class__
+        self.weaponUpgrades = weapon.upgrades
+        return self
+
+
 class Weapon(Actor):
     def __init__(self, man, pde, owner, position=[0, 0], id=None, bullet=Bullet, lifetime = -1):
         super().__init__(man, pde)

@@ -1,6 +1,7 @@
 from data.engine.actor.actor import Actor
 from data.engine.projectile.projectile_component import ProjectileComponent
 from data.engine.sprite.sprite_component import SpriteComponent
+import data.topdownshooter.content.objects.shooterentity.shooterentity as se
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.tiles.tile import Tile
 from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookatposition, objectlookattarget
@@ -53,14 +54,16 @@ class Bullet(Actor):
         if obj != self.owner and obj != self.owner.owner:
             for upg in self.owner.upgrades:
                 upg.onHit(bullet=self, damage=self.damage, object=obj)
-            if hasattr(obj, 'hp'):
-                obj.takedamage(self, self.damage * self.owner.damagemultiplier)
-                if len(self.pde.display_manager.userInterface.objects) < 16:
-                    self.pde.display_manager.userInterface.add_object(obj=Hitmarker(man=self.pde.display_manager.userInterface, pde=self.pde, position=self.position))
-                self.hit(obj)
-                if self.destroyOnCollide and not self.piercing:
-                    self.deconstruct()
-                    return True
+            if isinstance(obj, se.ShooterEntity):
+                if self.owner.owner is not None:
+                    if type(obj) not in self.owner.owner.ignoreEntities:
+                        obj.takedamage(self, self.damage * self.owner.damagemultiplier)
+                        if len(self.pde.display_manager.userInterface.objects) < 16:
+                            self.pde.display_manager.userInterface.add_object(obj=Hitmarker(man=self.pde.display_manager.userInterface, pde=self.pde, position=self.position))
+                        self.hit(obj)
+                        if self.destroyOnCollide and not self.piercing:
+                            self.deconstruct()
+                            return True
             elif isinstance(obj, Tile):
                 self.hit(obj)
                 if self.destroyOnCollide:

@@ -15,6 +15,7 @@ from data.topdownshooter.content.objects.shooterentity.shooterentity import Shoo
 from data.topdownshooter.content.objects.turret.turret import Turret
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
+from data.topdownshooter.content.objects.weapon.weapons.weapon import WeaponData
 from data.topdownshooter.content.objects.weapon.weapons.weapons import P90, SMG, AntiMatterRifle, AutoShotgun, AutomaticRifle, Biblizer, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, Friendship, Godray, GrenadeLauncher, InfinityRifle, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Pistol, Revolver, RiskGun, RocketLauncher, Scorcher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun, Starmada
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
 

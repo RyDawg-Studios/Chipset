@@ -3,12 +3,14 @@ from data.engine.actor.actor import Actor
 from data.engine.projectile.projectile_component import ProjectileComponent
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.engine.widgets.button import Button
+from data.topdownshooter.content.objects.weapon.weapons.weapon import WeaponData
 from data.topdownshooter.content.objects.widget.infobox import InfoBox
 
 class PickupWeapon(Actor):
     def __init__(self, man, pde, position=[0, 0], speed=[4, 4], rotation=0, weapon=None):
         super().__init__(man, pde)
         self.weapon = weapon
+        self.weaponData = WeaponData().createWeaponData(weapon=weapon)
         self.position = position
         self.scale = self.weapon.scale
         self.checkForCollision = False

@@ -11,10 +11,10 @@
             "sprite": "data\\topdownshooter\\assets\\sprites\\debug\\debugweapon\\cbmk2.png"
         },
         "statinfo":{
-            "firerate": 12,
+            "firerate": 10,
             "shotangles": [0],
-            "shotspread": 4,
-            "damagemultiplier": 1.5
+            "shotspread": 2,
+            "damagemultiplier": 2
 
         }
     },

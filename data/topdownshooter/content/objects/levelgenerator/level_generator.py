@@ -20,7 +20,7 @@ class LevelGenerator(Actor):
         self.points = []
         self.safetiles = []
         self.enemies = []
-        self.weaponladder = [Pistol, Revolver, LaserPistol, Musket, SMG, AutomaticRifle, P90, SplatGun, Shotgun, DartRifle, LooseChange, GrenadeLauncher, FlamePistol, InfinityRifle, LaserMachineGun, SniperRifle, RocketLauncher, ChainRifle, AutoShotgun, Flamethrower, Starmada, Godray, Biblizer, Scorcher]
+        self.weaponladder = [Pistol, Revolver, LaserPistol, SMG, AutomaticRifle, Shotgun, P90, DartRifle, LooseChange, GrenadeLauncher, FlamePistol, InfinityRifle, LaserMachineGun, SniperRifle, RocketLauncher, ChainRifle, AutoShotgun, Flamethrower, Starmada, Godray, Biblizer, Scorcher]
         self.roomoveride = {1: 'room2'}
 
     def generate_points(self):
