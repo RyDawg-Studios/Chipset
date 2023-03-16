@@ -625,6 +625,25 @@
             "shotangles": [-1, 0],
             "damagemultiplier": 2.2
         }
+    },
+    "Buckshot":
+    {
+        "textinfo":{
+            "name": "Buckshot",
+            "desc": "Shoots Ricochet Bullets",
+            "flavor": "ToDo"
+        },
+        "transforminfo":{
+            "scale": [30, 12],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\buckshot\\buckshot.png"
+
+        },
+        "statinfo":{
+            "firerate": 26,
+            "shotspread": 1,
+            "shotangles": [-10, -5, 5, 10, 0],
+            "damagemultiplier": 1.5
+        }
     }
     
 }

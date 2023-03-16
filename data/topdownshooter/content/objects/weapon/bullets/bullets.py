@@ -435,3 +435,79 @@ class BiblizerBullet(Bullet):
         self.speed -= 0.75
         if self.speed < 4:
             self.deconstruct()
+
+class BuckshotBullet(Bullet):
+    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+        super().__init__(man, pde, owner, position, target, sprite=r'data\topdownshooter\assets\sprites\weapons\shotgun\shotgunbullet.png')
+        self.damage = 6
+        self.speed = 18
+        self.destroyOnCollide = False
+        self.checkForCollision = True
+        self.lastoverlap = None
+
+
+    def update(self):
+        super().update()
+        if self.lifetime > 360:
+            self.speed -= 0.75
+            if self.speed < 4:
+                self.deconstruct()
+
+    def collide(self, obj, side):
+        if side != self.lastoverlap:
+            r = random.randint(0, 100)
+            if r <= 25:
+                self.exploding = True
+
+
+
+        if side == "Left":
+            self.target = pygame.Vector2(self.target.reflect((-1,0)))
+        if side == "Right":
+             self.target = pygame.Vector2(self.target.reflect((1,0)))
+        if side == "Top":
+             self.target = pygame.Vector2(self.target.reflect((0, -1)))
+        if side == "Bottom":
+            self.target = pygame.Vector2(self.target.reflect((0, 1)))
+
+        self.components["Sprite"].sprite.rotation = objectlookatposition(self, obj.rect.center) + 180
+
+        self.lastoverlap = side
+        
+        return super().collide(obj, side)
+
+    def checkXcollision(self, movement):
+        if self.canMove:
+            self.rect.x += self.movement.x * self.velocity
+            hits = self.getoverlaps()  
+            for object in hits:
+                if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
+                    if object != self.owner and object != self.owner.owner and not isinstance(self, object.__class__):
+                        if object not in self.collideInfo["Objects"]:
+                            self.collideInfo["Objects"].append(object)
+                        if movement[0] > 0:
+                            self.rect.right = object.rect.left
+                            self.collideInfo["Right"] = True
+                            self.collide(self, "Right")
+                        elif movement[0] < 0:
+                            self.rect.left = object.rect.right
+                            self.collideInfo["Left"] = True
+                            self.collide(self, "Left")
+
+    def checkYcollision(self, movement):
+        if self.canMove:
+            self.rect.y += self.movement.y * self.velocity
+            hits = self.getoverlaps()  
+            for object in hits:
+                if hasattr(object, 'checkForCollision') and object.checkForCollision and self.checkForCollision:
+                    if object != self.owner and object != self.owner.owner and not isinstance(self, object.__class__):
+                        if object not in self.collideInfo["Objects"]:
+                            self.collideInfo["Objects"].append(object)
+                        if movement[1] > 0:
+                            self.rect.bottom = object.rect.top
+                            self.collideInfo["Bottom"] = True
+                            self.collide(self, "Bottom")
+                        elif movement[1] < 0:
+                            self.rect.top = object.rect.bottom
+                            self.collideInfo["Top"] = True
+                            self.collide(self, "Top")

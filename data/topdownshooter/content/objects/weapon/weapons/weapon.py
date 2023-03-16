@@ -110,7 +110,8 @@ class Weapon(Actor):
                 
     def update(self):
         if not self.shooting:
-            self.components["Sprite"].sprite.rotation = self.rotation
+            if self.components["Sprite"] is not None:
+                self.components["Sprite"].sprite.rotation = self.rotation
         self.shottick += 1
         if self.shooting:
             self.shottime += 1
@@ -120,7 +121,7 @@ class Weapon(Actor):
         self.shooting = False
         for u in self.upgrades:
             u.update()
-        return super().update()
+        super().update()
 
     def pickup(self):
         return

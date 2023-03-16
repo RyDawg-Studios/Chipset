@@ -31,7 +31,7 @@ class FireRateText(Actor):
         self.box = box
         self.checkForCollision = False
         self.checkForOverlap = False
-        self.useCenterForPosition = True
+        self.useCenterForPosition = False
 
     def construct(self):
         super().construct()
@@ -39,8 +39,8 @@ class FireRateText(Actor):
         self.rect.topleft = [self.box.rect.topleft[0]+ 5, self.box.rect.topleft[1] + 27]
 
     def update(self):
+        super().update()
         self.rect.topleft = [self.box.rect.topleft[0]+ 5, self.box.rect.topleft[1] + 27]
-        return super().update()
 
 class DamageMultText(Actor):
     def __init__(self, man, pde, position=[0,0], box=None):
@@ -50,7 +50,7 @@ class DamageMultText(Actor):
         self.box = box
         self.checkForCollision = False
         self.checkForOverlap = False
-        self.useCenterForPosition = True
+        self.useCenterForPosition = False
 
     def construct(self):
         super().construct()
@@ -58,8 +58,8 @@ class DamageMultText(Actor):
         self.rect.topleft = [self.box.rect.topleft[0]+5, self.box.rect.topleft[1] + 37]
 
     def update(self):
+        super().update()
         self.rect.topleft = [self.box.rect.topleft[0]+5, self.box.rect.topleft[1] + 37]
-        return super().update()
 
 class AccuracyText(Actor):
     def __init__(self, man, pde, position=[0,0], box=None):
@@ -69,7 +69,7 @@ class AccuracyText(Actor):
         self.box = box
         self.checkForCollision = False
         self.checkForOverlap = False
-        self.useCenterForPosition = True
+        self.useCenterForPosition = False
 
     def construct(self):
         super().construct()
