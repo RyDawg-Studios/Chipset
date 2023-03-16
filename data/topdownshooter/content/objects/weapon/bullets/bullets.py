@@ -58,14 +58,18 @@ class DevBullet(Bullet):
         self.hometicks += 1
         if self.hometicks >= self.starthometime:
             if not self.homing:
-                self.area = self.man.add_object(obj=HomingActor(man=self.man, pde=self.pde, position=list(self.rect.center), owner=self))
                 self.homing = True
+        for obj in self.getNeighboringObjects():
+            if hasattr(obj, 'homable'):
+                if isinstance(obj, ShooterEntity) and obj is not self.shooter:
+                    if self.shooter is not None:
+                        if type(obj) not in self.shooter.ignoreEntities:
+                            self.target = getpositionlookatvector(self, obj.position)
+                            self.rotation = objectlookattarget(self, obj)
 
         return super().update()
 
     def deconstruct(self, outer=None):
-        if self.area != None:
-            self.area.deconstruct()
         return super().deconstruct(outer)
 
 
@@ -358,6 +362,11 @@ class Flame(Bullet):
         self.speed = 18
         self.size = self.scale.copy()
         self.piercing = True
+
+    def construct(self):
+        super().construct()
+        
+
 
     def update(self):
         super().update()

@@ -67,6 +67,7 @@ class ShooterEntity(Actor):
         #----------< Event Dispatchers >----------#
 
         self.onDeathEvent = EventDispatcher()
+        self.onSwitchWeaponEvent = EventDispatcher()
 
         
 
@@ -79,11 +80,11 @@ class ShooterEntity(Actor):
         return
     
     def switchweapon(self, index):
+        self.onSwitchWeaponEvent.call(self.currentweapon, index)
+        self.currentweapon = index
         if index <= len(self.weapons):
             self.removeweapon()
             self.weapon = self.man.add_object(obj=self.createweapon(self.weapons[index-1]))
-            self.currentweapon = index
-
         else:
             self.removeweapon()
             self.weapon = None
@@ -186,6 +187,8 @@ class ShooterEntity(Actor):
                 self.switchweapon(self.weapons.index(dc)+1)
             else:
                 self.dropweapon(rotation=objectlookattarget(self, obj))
+                if self.currentweapon <= len(self.weapons):
+                    self.weapons.remove(self.weapons[self.currentweapon-1])
                 self.switchweapon(self.currentweapon)
                 self.changeweapon(dc.weaponClass)
         else:
@@ -204,6 +207,7 @@ class ShooterEntity(Actor):
         if self.weapon is not None:
             self.weapon.deconstruct()
             self.weapon = None
+        
 
     def useitem(self, item):
         item.use()

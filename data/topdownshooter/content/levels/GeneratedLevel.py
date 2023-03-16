@@ -17,7 +17,6 @@ class GeneratedLevel(Level):
         super().__init__(man, pde)
         self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\bg.png')
 
-        self.pde.game.ui = self.pde.display_manager.userInterface.add_object(ShooterWidget(man=self.pde.display_manager.userInterface, pde=self.pde))
 
 
 
@@ -25,6 +24,8 @@ class GeneratedLevel(Level):
         l.generate_procedural_room()
         pos = random.choice(l.whitespace)
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=l.get_spawnpoint(), hp=self.pde.game.playerData.hp))
+
+        self.pde.game.ui = self.pde.display_manager.userInterface.add_object(ShooterWidget(man=self.pde.display_manager.userInterface, pde=self.pde, owner=p))
 
         pd = self.pde.game.playerData
 

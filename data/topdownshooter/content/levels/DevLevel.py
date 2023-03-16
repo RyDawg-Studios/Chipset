@@ -16,8 +16,9 @@ from data.topdownshooter.content.objects.turret.turret import Turret
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
 from data.topdownshooter.content.objects.weapon.weapons.weapon import WeaponData
-from data.topdownshooter.content.objects.weapon.weapons.weapons import P90, SMG, AntiMatterRifle, AutoShotgun, AutomaticRifle, Biblizer, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, Friendship, Godray, GrenadeLauncher, InfinityRifle, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Pistol, Revolver, RiskGun, RocketLauncher, Scorcher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun, Starmada
+from data.topdownshooter.content.objects.weapon.weapons.weapons import P90, SMG, AntiMatterRifle, AutoShotgun, AutomaticRifle, Biblizer, ChainRifle, DartRifle, DevGun, ElectroLauncher, Enderpearl, FlamePistol, Flamethrower, Friendship, Godray, GrenadeLauncher, InfinityRifle, LaserMachineGun, LaserPistol, LaserRifle, LooseChange, Medpack, Pistol, Revolver, RiskGun, RocketLauncher, Scorcher, Shotgun, SniperRifle, SpawnerWeapon, SplatGun, Starmada
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
+from data.topdownshooter.content.objects.widget.shooterwidget import ShooterWidget
 
 
 class DevLevel(Level):
@@ -29,8 +30,12 @@ class DevLevel(Level):
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[732/2, 412/2]))
         self.pde.game.player = p
         p.removeweapon()
+
+        self.pde.game.ui = self.pde.display_manager.userInterface.add_object(ShooterWidget(man=self.pde.display_manager.userInterface, pde=self.pde, owner=p))
+
+
         #self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[732/2, 412/2], weapon=LaserMachineGun))
-        itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle, LaserPistol, Pistol, RiskGun, FlamePistol, LooseChange, AutoShotgun, Flamethrower, DartRifle, Starmada, AntiMatterRifle, Godray, Friendship, Biblizer, P90, Scorcher, InfinityRifle]
+        itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle, LaserPistol, Pistol, RiskGun, FlamePistol, LooseChange, AutoShotgun, Flamethrower, DartRifle, Starmada, AntiMatterRifle, Godray, Friendship, Biblizer, P90, Scorcher, InfinityRifle, Medpack, Medpack, Medpack]
 
         c = 0
         r = 0

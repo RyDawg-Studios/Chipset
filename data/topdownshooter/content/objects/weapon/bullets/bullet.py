@@ -4,6 +4,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 import data.topdownshooter.content.objects.shooterentity.shooterentity as se
 from data.topdownshooter.content.objects.weapon.hitmarker.hitmarker import Hitmarker
 from data.topdownshooter.content.tiles.tile import Tile
+import copy
 from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookatposition, objectlookattarget
 
 class Bullet(Actor):
@@ -17,6 +18,7 @@ class Bullet(Actor):
         self.speed = 24
         self.damage = 2
         self.owner = owner
+        self.shooter = copy.copy(owner.owner)
         self.kb = 2
         self.destroyOnCollide = True
         self.ignoreCollides = []
@@ -52,15 +54,15 @@ class Bullet(Actor):
     def overlap(self, obj):
         super().overlap(obj)
         if obj != self.owner and obj != self.owner.owner:
-            for upg in self.owner.upgrades:
-                upg.onHit(bullet=self, damage=self.damage, object=obj)
             if isinstance(obj, se.ShooterEntity):
-                if self.owner.owner is not None:
-                    if type(obj) not in self.owner.owner.ignoreEntities:
+                if self.shooter is not None:
+                    if type(obj) not in self.shooter.ignoreEntities:
                         obj.takedamage(self, self.damage * self.owner.damagemultiplier)
-                        if len(self.pde.display_manager.userInterface.objects) < 16:
-                            self.pde.display_manager.userInterface.add_object(obj=Hitmarker(man=self.pde.display_manager.userInterface, pde=self.pde, position=self.position))
+                        if len(self.pde.display_manager.particleManager.objects) < 16:
+                            self.pde.display_manager.particleManager.add_object(obj=Hitmarker(man=self.pde.display_manager.particleManager, pde=self.pde, position=self.position))
                         self.hit(obj)
+                        for upg in self.owner.upgrades:
+                            upg.onHit(bullet=self, damage=self.damage, object=obj)
                         if self.destroyOnCollide and not self.piercing:
                             self.deconstruct()
                             return True
@@ -76,5 +78,6 @@ class Bullet(Actor):
 
     def deconstruct(self, outer=None):
         super().deconstruct(outer)
+        self.shooter = None
         for upg in self.owner.upgrades:
             upg.onBulletDestruction(bullet=self)
