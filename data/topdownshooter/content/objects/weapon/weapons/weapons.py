@@ -1,5 +1,5 @@
 import random
-from data.engine.fl.world_fl import objectlookatposition
+from data.engine.fl.world_fl import objectlookatposition, objectlookattarget
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.hazard.jumpscare.jumpscare import Jumpscare
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
@@ -218,7 +218,11 @@ class Medpack(Weapon):
         self.owner.hp += 75
         for component in self.components.values():
             component.update()
-        self.owner.weapon = None
+            
+        if self.owner.currentweapon <= len(self.owner.weapons):
+            self.owner.weapons.remove(self.owner.weapons[self.owner.currentweapon-1])
+        self.owner.switchweapon(self.owner.currentweapon)
+
         self.deconstruct()
 
     def update(self):
