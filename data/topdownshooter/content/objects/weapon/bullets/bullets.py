@@ -511,3 +511,8 @@ class BuckshotBullet(Bullet):
                             self.rect.top = object.rect.bottom
                             self.collideInfo["Top"] = True
                             self.collide(self, "Top")
+
+class VelocityRocket(Rocket):
+    def construct(self):
+        super().construct()
+        self.speed = 20

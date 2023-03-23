@@ -644,6 +644,25 @@
             "shotangles": [-10, -5, 5, 10, 0],
             "damagemultiplier": 1.5
         }
+    },
+    "Terminator":
+    {
+        "textinfo":{
+            "name": "Terminator",
+            "desc": "Rapid-fire rockets",
+            "flavor": "Pure Chaos"
+        },
+        "transforminfo":{
+            "scale": [104, 44],
+            "sprite": "data\\topdownshooter\\assets\\sprites\\weapons\\scorcher\\scorcher.png"
+
+        },
+        "statinfo":{
+            "firerate": 10,
+            "shotspread": 5,
+            "shotangles": [0],
+            "damagemultiplier": 1
+        }
     }
     
 }

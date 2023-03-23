@@ -9,7 +9,7 @@ import data.topdownshooter.content.objects.weapon.bullets.bullets as b
 
 
 class BlackHole(Actor):
-    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=-1, color='blue'):
+    def __init__(self, man, pde, owner, position=[0, 0], scale=[64, 64], lifetime=260, color='blue'):
         super().__init__(man, pde)
         self.position = position
         self.scale = scale

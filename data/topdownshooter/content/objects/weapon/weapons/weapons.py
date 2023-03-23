@@ -3,7 +3,7 @@ from data.engine.fl.world_fl import objectlookatposition, objectlookattarget
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.hazard.jumpscare.jumpscare import Jumpscare
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
-from data.topdownshooter.content.objects.weapon.bullets.bullets import AntiMatterBullet, BiblizerBullet, BuckshotBullet, Coin, DartBullet, DefaultBullet, DevBullet, Electrosphere, FireBall, Flame, GodrayBullet, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, StarmadaBullet, TurretBullet, PistolBullet
+from data.topdownshooter.content.objects.weapon.bullets.bullets import AntiMatterBullet, BiblizerBullet, BuckshotBullet, Coin, DartBullet, DefaultBullet, DevBullet, Electrosphere, FireBall, Flame, GodrayBullet, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, StarmadaBullet, TurretBullet, PistolBullet, VelocityRocket
 from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, GrenadeLauncherUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
 
 class AutomaticRifle(Weapon):
@@ -317,6 +317,11 @@ class Buckshot(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="Buckshot", position=position)
         self.bullet = BuckshotBullet
+
+class Terminator(Weapon):
+    def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, id="Terminator", position=position)
+        self.bullet = VelocityRocket
 
 
 

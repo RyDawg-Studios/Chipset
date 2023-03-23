@@ -9,6 +9,7 @@ from data.topdownshooter.content.objects.levelgenerator.level_generator import L
 from data.topdownshooter.content.objects.player.player import ShooterPlayer
 from data.topdownshooter.content.objects.turret.turret import Turret
 from data.topdownshooter.content.objects.weapon.weapons.weapons import DevGun, Pistol
+from data.topdownshooter.content.objects.widget.shooterwidget import ShooterWidget
 
 
 
@@ -19,21 +20,23 @@ class BossLevel(Level):
 
         lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[-240, -240],level="default"))
 
+        p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=lm.objects['p'][0], hp=self.pde.game.playerData.hp))
+
+        self.pde.game.ui = self.pde.display_manager.userInterface.add_object(ShooterWidget(man=self.pde.display_manager.userInterface, pde=self.pde, owner=p))
+
 
         b = self.objectManager.add_object(BossEnemy(man=self.objectManager, pde=pde, position=lm.objects['b'][0]))
 
         b.onDeathEvent.bind(self.on_boss_killed)
 
-        p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=lm.objects['p'][0], hp=self.pde.game.playerData.hp))
 
-        x = self.pde.game.playerData.loadout[0]
+        x = self.pde.game.playerData
 
-        if x is not NoneType:
-            w = x(man=self.objectManager, pde=self.pde, owner=p, position=[0,0])
-            p.weapon = self.objectManager.add_object(obj=w)
-        else:
-            w = None
-            p.weapon = w
+        p.weapons = x.loadout
+
+        p.currentweapon = x.currentWeapon
+        p.switchweapon(p.currentweapon)
+
         
 
     def on_boss_killed(self, enemy, killer):
