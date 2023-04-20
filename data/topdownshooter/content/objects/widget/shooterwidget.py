@@ -49,7 +49,7 @@ class LevelText(Actor):
         return super().deconstruct(outer)
     
 class WeaponSelectorChamber(Actor):
-    def __init__(self, man, pde, position=[0.0], scale=[128, 128], checkForOverlap=True, checkForCollision=True, useCenterForPosition=False, lifetime=-1, owner=None):
+    def __init__(self, man, pde, position=[0, 0], scale=[128, 128], checkForOverlap=True, checkForCollision=True, useCenterForPosition=False, lifetime=-1, owner=None):
         super().__init__(man, pde, position, scale, checkForOverlap, checkForCollision, useCenterForPosition, lifetime)
         self.scale = [128, 127]
         self.owner = owner
@@ -97,10 +97,42 @@ class WeaponSelector(Actor):
     def update(self):
         super().update()
 
+class UpgradeSelector(Actor):
+    def __init__(self, man, pde, position=[0,0], scale=[240, 64], checkForOverlap=False, checkForCollision=False, useCenterForPosition=False, lifetime=-1, owner=None):
+        super().__init__(man, pde, position, scale, checkForOverlap, checkForCollision, useCenterForPosition, lifetime)
+
+        self.owner = owner
+
+        self.opening = False
+        self.closing = True
+
+
+    def construct(self):
+        super().construct()
+        self.components["Sprite"] = SpriteComponent(owner=self, sprite='', layer=6)
+
+        self.rect.topright = [1100, -64]
+
+        self.container = []
 
 
 
-        
+    def update(self):
+        super().update()
+        if self.opening:
+            if self.rect.y < 0:
+                self.rect.y += (abs(self.rect.y) / 4)
+        else:
+            if self.rect.y >= -64:
+                self.rect.y -= (abs(self.rect.y+64) / 4) +1
+
+    def open(self):
+        if self.opening:
+            self.opening = False
+            self.closing = True
+        else:
+            self.opening = True
+            self.closing = False
     
 class ShooterWidget(Actor):
     def __init__(self, man, pde, position=[0,0], scale=[0,0], checkForOverlap=False, checkForCollision=False, useCenterForPosition=False, lifetime=-1, owner=None):
@@ -111,5 +143,10 @@ class ShooterWidget(Actor):
         super().construct()
         self.levelText = self.man.add_object(obj=LevelText(man=self.man, pde=self.pde))
         self.inventory = self.man.add_object(obj=WeaponSelector(man=self.man, pde=self.pde, owner=self.owner))
+        self.upgrades = self.man.add_object(obj=UpgradeSelector(man=self.man, pde=self.pde, owner=self.owner))
+
+    def openUpgradeSelection(self):
+        self.upgrades.open()
+
 
 

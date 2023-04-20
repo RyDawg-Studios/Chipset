@@ -4,7 +4,6 @@ from data.engine.actor.actor import Actor
 from data.engine.anim.anim_manager import AnimManager
 from data.engine.fl.world_fl import getpositionlookatvector
 from data.engine.sprite.sprite_component import SpriteComponent
-from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 import data.topdownshooter.content.objects.weapon.bullets.bullets as b
 
 

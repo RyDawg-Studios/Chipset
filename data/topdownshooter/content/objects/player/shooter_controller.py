@@ -24,6 +24,8 @@ class ShooterController(PlayerController):
             self.owner.dead = True
         if input == pygame.K_m:
             self.owner.spawnmagnet()
+        if input == pygame.K_u:
+            self.owner.openUpgradeSelectionUI()
 
         if input in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6]:
             print([pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6].index(input)+1)

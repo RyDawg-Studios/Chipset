@@ -9,6 +9,7 @@ from data.topdownshooter.content.objects.player.shooter_controller import Shoote
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
 from data.topdownshooter.content.objects.widget.shooterwidget import ShooterWidget
+import data.topdownshooter.content.objects.weapon.upgrade.upgrades as u
 
 class Crosshair(Actor):
     def __init__(self, man, pde, position) -> None:
@@ -31,6 +32,8 @@ class ShooterPlayer(ShooterEntity):
         self.crosshair = None
         
         self.weaponindx = 0
+
+        self.stock = [u.SplitStreamUpgrade, u.DisarmamentUpgrade, u.VamprismUpgrade]
 
         self.ignoreEntities =[ShooterPlayer]
 
@@ -69,6 +72,9 @@ class ShooterPlayer(ShooterEntity):
                 self.target = self.position
         else:
             self.target = self.pde.input_manager.mouse_position
+
+    def openUpgradeSelectionUI(self):
+        self.pde.game.ui.openUpgradeSelection()
 
     def update(self):
         super().update()

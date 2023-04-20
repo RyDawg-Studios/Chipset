@@ -9,7 +9,7 @@ from data.topdownshooter.content.objects.hazard.blackhole.blackhole import Black
 from data.topdownshooter.content.objects.hazard.explosion.explosion import Explosion
 from data.topdownshooter.content.objects.hazard.mine.mine import Mine
 from data.topdownshooter.content.objects.hazard.splat.splat import Splat
-from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
+import data.topdownshooter.content.objects.shooterentity.shooterentity as se
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 from data.topdownshooter.content.tiles.tile import Tile
 
@@ -30,7 +30,7 @@ class HomingActor(Actor):
         if self.foundtarget == False:
             self.target = obj
             if hasattr(obj, 'homable'):
-                if isinstance(obj, ShooterEntity) and obj != self.owner.owner.owner:
+                if isinstance(obj, se.ShooterEntity) and obj != self.owner.owner.owner:
                     self.owner.target = getpositionlookatvector(self, obj.position)
                     self.owner.rotation = objectlookattarget(self, obj)
         return super().overlap(obj)
@@ -61,7 +61,7 @@ class DevBullet(Bullet):
                 self.homing = True
         for obj in self.getNeighboringObjects():
             if hasattr(obj, 'homable'):
-                if isinstance(obj, ShooterEntity) and obj is not self.shooter:
+                if isinstance(obj, se.ShooterEntity) and obj is not self.shooter:
                     if self.shooter is not None:
                         if type(obj) not in self.shooter.ignoreEntities:
                             self.target = getpositionlookatvector(self, obj.position)
@@ -319,7 +319,7 @@ class Rocket(Bullet):
         self.spawnedRocket = False
 
     def hit(self, object):
-        if isinstance(object, ShooterEntity) or isinstance(object, Tile):
+        if isinstance(object, se.ShooterEntity) or isinstance(object, Tile):
             if not self.spawnedRocket:
                 self.man.add_object(obj=Explosion(man=self.man, pde=self.pde, owner=self, position=self.rect.center, scale=[128, 128]))
                 self.spawnedRocket = True

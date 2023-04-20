@@ -8,6 +8,7 @@ from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
 from data.topdownshooter.content.objects.weapon.pickup.pickupweapon import PickupWeapon
 from data.topdownshooter.content.objects.weapon.weapons.weapon import WeaponData
 from data.topdownshooter.content.objects.widget.shooterwidget import HealthBar
+import data.topdownshooter.content.objects.weapon.upgrade.upgrades as u
 
 
 class ShooterEntity(Actor):
@@ -24,6 +25,7 @@ class ShooterEntity(Actor):
         
         self.weapon = None
         self.weapons = []
+        self.stock = []
         self.currentweapon = 1
         self.maxweapons = 6
         self.weaponoffset = 10
@@ -68,6 +70,8 @@ class ShooterEntity(Actor):
 
         self.onDeathEvent = EventDispatcher()
         self.onSwitchWeaponEvent = EventDispatcher()
+        self.onKillEvent = EventDispatcher()
+        self.onKillEvent.bind(self.onKill)
 
         
 
@@ -144,6 +148,7 @@ class ShooterEntity(Actor):
 
     def die(self, killer):
         self.onDeathEvent.call(self, killer)
+        killer.owner.owner.onKillEvent.call(self)
         self.dead = True
         if killer is not None:
             rot = killer.rotation
@@ -188,8 +193,7 @@ class ShooterEntity(Actor):
             self.dropweapon(rotation=objectlookattarget(self, obj))
             self.weapons[self.currentweapon-1] = dc
             self.switchweapon(self.weapons.index(dc)+1)
-
-
+        return
 
     def changeweapon(self, cls):
         self.removeweapon()
@@ -200,11 +204,11 @@ class ShooterEntity(Actor):
         if self.weapon is not None:
             self.weapon.deconstruct()
             self.weapon = None
-        
-
-    def useitem(self, item):
-        item.use()
         return
+        
+    def useitem(self, item):
+        return item.use()
+
 
     def checkXcollision(self, movement):
         if self.canMove:
@@ -253,6 +257,10 @@ class ShooterEntity(Actor):
             self.rect.width -= 1
         else:
             self.die(killer=None)
+
+    def onKill(self, enemy):
+        self.stock.append(random.choice(u.upgrades))
+        print(self.stock)
 
     def deconstruct(self):
         self.healthbar.deconstruct()

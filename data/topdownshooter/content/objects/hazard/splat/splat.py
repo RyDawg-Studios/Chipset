@@ -3,7 +3,6 @@ import pygame
 from data.engine.actor.actor import Actor
 from data.engine.anim.anim_manager import AnimManager
 from data.engine.sprite.sprite_component import SpriteComponent
-from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 
 
 class Splat(Actor):
