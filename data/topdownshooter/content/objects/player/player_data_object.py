@@ -8,3 +8,4 @@ class PlayerDataObject:
         self.maxhp = 400
         self.loadout = [WeaponData(LaserMachineGun)]
         self.currentWeapon = 1
+        self.kills = 0

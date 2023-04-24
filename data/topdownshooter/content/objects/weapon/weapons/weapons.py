@@ -4,7 +4,7 @@ from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.hazard.jumpscare.jumpscare import Jumpscare
 from data.topdownshooter.content.objects.weapon.weapons.weapon import Weapon
 from data.topdownshooter.content.objects.weapon.bullets.bullets import AntiMatterBullet, BiblizerBullet, BuckshotBullet, Coin, DartBullet, DefaultBullet, DevBullet, Electrosphere, FireBall, Flame, GodrayBullet, Grenade, LaserBullet, LaserBullet2, PistolBullet, RevolverBullet, Rocket, SMGBullet, ShotgunBullet, SniperBullet, SplatBullet, StarmadaBullet, TurretBullet, PistolBullet, VelocityRocket
-from data.topdownshooter.content.objects.weapon.upgrade.upgrades import DisarmamentUpgrade, ExplosiveBulletsUpgrade, GrenadeLauncherUpgrade, SecondWindUpgrade, SplitStreamUpgrade, VamprismUpgrade
+import data.topdownshooter.content.objects.weapon.upgrade.upgrades as u
 
 class AutomaticRifle(Weapon):
     def __init__(self, man, pde, owner, position):
@@ -39,7 +39,7 @@ class SMG(Weapon):
 class DevGun(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="Devgun", position=position)
-        self.upgrades = [GrenadeLauncherUpgrade(man=self.man, pde=self.pde, weapon=self), DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self), SplitStreamUpgrade(man=self.man, pde=self.pde, weapon=self)]
+        self.upgrades = [u.GrenadeLauncherUpgrade(man=self.man, pde=self.pde, weapon=self), u.DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self), u.SplitStreamUpgrade(man=self.man, pde=self.pde, weapon=self)]
         self.bullet = DevBullet
 
 class LaserRifle(Weapon):
@@ -287,7 +287,7 @@ class Godray(Weapon):
 class Friendship(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="Friendship", position=position)
-        self.upgrades = [VamprismUpgrade(man=self.man, pde=self.pde, weapon=self), DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self), SplitStreamUpgrade(man=self.man, pde=self.pde, weapon=self)]
+        self.upgrades = [u.VamprismUpgrade(man=self.man, pde=self.pde, weapon=self), u.DisarmamentUpgrade(man=self.man, pde=self.pde, weapon=self), u.SplitStreamUpgrade(man=self.man, pde=self.pde, weapon=self)]
 
         self.bullet = StarmadaBullet
 

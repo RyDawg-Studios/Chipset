@@ -110,7 +110,7 @@ class Weapon(Actor):
                 
     def update(self):
         if not self.shooting:
-            if self.components["Sprite"] is not None:
+            if "Sprite" in self.components.keys():
                 self.components["Sprite"].sprite.rotation = self.rotation
         self.shottick += 1
         if self.shooting:

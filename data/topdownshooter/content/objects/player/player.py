@@ -112,3 +112,7 @@ class ShooterPlayer(ShooterEntity):
 
     def deconstruct(self):
         super().deconstruct()
+
+    def onKill(self, enemy):
+        super().onKill(enemy)
+        self.pde.game.playerData.kills += 1
