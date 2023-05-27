@@ -112,7 +112,7 @@ class Weapon(Actor):
         if not self.shooting:
             if "Sprite" in self.components.keys():
                 self.components["Sprite"].sprite.rotation = self.rotation
-        self.shottick += 1
+        self.shottick += 1 * self.owner.handeling
         if self.shooting:
             self.shottime += 1
         else:

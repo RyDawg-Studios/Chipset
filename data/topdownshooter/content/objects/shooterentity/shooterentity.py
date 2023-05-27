@@ -42,6 +42,8 @@ class ShooterEntity(Actor):
         self.falling = False
         self.canGrantHP = True
         self.speed = 3
+        self.handeling = 1
+
 
         #----------< Dodge Info >----------#
 

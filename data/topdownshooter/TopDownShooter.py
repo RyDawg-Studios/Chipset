@@ -17,7 +17,7 @@ class ShooterGame(Game):
         super().__init__(pde)
         self.player = None
         self.currentlevel = GeneratedLevel
-        self.currentRoomNumber = 1
+        self.currentRoomNumber = 10
         self.playerData = PlayerDataObject()
         self.ui = None
 

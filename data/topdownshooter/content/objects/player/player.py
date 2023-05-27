@@ -30,7 +30,10 @@ class ShooterPlayer(ShooterEntity):
         self.pausable = False
         self.bleed = True
         self.crosshair = None
+        self.handeling = 1
         
+
+
         self.weaponindx = 0
 
         self.stock = [u.SplitStreamUpgrade, u.DisarmamentUpgrade, u.VamprismUpgrade]

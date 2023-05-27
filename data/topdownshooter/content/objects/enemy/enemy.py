@@ -19,6 +19,7 @@ class ShooterEnemy(ShooterEntity):
         self.rotation = 0
         self.ticksSinceWeapon = 0
         self.bleed = True
+        self.handeling = random.randint(85, 100) / 100
 
     def construct(self):
         super().construct()

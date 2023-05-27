@@ -76,7 +76,6 @@ class DevBullet(Bullet):
 class Grenade(Bullet):
     def __init__(self, man, pde, owner, target=[0,0], scale = [20, 14],position=[0, 0]):
         super().__init__(man, pde, owner, position=position, scale=scale, target=target, sprite=r'data\topdownshooter\assets\sprites\weapons\grenadelauncher\grenade.png')
-        self.owner = owner
         self.lifetime = 120
         self.destroyOnCollide = False
         self.checkForCollision = True
