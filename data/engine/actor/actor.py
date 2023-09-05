@@ -22,7 +22,6 @@ class Actor(Object):
         self.scale = scale
         self.rotation = 0
         self.canMove = True
-        self.moveable = True
         self.movement = pygame.Vector2([0, 0])
         self.useCenterForPosition = useCenterForPosition
 
@@ -43,6 +42,7 @@ class Actor(Object):
         self.checkForOverlap = checkForOverlap
         self.checkForCollision = checkForCollision
         self.useSpriteRectForCollision = False
+        self.moveable = False
 
         # -----< Debug Info >----- #
 

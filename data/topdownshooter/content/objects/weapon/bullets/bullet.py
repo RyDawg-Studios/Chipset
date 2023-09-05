@@ -13,6 +13,7 @@ class Bullet(Actor):
         self.target = target
         self.spritePath = sprite
         self.checkForCollision = False
+        self.moveable = True
         self.scale = scale
         self.position = position
         self.speed = 24

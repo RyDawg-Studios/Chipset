@@ -19,6 +19,7 @@ class ShooterEntity(Actor):
         self.position = position
         self.scale = scale
         self.maxVelocity = 0
+        self.moveable = True
 
 
         #----------< Weapon Info >----------#

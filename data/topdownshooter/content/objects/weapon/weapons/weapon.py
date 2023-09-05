@@ -60,6 +60,7 @@ class Weapon(Actor):
         self.checkForOverlap = False
         self.useCenterForPosition = True
         self.lifetime = lifetime
+        self.moveable = False
 
 
         #----------< Shot Info >----------#

@@ -22,6 +22,7 @@ class PickupWeapon(Actor):
         self.rotticks = 0
         self.rottime = 100
         self.hoverframes = 0
+        self.moveable = False
 
         self.infobox = None
 
