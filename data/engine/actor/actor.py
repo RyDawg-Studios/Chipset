@@ -22,6 +22,7 @@ class Actor(Object):
         self.scale = scale
         self.rotation = 0
         self.canMove = True
+        self.moveable = True
         self.movement = pygame.Vector2([0, 0])
         self.useCenterForPosition = useCenterForPosition
 
@@ -79,10 +80,10 @@ class Actor(Object):
                 if objs is not None:
                     objects += objs.particles
             
-        if self.checkForOverlap:
+        if self.moveable:
             for object in objects:
                 if isinstance(object, Actor):
-                    if self.checkForOverlap and object.checkForOverlap:
+                    if object.checkForOverlap:
                         if self.collideRect.colliderect(object.collideRect) and object != self and not object.decompose:
                             if object not in self.overlapInfo["Objects"]:
                                 self.overlap(object)

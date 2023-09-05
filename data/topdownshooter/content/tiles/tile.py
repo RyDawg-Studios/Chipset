@@ -11,6 +11,7 @@ class Tile(Actor):
         self.scale = [24, 24]
         self.useCenterForPosition = True
         self.canMove = False
+        self.moveable = False
 
     def construct(self):
         super().construct()
