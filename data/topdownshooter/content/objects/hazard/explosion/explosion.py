@@ -13,6 +13,8 @@ class Explosion(Actor):
         self.owner = owner
         self.useCenterForPosition = True
         self.checkForCollision = False
+        self.checkForOverlap = True
+        self.moveable = True
         self.damage = damage
 
 

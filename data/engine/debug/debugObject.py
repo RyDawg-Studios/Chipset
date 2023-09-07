@@ -13,6 +13,22 @@ from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import objectlookattarget
 from data.engine.sprite.sprite_component import SpriteComponent
 
+class TestRepObject(Object):
+    def __init__(self, man, pde):
+        super().__init__(man, pde)
+        self.replicate = True
+        self.replicable_attributes = [
+            "count"
+        ]
+        self.replication_id = 'test_rep_object'
+
+        self.count = 0
+
+    def construct(self):
+        super().construct()
+
+        print(self.count)
+
 
 class TestSpriteActor(Actor):
     def __init__(self, man, pde, position=[0,0], scale=[32, 32]):

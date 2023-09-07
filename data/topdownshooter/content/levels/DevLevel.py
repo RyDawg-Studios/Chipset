@@ -27,11 +27,8 @@ class DevLevel(Level):
         super().__init__(man, pde)
         self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\bg.png')
 
-        p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=[732/2, 412/2]))
-        self.pde.game.player = p
-        p.removeweapon()
 
-        self.pde.game.ui = self.pde.display_manager.userInterface.add_object(ShooterWidget(man=self.pde.display_manager.userInterface, pde=self.pde, owner=p))
+        #self.pde.game.ui = self.pde.display_manager.userInterface.add_object(ShooterWidget(man=self.pde.display_manager.userInterface, pde=self.pde, owner=p))
 
 
         #self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[732/2, 412/2], weapon=LaserMachineGun))
@@ -51,5 +48,7 @@ class DevLevel(Level):
         lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[320,300],level="room2"))
         chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,-128], items=[DevGun]))
         dummy = self.objectManager.add_object(Dummy(man=self.objectManager, pde=pde, position=[320,-64]))
+
+        self.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'update_game_state', 'event_args': []}})
 
         #b = self.objectManager.add_object(BlackHole(man=self.objectManager, pde=pde, position=[320,-64], owner=p))

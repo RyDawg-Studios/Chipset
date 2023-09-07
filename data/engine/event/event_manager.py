@@ -7,6 +7,7 @@ class EventManager:
         self.active = False
         self.pde = pde
         self.events = {}
+        self.net_events = {}
 
     def activate(self):
         return
@@ -22,5 +23,5 @@ class EventManager:
 
     def handle_netevent(self, event):
         if event['message_type'] == 'event':
-            if event['message_data']['event_name'] in self.events:
-                self.events[event['message_data']['event_name']](event['message_data']['event_args'])
+            if event['message_data']['event_name'] in self.net_events:
+                self.net_events[event['message_data']['event_name']](event['message_data']['event_args'])

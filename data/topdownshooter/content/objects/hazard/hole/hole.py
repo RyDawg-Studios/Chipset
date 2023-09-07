@@ -12,6 +12,8 @@ class Hole(Actor):
         self.scale =[32, 32]
         self.useCenterForPosition = True
         self.checkForCollision = False
+        self.checkForOverlap = True
+        self.moveable = True
         self.sent = False
 
     def construct(self):

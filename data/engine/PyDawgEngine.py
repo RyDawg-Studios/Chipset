@@ -14,6 +14,8 @@ from data.engine.sprite.sprite_manager import SpriteManager
 from data.engine.debug.debugGame import DebugGame
 from data.engine.networking.network import Network
 from data.topdownshooter.TopDownShooter import ShooterGame
+from data.engine.networking import pde_network_table
+from data.topdownshooter.networking import tds_network_table
 
 class PyDawgEngine:
 
@@ -48,6 +50,9 @@ class PyDawgEngine:
         self.display_manager = DisplayManager(pde=self)
         self.display_manager.active = True
 
+        self.network_manager = NetworkManager(pde=self)
+        self.network_manager.active = True
+
         self.active = False
 
         self.clock = pygame.time.Clock()
@@ -55,15 +60,18 @@ class PyDawgEngine:
         self.targetFPS = 30
         self.fps = 0
 
+        self.replication_tables = {"pde": pde_network_table,
+                                   "tds": tds_network_table}
+
         self.startengine()
 
     def startengine(self):
-        for man in [self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
+        for man in [self.network_manager, self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
             if man.active == False:
                 raise Exception(str(man) + " Was not active on engine start. Did you properly initialize it?")
             else: man.active == True
 
-        for man in [self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
+        for man in [self.network_manager, self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
             if man.active == False:
                 raise Exception(str(man) + " Was not active on engine start. Did you properly initialize it?")
             else: man.activate()

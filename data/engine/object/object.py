@@ -3,14 +3,26 @@ import struct
 
 class Object:
     def __init__(self, man, pde):
+
+        # -----< Actor Info >----- #
+
         self.man = man
         self.pde = pde
         self.components = {}
         self.scroll = True
+
+        # -----< Replcation Info >----- #
+
         self.replicate = False
+        self.replicable_attributes = []
+
+        # -----< Object Info >----- #
+
         self.pausable = True
         self.paused = False
         self.decompose = False
+
+        # -----< Quadtree Info >----- #
 
         self.quadtree = None
 
