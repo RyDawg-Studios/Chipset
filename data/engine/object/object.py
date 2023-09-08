@@ -14,7 +14,11 @@ class Object:
         # -----< Replcation Info >----- #
 
         self.replicate = False
-        self.replicable_attributes = []
+        self.replicable_attributes = {} # Var name, then replicable var type
+        self.replication_id = 'empty_object' #Unique to a given object
+        self.replication_package = 'pde' #Where the object is located
+        self.hash = 000
+
 
         # -----< Object Info >----- #
 
@@ -73,9 +77,6 @@ class Object:
             component.deconstruct()
             component = None
         self.components = {}
- 
-    def serialize(self, data=None):
-        return struct.pack(data)
         
     def deserialize(self):
         return
