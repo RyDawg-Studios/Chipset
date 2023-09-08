@@ -21,7 +21,7 @@ class Crosshair(Actor):
 
 
 class ShooterPlayer(ShooterEntity):
-    def __init__(self, man, pde, position=None, hp=400):
+    def __init__(self, man, pde, position=[0,0], hp=400):
         super().__init__(man, pde, position=position)
         self.maxhp = 400
         self.hp = hp
@@ -86,14 +86,9 @@ class ShooterPlayer(ShooterEntity):
         self.pde.game.playerData.hp = self.hp
         self.pde.game.playerData.loadout = self.weapons.copy()
         self.pde.game.playerData.currentWeapon = self.currentweapon
-        
-
-
-        self.components["Sprite"].scale = self.scale
-
 
         self.settargetposition()
-        self.managereticle()
+        #self.managereticle()
         
         if self.weapon != None:
             self.weapon.rotation = objectlookatposition(self.weapon, self.target)

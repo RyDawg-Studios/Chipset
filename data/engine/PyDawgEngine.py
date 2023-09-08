@@ -50,9 +50,9 @@ class PyDawgEngine:
         self.display_manager = DisplayManager(pde=self)
         self.display_manager.active = True
 
-        if self.config_manager.config["config"]["network"]["connectToServer"]:
-            self.network_manager = NetworkManager(pde=self)
-            self.network_manager.active = True
+
+        self.network_manager = NetworkManager(pde=self)
+        self.network_manager.active = True
 
         self.active = False
 
@@ -67,12 +67,12 @@ class PyDawgEngine:
         self.startengine()
 
     def startengine(self):
-        for man in [self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
+        for man in [self.network_manager, self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
             if man.active == False:
                 raise Exception(str(man) + " Was not active on engine start. Did you properly initialize it?")
             else: man.active == True
 
-        for man in [self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
+        for man in [self.network_manager, self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
             if man.active == False:
                 raise Exception(str(man) + " Was not active on engine start. Did you properly initialize it?")
             else: man.activate()
