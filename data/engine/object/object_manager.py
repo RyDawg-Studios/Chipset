@@ -71,8 +71,13 @@ class ObjectManager:
 
     def deserializeNetObject(self, data):
         obj = self.pde.replication_tables[data[0]["package_id"]].object_table[data[0]['object_id']](man=self, pde=self.pde)
+        print(obj)
         for attr in data[0]['attributes']:
-                setattr(obj, attr, data[0]['attributes'][attr])
+                if data[0]['attributes'][attr][1] == False: #Should Deserialize?
+                    setattr(obj, attr[0], data[0]['attributes'][attr][0])
+                else:
+                    setattr(obj, attr[0], self.deserializeNetObject([data[0]['attributes'][attr][0]]))
+                
         self.add_object(obj)
 
 
