@@ -49,7 +49,5 @@ class DevLevel(Level):
         chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,-128], items=[DevGun]))
         dummy = self.objectManager.add_object(Dummy(man=self.objectManager, pde=pde, position=[320,-64]))
 
-        self.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'update_game_state', 'event_args': []}})
-        self.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'update_game_state', 'event_args': []}})
 
         #b = self.objectManager.add_object(BlackHole(man=self.objectManager, pde=pde, position=[320,-64], owner=p))

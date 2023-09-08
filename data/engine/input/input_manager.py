@@ -17,6 +17,7 @@ class InputManager():
         self.hat_inputs = (0, 0)
 
         self.on_input_event = EventDispatcher()
+        self.on_output_event = EventDispatcher()
  
     def activate(self):
         self.joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
@@ -34,7 +35,7 @@ class InputManager():
             self.key_inputs.append(event.key)
             for pc in self.pde.player_manager.player_controllers:
                 pc.on_input(event.key)
-            self.on_input_event.call(event.unicode)
+            self.on_input_event.call(event.key)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             for pc in self.pde.player_manager.player_controllers:
@@ -42,6 +43,8 @@ class InputManager():
 
         if event.type == pygame.KEYUP:
             self.key_inputs.remove(event.key)
+            self.on_output_event.call(event.key)
+
 
         if event.type == pygame.JOYAXISMOTION:
             self.controller_axis_values[event.axis] = round(event.value)

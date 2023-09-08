@@ -5,6 +5,7 @@ from data.engine.particle.particle_emitter import ParticleEmitter
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
+from data.topdownshooter.content.objects.player.net_shooter_controller import NetShooterController
 from data.topdownshooter.content.objects.player.shooter_controller import ShooterController
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
@@ -42,7 +43,7 @@ class ShooterPlayer(ShooterEntity):
 
     def construct(self):
         super().construct()
-        self.components["PlayerController"] = ShooterController(owner=self)
+        self.components["PlayerController"] = NetShooterController(owner=self)
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
 
         self.crosshair = self.man.pde.display_manager.userInterface.add_object(obj=Crosshair(man=self.man.pde.display_manager.userInterface, pde=self.pde, position=[0,0]))

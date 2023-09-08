@@ -42,9 +42,14 @@ class ShooterGame(Game):
 
     def activate(self):
         super().activate()
-        self.changelevel(MainMenu)
+        self.changelevel(DevLevel)
 
     def restart(self):
         self.pde.player_manager.clear()
         self.changelevel(self.currentlevel)
         return
+    
+    def update(self):
+        super().update()
+        self.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'update_game_state', 'event_args': []}})
+

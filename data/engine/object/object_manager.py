@@ -77,9 +77,9 @@ class ObjectManager:
             if spawned.hash == data[0]['hash']:
                 for attr in data[0]['attributes']:
                     if data[0]['attributes'][attr][1] == False: #Should Deserialize?
-                        setattr(obj, attr[0], data[0]['attributes'][attr][0])
+                        setattr(spawned, attr[0], data[0]['attributes'][attr][0])
                     else:
-                        setattr(obj, attr[0], self.deserializeNetObject([data[0]['attributes'][attr][0]]))
+                        setattr(spawned, attr[0], self.deserializeNetObject([data[0]['attributes'][attr][0]]))
                 return
 
         obj = self.pde.replication_tables[data[0]["package_id"]].object_table[data[0]['object_id']](man=self, pde=self.pde)

@@ -1,11 +1,14 @@
 import pygame
 from data.engine.player.player_controller import PlayerController
 
-class ShooterController(PlayerController):
+class NetShooterController(PlayerController):
     def __init__(self, owner):
         super().__init__(owner)
         self.resetPos = True
         self.axis = [0, 0, 0, 0, 0, 0]
+
+        self.inpman.on_input_event.bind(self.on_keydown)
+        self.inpman.on_output_event.bind(self.on_keyup)
 
     def on_input(self, input):
         super().on_input(input)
@@ -26,6 +29,8 @@ class ShooterController(PlayerController):
             self.owner.spawnmagnet()
         if input == pygame.K_u:
             self.owner.openUpgradeSelectionUI()
+
+        
 
         if input in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6]:
             print([pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6].index(input)+1)
@@ -50,7 +55,7 @@ class ShooterController(PlayerController):
 
         if pygame.K_SPACE in self.owner.pde.input_manager.key_inputs:
             self.owner.shootweapon(self.owner.pde.input_manager.mouse_position)
-            #self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [pygame.K_SPACE]}})
+        
     
     def on_joystick(self, event):
         if event.axis <= 6:
@@ -71,3 +76,10 @@ class ShooterController(PlayerController):
             if self.axis[5] > .5:
                 if self.owner.weapon is not None:
                     self.owner.shootweapon(target=pygame.Vector2(self.owner.weapon.position) + (pygame.Vector2(self.axis[2], self.axis[3])*35))
+
+    def on_keydown(self, data):
+        self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [data, True]}})
+
+    
+    def on_keyup(self, data):
+        self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [data, False]}})
