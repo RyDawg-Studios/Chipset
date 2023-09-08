@@ -70,9 +70,9 @@ class ObjectManager:
                     return obj
 
     def deserializeNetObject(self, data):
-        obj = self.pde.replication_tables[data[0]["package_id"]].object_table[[data[0]['object_id']](man=self, pde=self.pde)]
+        obj = self.pde.replication_tables[data[0]["package_id"]].object_table[data[0]['object_id']](man=self, pde=self.pde)
         for attr in data[0]['attributes']:
-            setattr(obj, attr, data[0]['attributes'][attr])
+                setattr(obj, attr, data[0]['attributes'][attr])
         self.add_object(obj)
 
 
