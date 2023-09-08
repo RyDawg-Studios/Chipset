@@ -19,11 +19,47 @@ class WeaponData():
 
 
 class Weapon(Actor):
-    def __init__(self, man, pde, owner, position=[0, 0], id=None, bullet=Bullet, lifetime = -1):
+    def __init__(self, man, pde, owner=None, position=[0, 0], id=None, bullet=Bullet, lifetime = -1):
         super().__init__(man, pde)
         #----------< Data Info >----------#
         self.id = id
 
+            
+
+        #----------< Actor Info >----------#
+        self.owner = owner
+        self.position = position
+        self.checkForCollision = False
+        self.checkForOverlap = False
+        self.useCenterForPosition = True
+        self.lifetime = lifetime
+        self.moveable = False
+
+
+        #----------< Shot Info >----------#
+        self.bullet = bullet
+        self.shottick = 500
+        self.shottime = 0
+        self.shooting = False
+        
+
+        #----------< Weapon Info >----------#
+        self.upgrades = []
+        self.uiOverride = None
+        self.addToInventory = True
+        self.ai_state = "wander"
+
+        #----------< Replication Info >----------#
+        self.replicate = True
+        self.replication_package = 'tds'
+        self.replication_id = 'weapon'
+        self.replicable_attributes = {
+            "id": str
+        }
+
+
+
+    def construct(self):
         if self.id != None:
             weapondata = json.load(open(r"data\topdownshooter\data\weapondata.json"))[self.id]
 
@@ -51,34 +87,7 @@ class Weapon(Actor):
             self.name = 'Default Name'
             self.description = 'Default Description'
             self.flavor = 'Default Flavor'
-            
 
-        #----------< Actor Info >----------#
-        self.owner = owner
-        self.position = position
-        self.checkForCollision = False
-        self.checkForOverlap = False
-        self.useCenterForPosition = True
-        self.lifetime = lifetime
-        self.moveable = False
-
-
-        #----------< Shot Info >----------#
-        self.bullet = bullet
-        self.shottick = 500
-        self.shottime = 0
-        self.shooting = False
-        
-
-        #----------< Weapon Info >----------#
-        self.upgrades = []
-        self.uiOverride = None
-        self.addToInventory = True
-        self.ai_state = "wander"
-
-
-
-    def construct(self):
         super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=self.sprite, layer=3)        
 
@@ -96,6 +105,8 @@ class Weapon(Actor):
                 bullet_target = with_spread.rotate(shot) + self.position
                 
                 b = self.man.add_object(obj=bullet(man=self.man, pde=self.pde, owner=self, target=bullet_target, position=self.rect.center))
+                b.on_update_dispatcher.call(self.on_bullet_update)
+                b.on_hit_dispatcher.call(self.on_bullet_hit)
                 self.components["Sprite"].sprite.rotation = b.rotation
                 for u in self.upgrades:
                     u.onShot(bullet=b, target=target)
@@ -113,7 +124,6 @@ class Weapon(Actor):
         if not self.shooting:
             if "Sprite" in self.components.keys():
                 self.components["Sprite"].sprite.rotation = self.rotation
-        self.shottick += 1 * self.owner.handeling
         if self.shooting:
             self.shottime += 1
         else:
@@ -126,6 +136,14 @@ class Weapon(Actor):
 
     def pickup(self):
         return
+    
+    def on_bullet_update(self, bullet):
+        for upg in self.upgrades:
+            upg.onBulletUpdate(bullet=bullet)
+    
+    def on_bullet_hit(self, bullet):
+        for upg in self.upgrades:
+            upg.onBulletHit(bullet=bullet)
 
     def deconstruct(self):
         self.owner = None

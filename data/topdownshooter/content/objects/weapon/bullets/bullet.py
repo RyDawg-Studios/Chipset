@@ -1,4 +1,5 @@
 from data.engine.actor.actor import Actor
+from data.engine.eventdispatcher.eventdispatcher import EventDispatcher
 from data.engine.projectile.projectile_component import ProjectileComponent
 from data.engine.sprite.sprite_component import SpriteComponent
 import data.topdownshooter.content.objects.shooterentity.shooterentity as se
@@ -8,7 +9,7 @@ import copy
 from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookatposition, objectlookattarget
 
 class Bullet(Actor):
-    def __init__(self, man, pde, owner, position=[0,0], target=[0, 0], scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\assaultrifle\assaultriflebullet.png'):
+    def __init__(self, man, pde, owner=None, position=[0,0], target=[0, 0], scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\assaultrifle\assaultriflebullet.png'):
         super().__init__(man, pde)
         self.target = target
         self.spritePath = sprite
@@ -27,6 +28,12 @@ class Bullet(Actor):
         self.useCenterForPosition = True
         self.piercing = False
 
+        self.on_update_dispatcher = EventDispatcher()
+        self.on_hit_dispatcher = EventDispatcher()
+        self.on_destroy_dispatcher = EventDispatcher()
+
+
+
 
     def construct(self):
         super().construct()
@@ -37,11 +44,9 @@ class Bullet(Actor):
 
     def update(self):
         super().update()
+
         if not self.paused:
             self.components["Sprite"].sprite.rotation = self.rotation
-
-            for upg in self.owner.upgrades:
-                upg.onBulletUpdate(bullet=self)
 
             self.movement = self.target * self.speed
 
@@ -49,11 +54,15 @@ class Bullet(Actor):
                 if self.rect.centerx not in range(0, self.pde.config_manager.config["config"]["dimensions"][0]) or self.rect.centery not in range(0, self.pde.config_manager.config["config"]["dimensions"][1]):
                     self.deconstruct()
 
+        self.on_update_dispatcher.call(self)
+
     def onshot(self):
         pass
 
     def overlap(self, obj):
         super().overlap(obj)
+        self.on_hit_dispatcher.call(self)
+
         if obj != self.owner and obj != self.owner.owner:
             if isinstance(obj, se.ShooterEntity):
                 if self.shooter is not None:
@@ -62,8 +71,7 @@ class Bullet(Actor):
                         if len(self.pde.display_manager.particleManager.objects) < 16:
                             self.pde.display_manager.particleManager.add_object(obj=Hitmarker(man=self.pde.display_manager.particleManager, pde=self.pde, position=self.position))
                         self.hit(obj)
-                        for upg in self.owner.upgrades:
-                            upg.onHit(bullet=self, damage=self.damage, object=obj)
+                        self.on_hit_dispatcher.call(self)
                         if self.destroyOnCollide and not self.piercing:
                             self.deconstruct()
                             return True
@@ -76,9 +84,9 @@ class Bullet(Actor):
 
     def hit(self, obj):
         return
+    
 
     def deconstruct(self, outer=None):
+        self.on_destroy_dispatcher.call(self)
         super().deconstruct(outer)
         self.shooter = None
-        for upg in self.owner.upgrades:
-            upg.onBulletDestruction(bullet=self)

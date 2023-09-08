@@ -10,7 +10,7 @@ class InputManager():
         self.pde = pde
         self.key_inputs = []
         self.mouse_inputs = []
-        self.mouse_position = []
+        self.mouse_position = [0,0]
         self.controller_axis_values = {0: 0, 1:0, 2:0, 3:0, 4:-1, 5:-1}
         self.controller_inputs = []
         self.joystick_inputs = None

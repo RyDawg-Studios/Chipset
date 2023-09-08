@@ -40,11 +40,11 @@ class HomingActor(Actor):
         return super().update()
 
 class DefaultBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target)
 
 class DevBullet(Bullet):
-    def __init__(self, man, pde, owner, target=[0,0], position=[0, 0], scale=[20, 4]):
+    def __init__(self, man, pde, owner=None, target=[0,0], position=[0, 0], scale=[20, 4]):
         super().__init__(man, pde, owner, position=position, scale=scale,target=target, sprite=r'data\topdownshooter\assets\sprites\weapons\devgun\devbullet.png')
         self.scale = scale
         self.damage = 5
@@ -74,7 +74,7 @@ class DevBullet(Bullet):
 
 
 class Grenade(Bullet):
-    def __init__(self, man, pde, owner, target=[0,0], scale = [20, 14],position=[0, 0]):
+    def __init__(self, man, pde, owner=None, target=[0,0], scale = [20, 14],position=[0, 0]):
         super().__init__(man, pde, owner, position=position, scale=scale, target=target, sprite=r'data\topdownshooter\assets\sprites\weapons\grenadelauncher\grenade.png')
         self.lifetime = 120
         self.destroyOnCollide = False
@@ -151,25 +151,25 @@ class Grenade(Bullet):
         self.man.add_object(obj=Explosion(man=self.man, pde=self.pde, owner=self, position=self.rect.center, scale=[128, 128]))
 
 class LaserBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\lasermachinegun\laserbullet.png')
         self.speed = 20
         self.damage = 5
 
 class SniperBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[24, 3], sprite=r'data\topdownshooter\assets\sprites\weapons\sniper\sniperbullet.png')
         self.speed = 24
         self.damage = random.randint(80, 120)
 
 class RevolverBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[24, 3], sprite=r'data\topdownshooter\assets\sprites\weapons\sniper\sniperbullet.png')
         self.speed = 32
         self.damage = 20
 
 class ShotgunBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, sprite=r'data\topdownshooter\assets\sprites\weapons\shotgun\shotgunbullet.png')
         self.damage = 6
         self.speed = 18
@@ -182,13 +182,13 @@ class ShotgunBullet(Bullet):
 
 
 class SMGBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target)
         self.speed = 20
         self.damage = 2
 
 class Electrosphere(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[16, 16], sprite=r'data\topdownshooter\assets\sprites\weapons\electrospherelauncher\electroball.png')
         self.speed = 8
         self.destroyOnCollide = False
@@ -278,11 +278,8 @@ class Electrosphere(Bullet):
             e = self.man.add_object(obj=self.explosion(man=self.man, pde=self.pde, owner=self, position = self.position, scale = [128, 128]))
             self.deconstruct()
 
-
-
-
 class SplatBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         self.color = random.choice(['blue', 'orange'])
         if self.color == 'orange':
             s = r'data\topdownshooter\assets\sprites\weapons\splatgun\splatorange.png'
@@ -310,7 +307,7 @@ class SplatBullet(Bullet):
         self.pde.display_manager.particleManager.add_object(obj=Splat(man=self.pde.display_manager.particleManager, pde=self.pde, position=list(self.rect.center), owner=self, color=self.color))
 
 class Rocket(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale = [30, 20], sprite=r'data\topdownshooter\assets\sprites\weapons\rocketlauncher\rocket.png')
         self.speed = 10
         self.damage = 15
@@ -325,37 +322,37 @@ class Rocket(Bullet):
         return super().hit(object)
 
 class LaserBullet2(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale = [32, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\laserrifle\chainriflebullet.png')
         self.speed = 15
         self.damage = 15
 
 class TurretBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[24, 3], sprite=r'data\topdownshooter\assets\sprites\weapons\turret\turret_bullet.png')
         self.speed = 30
         self.damage = 4
 
 class PistolBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[12, 3], sprite=r'data\topdownshooter\assets\sprites\weapons\pistol\pistolbullet.png')
         self.speed = 18
         self.damage = 8
 
 class FireBall(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale = [26, 12], sprite=r'data\topdownshooter\assets\sprites\weapons\flamepistol\fireball.png')
         self.speed = 12
         self.damage = 12
 
 class Coin(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale = [4,4], sprite=r'data\topdownshooter\assets\sprites\weapons\loosechange\coin.png')
         self.speed = 20
         self.damage = 5
 
 class Flame(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target,scale=[26,12], sprite=r'data\topdownshooter\assets\sprites\weapons\flamepistol\fireball.png')
         self.damage = 0.45
         self.speed = 18
@@ -379,13 +376,13 @@ class Flame(Bullet):
                 self.deconstruct()
 
 class DartBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\dartrifle\dartbullet.png')
         self.speed = 22
         self.damage = 8
 
 class StarmadaBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         color = random.choice(['r', 'o', 'y', 'g', 'b', 'p'])
         self.color = r"data\topdownshooter\assets\sprites\weapons\starmada\starmada_" + color + ".png"
 
@@ -397,7 +394,7 @@ class StarmadaBullet(Bullet):
         self.splattime = random.randint(10, 20)
 
 class AntiMatterBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\antimatterrifle\antimatterbullet.png')
         self.speed = 30
         self.damage = 100
@@ -409,7 +406,7 @@ class AntiMatterBullet(Bullet):
             b = self.man.add_object(BlackHole(man=self.man, pde=self.pde, position=self.position, owner=self.owner.owner))
 
 class GodrayBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, scale=[20, 4], sprite=r'data\topdownshooter\assets\sprites\weapons\godray\godraybullet.png')
         self.lifetime = 360
         self.speed = 18
@@ -424,7 +421,7 @@ class GodrayBullet(Bullet):
         super().construct()
 
 class BiblizerBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, sprite=r'data\topdownshooter\assets\sprites\weapons\godray\godraybullet.png')
         self.damage = 8
         self.speed = 18
@@ -436,7 +433,7 @@ class BiblizerBullet(Bullet):
             self.deconstruct()
 
 class BuckshotBullet(Bullet):
-    def __init__(self, man, pde, owner, position=[0, 0], target=[0, 0]):
+    def __init__(self, man, pde, owner=None, position=[0, 0], target=[0, 0]):
         super().__init__(man, pde, owner, position, target, sprite=r'data\topdownshooter\assets\sprites\weapons\shotgun\shotgunbullet.png')
         self.damage = 6
         self.speed = 18

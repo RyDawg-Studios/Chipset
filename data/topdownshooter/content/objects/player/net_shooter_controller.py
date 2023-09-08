@@ -77,6 +77,9 @@ class NetShooterController(PlayerController):
                 if self.owner.weapon is not None:
                     self.owner.shootweapon(target=pygame.Vector2(self.owner.weapon.position) + (pygame.Vector2(self.axis[2], self.axis[3])*35))
 
+        self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'mouse', 'event_args': [self.inpman.mouse_position]}})
+
+
     def on_keydown(self, data):
         self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [data, True]}})
 

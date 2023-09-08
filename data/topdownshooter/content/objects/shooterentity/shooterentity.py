@@ -161,6 +161,7 @@ class ShooterEntity(Actor):
         if self.weapon != None:
             self.weapon.queuedeconstruction()
 
+    
 
     def offsetweapon(self, weapon, offset=10):
         if weapon is not None:
