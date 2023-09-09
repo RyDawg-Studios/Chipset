@@ -25,6 +25,8 @@ class PyDawgEngine:
 
         self.game = game(pde=self)
         
+        self.config_manager = ConfigManager(pde=self)
+        self.config_manager.active = True
 
         self.event_manager = EventManager(pde=self)
         self.event_manager.active = True
@@ -41,8 +43,6 @@ class PyDawgEngine:
         self.player_manager = PlayerManager(pde=self)
         self.player_manager.active = True
 
-        self.config_manager = ConfigManager(pde=self)
-        self.config_manager.active = True
 
         self.sprite_manager = SpriteManager(pde=self)
         self.sprite_manager.active = True
