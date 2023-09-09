@@ -42,23 +42,22 @@ class ShooterPlayer(ShooterEntity):
             "weapon": object
         }
 
-        
-
-
         self.weaponindx = 0
 
         self.stock = [u.SplitStreamUpgrade, u.DisarmamentUpgrade, u.VamprismUpgrade]
 
         self.ignoreEntities =[ShooterPlayer]
 
+        self.controller = NetShooterController(owner=self)
+
     def construct(self):
         super().construct()
-        self.components["PlayerController"] = NetShooterController(owner=self)
+        self.components["PlayerController"] = self.controller
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
 
-        self.crosshair = self.man.pde.display_manager.userInterface.add_object(obj=Crosshair(man=self.man.pde.display_manager.userInterface, pde=self.pde, position=[0,0]))
+        # self.crosshair = self.man.pde.display_manager.userInterface.add_object(obj=Crosshair(man=self.man.pde.display_manager.userInterface, pde=self.pde, position=[0,0]))
         
-        self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
+        # self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
 
     def cycleweapon(self):
         index = self.currentweapon + 1

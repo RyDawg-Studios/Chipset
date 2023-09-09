@@ -7,7 +7,7 @@ from data.engine.eventdispatcher.eventdispatcher import EventDispatcher
 from data.engine.server.connection import Connection
 
 class Server():
-    def __init__(self, pde, server="127.0.0.1", port=8080, maxClients=2):
+    def __init__(self, pde, server="192.168.1.102", port=8080, maxClients=2):
         self.pde = pde
         self.server = server
         self.port = port
@@ -30,6 +30,9 @@ class Server():
     def update(self):
         data = self.sock.recvfrom(1024)
         self.handle_data(data)
+        for object in self.pde.level_manager.level.objectManager.objects:
+            if object.replicate:
+                self.emit_event({'message_type': 'event', 'message_data': {'event_name': 'spawn', 'event_args': [object.serialize()]}})
 
 
     def emit_event(self, data):
@@ -57,7 +60,7 @@ class Server():
             if data:
                 data = json.loads(data)
 
-                print(f"Receiving event: {data}")
+                print(f"Receiving event: {data} from {client}")
 
                 if data["message_type"] == 'ping':
                     print(data['message_data']['data'])

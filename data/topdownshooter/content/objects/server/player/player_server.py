@@ -5,6 +5,8 @@ from data.engine.particle.particle_emitter import ParticleEmitter
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
+from data.topdownshooter.content.objects.player.net_shooter_controller import NetShooterController
+from data.topdownshooter.content.objects.player.player import ShooterPlayer
 from data.topdownshooter.content.objects.server.player.client_linked_shooter_controller import ClientLinked_ShooterController
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
@@ -19,98 +21,9 @@ class Crosshair(Actor):
         super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\ui\hud\reticle.png', layer=5)
 
-class ShooterPlayerServer(ShooterEntity):
-    def __init__(self, man, pde, position=None, hp=400):
-        super().__init__(man, pde, position=position)
-        self.maxhp = 400
-        self.hp = hp
-        self.maxVelocity = 1
-        self.velocity = self.maxVelocity
-        self.pausable = False
-        self.bleed = True
-        self.crosshair = None
-        self.handeling = 1
-        self.replicate = True
-        self.replication_package = 'tds'
-        self.replication_id = 'controllable_player'
-        self.replicable_attributes = {
-            "position": list,
-            "healthbar": object,
-            "weapon": object
-        }
+class ShooterPlayerServer(ShooterPlayer):
+    def __init__(self, man, pde, client=(0,0), position=[0,0], hp=400):
+        super().__init__(man, pde, position, hp)
+        self.client = client
 
-
-        self.weaponindx = 0
-
-        self.stock = [u.SplitStreamUpgrade, u.DisarmamentUpgrade, u.VamprismUpgrade]
-
-        self.ignoreEntities =[ShooterPlayerServer]
-
-    def construct(self):
-        super().construct()
-        self.components["PlayerController"] = ClientLinked_ShooterController(owner=self)
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
-
-    def cycleweapon(self):
-        index = self.currentweapon + 1
-        if index > 6:
-            index = 1
-        self.switchweapon(index)
-
-    def spawnmagnet(self):
-        self.man.add_object(Magnet(man=self.man, pde=self.pde, position=self.pde.input_manager.mouse_position))
-
-    def managereticle(self):
-        if self.weapon is not None:
-            self.crosshair.rect.center = self.target
-            self.crosshair.components["Sprite"].sprite.opacity = 255
-        else:
-            self.crosshair.components["Sprite"].sprite.opacity = 0
-
-    def settargetposition(self):
-        if len(self.pde.input_manager.joysticks) > 0:
-            if self.weapon is not None:
-                self.target = pygame.Vector2(self.weapon.rect.center) + (pygame.Vector2(round(self.components["PlayerController"].axis[2], 2), round(self.components["PlayerController"].axis[3], 2)) * 50)
-                self.cam.rect.center = self.target
-            else:
-                self.target = self.position
-        else:
-            self.target = self.pde.input_manager.mouse_position
-
-    def openUpgradeSelectionUI(self):
-        self.pde.game.ui.openUpgradeSelection()
-
-    def update(self):
-        super().update()
-        self.pde.game.player = self
-
-        self.pde.game.playerData.hp = self.hp
-        self.pde.game.playerData.loadout = self.weapons.copy()
-        self.pde.game.playerData.currentWeapon = self.currentweapon
-
-        self.settargetposition()
-        
-        if self.weapon != None:
-            self.weapon.rotation = objectlookatposition(self.weapon, self.target)
-
-        if self.deadticks >= 100:
-            self.pde.game.game_over()
-            self.pde.game.restart()
-            return
-
-        #self.fo.rect.center = self.cam.rect.center
-
-    def die(self, killer):
-        super().die(killer)
-        self.pde.game.player = None
-        self.canMove = False
-        self.canShoot = False
-        self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\deadme.png', layer=2)
-        self.dropweapon()
-
-    def deconstruct(self):
-        super().deconstruct()
-
-    def onKill(self, enemy):
-        super().onKill(enemy)
-        self.pde.game.playerData.kills += 1
+        self.controller = ClientLinked_ShooterController(owner=self, client=self.client)

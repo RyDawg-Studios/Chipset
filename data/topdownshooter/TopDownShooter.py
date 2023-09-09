@@ -51,5 +51,4 @@ class ShooterGame(Game):
     
     def update(self):
         super().update()
-        self.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'update_game_state', 'event_args': []}})
 

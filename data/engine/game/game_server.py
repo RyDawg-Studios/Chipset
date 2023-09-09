@@ -1,18 +1,11 @@
-class GameServer:
+from data.engine.game.game import Game
+
+
+class GameServer(Game):
     def __init__(self, pde):
-        self.pde = pde
+        super().__init__(pde)
 
     def activate(self):
+        super().activate()
         self.pde.server_manager.server.onPlayerJoin_Dispatcher.bind(self.add_player)
         return
-
-    def clearObjectManager(self):
-        if self.pde.level_manager.level is not None:
-            self.pde.level_manager.clearlevel()
-
-    def update(self):
-        pass
-
-    def add_player(self, data):
-        return
-

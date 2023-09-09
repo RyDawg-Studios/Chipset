@@ -94,7 +94,7 @@ class PyDawgEngine:
         self.player_manager.update()
         self.game.update()
 
-        self.dt = self.clock.tick(60) * 0.001 * self.targetFPS
+        self.dt = self.clock.tick(60) / 1000
         self.fps = round(self.clock.get_fps())
 
         pygame.display.set_caption(str(self.fps))

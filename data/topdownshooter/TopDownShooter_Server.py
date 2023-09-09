@@ -57,6 +57,5 @@ class ShooterGameServer(GameServer):
     
     def add_player(self, data):
         super().add_player(data)
-        print("Player Added")
-        p = self.pde.level_manager.level.objectManager.add_object(ShooterPlayerServer(man=self.pde.level_manager.level.objectManager, pde=self.pde, position=[0,0]))
+        p = self.pde.level_manager.level.objectManager.add_object(ShooterPlayerServer(man=self.pde.level_manager.level.objectManager, pde=self.pde, position=[0,0], client=data[1]))
         p.removeweapon()

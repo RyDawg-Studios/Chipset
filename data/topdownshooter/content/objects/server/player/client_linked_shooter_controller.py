@@ -1,9 +1,9 @@
 import pygame
-from data.engine.player.player_controller import PlayerController
+from data.engine.player.net_player_controller import NetPlayerController
 
-class ClientLinked_ShooterController(PlayerController):
-    def __init__(self, owner):
-        super().__init__(owner)
+class ClientLinked_ShooterController(NetPlayerController):
+    def __init__(self, owner, client=(0,0)):
+        super().__init__(owner, client)
         self.resetPos = True
         self.axis = [0, 0, 0, 0, 0, 0]
 
@@ -17,7 +17,6 @@ class ClientLinked_ShooterController(PlayerController):
         if input == pygame.K_LALT or input == 8:
             self.owner.altShot(target=self.owner.pde.input_manager.mouse_position)
         if input == pygame.K_f or input == 2:
-            print("F")
             self.owner.interact()
         if input == pygame.K_q:
             self.owner.cycleweapon()
