@@ -9,7 +9,6 @@ class ObjectManager:
 
     def __init__(self, pde) -> None:
         self.objects = []
-        self.hashed_objects = []
         self.pde = pde
         self.clearing = False
 
@@ -22,14 +21,12 @@ class ObjectManager:
     def add_object(self, obj):
         if obj not in self.objects:
             self.objects.append(obj)
-            self.hashed_objects.append(hash(obj))
             obj.construct()
 
         return obj
 
     def remove_object(self, obj, outer=None):
         if obj in self.objects:
-            self.hashed_objects.append(hash(obj))
             self.objects.remove(obj)
             return True
         else:
