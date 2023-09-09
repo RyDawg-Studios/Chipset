@@ -77,6 +77,19 @@ class Object:
             component.deconstruct()
             component = None
         self.components = {}
+
+    def serialize(self):
+        data = {'package_id': self.replication_package, 'object_id': self.replication_id, 'attributes': {}, 'hash': hash(self)}
+        for attr, attr_type in self.replicable_attributes.items():
+
+            if attr_type is not object:
+                data["attributes"][attr] = [attr_type((getattr(self, str(attr)))), False]
+            else:
+                if getattr(self, str(attr)) is not None:
+                    data["attributes"][attr] = [getattr(self, str(attr)).serialize(), True]
+                else:
+                    data["attributes"][attr] = [None, False]
+        return data
         
     def deserialize(self):
         return

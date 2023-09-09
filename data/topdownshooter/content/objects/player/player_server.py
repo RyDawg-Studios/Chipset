@@ -5,8 +5,7 @@ from data.engine.particle.particle_emitter import ParticleEmitter
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
-from data.topdownshooter.content.objects.player.net_shooter_controller import NetShooterController
-from data.topdownshooter.content.objects.player.shooter_controller import ShooterController
+from data.topdownshooter.content.objects.player.client_linked_shooter_controller import ClientLinked_ShooterController
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
 from data.topdownshooter.content.objects.widget.shooterwidget import ShooterWidget
@@ -20,9 +19,8 @@ class Crosshair(Actor):
         super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\ui\hud\reticle.png', layer=5)
 
-
-class ShooterPlayer(ShooterEntity):
-    def __init__(self, man, pde, position=[0,0], hp=400):
+class ShooterPlayerServer(ShooterEntity):
+    def __init__(self, man, pde, position=None, hp=400):
         super().__init__(man, pde, position=position)
         self.maxhp = 400
         self.hp = hp
@@ -32,7 +30,6 @@ class ShooterPlayer(ShooterEntity):
         self.bleed = True
         self.crosshair = None
         self.handeling = 1
-
         self.replicate = True
         self.replication_package = 'tds'
         self.replication_id = 'controllable_player'
@@ -42,30 +39,23 @@ class ShooterPlayer(ShooterEntity):
             "weapon": object
         }
 
-        
-
 
         self.weaponindx = 0
 
         self.stock = [u.SplitStreamUpgrade, u.DisarmamentUpgrade, u.VamprismUpgrade]
 
-        self.ignoreEntities =[ShooterPlayer]
+        self.ignoreEntities =[ShooterPlayerServer]
 
     def construct(self):
         super().construct()
-        self.components["PlayerController"] = NetShooterController(owner=self)
+        self.components["PlayerController"] = ClientLinked_ShooterController(owner=self)
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\me.png', layer=2)
-
-        self.crosshair = self.man.pde.display_manager.userInterface.add_object(obj=Crosshair(man=self.man.pde.display_manager.userInterface, pde=self.pde, position=[0,0]))
-        
-        self.cam = self.man.add_object(ShooterCamera(man=self.man, pde=self.pde, position=self.position, target=self))
 
     def cycleweapon(self):
         index = self.currentweapon + 1
         if index > 6:
             index = 1
         self.switchweapon(index)
-
 
     def spawnmagnet(self):
         self.man.add_object(Magnet(man=self.man, pde=self.pde, position=self.pde.input_manager.mouse_position))
@@ -99,7 +89,6 @@ class ShooterPlayer(ShooterEntity):
         self.pde.game.playerData.currentWeapon = self.currentweapon
 
         self.settargetposition()
-        #self.managereticle()
         
         if self.weapon != None:
             self.weapon.rotation = objectlookatposition(self.weapon, self.target)

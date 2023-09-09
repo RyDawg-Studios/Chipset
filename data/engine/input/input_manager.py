@@ -69,3 +69,14 @@ class InputManager():
         if pygame.K_ESCAPE in self.key_inputs:
             pygame.quit()
             sys.exit()
+
+    def handle_net_input(self, data, client):
+        if data[1] == True: #If Keydown
+            self.key_inputs.append(data[0])
+            for pc in self.pde.player_manager.player_controllers:
+                pc.on_input(data[0])
+        else:
+            self.key_inputs.remove(data[0])
+
+    def handle_net_mouse(self, data, client):
+        self.mouse_position = data[0]

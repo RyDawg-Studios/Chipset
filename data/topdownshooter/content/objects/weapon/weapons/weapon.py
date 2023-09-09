@@ -54,7 +54,8 @@ class Weapon(Actor):
         self.replication_package = 'tds'
         self.replication_id = 'weapon'
         self.replicable_attributes = {
-            "id": str
+            "id": str,
+            "owner": str
         }
 
 
