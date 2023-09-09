@@ -112,6 +112,9 @@ class UpgradeContainer(Actor):
         self.weapon = weapon
         self.upgrades = ["Empty", "Empty", "Empty"]
         self.box = box
+        self.checkForCollision = False
+        self.checkForOverlap = False
+        self.moveable = False
         for inx, upgrade in enumerate(self.weapon.upgrades):
             self.upgrades[inx] = upgrade.id 
         self.icons = []
@@ -135,6 +138,7 @@ class InfoBox(Actor):
         self.weapon = weapon
         self.checkForCollision = False
         self.checkForOverlap = False
+        self.moveable = False
         self.useCenterForPosition = True
 
     

@@ -13,7 +13,7 @@ from data.topdownshooter.content.levels.TestLevel import TestLevel
 from data.topdownshooter.content.levels.GeneratedLevel import GeneratedLevel
 from data.topdownshooter.content.objects.player.player import ShooterPlayer
 from data.topdownshooter.content.objects.player.player_data_object import PlayerDataObject
-from data.topdownshooter.content.objects.player.player_server import ShooterPlayerServer
+from data.topdownshooter.content.objects.server.player.player_server import ShooterPlayerServer
 from data.topdownshooter.content.objects.widget.leveltext import LevelText
 from data.topdownshooter.content.objects.widget.shooterwidget import ShooterWidget
 

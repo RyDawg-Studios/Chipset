@@ -5,7 +5,7 @@ from data.engine.particle.particle_emitter import ParticleEmitter
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
-from data.topdownshooter.content.objects.player.client_linked_shooter_controller import ClientLinked_ShooterController
+from data.topdownshooter.content.objects.server.player.client_linked_shooter_controller import ClientLinked_ShooterController
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
 from data.topdownshooter.content.objects.widget.fadeout import FadeOut
 from data.topdownshooter.content.objects.widget.shooterwidget import ShooterWidget
