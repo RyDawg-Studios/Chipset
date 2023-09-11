@@ -1,4 +1,4 @@
-from data.engine.PyDawgEngine_Server import PyDawgEngineServer
+from data.engine.server.engine.PyDawgEngine_Server import PyDawgEngineServer
 import pygame
 
 pygame.init()

@@ -1,40 +1,22 @@
-import pygame
-from data.engine.component.component import Component
 
-class NetPlayerController(Component):
-    def __init__(self, owner, client) -> None:
+from data.engine.player.player_controller import PlayerController
+
+class NetPlayerController(PlayerController):
+    def __init__(self, owner):
         super().__init__(owner)
-        self.inpman = self.owner.pde.input_manager
-        self.client = client
-        self.owner.pde.player_manager.net_controllers[self.client] = self
 
-    def update(self):
-        self.manage_input()
-        super().update()
+        self.inpman.on_input_event.bind(self.on_keydown)
+        self.inpman.on_output_event.bind(self.on_keyup)
 
-    def manage_input(self):
-        pass
-
-    def on_joystick(self, event):
-        pass
-
-    def update_debug(self):
-        pass
-
-    def on_input(self, input):
-        if input == pygame.K_F1:
-            self.owner.pde.level_manager.level.objectManager.printobjects()
-            
-    def on_mouse(self, button):
-        pass
-
-    def deconstruct(self):
-        self.owner.pde.player_manager.net_controllers.pop(self)
-        return super().deconstruct()
-    
     def on_keydown(self, data):
         self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [data, True]}})
+        return
 
-    
     def on_keyup(self, data):
         self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [data, False]}})
+        return
+    
+    def deconstruct(self):
+        super().deconstruct()
+        return
+    

@@ -17,7 +17,7 @@ class Network():
 
 
     def send_event(self, data):
-        print(f"Sending: {data}")
+        #print(f"Sending: {data}")
         dump = json.dumps(data)
         event = bytes(dump, "utf-8")
         self.connection.sendto(event, self.address)
@@ -33,7 +33,7 @@ class Network():
             if data:
                 data = json.loads(data)
 
-                print(f"Receiving event: {data}")
+                #print(f"Receiving event: {data}")
 
                 if data["message_type"] == 'ping':
                     print(data['message_data']['data'])

@@ -2,7 +2,6 @@ import pygame
 
 from data.engine.quadtree.Quadtree import QuadTree
 from data.engine.quadtree.range import Rectangle
-from data.engine.networking import pde_network_table as nt
 
 
 class ObjectManager:

@@ -1,14 +1,11 @@
 import pygame
-from data.engine.player.player_controller import PlayerController
+from data.engine.player.net_player_controller import NetPlayerController
 
-class NetShooterController(PlayerController):
+class NetShooterController(NetPlayerController):
     def __init__(self, owner):
         super().__init__(owner)
         self.resetPos = True
         self.axis = [0, 0, 0, 0, 0, 0]
-
-        self.inpman.on_input_event.bind(self.on_keydown)
-        self.inpman.on_output_event.bind(self.on_keyup)
 
     def on_input(self, input):
         super().on_input(input)
@@ -78,11 +75,3 @@ class NetShooterController(PlayerController):
                     self.owner.shootweapon(target=pygame.Vector2(self.owner.weapon.position) + (pygame.Vector2(self.axis[2], self.axis[3])*35))
 
         #self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'mouse', 'event_args': [self.inpman.mouse_position]}})
-
-
-    def on_keydown(self, data):
-        self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [data, True]}})
-
-    
-    def on_keyup(self, data):
-        self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [data, False]}})

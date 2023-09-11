@@ -19,13 +19,13 @@ class HealthBar(Actor):
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\topdownshooter\assets\sprites\ui\healthbar\bar.png', layer=6)
 
     def update(self):
+        super().update()
         self.rect.centerx= self.owner.position.x
         self.rect.centery = self.owner.position.y - 24
         if self.owner.hp > 0:
             self.rect.width = (self.owner.hp / self.owner.maxhp )* 40
         else:
             self.rect.width = 0
-        return super().update()
     
 class LevelText(Actor):
     def __init__(self, man, pde):

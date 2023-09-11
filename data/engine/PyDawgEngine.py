@@ -58,7 +58,7 @@ class PyDawgEngine:
 
         self.clock = pygame.time.Clock()
         self.dt = 0
-        self.targetFPS = 60
+        self.targetFPS = 30
         self.fps = 0
 
         self.replication_tables = {"pde": pde_network_table,

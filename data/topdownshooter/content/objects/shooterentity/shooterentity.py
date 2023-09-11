@@ -12,12 +12,12 @@ import data.topdownshooter.content.objects.weapon.upgrade.upgrades as u
 
 
 class ShooterEntity(Actor):
-    def __init__(self, man, pde, position=[0, 0], scale=[32, 32], maxhp=100, hp=100):
+    def __init__(self, man, pde, position=[0, 0], maxhp=100, hp=100):
         super().__init__(man, pde)
         #----------< Transform Info >----------#
 
         self.position = position
-        self.scale = scale
+        self.scale = [32, 32]
         self.maxVelocity = 0
         self.moveable = True
 

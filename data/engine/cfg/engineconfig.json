@@ -11,7 +11,7 @@
         "network":
         {
             "connectToServer": true,
-            "address": "192.168.1.102"
+            "address": "localhost"
         }
     }
 }

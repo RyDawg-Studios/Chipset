@@ -5,6 +5,7 @@ import _thread as threading
 from data.engine.display.display_manager import DisplayManager
 from data.engine.event.event_manager import EventManager
 from data.engine.input.input_manager import InputManager
+from data.engine.input.input_manager_server import InputManagerServer
 from data.engine.level.level_manager import LevelManager
 from data.engine.mouse.mouse_manager import MouseManager
 from data.engine.player.player_manger import PlayerManager
@@ -34,7 +35,7 @@ class PyDawgEngineServer:
         self.level_manager = LevelManager(pde=self)
         self.level_manager.active = True
 
-        self.input_manager = InputManager(pde=self)
+        self.input_manager = InputManagerServer(pde=self)
         self.input_manager.active = True
 
         self.player_manager = PlayerManager(pde=self)

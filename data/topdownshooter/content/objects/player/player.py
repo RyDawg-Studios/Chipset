@@ -1,15 +1,10 @@
 import pygame
 from data.engine.actor.actor import Actor
 from data.engine.fl.world_fl import objectlookatposition
-from data.engine.particle.particle_emitter import ParticleEmitter
 from data.engine.sprite.sprite_component import SpriteComponent
-from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.hazard.magnet.magnet import Magnet
-from data.topdownshooter.content.objects.player.net_shooter_controller import NetShooterController
 from data.topdownshooter.content.objects.player.shooter_controller import ShooterController
 from data.topdownshooter.content.objects.shooterentity.shooterentity import ShooterEntity
-from data.topdownshooter.content.objects.widget.fadeout import FadeOut
-from data.topdownshooter.content.objects.widget.shooterwidget import ShooterWidget
 import data.topdownshooter.content.objects.weapon.upgrade.upgrades as u
 
 class Crosshair(Actor):

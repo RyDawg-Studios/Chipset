@@ -35,6 +35,7 @@ class InputManager():
             self.key_inputs.append(event.key)
             for pc in self.pde.player_manager.player_controllers:
                 pc.on_input(event.key)
+
             self.on_input_event.call(event.key)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -72,10 +73,10 @@ class InputManager():
 
     def handle_net_input(self, data, client):
         if data[1] == True: #If Keydown
-            self.key_inputs.append(data[0])
+            self.pde.player_manager.net_controllers[client].key_inputs.append(data[0])
             self.pde.player_manager.net_controllers[client].on_input(data[0])
         else:
-            self.key_inputs.remove(data[0])
+            self.pde.player_manager.net_controllers[client].key_inputs.remove(data[0])
 
     def handle_net_mouse(self, data, client):
         self.mouse_position = data[0]

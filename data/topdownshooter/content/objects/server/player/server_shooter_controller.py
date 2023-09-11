@@ -1,7 +1,8 @@
 import pygame
-from data.engine.player.net_player_controller import NetPlayerController
 
-class ClientLinked_ShooterController(NetPlayerController):
+from data.engine.server.player.server_player_controller import ServerPlayerController
+
+class ServerShooterController(ServerPlayerController):
     def __init__(self, owner, client=(0,0)):
         super().__init__(owner, client)
         self.resetPos = True
@@ -35,32 +36,32 @@ class ClientLinked_ShooterController(NetPlayerController):
     def manage_input(self):
         super().manage_input()
 
-        if pygame.K_RIGHT in self.owner.pde.input_manager.key_inputs or pygame.K_d in self.owner.pde.input_manager.key_inputs:
+        if pygame.K_RIGHT in self.key_inputs or pygame.K_d in self.key_inputs:
             self.owner.movement[0] = 1
-        elif pygame.K_LEFT in self.owner.pde.input_manager.key_inputs or pygame.K_a in self.owner.pde.input_manager.key_inputs:
+        elif pygame.K_LEFT in self.key_inputs or pygame.K_a in self.key_inputs:
             self.owner.movement[0] = -1
         else:
             self.owner.movement[0] = 0
-        if pygame.K_UP in self.owner.pde.input_manager.key_inputs or pygame.K_w in self.owner.pde.input_manager.key_inputs:
+        if pygame.K_UP in self.key_inputs or pygame.K_w in self.key_inputs:
             self.owner.movement[1] = -1
-        elif pygame.K_DOWN in self.owner.pde.input_manager.key_inputs or pygame.K_s in self.owner.pde.input_manager.key_inputs:
+        elif pygame.K_DOWN in self.key_inputs or pygame.K_s in self.key_inputs:
             self.owner.movement[1] = 1
         else:
             self.owner.movement[1] = 0
 
-        if pygame.K_SPACE in self.owner.pde.input_manager.key_inputs:
+        if pygame.K_SPACE in self.key_inputs:
             self.owner.shootweapon(self.owner.pde.input_manager.mouse_position)
     
     def on_joystick(self, event):
+        super().on_joystick(event)
         if event.axis <= 6:
             self.axis[event.axis] = event.value
 
         if self.axis[4] > 0.5:
             self.owner.dodging = True
 
-        
+        return
 
-        return super().on_joystick(event)
     
     def update(self):
         super().update()

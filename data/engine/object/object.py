@@ -80,8 +80,17 @@ class Object:
                 components.append(c)
         return components
 
-    def serialize(self):
-        data = {'package_id': self.replication_package, 'object_id': self.replication_id, 'attributes': {}, 'hash': hash(self)}
+    def serialize(self, _id=''):
+        rep_id = ''
+
+        if _id == '':
+            rep_id = self.replication_id
+        else:
+            rep_id = _id
+            
+
+        data = {'package_id': self.replication_package, 'object_id': rep_id, 'attributes': {}, 'hash': hash(self)}
+
         for attr, attr_type in self.replicable_attributes.items():
 
             if attr_type is not object:
@@ -98,6 +107,9 @@ class Object:
     
     def onNetworkSpawn(self, data):
         return
+    
+    def server_replicate_object(self, server, client):
+        server.emit_event({'message_type': 'event', 'message_data': {'event_name': 'spawn', 'event_args': [self.serialize()]}})
 
     def deconstruct(self, outer=None):
         self.pause()
@@ -106,7 +118,6 @@ class Object:
             component.deconstruct()
             component = None
         self.components = {}
-
         return
     
 
