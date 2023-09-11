@@ -20,6 +20,9 @@ class ServerManager():
         t.start()
 
     def update(self):
+        for object in self.pde.level_manager.level.objectManager.objects:
+            if object.replicate:
+                self.server.emit_event({'message_type': 'event', 'message_data': {'event_name': 'spawn', 'event_args': [object.serialize()]}})
         return
 
     def disconnect(self):

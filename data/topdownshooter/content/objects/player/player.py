@@ -24,6 +24,7 @@ class Crosshair(Actor):
 class ShooterPlayer(ShooterEntity):
     def __init__(self, man, pde, position=[0,0], hp=400):
         super().__init__(man, pde, position=position)
+        
         self.maxhp = 400
         self.hp = hp
         self.maxVelocity = 1
@@ -38,8 +39,8 @@ class ShooterPlayer(ShooterEntity):
         self.replication_id = 'controllable_player'
         self.replicable_attributes = {
             "position": list,
-            "healthbar": object,
-            "weapon": object
+            "weapon": object,
+            "hp": int
         }
 
         self.weaponindx = 0
@@ -48,7 +49,7 @@ class ShooterPlayer(ShooterEntity):
 
         self.ignoreEntities =[ShooterPlayer]
 
-        self.controller = NetShooterController(owner=self)
+        self.controller = ShooterController(owner=self)
 
     def construct(self):
         super().construct()

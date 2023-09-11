@@ -31,3 +31,10 @@ class NetPlayerController(Component):
     def deconstruct(self):
         self.owner.pde.player_manager.net_controllers.pop(self)
         return super().deconstruct()
+    
+    def on_keydown(self, data):
+        self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [data, True]}})
+
+    
+    def on_keyup(self, data):
+        self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [data, False]}})

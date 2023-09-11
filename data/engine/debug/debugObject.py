@@ -1,7 +1,6 @@
 import pygame
 from data.engine.actor.actor import Actor
 from data.engine.ai.ai_component import AIComponent
-from data.engine.networking.replication_component import ReplicationComponent
 from data.engine.projectile.projectile_component import ProjectileComponent
 from data.engine.sprite.sprite_component import SpriteComponent
 from data.engine.debug.debugAI import debugAI
@@ -92,7 +91,6 @@ class TestActor(Actor):
     def construct(self):
         super().construct()
         self.components["Sprite"] = SpriteComponent(owner=self, sprite=r'data\assets\sprites\mariohitbox.png', layer=2)
-        self.components["Rep"] = ReplicationComponent(owner=self)
 
     def takedamage(self, obj):
         return True

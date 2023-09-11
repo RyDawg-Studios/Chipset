@@ -1,5 +1,6 @@
 import gc
 import pygame
+from data.engine.eventdispatcher.eventdispatcher import EventDispatcher
 from data.engine.object.object import Object
 from data.engine.widgets.button import Button
 from data.engine.sprite.sprite_component import SpriteComponent
@@ -48,6 +49,8 @@ class Actor(Object):
 
         if self.pde.config_manager.config["config"]["debugMode"]:
             self.components["DebugButton"] = Button(owner=self, bind=self.printDebugInfo)
+
+
 
     def construct(self):
         super().construct()
@@ -136,7 +139,7 @@ class Actor(Object):
 
     def checkXcollision(self, movement):
         if self.canMove:
-            self.rect.x += self.movement.x * (60 * self.pde.dt)
+            self.rect.x += self.movement.x * (self.pde.dt)
             hits = self.getoverlaps()  
             for object in hits:
                 if isinstance(object, Actor) and object.checkForCollision and self.checkForCollision:
@@ -153,7 +156,7 @@ class Actor(Object):
 
     def checkYcollision(self, movement):
         if self.canMove:
-            self.rect.y += self.movement.y * (60 * self.pde.dt)
+            self.rect.y += self.movement.y * (self.pde.dt)
             hits = self.getoverlaps()  
             for object in hits:
                 if isinstance(object, Actor) and object.checkForCollision and self.checkForCollision:
@@ -176,7 +179,6 @@ class Actor(Object):
                 if objs is not None:
                     objects += objs.particles
         return objects
-
 
     def deconstruct(self, outer=None):
         self.collideInfo["Objects"] = []

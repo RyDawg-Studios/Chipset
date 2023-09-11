@@ -12,7 +12,7 @@ from data.engine.cfg.config_manager import ConfigManager
 from data.engine.sprite.sprite_manager import SpriteManager
 from data.engine.debug.debugGame import DebugGame
 from data.engine.server.server_manager import ServerManager
-from data.topdownshooter.TopDownShooter_Server import ShooterGameServer
+from data.topdownshooter.content.objects.server.game.TopDownShooter_Server import ShooterGameServer
 
 class PyDawgEngineServer:
 
@@ -72,7 +72,7 @@ class PyDawgEngineServer:
 
         self.active = True
 
-        sleep(1)
+        sleep(2)
 
         self.game.activate()
 
@@ -80,8 +80,11 @@ class PyDawgEngineServer:
             self.update()
 
     def update(self):
-        self.display_manager.update()
+        self.dt = (self.clock.tick(60) / 1000) * self.targetFPS
+        self.fps = round(self.clock.get_fps())
+
         self.server_manager.update()
+
         self.config_manager.update()
         self.event_manager.update()
         self.input_manager.update()
@@ -90,10 +93,8 @@ class PyDawgEngineServer:
         self.player_manager.update()
         self.game.update()
 
-        self.dt = self.clock.tick(60) * 0.001 * self.targetFPS
-        self.fps = round(self.clock.get_fps())
+        self.display_manager.update()
 
         pygame.display.set_caption(str(self.fps))
-
 
         

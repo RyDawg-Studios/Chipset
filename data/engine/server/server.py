@@ -30,9 +30,7 @@ class Server():
     def update(self):
         data = self.sock.recvfrom(1024)
         self.handle_data(data)
-        for object in self.pde.level_manager.level.objectManager.objects:
-            if object.replicate:
-                self.emit_event({'message_type': 'event', 'message_data': {'event_name': 'spawn', 'event_args': [object.serialize()]}})
+
 
 
     def emit_event(self, data):

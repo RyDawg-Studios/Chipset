@@ -1,5 +1,7 @@
 import struct
 
+from data.engine.eventdispatcher.eventdispatcher import EventDispatcher
+
 
 class Object:
     def __init__(self, man, pde):
@@ -30,7 +32,15 @@ class Object:
 
         self.quadtree = None
 
+        # -----< Network Info >----- #
+        
+        self.onNetworkUpdate_Event = EventDispatcher()
+        self.onNetworkSpawn_Event = EventDispatcher()
+
+
     def construct(self):
+        self.onNetworkSpawn_Event.bind(self.onNetworkSpawn)
+        self.onNetworkUpdate_Event.bind(self.onNetworkUpdate)
         return
 
     def pause(self):
@@ -70,14 +80,6 @@ class Object:
                 components.append(c)
         return components
 
-    def deconstruct(self, outer=None):
-        self.pause()
-        self.man.remove_object(self, outer)
-        for component in self.components.values():
-            component.deconstruct()
-            component = None
-        self.components = {}
-
     def serialize(self):
         data = {'package_id': self.replication_package, 'object_id': self.replication_id, 'attributes': {}, 'hash': hash(self)}
         for attr, attr_type in self.replicable_attributes.items():
@@ -90,10 +92,22 @@ class Object:
                 else:
                     data["attributes"][attr] = [None, False]
         return data
-        
-    def deserialize(self):
+    
+    def onNetworkUpdate(self, data):
+        return
+    
+    def onNetworkSpawn(self, data):
         return
 
+    def deconstruct(self, outer=None):
+        self.pause()
+        self.man.remove_object(self, outer)
+        for component in self.components.values():
+            component.deconstruct()
+            component = None
+        self.components = {}
+
+        return
     
 
     

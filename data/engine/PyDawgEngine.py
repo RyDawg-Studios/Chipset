@@ -58,7 +58,7 @@ class PyDawgEngine:
 
         self.clock = pygame.time.Clock()
         self.dt = 0
-        self.targetFPS = 30
+        self.targetFPS = 60
         self.fps = 0
 
         self.replication_tables = {"pde": pde_network_table,
@@ -72,7 +72,7 @@ class PyDawgEngine:
                 raise Exception(str(man) + " Was not active on engine start. Did you properly initialize it?")
             else: man.active == True
 
-        for man in [self.network_manager, self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
+        for man in [self.config_manager, self.input_manager, self.display_manager, self.event_manager, self.mouse_manager, self.level_manager, self.player_manager]:
             if man.active == False:
                 raise Exception(str(man) + " Was not active on engine start. Did you properly initialize it?")
             else: man.activate()
@@ -85,7 +85,11 @@ class PyDawgEngine:
             self.update()
 
     def update(self):
-        self.display_manager.update()
+        self.dt = (self.clock.tick(60) / 1000) * self.targetFPS
+        self.fps = round(self.clock.get_fps())
+
+        self.network_manager.update()
+
         self.config_manager.update()
         self.event_manager.update()
         self.input_manager.update()
@@ -94,8 +98,7 @@ class PyDawgEngine:
         self.player_manager.update()
         self.game.update()
 
-        self.dt = self.clock.tick(60) / 1000
-        self.fps = round(self.clock.get_fps())
+        self.display_manager.update()
 
         pygame.display.set_caption(str(self.fps))
 

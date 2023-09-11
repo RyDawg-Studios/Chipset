@@ -18,6 +18,7 @@ class MainMenu(Level):
 
 
     def load_debug(self):
+        self.pde.network_manager.activate()
         self.pde.game.changelevel(DevLevel)
     
     def load_main(self):

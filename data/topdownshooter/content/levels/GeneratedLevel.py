@@ -3,6 +3,7 @@ from types import NoneType
 from data.engine.level.level import Level
 from data.topdownshooter.content.levels.levelloader.levelloader import LevelLoader
 from data.topdownshooter.content.levels.levelloader.room import Room
+from data.topdownshooter.content.objects.camera.shootercam import ShooterCamera
 from data.topdownshooter.content.objects.hazard.hole.hole import Hole
 from data.topdownshooter.content.objects.levelgenerator.level_generator import LevelGenerator
 from data.topdownshooter.content.objects.player.player import ShooterPlayer
@@ -26,6 +27,9 @@ class GeneratedLevel(Level):
         p = self.objectManager.add_object(ShooterPlayer(man=self.objectManager, pde=pde, position=l.get_spawnpoint(), hp=self.pde.game.playerData.hp))
 
         self.pde.game.ui = self.pde.display_manager.userInterface.add_object(ShooterWidget(man=self.pde.display_manager.userInterface, pde=self.pde, owner=p))
+
+        cam = self.objectManager.add_object(ShooterCamera(man=self.objectManager, pde=pde, position=p.position, target=p))
+
 
         pd = self.pde.game.playerData
 

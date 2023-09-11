@@ -55,7 +55,8 @@ class Weapon(Actor):
         self.replication_id = 'weapon'
         self.replicable_attributes = {
             "id": str,
-            "owner": str
+            "owner": str,
+            "rotation": int
         }
 
 
@@ -122,9 +123,12 @@ class Weapon(Actor):
             u.onAltShot(target)
                 
     def update(self):
+        super().update()
         if not self.shooting:
             if "Sprite" in self.components.keys():
                 self.components["Sprite"].sprite.rotation = self.rotation
+        self.shottick += 1
+
         if self.shooting:
             self.shottime += 1
         else:
@@ -133,7 +137,6 @@ class Weapon(Actor):
         self.shooting = False
         for u in self.upgrades:
             u.update()
-        super().update()
 
     def pickup(self):
         return

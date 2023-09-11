@@ -164,6 +164,7 @@ class Revolver(Weapon):
 class ChainRifle(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="ChainRifle", position=position)
+
         self.bullet = LaserBullet2
 
 class TurretHead(Weapon):
@@ -231,6 +232,7 @@ class Medpack(Weapon):
 class FlamePistol(Weapon):
     def __init__(self, man, pde, owner, position):
         super().__init__(man, pde, owner, id="FlamePistol", position=position)
+
         self.bullet = FireBall
 
 class LooseChange(Weapon):
