@@ -28,4 +28,4 @@ class InputManagerServer(InputManager):
             self.pde.player_manager.net_controllers[client].key_inputs.remove(data[0])
 
     def handle_net_mouse(self, data, client):
-        self.mouse_position = data[0]
+        self.pde.player_manager.net_controllers[client].mouse_pos = data[0]

@@ -28,6 +28,8 @@ class InputManager():
     def update(self):
         self.mouse_inputs = pygame.mouse.get_pressed(5)
         self.mouse_position = pygame.mouse.get_pos()
+        for pc in self.pde.player_manager.player_controllers:
+                        pc.mouse_pos = self.mouse_position
 
     def manage_inputs(self, event):
 

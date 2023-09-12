@@ -6,6 +6,7 @@ class PlayerController(Component):
         super().__init__(owner)
         self.inpman = self.owner.pde.input_manager
         self.key_inputs = []
+        self.mouse_pos = [0,0]
 
     def update(self):
         super().update()

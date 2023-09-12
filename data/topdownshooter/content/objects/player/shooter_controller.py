@@ -15,7 +15,7 @@ class ShooterController(PlayerController):
         if input == pygame.K_LSHIFT:
             self.owner.dodging = True
         if input == pygame.K_LALT or input == 8:
-            self.owner.altShot(target=self.owner.pde.input_manager.mouse_position)
+            self.owner.altShot(target=self.mouse_pos)
         if input == pygame.K_f or input == 2:
             self.owner.interact()
         if input == pygame.K_q:
@@ -48,7 +48,7 @@ class ShooterController(PlayerController):
             self.owner.movement[1] = 0
 
         if pygame.K_SPACE in self.key_inputs:
-            self.owner.shootweapon(self.owner.pde.input_manager.mouse_position)
+            self.owner.shootweapon(self.mouse_pos)
             #self.owner.pde.network_manager.network.send_event({'message_type': 'event', 'message_data': {'event_name': 'input', 'event_args': [pygame.K_SPACE]}})
     
     def on_joystick(self, event):

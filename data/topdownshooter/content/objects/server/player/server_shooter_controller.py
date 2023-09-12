@@ -16,7 +16,7 @@ class ServerShooterController(ServerPlayerController):
         if input == pygame.K_LSHIFT:
             self.owner.dodging = True
         if input == pygame.K_LALT or input == 8:
-            self.owner.altShot(target=self.owner.pde.input_manager.mouse_position)
+            self.owner.altShot(self.mouse_pos)
         if input == pygame.K_f or input == 2:
             self.owner.interact()
         if input == pygame.K_q:
@@ -50,7 +50,7 @@ class ServerShooterController(ServerPlayerController):
             self.owner.movement[1] = 0
 
         if pygame.K_SPACE in self.key_inputs:
-            self.owner.shootweapon(self.owner.pde.input_manager.mouse_position)
+            self.owner.shootweapon(self.mouse_pos)
     
     def on_joystick(self, event):
         super().on_joystick(event)

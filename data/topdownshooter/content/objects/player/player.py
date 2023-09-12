@@ -80,7 +80,7 @@ class ShooterPlayer(ShooterEntity):
             else:
                 self.target = self.position
         else:
-            self.target = self.pde.input_manager.mouse_position
+            self.target = self.components["PlayerController"].mouse_pos
 
     def openUpgradeSelectionUI(self):
         self.pde.game.ui.openUpgradeSelection()
