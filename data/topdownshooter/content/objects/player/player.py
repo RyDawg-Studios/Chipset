@@ -34,7 +34,6 @@ class ShooterPlayer(ShooterEntity):
         self.replication_id = 'controllable_player'
         self.replicable_attributes = {
             "position": list,
-            "weapon": object,
             "hp": int
         }
 

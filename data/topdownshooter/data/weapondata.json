@@ -373,7 +373,7 @@
 
         },
         "statinfo":{
-            "firerate": 1,
+            "firerate": 25,
             "shotspread": 2,
             "shotangles": [0],
             "damagemultiplier": 1
