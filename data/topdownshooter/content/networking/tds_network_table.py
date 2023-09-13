@@ -10,5 +10,5 @@ object_table = {
     'controllable_player': NetShooterPlayer,
     'shooter_player': ShooterPuppet,
     'pickup_weapon': PickupWeapon,
-    'weapon': Weapon
+    'weapon': Weapon,
 }

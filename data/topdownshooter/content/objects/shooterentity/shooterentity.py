@@ -1,7 +1,7 @@
 import random
 from data.engine.actor.actor import Actor
 from data.engine.eventdispatcher.eventdispatcher import EventDispatcher
-from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookattarget
+from data.engine.fl.world_fl import getobjectlookatvector, getpositionlookatvector, objectlookatposition, objectlookattarget
 from data.engine.particle.particle_emitter import ParticleEmitter
 from data.topdownshooter.content.objects.particles.blood import Blood
 from data.topdownshooter.content.objects.weapon.bullets.bullet import Bullet
@@ -20,7 +20,6 @@ class ShooterEntity(Actor):
         self.scale = [32, 32]
         self.maxVelocity = 0
         self.moveable = True
-
 
         #----------< Weapon Info >----------#
         
@@ -44,7 +43,6 @@ class ShooterEntity(Actor):
         self.canGrantHP = True
         self.speed = 3
         self.handeling = 1
-
 
         #----------< Dodge Info >----------#
 
@@ -190,14 +188,19 @@ class ShooterEntity(Actor):
             
     def pickupweapon(self, obj):
         dc = WeaponData(weaponClass=obj.weaponData.weaponClass, upgrades=obj.weaponData.weaponUpgrades)
+        self.addweapon(dc)
+        return 
+    
+    def addweapon(self, dataClass):
+        dc = dataClass
         if len(self.weapons) < self.maxweapons:
                 self.weapons.append(dc)
                 self.switchweapon(self.weapons.index(dc)+1)
         else:
-            self.dropweapon(rotation=objectlookattarget(self, obj))
+            self.dropweapon(rotation=objectlookatposition(self, self.target))
             self.weapons[self.currentweapon-1] = dc
             self.switchweapon(self.weapons.index(dc)+1)
-        return
+
 
     def changeweapon(self, cls):
         self.removeweapon()

@@ -28,7 +28,7 @@ class ServerLevel(Level):
         self.changebackground(r'data\topdownshooter\assets\sprites\backgrounds\bg.png')
 
         #self.objectManager.add_object(ShooterEnemy(man=self.objectManager, pde=pde, position=[732/2, 412/2], weapon=LaserMachineGun))
-        itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle, LaserPistol, Pistol, RiskGun, FlamePistol, LooseChange, AutoShotgun, Flamethrower, DartRifle, Starmada, AntiMatterRifle, Godray, Friendship, Biblizer, P90, Scorcher, InfinityRifle, Buckshot, Terminator]
+        itemlist = [SMG, AutomaticRifle, SniperRifle, LaserMachineGun, GrenadeLauncher, Shotgun, ElectroLauncher, SpawnerWeapon, Enderpearl, SplatGun, RocketLauncher, Revolver, ChainRifle, LaserPistol, Pistol, RiskGun, FlamePistol, LooseChange, AutoShotgun, Flamethrower, DartRifle, Starmada, AntiMatterRifle, Godray, Friendship, Biblizer, P90, Scorcher, InfinityRifle, Buckshot]
 
         c = 0
         r = 0
@@ -37,9 +37,8 @@ class ServerLevel(Level):
             if c >= 7:
                 r += 1
                 c = 1
-            weap = self.objectManager.add_object(obj=w(man=self.objectManager, pde=self.pde, owner=None, position=[0,0]))
-            self.objectManager.add_object(PickupWeapon(man=self.objectManager, pde=self.pde, position=[(c) * 64, r*32], speed=[0, 0], weapon=weap))
-            weap.deconstruct()
+            w = itemlist[inx]
+            self.objectManager.add_object(PickupWeapon(man=self.objectManager, pde=self.pde, position=[(c) * 64, r*32], speed=[0, 0], weaponData=WeaponData(weaponClass=w, upgrades=[])))
 
         lm = self.objectManager.add_object(LevelLoader(man=self.objectManager, pde=pde, position=[320,300],level="room2"))
         chest = self.objectManager.add_object(Chest(man=self.objectManager, pde=pde, position=[320,-128], items=[DevGun]))

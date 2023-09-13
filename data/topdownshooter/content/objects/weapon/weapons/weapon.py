@@ -16,7 +16,18 @@ class WeaponData():
         self.weaponClass = weapon.__class__
         self.weaponUpgrades = weapon.upgrades
         return self
+    
+    def createWeapon(self, man, pde):
+        w = self.weaponClass(man=man, pde=pde, owner=self, position=[0,0])
+        w.upgrades = self.weaponUpgrades.copy()
+        return w
 
+    def serialize(self, man, pde):
+        w = self.createWeapon(man, pde)
+        d = {"weapon_id": w.id, "weapon_upgrades": w.upgrades.copy()}
+        w.deconstruct()
+        return d
+    
 
 class Weapon(Actor):
     def __init__(self, man, pde, owner=None, position=[0, 0], id=None, bullet=Bullet, lifetime = -1):
@@ -50,7 +61,7 @@ class Weapon(Actor):
         self.ai_state = "wander"
 
         #----------< Replication Info >----------#
-        self.replicate = True
+        self.replicate = False
         self.replication_package = 'tds'
         self.replication_id = 'weapon'
         self.replicable_attributes = {
@@ -137,6 +148,13 @@ class Weapon(Actor):
         self.shooting = False
         for u in self.upgrades:
             u.update()
+
+    def serialize(self, _id=''):
+        u_ids = []
+        for u in self.upgrades:
+            u_ids.append(u.id)
+
+        return {'weapon_id': self.id, 'weapon_upgrades': u_ids.copy()}        
 
     def pickup(self):
         return

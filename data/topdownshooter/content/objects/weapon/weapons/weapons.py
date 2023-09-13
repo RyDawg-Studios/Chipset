@@ -106,10 +106,10 @@ class SpawnerWeapon(Weapon):
 
 class Enderpearl(Weapon):
     def __init__(self, man, pde, owner, position):
+        super().__init__(man, pde, owner, position=position, id='Enderpearl')
         self.scale = [16, 16]
         self.firerate = 60
         self.shot = False
-        super().__init__(man, pde, owner, position=position)
 
     def shoot(self, target, bullet):
         self.shooting = True

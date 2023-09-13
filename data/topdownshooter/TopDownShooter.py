@@ -9,8 +9,11 @@ from data.topdownshooter.content.levels.morphlevel import MorphLevel
 from data.topdownshooter.content.levels.TestLevel import TestLevel
 from data.topdownshooter.content.levels.GeneratedLevel import GeneratedLevel
 from data.topdownshooter.content.objects.player.player_data_object import PlayerDataObject
+from data.topdownshooter.content.objects.weapon.weapons.weapon import WeaponData
 from data.topdownshooter.content.objects.widget.leveltext import LevelText
 from data.topdownshooter.content.objects.widget.shooterwidget import ShooterWidget
+import data.topdownshooter.content.objects.weapon.weapons.weapon_table as wt
+
 
 class ShooterGame(Game):
     def __init__(self, pde):
@@ -20,6 +23,12 @@ class ShooterGame(Game):
         self.currentRoomNumber = 10
         self.playerData = PlayerDataObject()
         self.ui = None
+
+
+    def activate(self):
+        super().activate()
+        self.pde.event_manager.net_events["add_puppet_weapon"] = self.add_puppet_weapon
+        self.changelevel(MainMenu)
 
     def game_over(self):
         self.playerData = PlayerDataObject()
@@ -40,14 +49,17 @@ class ShooterGame(Game):
         l = self.pde.level_manager.addlevel(level=level(man=self.pde.level_manager, pde=self.pde), name="Main", active=True)
         return l
 
-    def activate(self):
-        super().activate()
-        self.changelevel(MainMenu)
 
     def restart(self):
         self.pde.player_manager.clear()
         self.changelevel(self.currentlevel)
         return
+    
+    def add_puppet_weapon(self, data):
+        for spawned in self.pde.level_manager.level.object_manager.objects:
+            if spawned.hash == data[1]:
+                spawned.addNetWeapon(data)
+                return
     
     def update(self):
         super().update()

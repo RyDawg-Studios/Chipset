@@ -61,7 +61,7 @@ class Server():
             if data:
                 data = json.loads(data)
 
-                print(f"Receiving event: {data} from {client}")
+                #print(f"Receiving event: {data} from {client}")
 
                 if data["message_type"] == 'ping':
                     print(data['message_data']['data'])
