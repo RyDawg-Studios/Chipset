@@ -22,8 +22,6 @@ class Server():
         self.pde.event_manager.net_events["input"] = self.handle_input
         self.pde.event_manager.net_events["mouse"] = self.handle_mouse
 
-
-
         self.onPlayerJoin_Dispatcher = EventDispatcher()
 
         self.pde.onQuit_event.bind(self.close_all_clients)

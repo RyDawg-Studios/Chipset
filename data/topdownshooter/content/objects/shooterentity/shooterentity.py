@@ -174,7 +174,8 @@ class ShooterEntity(Actor):
             w = weapon
 
         if self.weapon is not None:
-            self.man.add_object(obj=PickupWeapon(man=self.man, pde=self.pde, position=list(self.rect.center), rotation=rotation, weapon=w, speed=[4, 4]))
+            wd = WeaponData(w.__class__, self.weapon.upgrades.copy())
+            self.man.add_object(obj=PickupWeapon(man=self.man, pde=self.pde, position=list(self.rect.center), rotation=rotation, weaponData=wd, speed=[4, 4]))
 
             self.removeweapon()
 

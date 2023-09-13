@@ -9,7 +9,9 @@ class PlayerManager():
         self.net_controllers = {}
         
     def update(self):
-        return
+        for pc in list(self.player_controllers):
+            if pc.owner is None:
+                self.player_controllers.remove(pc)
         
     def activate(self):
         return
