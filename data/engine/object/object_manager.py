@@ -93,7 +93,6 @@ class ObjectManager:
                         setattr(obj, attr[0], data[0]['attributes'][attr][0])
                     else:
                         setattr(obj, attr[0], self.deserializeNetObject([data[0]['attributes'][attr][0]], owner=obj))
-        sleep(1)
         self.add_object(obj)
         obj.onNetworkSpawn_Event.call(data[0])
         return obj
