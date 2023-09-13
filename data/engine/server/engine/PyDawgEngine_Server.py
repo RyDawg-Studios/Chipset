@@ -4,6 +4,7 @@ import _thread as threading
 
 from data.engine.display.display_manager import DisplayManager
 from data.engine.event.event_manager import EventManager
+from data.engine.eventdispatcher.eventdispatcher import EventDispatcher
 from data.engine.input.input_manager import InputManager
 from data.engine.input.input_manager_server import InputManagerServer
 from data.engine.level.level_manager import LevelManager
@@ -58,6 +59,9 @@ class PyDawgEngineServer:
         self.targetFPS = 30
         self.fps = 0
 
+        self.onQuit_event = EventDispatcher()
+
+
         self.startengine()
 
     def startengine(self):
@@ -97,5 +101,8 @@ class PyDawgEngineServer:
         self.display_manager.update()
 
         pygame.display.set_caption(str(self.fps))
+
+    def quit(self):
+        self.onQuit_event.call()
 
         

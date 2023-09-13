@@ -17,6 +17,7 @@ class InputManagerServer(InputManager):
             self.on_output_event.call(event.key)
 
         if pygame.K_ESCAPE in self.key_inputs:
+            self.pde.quit()
             pygame.quit()
             sys.exit()
 

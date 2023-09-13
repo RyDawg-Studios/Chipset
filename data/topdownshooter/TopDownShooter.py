@@ -56,7 +56,8 @@ class ShooterGame(Game):
         return
     
     def add_puppet_weapon(self, data):
-        for spawned in self.pde.level_manager.level.object_manager.objects:
+        print(data)
+        for spawned in self.pde.level_manager.level.objectManager.objects:
             if spawned.hash == data[1]:
                 spawned.addNetWeapon(data)
                 return

@@ -89,7 +89,7 @@ class Object:
             rep_id = _id
             
 
-        data = {'package_id': self.replication_package, 'object_id': rep_id, 'attributes': {}, 'hash': hash(self)}
+        data = {'package_id': self.replication_package, 'object_id': rep_id, 'attributes': {}, 'hash': id(self)}
 
         for attr, attr_type in self.replicable_attributes.items():
 

@@ -70,6 +70,7 @@ class InputManager():
             self.hat_inputs = (0, 0)
 
         if pygame.K_ESCAPE in self.key_inputs:
+            self.pde.quit()
             pygame.quit()
             sys.exit()
 

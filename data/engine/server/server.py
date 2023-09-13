@@ -13,6 +13,7 @@ class Server():
         self.port = port
         self.maxClients = maxClients
         self.clients = {}
+        self.active = True
 
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.bind((self.server, self.port))
@@ -25,30 +26,36 @@ class Server():
 
         self.onPlayerJoin_Dispatcher = EventDispatcher()
 
+        self.pde.onQuit_event.bind(self.close_all_clients)
+
         print("Server Started, Awaiting Connection")
 
     def update(self):
         data = self.sock.recvfrom(1024)
         self.handle_data(data)
 
+    def close_all_clients(self):
+        self.active = False
 
 
     def emit_event(self, data, exclude=[]):
-        for cli in self.clients.keys():
+        for cli in list(self.clients.keys()):
             if cli not in exclude:
                 self.send_event(data, cli)
 
     def send_event(self, data, cli):
-        #print(f"Sending: {data} to {cli}")
+        print(f"Sending: {data} to {cli}")
         dump = json.dumps(data)
         event = bytes(dump, "utf-8")
         self.sock.sendto(event, cli)
     
     def client_thread(self, pde, client):
-        while True:
+        while self.active:
             for object in pde.level_manager.level.objectManager.objects:
                 if object.replicate:
                     object.server_replicate_object(server=self, client=client)
+        else:
+            return
 
     def handle_data(self, data):
         if data[1] not in self.clients:

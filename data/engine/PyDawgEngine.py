@@ -3,6 +3,7 @@ import _thread as threading
 
 from data.engine.display.display_manager import DisplayManager
 from data.engine.event.event_manager import EventManager
+from data.engine.eventdispatcher.eventdispatcher import EventDispatcher
 from data.engine.input.input_manager import InputManager
 from data.engine.level.level_manager import LevelManager
 from data.engine.mouse.mouse_manager import MouseManager
@@ -64,6 +65,8 @@ class PyDawgEngine:
         self.replication_tables = {"pde": pde_network_table,
                                    "tds": tds_network_table}
 
+        self.onQuit_event = EventDispatcher()
+
         self.startengine()
 
     def startengine(self):
@@ -103,7 +106,7 @@ class PyDawgEngine:
         pygame.display.set_caption(str(self.fps))
 
     def quit(self):
-        return
+        self.onQuit_event.call()
 
 
         
