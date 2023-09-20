@@ -139,7 +139,7 @@ class Actor(Object):
 
     def checkXcollision(self, movement):
         if self.canMove:
-            self.rect.x += self.movement.x * (self.pde.dt)
+            self.rect.x += round(self.movement.x * (self.pde.dt))
             hits = self.getoverlaps()  
             for object in hits:
                 if isinstance(object, Actor) and object.checkForCollision and self.checkForCollision:
@@ -156,7 +156,7 @@ class Actor(Object):
 
     def checkYcollision(self, movement):
         if self.canMove:
-            self.rect.y += self.movement.y * (self.pde.dt)
+            self.rect.y += round(self.movement.y * (self.pde.dt))
             hits = self.getoverlaps()  
             for object in hits:
                 if isinstance(object, Actor) and object.checkForCollision and self.checkForCollision:
