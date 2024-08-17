@@ -3,6 +3,8 @@ from data.engine.widgets.element.e_button import ButtonElement
 from data.engine.widgets.element.e_sprite import SpriteElement
 from data.topdownshooter.content.levels.DevLevel import DevLevel
 from data.topdownshooter.content.levels.GeneratedLevel import GeneratedLevel
+from data.topdownshooter.content.levels.ServerLevels.ServerLevel import ServerLevel
+from data.topdownshooter.content.levels.TestLevel import TestLevel
 
 
 class MainMenu(Level):
@@ -19,7 +21,7 @@ class MainMenu(Level):
 
     def load_debug(self):
         self.pde.network_manager.activate()
-        self.pde.game.changelevel(DevLevel)
+        self.pde.game.changelevel(TestLevel)
     
     def load_main(self):
         self.pde.game.changelevel(GeneratedLevel)
